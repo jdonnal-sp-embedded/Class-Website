@@ -1,0 +1,697 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 2.0 for Windows">
+	<TITLE>Using The Amulet Compiler</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">Using Amulet's HTMLCompiler</H1>
+<P>The Amulet HTMLCompiler compiles HTML and image files into a single compact µHTML project. Additionally,
+µHTML projects may be saved to a file (with a .uht or .pdb extension) or programmed into the flash 
+ memory of an Amulet 
+module.<BR>
+<BR>
+For more detail on using the HTMLCompiler, click on the following topics:
+
+		<UL>
+	<LI><A HREF="#RunningHTMLCompiler">Starting the HTMLCompiler,</A>
+	<LI><A HREF="#Compiling">Compiling a collection of HTML files,</A>
+	<LI><A HREF="#Saving">Saving a µHTML project,</A>
+	<LI><A HREF="#Loading">Loading a previously saved µHTML project,</A>
+			<li><a href="#Uploading">Saving a screenshot of the currently displayed uHTML page,</a>
+			<LI><A HREF="#SerialSetup">Setting up the RS232 port for flash programming,</A>
+	<LI><A HREF="#LCDSetup">Setting up the LCD Characteristics,</A>
+    <LI><A href="#FlashSize">Specifying the size of the installed flash,</A>
+	</LI>
+<LI><A HREF="#Flashing">Programming a µHTML project into the Amulet module's flash memory,</A>
+	<LI><A HREF="#Restore">Restoring the Amulet module flash to the factory configuration,</A>
+	<li><a href="#firmware_upgrade">Updating or Restoring Amulet OS Files,</a></li>
+    <li><a href="#noTouchOS">Updating Amulet OS Files on module with no touchpanel,</a></li>
+    <li><a href="#customOS">Creating a&nbsp;&quot;production ready&quot; single 
+    file comprised of&nbsp;both a project and an OS,</a></li>
+    <li><a href="#CustomizingOSPages">Customizing OS Screens,</a></li>
+<LI><A HREF="#Message">Status and Error Messages,</A>
+	<LI>Menus: <A HREF="#File">File</A>, <A HREF="#Settings">Settings</A>, <A HREF="#Help">Help</A>
+</UL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="RunningHTMLCompiler"></A>Starting the HTMLCompiler</H2>
+<P>HTMLCompiler runs on Windows 95, 98, ME, XP and NT 4.0 or later. HTMLCompiler may be invoked by any standard Windows method:
+
+		<UL>
+	<LI>From the Windows <B>START</B> menu,
+	<LI>Double clicking on
+	<UL>
+		<LI>the HTMLCompiler icon,
+		<LI>any *.uht file icons,
+		<LI>any shortcut icons.
+	</UL>
+	<LI>From the DOS command line. If executing from the DOS command line, a pre-compiled *.uht file may be optionally
+	specified as follows:<BR>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C:\Program Files\Amulet\HTMLCompiler file.uht<BR>
+	In the above case, file.uht will be automatically loaded and prepared for flash programming.
+</UL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Compiling"></A>Compiling a collection of HTML files</H2>
+<P>Like most websites, most µHTML projects contain multiple pages. However, all action starts at the &quot;home
+page&quot;. In a µHTML GUI, the home page is the first page that is displayed on the Amulet LCD after boot
+up. Since all other display pages can be traced back to the home page through hypertext links, the HTMLCompiler
+can build a complete µHTML project by starting with the HTML file for the home page.<BR>
+<BR>
+To create a µHTML project:
+
+		<OL>
+	<LI>From the HTMLCompiler's <B>File</B> menu, select <B>Open</B>. You will be presented with a file dialog box
+	similar to the one pictured below.<BR>
+	<IMG SRC="Images/openHome.gif" WIDTH="428" HEIGHT="266" ALIGN="BOTTOM" BORDER="0">
+	<LI>Use the controls in the file dialog to navigate to the folder that contains the HTML file of your home page.
+	<LI>Select your home page and click the <B>Open</B> button. The HTMLCompiler will open and compile your home page
+	and any other file that is linked from your home page. If successful, the HTMLCompiler will display:<BR>
+	<B>&lt;Successful Compile!  Ready to Program 19 files (3136 bytes) into Flash&gt;&gt;</B>
+</OL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Saving"></A>Saving a µHTML project</H2>
+<P>You may save the results of a successful compile to a file. All µHTML projects should be saved to files
+with either the .uht or .pdb extension. You can use any other extension, but the HTMLCompiler will ONLY load projects saved with
+the .uht or .pdb extension.<BR>
+<BR>
+To save a µHTML project:
+
+		<OL>
+	<LI>From the HTMLCompiler's <B>File</B> menu, select <B>Save</B>. You will be presented with a file dialog box.
+	<LI>Use the controls in the file dialog to navigate to the folder where you want to save your µHTML project.
+	<LI>If the default file name is acceptable, click the <B>Save</B> button. If you wish to specify a different file
+	name, remember that the extension MUST be .uht!
+</OL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Loading"></A><B>Loading a previously saved µHTML project</B></H2>
+<P>You may reload the results of any pre-compiled µHTML projects that have been saved to a file with a .uht
+extension. <B>NOTE</B>: the HTMLCompiler will ONLY load projects saved with the .uht extension.<BR>
+<BR>
+To load a µHTML project:
+
+<OL>
+	<LI>From the HTMLCompiler's <B>File</B> menu, select <B>Open</B>. You will be presented with a file dialog box.
+	<LI>Use the controls in the file dialog to navigate to the folder that contains the *.uht file of your previously
+	compiled µHTML project.
+	<LI>Select your µHTML project and click the <B>Open</B> button. The HTMLCompiler will open the µHTML
+	project and prepare it for programming into the flash memory of an Amulet module.
+</OL>
+		<P>Optionally, you may double click on any file with the .uht extension. Windows will automatically launch the
+HTMLCompiler and load the *.uht µHTML project.<BR>
+<BR>
+Also, if executing from the DOS command line, a pre-compiled *.uht file may be optionally specified as follows:<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C:\Program Files\Amulet\HTMLCompiler file.uht<BR>
+In the above case, file.uht will be automatically loaded and prepared for flash programming.</P>
+		<HR ALIGN="CENTER">
+		<h2><a name="Uploading"></a><B>Saving a screenshot of the currently displayed uHTML page</B></h2>
+		<p>You can use the HTMLCompiler to save the contents of the currently displayed uHTML page on an Amulet powered display. The HTMLCompiler will only allow you to save the screenshot with a .bmp extension. If you try to use any other extension like a .gif, then the HTMLCompiler will not save the screenshot.<br>
+			<br>
+			To save a screenshot:</p>
+		<ol>
+			<li>Connect one end of the 9-pin serial cable to the serial connector on the Amulet module and the other end to the assigned serial port on your PC.
+			<li>Apply power to the Amulet module.
+			<li>On the Amulet module, navigate to the uHTML page you wish to upload and save.
+			<li>From the HTMLCompiler's <B>File</B> menu, select <B>Upload</B> <B>Image</B>. The HTMLCompiler will request a screenshot from the Amulet module and you will be presented with a file dialog box.
+			<li>Use the controls in the file dialog to navigate to the folder where you want to save your screenshot image and remember that the extension MUST be .bmp!
+		</ol>
+<p>Note, the Upload Image function assumes you are dealing with a 320x240 sized 
+display at 115200 baud. If your display is a different size, you need to modify 
+one of the current OS files. Here are the steps needed to allow a 480x320 display 
+perform an image upload.</p>
+<ol type="1">
+    <li>Find the directory Amulet\Projects\OS Files</li>
+    <li>Copy the file ScreenDump.ahtml and name it ScreenDump480x320.ahtml</li>
+    <li>Open ScreenDump480x320.ahtml in notepad or another text editor.</li>
+    <li>Find the line that reads <FONT FACE="Courier New"><b>&lt;P&gt;&lt;APPLET 
+    CODE=&quot;Scribble.class&quot; WIDTH=&quot;320&quot; HEIGHT=&quot;240&quot; 
+    ALIGN=&quot;BOTTOM&quot; name=&quot;Scrib1&quot; codebase=&quot;\&quot;&gt;</b></FONT></li>
+    <li>Change the Width to 480 and the Height to 320.</li>
+    <li>Save ScreenDump480x320.ahtml</li>
+    <li>Open ScreenDump480x320.ahtml in the HTMLCompiler and program into your 
+    Amulet module.</li>
+</ol>
+<p>If you are programming your Amulet module at 19200 instead of 115200, 
+then you will need to modify ScreenDump.ahtml as well. Here are the steps you 
+need to allow the Upload Image to work at 19200.</p>
+<ol type="1">
+    <li>Find the directory Amulet\Projects\OS Files</li>
+    <li>Copy the file ScreenDump.ahtml and name it ScreenDump19200.ahtml</li>
+    <li>Open ScreenDump19200.ahtml in notepad or another text editor.</li>
+    <li>Find the line that starts with <FONT FACE="Courier New"><b>&lt;META 
+    NAME=&quot;Amulet&quot; CONTENT=&quot;baud=115200...</b></FONT></li>
+    <li>Change the baud to 19200</li>
+    <li>Save ScreenDump19200.ahtml</li>
+    <li>Open ScreenDump19200.ahtml in the HTMLCompiler and program into your 
+    Amulet module.</li>
+</ol>
+		<hr align="CENTER">
+		<H2><A NAME="SerialSetup"></A><B>Setting up the RS232 port for flash programming</B></H2>
+<P>The HTMLCompiler uses an RS232 port on your PC to program the flash  memory of your Amulet 
+module. Prior to programming, for the first time, you must select a comm port, select the programming and auto &quot;wake-up&quot; baud rates. The HTMLCompiler stores these settings in its Amulet.ini file so that they can be recalled each time you launch the HTMLCompiler.<BR>
+<BR>
+To select a serial port for programming:
+
+		<OL>
+	<LI>From the HTMLCompiler's <B>Settings </B>menu, select <B>RS232</B>. You will be presented with an RS232 dialog
+	box similar to the one pictured below.<BR>
+	<IMG SRC="Images/baud1.gif" ALIGN="BOTTOM" BORDER="0" width="232" height="190">
+	<LI>Next, select any available serial port from the <B>Comm Port</B> list. All ports listed in your Windows Registry
+	will be listed.
+	<LI>Then, choose a baud from the <B>Flash Rate</B> list. On the 5.7&quot; 
+    module, the flash rate must match the bit rate selected by DIP Switch 2 of the Amulet 
+     module. If you selected 115200, be sure to place Switch 2 in the OFF position. If you selected 19200, be sure to place Switch 2 in the ON position.
+			On the 3.8&quot; module, the flash rate is set by the 
+    factory to 115200. To change to 19200, see the 3.8&quot; hardware documentation.<li>Now choose a baud from the <B>uP Comm Rate </B>list. The HTMLCompiler will use the uP comm rate to send out the &quot;wake-up&quot; message to the Amulet controller during a programming session. In order to use the auto &quot;wake-up&quot; feature, the uP comm rate baud needs to match the baud rate used by the META tag (if META is not present, the default is 115200) of the currently displayed uHTML&nbsp;page on the Amulet display.			<LI>Finally click the <B>OK</B> button.
+</OL>
+		<HR ALIGN="CENTER">
+		<h2><a name="LCDSetup"></a><B>Setting up the LCD Characteristics</B></h2>
+		
+<P>The HTMLCompiler has added a new feature which adds support for different size LCD's. Prior to programming for the first time, you must specify and program the LCD characteristics of the exact display you'll be using, only if using a display other than the one Amulet supplied in the starter kit or module kit. The HTMLCompiler stores the LCD settings in individual .ini files located in \Displays\ subdirectory of the Amulet main directory.<BR>
+			<BR>
+To select a different size LCD:
+
+		<OL>
+	<LI>From the HTMLCompiler's <B>Settings </B>menu, select <B>LCD</B>. You will be presented with an LCD dialog box
+	similar to the one pictured below. <BR>
+				<IMG src="Images/LCDChar.gif" width="620" height="607" border="0"><LI>Select a display from LCD Type.			If the display is listed, then all the LCD settings will be automatically filled in for you upon selecting the display. Steps 4 - 10 are useful if your 
+    display is not listed under LCD Type. You can go directly to Step 10 if you selected a supported display from the LCD&nbsp;Type options list.<li>If the display you're using is not listed under LCD Type, either 
+    choose OtherLCD and fill in the values of the LCD settings manually, or 
+    select an LCD from the drop down list&nbsp;which is similar in characterstics 
+    to your display, make the appropriate changes, and select the Save As... 
+    button to&nbsp;give your LCD a unique name. 		<li>Type in the width of the LCD in pixels (# of columns) and the height of the LCD in pixels (# of rows).
+			<LI>For Additional Hsync's, leave the value set to zero since it is for internal use only.
+	<LI>Next, type in the Frame Frequency. Consult the LCD manufacturers datasheet if you're not sure which value to
+	input here.
+	<LI>Choose a polarity for the Pixel Clock Active Edge and Line Pulse from the appropriate lists. Changing
+	the polarity in either list box will change the output in the Timing Diagram Example to reflect what the signals
+	would look like if you were to look at them using a scope.
+
+			<li>Select a Display Polarity. The display polarity can normally be found in the general specifications of the LCD's datasheet. Choosing a positive polarity means that when the pixel data is high, the pixel is turned on in the display. Choosing a negative polarity means that when the pixel data is low, the pixel is turned off on the display. Unfortunately, not all display manufacturers follow this nomenclature, so you may want to try it both ways to see which polarity looks best for the particular display you're using. Changing the polarity will change the LCD&nbsp;image to reflect the polarity of the pixels.			<LI>Now, choose the number of data lines required by the LCD from the # Of Bits/Pixel Clock list box. Changing
+	the number of bits from the list box will change the output in the Timing Diagram Example.
+	<LI>Select a Contrast Setting. This is only applicable on LCD modules equipped 
+    with an SPI-based digital pot used to adjust the contrast setting. The range 
+    is 0x00-0xFF. This value will be used to initialize the contrast setting 
+    upon powering the module. The contrast can still be adjusted during runtime. 
+    See <a href="contrast.htm">Software Controlled Contrast and Backlighting</a> 
+    documentation for more information.</LI>
+<LI>Select a Backlight&nbsp;Intensity. This is only applicable on LCD modules 
+    equipped with an SPI-based digital pot used to adjust the backlight&nbsp;intensity. 
+    The range is 0x00-0xFF. This value will be used to initialize the backlight&nbsp;intensity 
+    upon powering the module. The backlight intensity&nbsp;can still be adjusted 
+    during runtime. See <a href="contrast.htm">Software Controlled Contrast 
+    and Backlighting</a> documentation for more information.</LI>
+<LI>Checking the Force Touchscreen Calibration box will force the Amulet 
+    to go into its touchscreen calibration routine before displaying your project. 
+    The touchscreen calibration routine will only be launched once after hitting 
+    the <B>Program Now</B> button unless&nbsp;the Always Program Settings checkbox 
+    is checked as well. In that case, the touchscreen calibration routine will 
+    be launched every time you download uHTML pages into the Amulet module.
+    
+    <li>Checking the Always Program Settings box will program this LCD configuration 
+    every time the Program Flash button on the HTMLCompiler is hit. Typically, 
+    the LCD settings only need to be entered into the Flash once after loading 
+    the OS since the LCD settings actually reside within the OS space of the 
+    flash. Writing new projects to the flash will not write over the LCD settings. 
+    Another thing to note is that if the Always Program Settings box is selected, 
+    the LCD settings are also saved in the resultant .uht or .pdb file. This 
+    allows you to customize a project or an OS specific to a particular display. 
+    For instance, by default, the .uht OS file comes with a negative polarity, 
+    but if your LCD module is a transflective display with positive polarity, 
+    you can modify the Display Polarity to use a positive polarity and then 
+    select the Always Program Settings box. You would then Open the .uht OS 
+    file in the HTMLCompiler and then save the file as another separate .uht 
+    file which can now be your custom OS file.</li>
+    <li>Finally, click the <B>Program Now</B> button to program the new LCD settings into the Amulet 
+     module. You really only need to program the LCD settings into the Amulet 
+    module once, unless you begin using a different size LCD.</li>
+</OL>
+
+<P><B>NOTES</B>:
+
+		<UL>
+	<LI>Clicking the <B>Program Now </B>button will program the current LCD settings and will automatically save the LCD&nbsp;settings in an .ini file with the selected display in LCD Type as the name of the file. The only exception to the autosave feature of the <B>Program Now</B> button is if you have OtherLCD selected for LCD&nbsp;Type. Clicking on <B>Program Now</B> while having OtherLCD selected as the LCD&nbsp;Type will only program the LCD&nbsp;settings and NOT&nbsp;save the LCD&nbsp;settings.<LI>Clicking the <B>Save </B>button will save the LCD settings in an .ini file with the selected display in LCD Type as the name of the file and then close the LCD Characteristics window. For example, if  AmuletGT380B is 
+    selected for LCD Type and the <B>Save</B> button is pushed,  the current LCD settings will be saved in a file called AmuletGT380B.ini in the Displays folder 
+    and&nbsp;the LCD Characteristics&nbsp;menu window will close without programming the settings into the Amulet module. If you have OtherLCD selected for LCD Type and you click on <B>Save</B>, then a pop-up message will appear awaiting for you to specify a file name, with no extension, to save the LCD settings to before closing the LCD&nbsp;Characteristics window.
+    <li>If saving a new LCD Type, the name must not contain any spaces. For 
+    example, Half VGA is not a valid name, but Half_VGA is valid.</li>
+<LI>If you decide to use a different size LCD, be sure to create your HTML pages with this in mind by setting the
+	table to the new width and height of the LCD.
+</UL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="FlashSize"></A>Specifying the Size of the Installed Flash</H2>
+<P>The Amulet OS and your compiled project both reside in the installed serial 
+data flash on board the Amulet module. If your project becomes larger than 
+the size of your flash can handle, the HTMLCompiler will display a warning message. 
+The serial data flash can be upgraded from 1MBit to either a 2MBit, 4MBit or 
+8MBit part. If your Amulet module has a larger sized serial data flash, then 
+you can specify your&nbsp;actual flash size to keep the warning message from 
+showing up when not appropriate.</P>
+<P>To specify the size of the flash installed in your Amulet module, select 
+<B>Flash Size</B> from the <B>Settings</B> menu of the HTMLCompiler. Choose 
+the appropriate size (1MBit, 2MBit, 4MBit or 8MBit) and press the OK button.</P>
+<P><IMG src="Images/FlashSize.gif" width="232" height="130" border="0"></P>
+<P>Note: This will not change the size of the flash installed in your Amulet 
+module. The size specified here should reflect the size of the installed serial 
+data flash module.</P>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Skinning"></A>Customizing the Look of the HTMLCompiler</H2>
+<P>Menu: Settings &gt; HTMLCompiler Preferences</P>
+<p>The HTMLCompiler Preferences&nbsp;menu allows you to customize the colors 
+that are used in displaying the HTMLCompiler, the size of the border around 
+the console window and also allows you to add &quot;Save .pdb&quot; and &quot;Save 
+.uht&quot; buttons.</p>
+<p><img src="Images/Skin.gif" width="600" height="359" border="0"></p>
+<p><B>Color Preferences:</B></p>
+<p>The background,&nbsp;the text and the frame can all be set to one of 13 colors. 
+A sample of what your choices will look like is displayed in the right hand 
+side of the menu. Be aware that if you choose the same color for the background 
+and the text that you will not be able to see any text in the console window.</p>
+<p><B>Layout Preferences:</B></p>
+<p>By selecting the Minimal Frame checkbox, only a small border along the bottom 
+will appear on the HTMLCompiler. This merely&nbsp;changes the look of the HTMLCompiler. 
+You can see the difference a border makes by looking at the sample to the right.</p>
+<p>You can also enable the &quot;Save .pdb&quot; button and/or the &quot;Save 
+.uht&quot; button. After a successful compile, these buttons will appear along 
+the bottom of the HTMLCompiler, thus allowing for quick saving of a .uht or 
+.pdb file. These buttons will create a .uht or .pdb file with the same name 
+as the name of the file chosen to compile. They will not give you a chance to 
+save the files as a different name and they will write over any existing file 
+of the same name without giving you a warning message.</p>
+<p>If you are happy with your changes, then select the OK button. If you want 
+to disregard the changes you made, select the CANCEL button. If the OK button 
+is selected, the Preferences menu is closed down and the HTMLCompiler will now 
+reflect the changes that you entered.</p>
+		<HR ALIGN="CENTER">
+<H2><A NAME="Flashing"></A>Programming the Amulet's flash memory</H2>
+<P>By default, the Program Flash button is disabled. To enable the button you must either <A HREF="#Compiling">compile</A>
+a project or <A HREF="#Loading">load</A> a previously compiled project.<BR>
+<BR>
+To program the Amulet's Flash memory:
+
+<OL>
+	<LI>Remove power from the Amulet controller board. If you have a 3.8&quot; 
+    module, ensure Boot M is jumpered in J2. If you have a 5.7&quot; module, 
+    make sure that the controller board DIP switch settings on
+	SW2 are, as follows:<BR>
+	
+	<TABLE BORDER="0">
+		<TR>
+			<TD><IMG SRC="Images/dipFlash.gif" WIDTH="64" HEIGHT="79" ALIGN="BOTTOM" BORDER="0"></TD>
+			<TD  NOWRAP>Switch 1 (Boot Mode) = ON (normal) (<a href="#* Note">*See 
+                Note below</a>)<br>
+				Switch 2 (Program Baud Rate) = OFF (115200) or ON (19200)<BR>
+				NOTE: This must match the <A HREF="#SerialSetup">bit rate set for the compiler</A>.<BR>
+				Switch 3 (RAM Test) = OFF (disabled)<BR>
+				Switch 4 (Touch Panel Mode) = ON (Normal operation)</TD>
+		</TR>
+	</TABLE>
+
+	<LI>Connect one end of the 9-pin serial cable (included with the starter kit) to the serial port (J2) on the controller
+	board and the other end to the assigned serial port on your PC.
+	<LI>Apply power to the Amulet controller board. The module should power up and the 
+    last programmed project should be displayed.
+	If not, recheck the DIP switch settings on the board.
+	<LI>Finally, Press the <B>Program Flash</B> button.
+</OL>
+
+<p><a name="* Note">* Note</a>: Upon clicking on the <B>Program Flash</B> button in the Compiler window, the Compiler will attempt to send out an auto &quot;wake-up&quot; message to the Amulet controller. If the page currently being displayed is set up to use the same baud rate using the <a href="HTMLSupport.htm#META">META</a> tag (if META is not present, the default is 115200) as the Compiler's uP comm rate, 
+then the Amulet controller will change to a generic &quot;Please wait while programming flash...&quot; screen and commence programming. If the page has a baud rate different than what the Compiler is set to, then you should 
+set the <A HREF="#SerialSetup">uP comm rate</A> in the Settings-&gt;RS232 dialog 
+box to match the baud rate set by the META tag. This will allow the HTMLCompiler 
+to wake up the Amulet at one baud rate and then program it at&nbsp;another baud 
+rate. The only time you should have to put the Amulet into program mode (DIP 
+ Switch 1 to OFF on the 5.7&quot; or&nbsp;Boot M not jumpered on the 3.8&quot;) 
+is 
+when the project you compiled locks up the Amulet OS to the point where it won't 
+accept the wake up message or if the Amulet OS has been corrupted and you need 
+to <a href="#firmware_upgrade">reload the OS</a>.</p>
+<P><B>NOTES</B>:
+
+		<UL>
+	<LI>If the selected serial port is already open and in use by another application, the compiler will abort the
+	Flash programming cycle and display the &quot;Port is in use&quot; error message. In this case, either close the
+	conflicting application, or select a different serial port.<LI>If the compiler doesn't see the controller board, the compiler will display the &quot;Serial port timed out&quot;
+	error message. Recheck the DIP switch settings, the serial cable connections and the power connections, then try
+	again. You might also try a different baud rate.</UL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Restore"></A>Restoring The Flash to The Factory Configuration</H2>
+<P>You may, at anytime, restore the Amulet flash memory to the original factory configuration.
+
+<OL>
+	
+  <LI>First <A HREF="#Loading">load</A> the file home.html from the <A HREF="../projects/EasyAs123/" target="_blank">\projects\EasyAs123\</A> 
+    subdirectory of the Amulet main directory. By default, the Amulet main directory 
+    is C:\Program Files\Amulet, however you may have specified a different path 
+    during the install. 
+  <LI>Next, <A HREF="#Flashing">program</A> the file into Amulet flash.
+</OL>
+
+<hr align="CENTER">
+<h2><a name="firmware_upgrade"></a>Updating or Restoring Your Amulet OS</h2>
+<P>If you are updating from a previous version of Amulet software you MUST update your 
+  firmware.
+Follow the steps below if your Amulet no longer seems to work correctly. If 
+your module does not have a touchpanel, <a href="#noTouchOS">see section</a> 
+below.<ol>
+  <li>First <A HREF="#Loading">load</A> the file <B>AmuletOSv3.2.uht</B> from 
+    the <a href="../binaries/" target="_blank">\binaries\</a> subdirectory of 
+    the Amulet main directory. By default, the Amulet main directory is C:\Program 
+    Files\Amulet, however you may have specified a different path during the install. 
+  <li>If the Amulet is currently &quot;dead&quot;, put the Amulet module in 
+    program 
+    mode (DIP switch 1 to OFF in the 5.7&quot; or remove the Boot M jumper in 
+    the 3.8&quot;) and hit the reset button.
+    <li>Next, <A HREF="#Flashing">program</A> the file into Amulet Flash.
+    After the OS is successfully loaded, the touchpanel calibration routine 
+    will appear. After successfully calibrating the touchpanel, a screen allowing 
+    the setting of the display polarity appears. Hit the button to the right 
+    to toggle the display polarity.<br><B>
+  <BR>
+   
+
+</B></li>
+</ol>
+<hr><h2><a name="noTouchOS"></a>Loading the Amulet OS For LCDs Without A 
+Touchpanel</h2>
+<p>If you are updating a module that does not have a touchpanel, then you'll 
+need to load the file <B>AmuletOSv3.2_NT.uht  </B>instead of <B>AmuletOSv3.2.uht.</B> 
+The regular OS requires touchpanel calibration upon loading. The _NT file does 
+not have this requirement.</p>
+<P>After loading the &quot;No Touchpanel&quot; OS, if you need to change the 
+polarity, you obviously won't be able to change it through the LCD, since you 
+can't use the touchpanel to select the &quot;&quot;Toggle Display Polarity&quot; 
+button, but you can by going into the LCD Settings menu and either selecting 
+your specific LCD from the list of LCD Types, or you can create your own custom 
+LCD settings, including the display polarity&nbsp;and save that LCD type. After 
+selecting the LCD settings for your specific display, you can then hit the Program 
+Now button. </P>
+<P>Make sure that the &quot;Force Touchscreen Calibration&quot; checkbox is 
+unchecked, otherwise you will be forced to run the touchscreen calibration before 
+displaying anything else.</P>
+<HR ALIGN="CENTER">
+
+<h2><a name="customOS"></a>Creating a &quot;Production Ready&quot;&nbsp;File Comprised of 
+Both a Project and an OS</h2>
+<p>When going into production, it is often desirable to program a single file 
+into the production units. Amulet provides you with the ability to combine your 
+project with a raw OS file. A raw Amulet OS file contains all the same files 
+as&nbsp;the regular Amulet OS, without the initial project which&nbsp;shows 
+the version number of the Amulet OS and gives you the ability to change the 
+polarity of the display. To use the raw Amulet OS file, you must provide it 
+with a project to start up with. To see a comprehensive example on doing this, 
+<A href="Examples.htm#CustomOS">click here for the CustomOS example.</A></p>
+<p>You can combine multiple .uht files by creating 
+an Amulet script file, which is a text file with a .AmuletOS extension. You then 
+open this .AmuletOS file in the HTMLCompiler and save the results as a .uht 
+or .pdb file.</p>
+<P>.AmuletOS files need to contain the name of a project previously&nbsp;saved 
+as a .uht file along with the name of a raw Amulet OS file. &nbsp;The final line should 
+contain&nbsp;NoFontHdr. All folders&nbsp;are relative to the folder containing 
+the .AmuletOS file. </P>
+<P><B>NOTE: A raw Amulet OS file contains all the files needed for the OS, but 
+no initial project. It should never be loaded by itself. It should only be used 
+in conjunction with another project and packaged together via a .AmuletOS file. 
+Conversely, you should never try to package a full Amulet OS file with another 
+project in a .AmuletOS file.</B></P>
+<P>Here is an example of a custom .AmuletOS file for a fictitious project named 
+ACME. &nbsp;Assume ACME.uht and ACME.AmuletOS reside in the Amulet\projects\ACME 
+folder.</P>
+<P><B><FONT face="Courier New">..\..\binaries\AmuletOSv3.2_RAW.uht<BR>ACME.uht<BR>NoFontHdr</FONT></B></P>
+<P>Notice that we're using the raw OS file found in the Amulet\binaries 
+folder. The directory&nbsp;containing the .AmuletOS file is considered the root 
+directory and everything else is relative to the root inside of the .AmuletOS 
+file. Opening this .AmuletOS file in the HTMLCompiler combines the raw OS file 
+with the pre-compiled project, which you can then save as a single .uht or .pdb.</P>
+<P>By default, the raw&nbsp;Amulet OS is set up as a 320x240 AOB3202405B. You 
+can also specify the characteristics that are specific to the display you are 
+using and packaging that information with the .uht you created from the .AmuletOS 
+file. By entering the Settings-&gt;LCD menu choice from the HTMLCompiler, you 
+can specify the following in your custom OS:</P>
+<P><B>LCD size and type<BR>Display Polarity<BR>Frame Frequency<BR>Choose to 
+Force Touchscreen Calibration upon first boot up or not</B></P>
+<P><A HREF="#LCDSetup">See above</A> for more information regarding using the 
+LCD settings dialog. Upon setting your custom LCD characteristics, check the 
+<B>Always Program Settings</B> checkbox and hit the <B>Save</B> button. Now 
+open your .AmuletOS file with the HTMLCompiler and save as a .uht or .pdb. This 
+single .uht (or .pdb) will contain both the project and the OS specified in 
+the .Amulet OS file as well as the LCD configurations you specified in the LCD 
+settings dialog.</P>
+<P>Note: After successful creation of your custom OS file, if you do not uncheck 
+the <B>Always Program Setting</B> checkbox, then every time you program the flash, 
+those settings will be uploaded every time. If the existing OS already has the 
+settings you want, there is no need to reload them. But, if the <B>Force Touchscreen 
+Calibration</B> checkbox is set as well, this will result in you needing to 
+recalibrate the touchscreen after every new Flash programming.</P>
+<P>See a full example on how to use the .AmuletOS file in conjunction with the 
+LCD settings dialog by <A href="Examples.htm#CustomOS">clicking here</A>.</P>
+<HR ALIGN="CENTER">
+
+<h2><a name="CustomizingOSPages">Customizing OS screens</a></h2>
+<p>Almost all the screens that come with the Amulet OS can be customized. A 
+copy of all the pages which can be customized can be found under the Amulet\projects\OS 
+Files directory. Within the OS Files directory, there are six&nbsp;sub-directories. 
+All OS files have the extension .ahtml. Here is a synopsis of what each sub-directory 
+holds:</p>
+<ol type="1">
+    <li><B>Flashing</B> &gt; Contains two files, Flashing.ahtml and FlashBack.html. 
+    Flashing.ahtml contains the screen that says &quot;Please wait while programming 
+    flash...&quot; which appears whenever you program the serial data flash. 
+    You can modify the text but you must not add any images. Flashing.ahtml 
+    includes a link to FlashBack.html, so you only need to compiler Flashing.ahtml 
+    and you will get FlashBack.html compiled as well. FlashBack.html is an alternate 
+    screen that you can jump directly to which says &quot;Please wait while 
+    loading image...&quot; This page is only used if updating an existing image 
+    within the project.</li>
+    <li><B>Icons</B> &gt; Contains one file, Icons.ahtml. This page does not, 
+    in and of itself, get saved to the flash. But, all the images that are referenced 
+    within this page, the ListBox up arrow, ListBox down arrow, RadioButton 
+    empty button, RadioButton tracking button, RadioButton full button, CheckBox 
+    empty box, CheckBox tracking box and&nbsp;CheckBox full box. These are the 
+    default images which are only used if the HTMLCompiler is not able to find 
+    the actual images which should reside within the Amulet\Configuration directory. 
+    These should probably not be changed, since they will very rarely, if ever, 
+    be used.</li>
+    <li><B>NoMatch</B> &gt; Contains one file, NoMatch.ahtml. This is the screen 
+    that appears if the version of the OS does not match the version of the 
+    HTMLCompiler used to compile and program the latest project. Text can be 
+    modified, but no images can be added.</li>
+    <li><B>ScreenDump</B> &gt; Contains two files, ScreenDump.ahtml and pixel.gif. 
+    ScreenDump.ahtml is jumped to when <A HREF="compiler.htm#Uploading">File 
+    &gt; Upload Image</A> is chosen. If your LCD is a different size than 320 
+    x 240, then you should modify the table size in ScreenDump.ahtml to reflect 
+    the size of your specific LCD. This will allow you to upload an image from 
+    the LCD and save it as a .bmp.</li>
+    <li><B>touch</B> &gt; Contains five files, Touch.ahtml, Target1.html, Target2.html, 
+    Target3.html, and&nbsp;Target2.gif. This is the touchscreen calibration 
+    routine. The file Touch.ahtml should be compiled and programmed to flash. 
+    Text can be modified in Target1.html, Target2.html, and Target3.html. A 
+    different target image can be used in place of Target2.gif. It does not 
+    have to be the exact same size as Target2.gif. The placement of the target 
+    must be the same in Target1.html and Target2.html, meaning the target must 
+    be in the upper left-hand corner in Target1.html and in the lower right-hand 
+    corner in Target2.html. The target can be placed anywhere within the touchable 
+    region in Target3.html.</li>
+    <li><B>Welcome</B> &gt; Contains four files, welcome.htm, toggle.htm, AmuletLogo.gif, 
+    and wrapper_Z.gif. These files comprise the initial project which gets loaded 
+    along with the OS. They are not stored in the OS region of the data flash. 
+    Once a new project is loaded, these files are over written. All these files 
+    can be changed or added to without worry.</li>
+</ol>
+<p>If you are creating a <a href="#customOS">Custom OS</a>, then you can modify 
+these files and use them in place of the files that come bundled with the OS 
+.uht file. Keep in mind that you will need to ensure that you program these 
+modified files after programming the OS .uht file. That means that the modified 
+OS files will need to appear after the OS .uht within the .AmuletOS script file.</p>
+<HR ALIGN="CENTER">
+
+<h2><A NAME="Message"></A>Status and Error Messages</h2>
+<P>When compiling, loading, saving, or Flash programming, the HTMLCompiler provides feedback to you in two different
+ways: on the Status Line, and in the Message Area
+
+		<OL>
+	<LI>First, the text on the title bar of the HTMLCompiler window functions as a Status Line. The status message
+	is of the form: <B>Amulet&nbsp;HTML&nbsp;Compiler:&nbsp;status</B><BR>
+	where: status = a text description of the current status of an operation.<BR>
+				<img src="Images/compiledHome.gif" width="608" height="386" border="0">
+	<LI>Secondly, the large scrollable text area in the center of the HTML compiler window functions as a Message Area.
+	It is used by the compiler to report the success or failure of each file as it is compiled into µHTML, programmed
+	into flash, saved into a *.uht project file, or loaded from a *.uht project file.<BR>
+	<BR>
+	Errors reported during the HTML parsing phase of compilation will have the following syntax:<BR>
+    <B>ERROR:&nbsp;file.htm(line number)&nbsp;--&nbsp;error message</B> 
+    <UL>
+		where:
+		<UL>
+			file.htm = the name of the file that caused the compile error;
+		</UL>
+		<UL>
+        line number = the last line, in file.htm, processed when the error occurred 
+        (line numbers start from 1); 
+      </UL>
+		<UL>
+			error message = description of the error.
+		</UL>
+	</UL>
+			
+	Errors reported during any other operation will have the following syntax:<BR>
+	<B>ERROR:&nbsp;error message</B>
+	<UL>
+		where:
+		<UL>
+			error message = description of the error.
+		</UL>
+	</UL>
+</OL>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="File"></A><B>File Menu</B></H2>
+		<TABLE BORDER="1" WIDTH="739">
+	<TR>
+		<TD VALIGN="TOP" width="94">Open...</TD>
+		<TD width="629">Open HTML (*.htm, *.html) file to compile, or any previously compiled µHTML (*.uht) project. Brings up a
+			file dialog for choosing file.</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">
+            <p>Open Last</p>
+</TD>
+		<TD width="629">
+            <p>Open the last file that was compiled and recompile it.</p>
+</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">
+            <p>Save .uht</p>
+</TD>
+		<TD width="629">
+            <p>Save compiled project in µHTML (*.uht) format. The name is automatically 
+            generated by replacing the extension of the file compiled with .uht. 
+            Will overwrite an existing file with the same name without asking.</p>
+</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">
+            <p>Save .pdb</p>
+</TD>
+		<TD width="629">Save a compiled project in Palm DataBase (*.pdb) format. 
+            The name is automatically generated by replacing the extension of 
+            the file compiled with .pdb. Will overwrite an existing file with 
+            the same name without asking.</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">Save .uht as...</TD>
+		<TD width="629">Save a compiled project in µHTML (*.uht) format. Brings up a file dialog for choosing the name and location
+			to save the *.uht project file.<BR>
+			<B>NOTE:</B> Filename MUST have a .uht extension!</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">Save .pdb as...</TD>
+		<TD width="629">Save a compiled project in Palm DataBase (*.pdb) format. Brings up a file dialog for choosing the name and location
+			to save the *.pdb project file.<BR>
+			<B>NOTE:</B> Filename MUST have a .pdb extension! Contact Amulet 
+            Technologies for the Palm software needed to program a .pdb project 
+            file into the&nbsp;Amulet  onboard Flash PROM.</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">
+            <p>Program Flash</p>
+</TD>
+		<TD width="629">
+            <p>Programs the resultant compiled project into the Amulet's flash 
+            memory. Same functionality as the Program Flash button in the lower 
+            right hand corner of the HTMLCompiler.</p>
+</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP" width="94">Upload Image</TD>
+		<TD width="629">Upload and save the contents of the currently displayed uHTML page on an Amulet powered LCD.</TD>
+	</TR>
+			<tr>
+				<td valign="TOP" width="94">
+            <p>1)...5)</p>
+</td>
+				<td width="629">
+            <p>Contains the names and directories of the last five pages&nbsp;compiled. 
+            Selecting one of these menu choices immediately recompiles that 
+            page.</p>
+</td>
+			</tr>
+			<tr>
+				<td valign="TOP" width="94">Exit</td>
+				<td width="629">Exit the program.</td>
+			</tr>
+		</TABLE>
+		<br>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Settings"></A><B>Settings Menu</B></H2>
+		<TABLE BORDER="1" WIDTH="100%">
+	<TR>
+		<TD VALIGN="TOP">RS232</TD>
+		<TD>Brings up the RS232 settings dialog used to configure the COM port for programming the Amulet onboard serial 
+            data flash.</TD>
+	</TR>
+	<TR>
+		<TD>LCD</TD>
+		<TD>Brings up the LCD characteristics dialog used to configure the 
+            Amulet module for different size LCD's.</TD>
+	</TR>
+    <tr>
+		<TD>
+            <p>Flash Size</p>
+</TD>
+		<TD>
+            <p>Brings up the Flash Size dialog used to specify the size of the 
+            flash memory installed on your Amulet module.</p>
+</TD>
+    </tr>
+    <tr>
+		<TD>
+            <p>HTMLCompiler Preferences</p>
+</TD>
+		<TD>
+            <p>Brings up the HTMLCompiler Skin dialog, used to customize the 
+            look of the HTMLCompiler.</p>
+</TD>
+    </tr>
+</TABLE>
+		<B><BR>
+
+</B><HR ALIGN="CENTER">
+		<H2><A NAME="Help"></A><B>Help Menu</B></H2>
+		<TABLE BORDER="1" WIDTH="100%">
+	<TR>
+		<TD VALIGN="TOP">Help...</TD>
+		<TD>Brings up this help document.</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP">
+            <p>Check For Updates</p>
+</TD>
+		<TD>
+            <p>Launches a browser to <a href="http://www.amulettechnologies.com/software.html">http://www.amulettechnologies.com/software.html</a> 
+            so you can check for software updates.</p>
+</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP">About...</TD>
+		<TD>Brings up a dialog containing information about the Amulet HTMLCompiler and about your computer.</TD>
+	</TR>
+</TABLE>
+		<CENTER>
+			<P>
+			<HR ALIGN="CENTER" WIDTH="60%">
+			<B><BR>
+</B><I>Amulet HTMLCompiler,<BR>
+  <FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I>
+			
+  <P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact 
+    Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet 
+    Home</A> 
+</CENTER>
+	</BODY>
+
+</HTML>

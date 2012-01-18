@@ -1,0 +1,110 @@
+<!--#set var="document_title" value="6.115 Datasheets" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2009-05-04 16:12:08 -0400 (Mon, 04 May 2009) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Useful Datasheets</h2>
+
+<h3>Memory</h3>
+<ul>
+ <li><a href="datasheets/6116.pdf">6116</a> - 
+     16K (2K x 8) Static RAM
+ <li><a href="datasheets/6264.pdf">6264</a> - 
+     64K (8K x 8) Static RAM
+ <li><a href="datasheets/62256.pdf">62256</a> - 
+     256K (32K x 8) Static RAM
+ <li><a href="datasheets/AT28C64.pdf">28C64</a> -
+     64K (8K x 8) EEPROM
+</ul>
+
+<h3>Analog - Discretes, Amplifiers, and Motor Drivers</h3>
+<ul>
+ <li><a href="datasheets/1N4148.pdf">1N4148</a> - 
+     500mW, 100V Diode
+ <li><a href="datasheets/1N4001GP.pdf">1N4001</a> -  
+     50V, 1A Diode
+ <li><a href="datasheets/LM18293N.pdf">LM18293</a> -
+     Four Channel Push-Pull Drivers
+ <li><a href="datasheets/LM158.pdf">LM358</a> - 
+     Dual Op-Amp
+ <li><a href="datasheets/LM386.pdf">LM386</a> - 
+     Low Voltage Audio Power Amplifier
+ <li><a href="datasheets/LM567.pdf">LM567</a> - 
+     Tone Decoder
+ <li><a href="datasheets/N7805CV.pdf">LM78xx</a> -
+     3-Terminal Positive Regulators (TO-220 Package) *
+ <li><a href="datasheets/LM79_SERIES.pdf">LM79xx</a> -
+     3-Terminal Negative Regulators (TO-220 Package) *
+ <li><a href="datasheets/phototransistor.pdf">LPT2023</a> -
+     Spindude Phototransistor
+ <li><a href="datasheets/tip120.pdf">TIP120</a> -
+     NPN Darlington Transistor
+</ul>
+* <em>Note that the TO-92 versions of these chips have a different pin-out.</em>
+
+<h3>D/A's and A/D's</h3>
+<ul>
+  <li><a href="datasheets/AD558.pdf">AD558</a> -
+      8-Bit, Microprocessor Compatible D/A
+  <li><a href="datasheets/ADC0801.pdf">ADC0804</a> -
+      8-Bit, Microprocessor Compatible A/D (100uS Conversion Time)
+  <li><a href="datasheets/ADC0820.pdf">ADC0820</a> -
+      8-Bit, Microprocessor Compatible A/D (2.5uS Conversion Time)
+  <li><a href="datasheets/ADC0841.pdf">ADC0841</a> -
+      8-Bit, Microprocessor Compatible A/D (40uS Conversion Time, Differential Input)
+</ul>
+
+<h3>7400 Series</h3>
+<ul>
+  <li><a href="datasheets/74hc4067.pdf">74HC4067</a> - 
+      16-Channel Analog Multiplexer/Demultiplexer
+  <li><a href="datasheets/74hc154.pdf">74HC154</a> - 
+      4-to-16 Line Decoder/Demultiplexer
+  <li><a href="datasheets/D74C922.pdf">74C922</a> -
+      16-Key Encoder
+  <li><a href="datasheets/DM7407.pdf">7407</a> -
+      Hex Buffers with High Voltage Open-Collector Outputs
+  <li><a href="datasheets/DM74ALS138.pdf">74LS138</a> -
+      3 to 8 Line Decoder/Demultiplexer
+  <li><a href="datasheets/DM74LS14.pdf">74LS14</a> -
+      Hex Inverter with Schmitt Trigger Inputs
+</ul>
+
+<h3>Processors</h3>
+<ul>
+  <li><a href="datasheets/ds89c430.pdf">DS89C430</a> -
+    Ultra-High-Speed Flash Microcontroller
+</ul>
+
+<h3>Other Digital ICs</h3>
+<ul>
+  <li><a href="datasheets/D8255AC.pdf">8255</a> -
+      CHMOS Programmable Peripheral Interface
+  <li><a href="datasheets/GAL22V10.pdf">22V10</a> -
+      Everyone's Favorite PLD
+  <li><a href="datasheets/16c450.pdf">16C450</a> - 
+      Serial UART
+  <li><a href="datasheets/P8254.pdf">82C54</a> -
+      CHMOS Programmable Interval Timer
+  <li><a href="datasheets/44780.pdf">HD44780</a> - 
+      Dot Matrix Liquid Crystal Display Controller/Driver
+  <li><A href="datasheets/MC6847.pdf">MC6847</a> -
+      Video display generator
+</ul>
+
+<h3>Crystal Oscillators</h3>
+<ul>
+  <li><a href="datasheets/crystal.jpg">Crystal oscillator pinout</a> - JPEG format 
+</ul>
+
+<h3>8051/R31JP Info</h3>
+<ul>
+  <li>is on the <a href="8051.shtml">8051</a> page.
+</ul>
+
+<h3>PIC Info</h3>
+<ul> 
+  <li>is on the <a href="pic.shtml">PIC</a> page.
+</ul>
+
+<!--#include file="include/footer.shtml"-->

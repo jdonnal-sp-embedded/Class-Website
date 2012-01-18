@@ -1,0 +1,12 @@
+#block-text.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active
+        %a#introduction_tab{:href=>'#'} Users
+      %li
+        %a#info_tab{:href=>'#'} Events
+  
+  #introduction_block.content
+    = render(:partial => 'users')
+  #info_block.content
+    = render(:partial => 'events')

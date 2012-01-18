@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+	<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>SPI Protocol</TITLE>
+</HEAD>
+
+	<body bgcolor="white" link="blue" vlink="blue" lang="EN-US">
+		<div align="center">
+			
+  <h1>Easy GUI SPI Protocol</h1>
+</div>
+<p>Easy GUI uses an ASCII communication protocol between the Easy GUI LCD Module 
+  (client) and your embedded device (server). The server must be an external device 
+  capable of SPI communications. Client messages are initiated either by timer 
+  events or by user input from the touch panel. Client messages are derived from 
+  compiled Amulet widgets stored in the data flash on the Easy GUI Controller 
+  Board. (<a href="Widgets.htm">See Widgets 
+  Document for more information.</a>) <br>
+  See <a href="AppendixC.htm">Appendix C</a> for a sample implementation of the 
+  server side.</p>
+<div align="CENTER"> 
+  <hr align="CENTER">
+</div>
+<h2>SPI Header Pinouts (5.7&quot; board only)</h2>
+<p>The SPI lines on the 5.7&quot; board have been brought out from the Amulet Browser chip to the J6 
+  header. The pin-out for the header is as follows:</p>
+<ul>
+  <li>SCK - pin 2</li>
+  <li>MOSI - pin 3</li>
+  <li>MISO - pin 4</li>
+  <li>SS(2) - pin 5</li>
+  <li>IRQ - pin 11</li>
+</ul>
+<div align="CENTER"> 
+  <p align="left">If you wish to access the SPI lines directly from the Amulet Browser 
+    Chip, the pin-out for the chip is as follows:</p>
+</div>
+<ul>
+  <li>SCK - pin 67</li>
+  <li>MOSI - pin 69</li>
+  <li>MISO - pin 70</li>
+  <li>SS(2) - pin 73</li>
+  <li>IRQ - pin 5</li>
+</ul>
+		<div align="CENTER">
+			<p></p>
+			<hr align="CENTER">
+</div>
+		<h2>Amulet Protocol</h2>
+<p>The communications protocol is half-duplex, with the Easy GUI client acting 
+  as master. The Amulet GUI can send five different types of messages, which are 
+  the same five types seen in the Amulet UART protocol:</p>
+<ul>
+  <li>A &quot;Get&quot; byte variable request (<font size="2"><b>Amulet:SPI.byteValue()</b></font>) 
+  <li>A &quot;Get&quot; word variable request &nbsp;(word = 2 bytes) (<font size="2"><b>Amulet:SPI.wordValue()</b></font>) 
+  <li>A &quot;Get&quot; string variable request (<font size="2"><b>Amulet:SPI.stringValue()</b></font>)
+  <li>An &quot;Invoke&quot; Remote Procedure Call (RPC) (<font size="2"><b>Amulet:SPI.invokeRPC()</b></font>)
+  <li>A &quot;Set&quot; byte variable command. (<font size="2"><b>Amulet:SPI.setByteValue()</b></font>)
+</ul>
+<div> 
+  <p>If the message is valid, the server should either return the requested data 
+    (if a &quot;Get&quot; request) or simply echo back the request (if a &quot;Set&quot; 
+    or &quot;Invoke&quot; request).</p>
+  <p>Table 1 defines the five types of messages that can be sent between the client 
+    and the server. The valid range of variables and Remote Procedure Calls is 
+    0-0xFF. The valid range for variable values returned from the external server 
+    (in response to the &quot;Get&quot; variable request) is also 0-0xFF. Since 
+    this is an ASCII protocol, it takes two bytes to send one-byte variables and 
+    RPCs. For example, the variable 0x1A would be transmitted as 0x31, 0x41, where 
+    0x31 is the ASCII representation of the high nibble&quot;1&quot; and 0x41 
+    is the ASCII representation of the low nibble &quot;A&quot;.</p>
+  <table width="800" border="1" align="center">
+    <tr> 
+      <td> 
+        <div align="center"> &nbsp;<img src="Images/gB_flow.gif" width="389" height="253" border="0"></div>
+      </td>
+      <td>&nbsp;<img src="Images/sB_flow.gif" width="391" height="255" border="0"></td>
+    </tr>
+    <tr>
+      <td>
+						<div align="center">
+							<img src="Images/gS_flow.gif" width="390" height="324"></div>
+					</td>
+      <td>
+						<div align="center">
+							<img src="Images/gW_flow.gif" width="391" height="324"></div>
+					</td>
+    </tr>
+  </table>
+  <table width="400" border="1" align="center">
+    <tr>
+      <td><img src="Images/i_flow.gif" width="391" height="171"></td>
+    </tr>
+  </table>
+  <p align="center"><b>Table 1. Flow charts for each of the 5 message types<br>
+    <br>
+    </b></p>
+  <p align="left"><b>Synchronization--</b>As master, the client initiates all 
+    communications by sending a message to the server. Before sending any bytes, 
+    the master will pull the Slave Select line 2(SS2) to ground. SS2 should 
+    be attached to the server's SPI Slave Select pin. All valid messages from 
+    the client to the server start with one of four command bytes: [0x11], [0x12],[0x13],[0x14] 
+    or [0x15] -- these are considered the Client Start Of Message (CSOM) characters. 
+    <b>NOTE</b>: These four CSOM bytes ALWAYS signify the start of a message and 
+    they are not allowed in the body of any message. The only valid characters 
+    in the body of a message are: ASCII 0-9 (0x31-0x39), and A-F (0x41-0x46), 
+    except in the body of the &quot;Get string&quot; response, where all ASCII 
+    characters from ' ' -' ~' (0x20-0x7e) are valid. If the server receives any 
+    character other than those specified, the message should be considered errant, 
+    and the server should start over hunting for a new CSOM character.<br>
+    <br>
+    All server responses must start with the counterpart of the CSOM character 
+    that began the message that is being responded to. The valid Server Start 
+    Of Message (SSOM) bytes are: [0x21], [0x22], [0x23],[0x24] or [0x25]. The 
+    body of the response message starts with a byte for byte echo of the command 
+    message. The echo is then followed by any optional response data (in ASCII 
+    format).</p>
+  <p>The master initiates the transfer by 
+    sending the CSOM out [the MOSI line] and the slave sends 0xFE [on the MISO line]. 
+    The GUI <b>must</b> receive the 0xFE in order for the communication to continue. 
+    After processing the CSOM byte (and loading the SPI data register with the 
+    SSOM), the slave must pull the GUI's interrupt line to ground  to signify that it is ready 
+    to receive another byte. The GUI's interrupt line (IRQ) must be pulled to 
+    ground for at least 5&nbsp;T states of the GUI controller. At 16 MHz the 
+    minimum grounding time would be 312ns. The IRQ&nbsp;line should be released 
+    before the GUI finishes sending the next SPI byte.&nbsp;</p>
+		</div>
+		
+<p>Upon reception of the interrupt, the GUI will send 
+    out the next byte in the message as the slave simultaneously sends the value 
+    that was loaded into the data register <b>after</b> the last transfer, in 
+    this case the SSOM. The communication process continues in this format and 
+    will eventually come to a point where the master does not need to send any 
+    more &quot;message body&quot; bytes relevant to the current message, but the 
+    slave still needs to send bytes to the master to complete the message on its 
+    side; for instance, the byte value on a &quot;Get&quot; byte message. In order 
+    to accommodate the slave's need for more transfers and since the master initiates 
+    the transfer, the master will send out dummy bytes (0xFE) until the slave stops sending 
+    interrupts to the master. Following the final byte of the message, the slave 
+    should not send an&nbsp;interrupt to the master. That interrupt is meant 
+    to signify&nbsp;that the slave is ready for the next byte in the message 
+    and since the message is complete, there is no need for the interrupt. Once 
+    the message is complete, if there are any new messages that are queued up 
+    on the master side, the master will immediately start transmitting the next 
+    message. Flow 
+    charts of each message type can be viewed in the tables above.</p>
+<div> 
+  <p>As noted earlier, after receiving a byte of a valid message from the client, 
+    the server then has 200ms to respond to the message before the client times 
+    out. After 200ms, if there is no response, the client will consider the message 
+    dropped, move to the next message in the buffer, and then transmit any new 
+    messages. The client will NOT repeat a message after a TIME OUT. Remember, 
+    this could lead to erratic behavior.</p>
+  <hr align="CENTER">
+  <h2>Flow Diagram Example</h2>
+			<p>The flow diagram of Table 2 depicts a sample communications session between an Easy GUI client and an external server that supports one byte variable and one string variable. Although this fictional server only supports byte variable 01 and string variable 01, Easy GUI supports up to 256 different byte variables, 256 different string variables, 256 different word variables and 256 different RPC's. The valid range for all the variables and the RPC's is 00-0xFF.<br>
+			</p>
+			<p>
+    In this example, the server variables have the following values:<br>
+				
+    Byte variable 01 = 0x38<br>
+				
+    String variable 01 = &quot;Abc&quot;<br>
+			</p>
+		</div>
+		
+<p>We see in Table 2 the transfer cycle for a GetByte request as well as a GetString 
+  request. Remember during the course of the data transfers from the client to 
+  the server and the server to the client, data is transmitted and received simultaneously 
+  on both sides (i.e. in byte 4 of the GetByte command, on the client side, a 
+  0xFE is sent out to the server while a 0x31 is received from the server). The 
+  interrupt field in the chart indicates whether or not the server needs to send 
+  an interrupt to the client, signaling that it is ready to transfer/receive again.</p>
+<p>&nbsp;</p>
+<table width="400" border="1" align="center">
+  <tr>
+    <td><img src="Images/SPIflow.gif" width="692" height="521"></td>
+  </tr>
+</table>
+<br>
+<div align="center">
+<p></p>
+			<p></p>
+		</div>
+		<p align="CENTER"><b>Table 2. Data flow diagram depicting several messages transmitted 
+  between the client and a fictitious server.</b></p>
+<div align="center">
+    <hr align="CENTER" width="60%">
+    <br>
+			<i>Amulet HTMLCompiler,<br>
+    <font size="2">Copyright &copy; </font><span style='font-size:10.0pt'>2000-2004</span><font size="2"> by<br>
+					
+    Amulet Technologies, LLC</font></i>
+			<p></p>
+			<p><a href="welcome.htm">Back to Welcome</a> - <a href="mailto:support@amulettechnologies.com">Contact 
+      Amulet</a> - <a href="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet 
+      Home</a> 
+</div>
+	</body>
+</HTML>

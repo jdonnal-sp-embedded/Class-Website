@@ -1,0 +1,20 @@
+%table.table
+  %thead
+    %tr
+      %th Event Name
+      %th Description
+      %th Time
+      %th Slots Filled
+      %th.last &nbsp;
+    %tr
+  - events.each do |event|
+    %tr{:class=> cycle("odd","even", :name=>"row_class"), :id=>"event"+event.id.to_s} 
+      %td #{link_to event.name, event_path(event), :remote=>true, :rel=>"facebox"}
+      %td #{event.description}
+      %td #{printTime(event)}
+      %td #{printSlots(event)}
+      -if modifiable
+        %td.last
+          #{link_to "delete", [:admin, event], :method=>"delete", :remote=> true, :confirm=>"Delete this event?"}
+      
+ 

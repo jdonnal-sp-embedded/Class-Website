@@ -1,0 +1,20 @@
+<% unless @event.valid? %>
+	error_field=$('.fieldWithErrors.end_at_box > .error')
+	error_field.hide()
+	<% if @event.errors.messages[:end_at] != nil%>
+		error_field.html("<%=@event.errors.messages[:end_at][0] %>")
+		error_field.fadeIn()
+	<% end %>
+	error_field=$('.fieldWithErrors.name_box> .error')
+	error_field.hide()
+	<% if@event.errors.messages[:name]!=nil%>
+		error_field.html("<%=@event.errors.messages[:name][0] %>")
+		error_field.fadeIn()
+	<% end %>
+	
+<% else %>
+	/*event was successfully created so display it in the table*/
+	$("#event_table").html("<%= render(:partial => 'shared/event_table',:locals=>{:events=>@events, :modifiable=>true}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+	/*close the facebox*/
+	$(document).trigger('close.facebox')
+<%end%>

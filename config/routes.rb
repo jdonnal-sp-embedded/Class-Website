@@ -1,4 +1,29 @@
 Website::Application.routes.draw do
+
+  root :to => "home#index"
+  match 'info' =>"info#index"
+  match 'info/objectives' =>"info#objectives"
+  match 'useful_stuff/r31jp'=>"useful_stuff#r31jp"
+  match 'useful_stuff/burnit' =>"useful_stuff#burnit"
+  match 'useful_stuff/amulet' =>"useful_stuff#amulet"
+  match 'useful_stuff/multimedio' => "useful_stuff#multimedio"
+  match 'useful_stuff/datasheets' => "useful_stuff#datasheets"
+  match 'useful_stuff/misc' => "useful_stuff#misc"
+  match 'useful_stuff/latex' => "useful_stuff#latex"
+  match 'useful_stuff/problems' => "useful_stuff#problems"
+  match 'useful_stuff/ideas' => "useful_stuff#ideas"
+  match 'useful_stuff/parts' => "useful_stuff#parts"
+  
+  match 'admin' => 'admin#index'
+  match 'admin/new_user(.:format)'=>'users#new'
+  devise_for :users
+  namespace :admin do
+    resources :users
+    resources :events do
+      resources :slots, :only=>[:create,:delete]
+    end
+  end
+  resources :events, :only=>[:show]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

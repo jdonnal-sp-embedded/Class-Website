@@ -1,0 +1,10 @@
+#slot_table
+  =render(:partial=>"slots/table", :locals=>{:event=>event, :slots=>slots})
+  .actions-bar.wat-cf
+    .actions
+      -if current_user.can_modify_slots?
+        =render(:partial=>'slots/admin_create')
+      -elsif current_user.can_create_slots?
+        =render(:partial=>'slots/limited_create')
+
+        

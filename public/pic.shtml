@@ -1,0 +1,51 @@
+<!--#set var="document_title" value="6.115 PIC16F628 Info" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2007-04-29 21:01:29 -0400 (Sun, 29 Apr 2007) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>PIC16F628 Information</h2>
+
+<h3>Datasheets</h3>
+<ul>
+ <li><a href="datasheets/16f628.pdf">PIC16F628</a> -
+     8-bit CMOS FLASH-based microcontroller
+ <li><a href="datasheets/16f628_errata.pdf">PIC16F628 errata</a> -
+     PIC16F62X Silicon/Data Sheet Errata (check this if you're having 
+     problems)
+</ul>
+
+<h3>Programming Hardware</h3>
+<ul>
+ <li><a href="miscfiles/programmer.jpg">Low Voltage Programmer Schematic</a> -
+     JPEG format
+ <li><a href="miscfiles/programmer.pcb">Low Voltage Programmer Layout</a> -
+     ExpressPCB format
+</ul>
+
+<h3>Programming Software</h3>
+<ul>
+   <li><a href="http://www.htsoft.com/products/compilers/PICClite.php">
+      Hi-Tech PICC Lite C Compiler</a> - link to vendor's homepage
+   <li><a href="miscfiles/picclite-805PL2.exe">
+      Hi-Tech PICC Lite C Compiler</a> - local copy of the version of
+      PICC Lite used on the lab computers
+   <li><a href="miscfiles/picclite.pdf">
+      Hi-Tech PICC Lite</a> - user's manual
+   <li><a href="miscfiles/jimpic-1.9.tar.gz">jimpic 1.9</a> -
+      source code for Windows and Linux
+   <li><a href="miscfiles/jimpic-1.9.exe">jimpic 1.9</a> - precompiled Windows executable
+   <li><a href="miscfiles/jimpic-1.9.txt">jimpic 1.9</a> - manual page
+   <li><a href="miscfiles/giveio.zip">giveio</a> - driver required for jimpic on Win NT/2K/XP
+</ul>
+
+<h3>Support</h3>
+<ul>
+   <li><a href="miscfiles/picguide.txt">PIC Guide</a> - Guide to
+     Programming the PIC16F628
+   <li><a href="miscfiles/blinky.c">blinky.c</a> - Test code from Lab 2
+     to blink an LED on pin B0
+   <li><a href="http://www.howstuffworks.com/c.htm">
+     How C Programming Works</a> - link to a decent tutorial on the C language
+</ul>     
+
+<!--#include file="include/footer.shtml"-->

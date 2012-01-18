@@ -1,0 +1,12 @@
+Configuring Hyperterminal for the R31JP
+
+The lab computers should all have a 9600 baud R31JP shortcut on the
+desktop that loads Hyperterminal with the correct settings.  If you
+would like to set up Hyperterminal or another program on your own
+computer, configure the COM port as follows:
+
+   Baud Rate: 9600
+   Data Bits: 8
+      Parity: None
+   Stop Bits: 1
+Flow Control: None

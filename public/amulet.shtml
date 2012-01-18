@@ -1,0 +1,43 @@
+<!--#set var="document_title" value="Amulet Module" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2007-02-13 06:13:13 -0500 (Tue, 13 Feb 2007) $ by \$Author: avestruz $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Amulet Module</h2>
+
+<p>The Amulet is our new touchscreen LCD module used in the labs and
+available for use with final projects.  The necessary software has been
+installed on all of the 6.115 lab computers, and the modules are set up
+around the lab.</p>
+
+<h3>Our Guides</h3>
+<!-- <p>These are <em>works in progress</em> that may contain errors or omissions.</p> -->
+<ul>
+<li><a href="miscfiles/amulet/AmuletStartupGuide.doc">Amulet Startup Guide</a> - start here
+<li><a href="miscfiles/amulet/HTMLTutorial.doc">HTML Tutorial</a> - with a focus on the Amulet
+</ul>
+
+<h3>Amulet Code for Lab Exercises</h3>
+<p>Right-click and select "save" to download these files.</p>
+<ul>
+<li><a href="miscfiles/amulet/lab1ex7.html">lab1ex7.html</a> - Lab 1, Exercise 7 (keypad)
+<li><a href="miscfiles/amulet/lab3ex5.html">lab3ex5.html</a> - Lab 3, Exercise 5 (waveform control)
+</ul>
+
+<h3>Official Documentation</h3>
+<p>This information is provided by the makers of the Amulet module.</p>
+<ul>
+<li><a href="miscfiles/amulet/AOB3202405.pdf">Amulet 5.7-inch module datasheet</a>
+<li><a href="miscfiles/amulet/cbgt380.pdf">Controller board datasheet</a>
+<li>HTMLCompiler Help and Guide - <a href="miscfiles/amulet/amulet-help/Help.htm">browse online</a> or 
+<a href="miscfiles/amulet/amulet-help.zip">download</a>
+</ul>
+
+<h3>Related Datasheets</h3>
+<ul>
+  <li><a href="datasheets/16c450.pdf">16C450</a> - 
+      Serial UART
+</ul>
+
+<!--#include file="include/footer.shtml"-->
+

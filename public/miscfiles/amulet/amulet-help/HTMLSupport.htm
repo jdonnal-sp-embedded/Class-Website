@@ -1,0 +1,1685 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Tuesday, April 17, 2001 10:32 AM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>HTML Support</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">HTML -- What is Supported, and What Is Not</H1>
+<P>Since the goal is to create a feature-rich graphical interface for embedded devices, and not to browse random
+web content, Amulet only supports a limited set of standard HTML tags. In general, most presentation tags are supported
+since they describe how the marked up content is to be visually presented -- <B>presentation tags describe visual
+appearance</B>. Logical or content tags are NOT typically supported since they aren't meant to describe how the
+content looks -- <B>logical tags describe WHAT the content is, not HOW it looks</B>.
+<H3>So, What's Supported</H3>
+<P>For a complete list of tags and attributes that are supported, see the <A HREF="#Tags">Matrix of Supported Tags
+and Attributes</A>. This matrix lists all of the tags and attributes that are supported along with a detailed description
+of the syntax, behaviors, and useful application tips. If it is not listed in this matrix, it is not supported.<BR>
+<BR>
+The following list itemizes the general HTML features that are currently supported:
+
+<UL>
+	<LI>Text style tags -- Bold, Underline, Italic, etc.
+	<LI>Hypertext links to other documents, plus a few Amulet extras.
+	<LI>Tables -- for alignment purposes only (no borders drawn)
+	<LI>Static images and animations -- monochrome only in the JPEG and GIF formats
+	<LI>Client side image maps
+	<LI>Plus scalable Amulet Dynamic UI widgets -- inserted with the Applet tag, but NOT implemented with Java.
+</UL>
+
+<H3>And, What's NOT Supported</H3>
+<P>The HTMLCompiler DOES NOT support the following:
+
+<UL>
+	<LI>Frames -- Currently not supported, although Amulet is considering support in the future.
+	<LI>Image scaling and text wrap -- You cannot resize images using height and width attributes, and you can only
+	align them with the top, middle, or bottom of the text line (that is, you can't float text around an image).
+	<LI>Color attributes -- Since the EasyGUI LCD is monochrome, all of the color setting attributes for all tags are
+	ignored.
+	<LI>Lists -- Neither OL (ordered lists) nor UL (unordered lists) are supported. You can get more precise list item
+	placement by using a table to organize the list, and custom bullets can be inserted with the &lt;IMG&gt; tag. In
+	addition, lists of hypertext linked objects can be created using the Amulet List Widget.
+	<LI>Forms -- This includes any of the form item tags (&lt;INPUT&gt;, &lt;FIELDSET&gt;, &lt;BUTTON&gt;, &lt;LABEL&gt;,
+	&lt;LEGEND&gt;, &lt;TEXTAREA&gt;, &lt;SELECT&gt;, etc.)
+	<LI>JavaScript -- However, we have been setting the stage for scripting 
+    by giving&nbsp;all widgets&nbsp;a variety of&nbsp;methods (functions) that&nbsp;can 
+    be called from other widgets.&nbsp;See <a href="IWC.htm">IWC</a> for more 
+    information.</UL>
+
+<P>
+<HR ALIGN="CENTER">
+<h3><A NAME="Tags"></A><B>Matrix</B> of Supported &lt;Tags&gt; and Their Associated Attributes</H3>
+<CENTER>
+<P>
+<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="0" WIDTH="675">
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="black" width="95"><B><FONT SIZE="2" COLOR="white">TAG</FONT></B></TD>
+		<TD BGCOLOR="black" width="560"><B><FONT SIZE="2" COLOR="white">DESCRIPTION</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95">
+			<DIV>
+				<P><B><FONT SIZE="2">&lt;!--&gt;</FONT></B>
+			</DIV>
+		</TD>
+		<TD width="560"><font size="2">For inserting comments that are ignored by browsers and Amulet's HTMLCompiler. Everything between
+			the &lt;!-- and --&gt; is ignored.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95">
+			<DIV>
+				<P><B><FONT SIZE="2"><a name="<A>">&lt;A&gt;</a></FONT></B>
+			</DIV>
+		</TD>
+		<TD width="560"><font size="2">Creates a touch sensitive hypertext link. Clicking/touching anything that appears between the &lt;A&gt;
+			and &lt;/A&gt; tags will trigger the appropriate hypertext action.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><FONT SIZE="2"><b><a name="HREF">HREF</a></b></FONT></TD>
+		<TD VALIGN="TOP" width="560"> <font size="2">-- Defines the function(s) 
+                to be called when the link is triggered. See <a href="AppendixB.htm#Control_functions">Appendix 
+                B</a> for available functions.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><FONT SIZE="2"><a name="ONTIME">ONTIME</a></FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">If the ONVAR attribute 
+                is not used, then this value automatically triggers the hypertext link after a specified time. Use </FONT><B><FONT SIZE="2">ONTIME=&quot;</FONT></B><font size="2"><i>1st 
+                number,2nd number</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where <i>1st number </i></FONT><font color="black" size="2">specifies the
+	frequency that the <b>HREF </b>function(s)<b> </b>is called  (specified in seconds, with
+	a single floating-point number). The range is 0.00 - 655.35. 0.00 means 
+                update never. The <i>2nd number</i> specifies the delay time from when
+	the page is loaded until the initial <b>HREF</b> function(s) is called  (specified in seconds, with a single
+	floating-point number). The range is 0.01 - 655.35. If the <i>2nd number</i> is not specified, then the delay time
+	defaults to the <i>1st number</i> (frequency) value. If the 2nd number 
+                is specified and the 1st number is 0.00, then the function(s) 
+                is called after the delay time specified by the second number 
+                and does not update again.&nbsp;If the ONVAR attribute 
+                is used, then this value specifies the frequency in which the 
+                ONVAR function is called.</font></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><FONT SIZE="2"><a name="ONVAR">ONVAR</a></FONT></TD>
+		<TD VALIGN="TOP" width="560"><p><font size="2">The value returned 
+by this function call  is used   to trigger 
+the function(s) in <b>HREF<i>.</i></b>  Use </FONT><B><FONT SIZE="2">ONVAR=&quot;</FONT></B><font size="2"><i>function</i><b>&quot;</b>, where <i>function</i> is called at the frequency 
+                specified in ONTIME. See <a href="AppendixB.htm#View_functions">Appendix 
+B</a> for available functions.</FONT></p>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD width="87">
+                <p align="left"><font size="2"><a name="TRIGGER">TRIGGER</a></font></p>
+		</TD>
+		<TD VALIGN="TOP" width="560">
+                <p><font size="2">This attribute specifies the  value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is equal to the TRIGGER value, the  <b>HREF</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD width="87">
+                <p align="left"><font size="2"><a name="TRIGGERgt">TRIGGER.GT</a></FONT></p>
+		</TD>
+		<TD VALIGN="TOP" width="560">
+                <p><font size="2">This attribute specifies the  value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is greater than the TRIGGER.GT value, the  <b>HREF</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD width="87">
+                <p align="left"><font size="2"><a name="TRIGGERlt">TRIGGER.LT</a></FONT></p>
+		</TD>
+		<TD VALIGN="TOP" width="560">
+                <p><font size="2">This attribute specifies the  value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is less than the TRIGGER.LT value, the  <b>HREF</b> 
+                function(s) is called. &nbsp;The trigger value can be a byte, 
+                word, InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD width="87">
+<p><FONT SIZE="2"><a name="TRIGGERneq">TRIGGER.NEQ</a></FONT></p>
+		</TD>
+		<TD VALIGN="TOP" width="560">
+<p><font size="2">This attribute specifies the  
+                value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is not equal to the TRIGGER.NEQ value, the  <b>HREF</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+		</TD>
+            <td width="0"><p>&nbsp;</p>
+</td>
+            <td width="0"><p>&nbsp;</p>
+</td>
+            <td width="0"><p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD width="87">
+                <p><font size="2"><a name="VALUE">VALUE</a></font></p>
+		</TD>
+		<TD VALIGN="TOP" width="560">
+<p><font size="2">Specifies the intrinsic 
+value of this  object. Use <b>VALUE=&quot;</b><i>number</i><b>&quot; </b>Range 
+                is 0 - 65535 (0x00 - 0xFFFF) or InternalRAM byte or word variable.</FONT></p>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD width="87">
+                <p><font size="2"><a name="NAME">NAME</a></font></p>
+		</TD>
+		<TD VALIGN="TOP" width="560">
+<p><font size="2">Specifies the internal name of this  object. Used 
+    for <a href="IWC.htm">Inter-Widget Communication</a> only.</FONT></p>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;APPLET&gt;</FONT></B></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Inserts an Amulet Widget. 
+                Amulet Widgets are a 
+group of UI objects
+common to embedded systems that are not supported by standard HTML. <a href="Widgets.htm">Click</a> 
+                for more info on widgets.&nbsp;Although Amulet Widgets are inserted into HTML pages using the Java applet tag, Amulet
+			widgets </FONT><U><FONT SIZE="2">ARE NOT</FONT></U><font size="2"> written in Java.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">ALIGN=&quot;TOP&nbsp;|&nbsp;MIDDLE&nbsp;|&nbsp;BOTTOM&quot;</FONT></B><font size="2"> -- Specifies the
+			method for vertically aligning the widget to the surrounding text/objects on the same line. Options are TOP, MIDDLE,
+			or BOTTOM, with the default being BOTTOM.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">CODE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Specifies which type of widget to be inserted.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">HEIGHT</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Specifies the widget height in pixels -- This is a required Attribute and the HTMLCompiler will
+			generate an error if it is missing.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">WIDTH</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Specifies the widget width in pixels -- This is a required Attribute and the HTMLCompiler will generate
+			an error if it is missing.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2"><a name="<AREA>">&lt;AREA&gt;</a></FONT></B></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Defines a touch sensitive hypertext region (hot spot) within the bounds of an image. Clicking/touching
+			the region defined by this tag will trigger the appropriate hypertext action. This tag is only allowed between
+			&lt;MAP&gt;...&lt;/MAP&gt; and used for implementing a client-side image map.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">COORDS</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Gives the hot spot coordinates, relative to the upper left corner of the image and specified by
+			the &lt;MAP NAME=&quot;...&quot;&gt; tag. Syntax is: </FONT><B><FONT SIZE="2">COORDS=&quot;</FONT></B><font size="2"><i>x1,y1,x2,y2</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where (<i>x1,y1</i>) represent the upper left corner of the hot spot and (<i>x2,y2</i>) represent the lower right
+			corner, relative to the upper left corner of the image. A value of (0,0) represents the image origin (the pixel
+			at the upper left corner of the image). All numbers <i>x1,y1,x2,y2</i> are integers, with x increasing towards the right
+			and y increasing towards the bottom.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><FONT SIZE="2"><a name="AREA_HREF">HREF</a></FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Defines the action when the link is triggered. &nbsp;See <a href="AppendixB.htm#Control_functions">Appendix 
+                B</a> for available functions.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP"><FONT SIZE="2"><a name="AREA_ONTIME">ONTIME</a></FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">If the ONVAR attribute 
+                not used, then this value automatically triggers the hypertext link after a specified time. Use </FONT><B><FONT SIZE="2">ONTIME=&quot;</FONT></B><font size="2"><i>1st 
+                number,2nd number</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where <i>1st number </i></FONT><font color="black" size="2">specifies the
+	frequency that the <b>HREF </b>function(s)<b> </b>is called  (specified in seconds, with
+	a single floating-point number). The range is 0.00 - 655.35. 0.00 means 
+                update never. The <i>2nd number</i> specifies the delay time from when
+	the page is loaded until the initial <b>HREF</b> function(s) is called  (specified in seconds, with a single
+	floating-point number). The range is 0.01 - 655.35. If the <i>2nd number</i> is not specified, then the delay time
+	defaults to the <i>1st number</i> (frequency) value. If the 2nd number 
+                is specified and the 1st number is 0.00, then the function(s) 
+                is called after the delay time specified by the second number 
+                and does not update again. If the ONVAR attribute 
+                is used, then this value specifies the frequency in which the 
+                ONVAR function is called.</font></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP">
+                <p><font size="2"><a name="AREA_ONVAR">ONVAR</a></font></p>
+</TD>
+		<TD VALIGN="TOP" width="560"><p><font size="2">The value returned 
+by this function call  is used   to trigger 
+the function(s) in <b>HREF<i>.</i></b>  Use </FONT><B><FONT SIZE="2">ONVAR=&quot;</FONT></B><font size="2"><i>function</i><b>&quot;</b>, where <i>function</i> is called at the frequency 
+                specified in ONTIME. See <a href="AppendixB.htm#View_functions">Appendix 
+B</a> for available functions.</FONT></p>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">SHAPE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">The current version of the HTMLCompiler supports only one shape: rectangle (</FONT><B><FONT SIZE="2">SHAPE=&quot;rect&quot;</FONT></B><font size="2">). Although most Internet browsers allow other shapes, the HTMLCompiler generates an ERROR if SHAPE=&quot;circle&quot;,
+			or SHAPE=&quot;poly&quot; is used.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP">
+                <p><font size="2"><a name="AREA_TRIGGER">TRIGGER</a></font></p>
+</TD>
+		<TD VALIGN="TOP" width="560">                <p><font size="2">This attribute specifies the  
+                value that 
+triggers the <b>URL</b> function(s). When the value returned from the ONVAR 
+                function is equal to the TRIGGER value, the <b>URL</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP">
+                <p><FONT SIZE="2"><a name="AREA_TRIGGERgt">TRIGGER.GT</a></FONT></p>
+</TD>
+		<TD VALIGN="TOP" width="560">                <p><font size="2">This attribute specifies the  
+                value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is greater than the TRIGGER.GT value, the  <b>HREF</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP">
+                <p><FONT SIZE="2"><a name="AREA_TRIGGERlt">TRIGGER.LT</a></FONT></p>
+</TD>
+		<TD VALIGN="TOP" width="560">                <p><font size="2">This attribute specifies the  
+                value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is less than the TRIGGER.LT value, the  <b>HREF</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP">                <p><FONT SIZE="2"><a name="AREA_TRIGGERneq">TRIGGER.NEQ</a></FONT></p>
+</TD>
+		<TD VALIGN="TOP" width="560"><p><font size="2">This attribute specifies the  
+                value that 
+triggers the  <b>HREF</b> function(s). When the value returned from the ONVAR 
+                function is not equal to the TRIGGER.NEQ value, the  <b>HREF</b> 
+                function(s) is called. The trigger value can be a byte, word, 
+                InternalRAM byte variable or InternalRAM word variable.</FONT></p>
+</TD>
+            <td width="0">                <p>&nbsp;</p>
+</td>
+            <td width="0">                <p>&nbsp;</p>
+</td>
+            <td width="0">                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2"><a name="AREA_VALUE">VALUE</a></font></TD>
+		<TD VALIGN="TOP" width="560"><p><font size="2">Specifies the intrinsic 
+value of this  object. Use <b>VALUE=&quot;</b><i>number</i><b>&quot; </b>Range 
+                is 0 - 65535 (0x00 - 0xFFFF) or InternalRAM byte or word variable.</FONT></p>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2"><a name="AREA_NAME">NAME</a></font></TD>
+		<TD VALIGN="TOP" width="560"><p><font size="2">Specifies the internal name of this  object. Used 
+    for <a href="IWC.htm">Inter-Widget Communication</a> only.</FONT></p>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;B&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Marks text for displaying in boldface. Same visual effect as the logical &lt;STRONG&gt; tag.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;BIG&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Makes text one size bigger than the surrounding text. Similar to &lt;FONT SIZE=&quot;+1&quot;&gt;,
+			except that nested &lt;BIG&gt; tags have a cumulative effect. So, &lt;BIG&gt;&lt;BIG&gt; ... &lt;/BIG&gt;&lt;/BIG&gt;
+			would yield text two sizes larger than the surrounding text.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;BODY&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">&lt;BODY&gt; ... &lt;/BODY&gt; must enclose the main section of a page.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;BR&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Used to insert a line break -- equivalent to the combination of a carriage return(0x0D) and a linefeed(0x0A)
+			in DOS.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;CENTER&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">For horizontally centering text, images, and widgets.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;DEL&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Logical equivalent to &lt;STRIKE&gt;. Strikes out text by displaying it with a line through it.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;DIV&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Used to specify visual attributes for a whole block of content.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">For aligning all the text and objects of the given block to the LEFT, CENTER, or RIGHT (default
+			is LEFT). </FONT><B><FONT SIZE="2">ALIGN=&quot;LEFT&nbsp;|&nbsp;CENTER&nbsp;|&nbsp;RIGHT&quot;</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;EM&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Logical equivalent to &lt;I&gt;. Marks text for displaying in italics.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2"><A NAME="<FONT>"></A>&lt;FONT&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">For changing the size and the font&nbsp;of individual letters and words.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">&nbsp;</TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">SIZE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Specifies the font size in one of two ways: Absolute, or Relative. To set a font to a specific size,
+			regardless of the size of the surrounding text, use the Absolute method. To increase, or decrease the font size
+			relative to the surrounding text, use the Relative method. If no 
+                size specified, default is 3.<BR></FONT>
+			
+			<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="1" WIDTH="100%">
+				<TR>
+					<TD VALIGN="TOP"><font size="2">Absolute:</FONT></TD>
+					<TD><B><FONT SIZE="2">SIZE=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where &quot;<i>n</i>&quot; specifies the absolute font
+						size between 1 and 7 (7 is the largest). Any enclosed text will be displayed at 8, 10, 12, 14, 18, 
+                            24, or 36  points for
+						n=1, 2, 3, 4, 5, 6 or 7 respectively. The value of 3 represents a browsers default font size -- 12 point.<BR>
+						</FONT><B><FONT SIZE="2">NOTE:</FONT></B><font size="2"> The default 
+                            Amulet Sans Serif typeface only has five point sizes, 
+                            1-5. Therefore values of 6 and 7 are not supported if 
+                            using the Amulet Sans Serif font.</FONT></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="TOP"><font size="2">Relative:</FONT></TD>
+					<TD><B><FONT SIZE="2">SIZE=&quot;+</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where a plus or minus sign before n indicates
+						a size relative to the current font size. &lt;FONT&nbsp;SIZE=&quot;+1&quot;&gt; is similar to &lt;BIG&gt;, and
+						&lt;FONT&nbsp;SIZE=&quot;-1&quot;&gt; is similar to &lt;SMALL&gt;. However, nested &lt;BIG&gt; or &lt;SMALL&gt;
+						tags have a cumulative effect, while nested relative &lt;FONT&gt; tags do NOT. So, &lt;FONT&nbsp;SIZE=&quot;+1&quot;&gt;&lt;FONT&nbsp;SIZE=&quot;+1&quot;&gt;
+						... &lt;/FONT&gt;&lt;/FONT&gt; would NOT yield text that is two sizes larger than the surrounding text.</FONT></TD>
+				</TR>
+			</TABLE>
+</TD>
+
+
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87" valign="top">
+                <p><font size="2">FACE</FONT></p>
+		</TD>
+		<TD HEIGHT="1" width="560">
+                <font size="2">Specifies which font face (also called a 
+&quot;typestyle&quot;) to use for the text between the &lt;FONT&gt; ...&lt;/FONT&gt; 
+                tags. The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See </FONT><a href="AmuletFontConverter.htm"><font size="2">AmuletFontConverter</font></a><font size="2"> 
+    for more information regarding&nbsp;the creation of .amf files. If no FACE 
+                specified, default 
+    is Amulet Sans Serif. </FONT>		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87">
+                <p><font size="2">COLOR</FONT></p>
+		</TD>
+		<TD HEIGHT="1" width="548">
+                <p><font size="2">Specifies the font color, either white or 
+                black. If no COLOR specified, default is black. <b>COLOR=&quot;WHITE|BLACK&quot;</b></FONT></p>
+		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;H</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">&lt;H1&gt; through &lt;H6&gt; can be used to set the size and alignment of text used to display
+			Headings. The smaller the number, the larger the text used. The convention followed by all major browsers is: &lt;H<i>n</i>&gt;
+			behaves exactly like the &lt;P&gt; paragraph tag except that the enclosed text is displayed in boldface at 8, 10,
+			12, 14, 18 and 24 points for n=6, 5, 4, 3, 2 and 1 respectively.<BR>
+			NOTE: &lt;H1&gt; is not supported by the Amulet Sans Serif typeface 
+                since it does not have&nbsp;a 24-point sized font.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">For aligning the heading text to the LEFT, CENTER, or RIGHT (default is LEFT). </FONT><B><FONT SIZE="2">ALIGN=&quot;LEFT&nbsp;|&nbsp;CENTER&nbsp;|&nbsp;RIGHT&quot;</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;HEAD&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Necessary for creating the HEAD section of a page where the document global &lt;META&gt; tags are
+			specified.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;HR&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Used to draw a horizontal line with a specified thickness, length, and alignment. The horizontal
+			line does not share a line with any text or objects, it resides on a line by itself.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">For aligning the horizontal line to the LEFT, CENTER, or RIGHT (default is LEFT). </FONT><B><FONT SIZE="2">ALIGN=&quot;LEFT&nbsp;|&nbsp;CENTER&nbsp;|&nbsp;RIGHT&quot;</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">NOSHADE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Draws the line with a solid color -- Black in most browsers AND on Amulet's EasyGUI LCD. By omitting
+			this attribute, the line will be drawn as 50% gray on Amulet's LCD -- Internet Browsers draw the line with some
+			3-D effect.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">SIZE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">SIZE=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> sets the thickness of the line to <i>n</i>
+			pixels. Default is 2 pixels.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">WIDTH</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">WIDTH=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> sets the length/width to <i>n</i> pixels.
+			Optionally, <i>n</i> may be specified as percentage of the window/table cell width: </FONT><B><FONT SIZE="2">WIDTH=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">%&quot;</FONT></B><font size="2">. The default value is 100%</FONT><B><FONT SIZE="2">.</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;HTML&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Tells a browser that this is an HTML document</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;I&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Marks text for displaying in italics. Same visual effect as the logical &lt;EM&gt; tag.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2"><a name="<IMG>"></a>&lt;IMG&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">For inserting both static and animated bitmap images.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">HEIGHT</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">HEIGHT=&quot;</FONT></B><font size="2"><i>pixels</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, specifies the image height in pixels. This attribute
+			is REQUIRED by the HTMLCompiler -- an error will be generated if it is missing.<BR>
+			</FONT><B><FONT SIZE="2">NOTE:</FONT></B><font size="2"> </FONT><B><FONT SIZE="2">The HTMLCompiler will not scale
+			the image if the actual image dimensions differ from those specified with the HEIGHT and WIDTH attributes.<BR>
+        </FONT><I><FONT SIZE="2">TIP: You may stretch a 1x1 GIF image by specifying 
+        different WIDTH and HEIGHT attributes to effectively nudge the surrounding 
+        elements a few pixels down, or to the right. The HTMLCompiler recognizes 
+        this as a &lt;</FONT><A HREF="#spacer"><FONT SIZE="2">SPACER</FONT></A><FONT SIZE="2">&gt; 
+        and does not store the image in the FLASH ROM file, however it is taken 
+        into consideration during the layout of the elements on the screen.</FONT></I></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">SRC</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">SRC=&quot;</FONT></B><font size="2"><i>filename</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where &quot;<i>filename</i>&quot; is the name of
+			the image file. Only files with a .gif or .jpg extension are allowed by the HTMLCompiler. Remember to include the
+			relative path to the file if it resides in a directory different from the current page. </FONT><B><FONT SIZE="2">NOTE:
+			The HTMLCompiler assumes that all filenames are relative the directory of the current page.</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">USEMAP</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">USEMAP=&quot;</FONT></B><font size="2"><i>name</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> identifies the image as a client-side image
+			map and specifies the &quot;<i>name</i>&quot; of the &lt;MAP&gt; that defines the clickable regions and actions.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">WIDTH</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">WIDTH=&quot;</FONT></B><font size="2"><i>pixels</i><b>&quot;</b>, specifies the image width in pixels. This attribute is
+			REQUIRED by the HTMLCompiler -- an error will be generated if it is missing.<BR>
+			</FONT><B><FONT SIZE="2">NOTE: The HTMLCompiler will not scale the image if the actual image dimensions differ
+			from those specified with the HEIGHT and WIDTH attributes.<BR>
+        </FONT><I><FONT SIZE="2">TIP: You may stretch a 1x1 GIF image by specifying 
+        different WIDTH and HEIGHT attributes to effectively nudge the surrounding 
+        elements a few pixels down, or to the right. The HTMLCompiler recognizes 
+        this as a &lt;</FONT><A HREF="#spacer"><FONT SIZE="2">SPACER</FONT></A><FONT SIZE="2">&gt; 
+        and does not store the image in the FLASH ROM file, however it is taken 
+        into consideration during the layout of the elements on the screen.</FONT></I></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87">
+<font size="2">NAME</FONT>		</TD>
+		<TD HEIGHT="1" width="548">
+<p><font size="2"><b>NAME=&quot;</b><i>name</i><b>&quot;</b>, specifies the internal name of the Image/Animated Image  object. Used 
+    for <a href="IWC.htm">Inter-Widget Communication</a> only.</FONT></p>
+		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87">
+                <p><font size="2">INVISIBLE</FONT></p>
+		</TD>
+		<TD HEIGHT="1" width="548">
+
+    <font size="2"><b>INVISIBLE</b>=<b>&quot;True|False&quot;</b>, specifies if 
+    the Animated Image&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the Animated Image&nbsp;is visible. &nbsp;If&nbsp;the Animated 
+                Image&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;</FONT><a href="IWC.htm#reappear()"><font size="2">reappear()</font></a><font size="2">&quot;. 
+                This attribute is only applicable for Animated Images, not static 
+                Images.</FONT>
+
+		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87">
+                <p><font size="2">INITIALCONDITION</FONT></p>
+		</TD>
+		<TD HEIGHT="1" width="548">
+<font size="2"><b>INITIALCONDITION=&quot;Play|Pause&quot;</b>, specifies the initial condition of the Animated Image when the page is loaded; <b>Play</b> 
+                specifies the Animated Image starts out animated, <b>Pause</b> specifies 
+                the Animated Image starts out paused. This attribute is only 
+                applicable for Animated Images, not static Images.</FONT>
+
+		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;INS&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Logical equivalent to &lt;U&gt;. Displays text with a solid underline.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;MAP&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Used to mark and name a collection of &lt;AREA&gt; tags so that they can be referenced via the USEMAP
+			attribute of the &lt;IMG&gt; tag -- for implementing a client side image map.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">NAME</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">NAME=&quot;</FONT></B><font size="2"><i>name</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> assigns a unique name to the image map so that
+			it may be linked to an image with <b>&lt;IMG USEMAP=&quot;</b><i>name</i><b>&quot;&gt;</b>. </FONT><B><FONT SIZE="2">NOTE:</FONT></B><font size="2"> The <i>name</i> is case sensitive, so the name &quot;ImageMap1&quot; is not the same as &quot;imagemap1&quot;.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><A NAME="META"></A><B><FONT SIZE="2">&lt;META&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">This tag appears only in the head of the document (between &lt;HEAD&gt;...&lt;/HEAD&gt;) to describe
+			the contents of the HTML document. Most of the META constructs, though, are intended for use by Internet search
+			engines, and therefore are not applicable to the creation of embedded GUI's. There is only one standard META construct
+			that is supported -- the document REFRESH construct. In addition, Amulet has also defined a new META construct
+			for the purpose of specifying non-visible attributes that are necessary for the HTMLCompiler.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">HTTP-EQUIV</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;<a href="Objects.htm#META">see 
+                Objects document</a>&quot;&gt;</FONT></B><font size="2"> -- This meta tag forces the browser to trigger a hypertext link after a specified number of seconds. 
+                Amulet has extended this meta tag so its functionality is the 
+                same as the &lt;A&gt; tag.  
+			</FONT><B><FONT SIZE="2">REFRESH</FONT></B><font size="2"> must be all uppercase. CONTENT fields are described
+			in 
+                <a href="Objects.htm#META">Objects document:</a><BR></FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">NAME</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">&lt;META NAME=&quot;Amulet&quot; 
+                CONTENT=&quot;baud=<i>number</i>;timeOut=<i>time</i>;draw=<i>type</i>;transition=<i>type</i>;touch&quot;&gt;</FONT></B><font size="2">&nbsp;-- This Amulet specific META tag specifies (1) The baudrate for communication to a serially-connected
+			device, (2) Time to start displaying the onscreen buffer, (3) When to start displaying the onscreen buffer, 
+                (4) The type of screen transition, (5) the communication time-out 
+                and (9) if the current page is a touch-screen calibration page. Notice
+			the strange syntax with all of the semi-colon delimited fields enclosed within one set of quotes. Also, the name
+			attribute is case sensitive: </FONT><B><FONT SIZE="2">Amulet</FONT></B><font size="2">.</FONT><B><FONT SIZE="2">
+			</FONT></B><font size="2">CONTENT fields are described below:<BR>
+			<BR></FONT>
+			
+			<TABLE BORDER="0" WIDTH="100%">
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">baud=</FONT></B></TD>
+					<TD VALIGN="TOP"><font size="2">The baudrate is specified in bits-per-second with one of the following integer values: <b>9600</b>, <b>19200</b>,
+
+						<b>57600</b>, or <b>115200</b>. 
+                            Default is <b>115200</b>.</FONT></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">timeOut=</FONT></B></TD>
+					<TD VALIGN="TOP"><font size="2">The amount 
+                            of time, in seconds, the Amulet waits for a response 
+                            after sending a message. If there is no response 
+                            in that time, the Amulet times out and sends&nbsp;the 
+                            next message in line.&nbsp;Valid range is <b>0.02</b>-<b>2.55</b> 
+                            seconds, in .01 increments. Default is <b>0.2</b> 
+                            (200ms)</FONT></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">draw=</FONT></B></TD>
+					<TD VALIGN="TOP"><font size="2"><b>draw=BufferFull | Instant</b> -- default = <b>Instant</b>.<b> BufferFull</b> means that the screen goes blank until the
+						next screen is completely rendered to an offscreen buffer. <b>Instant</b> means that the new screen is rendered to the
+						actively displayed buffer. <b>BufferFull</b> is best for slide shows that are created with the REFRESH META tag above. Most
+						user-triggered transitions look best as <b>Instant</b> transitions.</FONT></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">transition=</FONT></B></TD>
+					<TD VALIGN="TOP"><font size="2"><b>transition=GrayLCD | NoClearLCD | ClearLCD</b> -- default = <b>ClearLCD</b>. <b>GrayLCD</b> means that upon loading the page, 
+                            gray out the previous page. Can be used if a &quot;pop-up&quot; 
+                            warning message is desired. <b>NoClearLCD</b> means that 
+                            upon loading the page, leave the images from the 
+                            previous page. <b>ClearLCD</b> means that upon loading 
+                            the page, clear the previous page before drawing 
+                            this page. </FONT></TD>
+				</TR>
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">slaveAckRsp</FONT></B></TD>
+					<TD VALIGN="TOP">
+                            <p><font size="2">Configures the Amulet to respond 
+                            with an ACK (0xF0) when sent a &quot;Set&quot; or 
+                            &quot;Draw&quot; command.</FONT></p>
+</TD>
+				</TR>
+                    <tr>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">slaveNoRsp</FONT></B></TD>
+					<TD VALIGN="TOP">
+                            <p><font size="2">Configures the Amulet to send 
+                            no response&nbsp;when sent a &quot;Set&quot; or 
+                            &quot;Draw&quot; command.</FONT></p>
+</TD>
+                    </tr>
+                    <tr>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">UARTDelay</FONT></B></TD>
+					<TD VALIGN="TOP">
+                            <p><font size="2">Configures the Amulet to delay 
+                            a minimum of 2ms between every byte that is transmitted.</FONT></p>
+</TD>
+                    </tr>
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">nullTerminate</FONT></B></TD>
+					<TD VALIGN="TOP">
+                            <p><font size="2">Configures the Amulet to attach 
+                            a null (0x00)&nbsp;character at the end of every 
+                            transmission, not just strings.</FONT></p>
+</TD>
+				</TR>
+                    <tr>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">BasicStamp</FONT></B></TD>
+					<TD VALIGN="TOP">
+                            <p><font size="2">Configures the Amulet to delay 
+                            a minimum of 2ms between every byte that is transmitted 
+                            AND to attach a null (0x00) character at the end 
+                            of every transmission.</FONT></p>
+</TD>
+                    </tr>
+				<TR>
+					<TD VALIGN="TOP"><B><FONT SIZE="2">touch</FONT></B></TD>
+					<TD VALIGN="TOP"><font size="2">Usually this attribute is omitted. However it must be included on the 
+                            first touch screen calibration page
+						which contains the first touch target. 
+                            It must NOT&nbsp;be included on any other page.</FONT></TD>
+				</TR>
+			</TABLE>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87" valign="top">
+<font size="2"><a name="initCommands"></a>NAME</FONT>		</TD>
+		<TD HEIGHT="1" width="548">
+<B><FONT SIZE="2">&lt;META NAME=&quot;initCommands&quot; 
+                SRC=&quot;<i>filename</i>&quot;&gt;</FONT></B><font size="2">&nbsp;-- This Amulet specific META tag specifies the 
+                include file used to initialize the command opcodes the Amulet 
+                OS uses for its <a href="Protocol.htm#Summary">Amulet Serial 
+                Protocol</a>. Should only be specified in the main html page. 
+                Only one initialization per project is allowed. The file specified 
+                by <b><i>filename </i></b>must be located in the same directory 
+                as the main html page to be compiled. <a href="Protocol.htm#Customizing">See 
+                documentation</a> for initializing the command opcodes.</FONT>		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" width="4">
+                <p>&nbsp;</p>
+		</TD>
+		<TD HEIGHT="1" width="87" valign="top">
+<font size="2"><a name="initInternalRAM"></a>NAME</FONT>		</TD>
+		<TD HEIGHT="1" width="548">
+<B><FONT SIZE="2">&lt;META NAME=&quot;initInternalRAM&quot; 
+                SRC=&quot;<i>filename</i>&quot;&gt;</FONT></B><font size="2">&nbsp;-- This Amulet specific META tag specifies the 
+                include file used to initialize the <a href="internalRAM.htm">Internal 
+                RAM</a> variables.&nbsp;Should only be specified in the main 
+                html page. Only one initialization per project is allowed. The 
+                file specified by <b><i>filename </i></b>must be located in 
+                the same directory as the main html page to be compiled. <a href="internalRAM.htm#Initializing_IR">See 
+                documentation</a> for initializing the InternalRAM variables.</FONT>		</TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;P&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Marks individual paragraphs. Paragraphs are separated by two line breaks and can each have unique
+			alignment properties.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">For aligning all the text and objects of the given paragraph to the LEFT, CENTER, or RIGHT (default
+			is LEFT). </FONT><B><FONT SIZE="2">ALIGN=&quot;LEFT&nbsp;|&nbsp;CENTER&nbsp;|&nbsp;RIGHT&quot;</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;PARAM&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Used to provide arguments to an Amulet Widget. Only allowed between &lt;APPLET&gt;...&lt;/APPLET&gt;</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">NAME</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><SPAN STYLE="mso-bidi-font-weight : normal"><FONT SIZE="2">NAME=</FONT></SPAN><FONT SIZE="2">”</FONT></B><font size="2"><i>text</i></FONT><B><FONT SIZE="2">”</FONT></B><font size="2"> is used to specify the parameter name, which is defined by the widget.</FONT><SPAN STYLE="mso-spacerun : yes"><FONT
+			SIZE="2">&nbsp; </FONT></SPAN><font size="2">Each widget has its own set of parameter names. </FONT><B><FONT SIZE="2">NOTE:
+			All widget parameter names are case sensitive.</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">VALUE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">VALUE=&quot;</FONT></B><font size="2"><i>number</i></FONT><B><FONT SIZE="2">|</FONT></B><font size="2"><i>text</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> assigns a value to the parameter identified
+			with the </FONT><B><SPAN STYLE="mso-bidi-font-weight : normal"><FONT SIZE="2">NAME</FONT></SPAN></B><font size="2">
+			attribute.</FONT><SPAN STYLE="mso-spacerun : yes"><FONT
+			SIZE="2"> </FONT></SPAN><font size="2">Depending on the
+			parameter, the value can be numeric or textual. See 
+                <a href="Widgets.htm">Widgets.htm</a> for more information.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;S&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">(Identical to &lt;STRIKE&gt;, and same visual effect as the logical &lt;DEL&gt; tag) -- Strikes
+			out text by displaying it with a line through it.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;SMALL&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Makes text one size smaller than the surrounding text. Similar to &lt;FONT SIZE=&quot;-1&quot;&gt;,
+			except that nested &lt;SMALL&gt; tags have a cumulative effect. So, &lt;SMALL&gt;&lt;SMALL&gt; ... &lt;/SMALL&gt;&lt;/SMALL&gt;
+			would yield text that is two sizes smaller than the surrounding text.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><A NAME="spacer"></A><B><FONT SIZE="2">&lt;SPACER&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">(Also known as &quot;pixel-shimming&quot;.) Inserts a horizontal or vertical space, specified in
+			units of pixels. This tag is rarely supported by visual authoring tools or internet browsers, but it is very useful
+			for (1) creating custom line spacing between paragraphs (2) creating custom indents, or (3) nudging content down,
+			or to the right by a specific number of pixels.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">SIZE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">SIZE=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where <i>n</i> is the amount of space, in pixels.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">TYPE</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">TYPE=&quot;vertical | horizontal&quot;</FONT></B><font size="2">. A vertical spacer creates an
+			automatic line-break with the line height specified in the SIZE attribute, and the line width=100% of the window
+			or table cell. A horizontal spacer will have the width specified in the SIZE attribute, but it will assume the
+			height of the current line.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;STRIKE&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">(Identical to &lt;S&gt;, and same visual effect as the logical &lt;DEL&gt; tag ) -- Strikes out
+			text by displaying it with a line through it.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;STRONG&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Logical equivalent to &lt;B&gt;. Marks text for displaying in boldface.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;TABLE&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Creates a table for precise positioning of text, images, and widgets. Every page must be contained
+			within at least one table cell. Currently, the HTMLCompiler determines the pixel dimensions of the LCD from the
+			WIDTH and HEIGHT attributes of the outermost table in the HTML document. For this reason, </FONT><B><FONT SIZE="2">all
+			table dimensions MUST be specified -- an error will be generated if WIDTH or HEIGHT is missing!</FONT></B><font size="2"> In addition, the dimensions must be specified in pixels -- percent is NOT allowed and will also generate
+			an error. No borders, or background colors/patterns are drawn, the cell borders are transparent and only used as
+			an aid in layout.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">BACKGROUND</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">BACKGROUND=&quot;</FONT></B><font size="2"><i>filename</i><b>&quot;</b>, 
+                where &quot;<i>filename</i>&quot; is the name of
+			the image file. Only files with a .gif or .jpg extension are allowed by the HTMLCompiler. Currently, 
+                background images are not tiled or clipped if their dimensions 
+                are not the same as the table they reside in. Remember to include the
+			relative path to the file if it resides in a directory different from the current page. </FONT><B><FONT SIZE="2">NOTE:
+			The HTMLCompiler assumes that all filenames are relative the directory of the current page.</FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">HEIGHT</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">HEIGHT=&quot;</FONT></B><font size="2"><i>pixels</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> specifies the number of pixels occupied by
+			the table in the vertical direction (top-to-bottom).</FONT></TD>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+            <td width="0">
+                <p>&nbsp;</p>
+</td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">WIDTH</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">WIDTH=&quot;</FONT></B><font size="2"><i>pixels</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> specifies the number of pixels occupied by
+			the table in the horizontal direction (left-to-right).</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;TD&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Creates a display CELL for positioning text, images, and Widgets. Each cell may span several columns
+			and rows. In addition, horizontal and vertical alignment specs will apply only to the contents of the cell. The
+			Amulet HTMLCompiler REQUIRES that all row and column width dimensions be specified -- this is done in
+			the &lt;TD&gt; tag. The row and column height dimensions 
+                are optional.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">ALIGN=&quot;LEFT|CENTER|RIGHT&quot;</FONT></B><font size="2"> -- Specifies the horizontal text alignment
+			in the cell. The default is LEFT.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4">
+                <p>&nbsp;</p>
+</TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">BACKGROUND</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">BACKGROUND=&quot;</FONT></B><font size="2"><i>filename</i><b>&quot;</b>, 
+                where &quot;<i>filename</i>&quot; is the name of
+			the image file. Only files with a .gif or .jpg extension are allowed by the HTMLCompiler. Currently, 
+                background images are not tiled or clipped if their dimensions 
+                are not the same as the cell they reside in. Remember to include the
+			relative path to the file if it resides in a directory different from the current page. </FONT><B><FONT SIZE="2">NOTE:
+			The HTMLCompiler assumes that all filenames are relative the directory of the current page. 
+                </FONT></B></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">COLSPAN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">COLSPAN=&quot;</FONT></B><font size="2"><i>n</i><b>&quot;</b>, where <i>n</i> is the number of table columns occupied by the cell.
+			The second row of the 3x3 table below only has two &lt;TD&gt; cells. The first &lt;TD&gt; spans only one column,
+			while the second &lt;TD&gt;, shown in silver, spans the remaining two columns.</FONT> 
+			<TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="150" HEIGHT="99">
+				<TR>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD WIDTH="33">&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD COLSPAN="2" BGCOLOR="silver">
+						<P ALIGN="CENTER"><FONT SIZE="1">COLSPAN=2</FONT>
+					</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD WIDTH="33">&nbsp;</TD>
+				</TR>
+			</TABLE>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">HEIGHT</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">HEIGHT=&quot;</FONT></B><font size="2"><i>pixels</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> specifies the number of pixels occupied by
+			the cell in the vertical direction (top to bottom). Optionally, may be specified in percent of the total table
+			height -- </FONT><B><FONT SIZE="2">HEIGHT=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">%&quot;</FONT></B><font size="2">.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">NOWRAP</FONT></TD>
+		<TD VALIGN="TOP" width="560"><font size="2">Indicates that the content of the current cell should not be wrapped. The HTMLCompiler will truncate
+			any line that exceeds the cell width. Internet browsers usually extend the table to fit the text on a single line.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">ROWSPAN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">ROWSPAN=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2">, where <i>n</i> is the number of table rows occupied by the cell.
+			The 3x3 table below illustrates the concept of both ROWSPAN and COLSPAN. The cell shown in silver spans two columns
+			and two rows.</FONT> 
+			<TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="150" HEIGHT="99">
+				<TR>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD WIDTH="33">&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="33">&nbsp;</TD>
+					<TD ROWSPAN="2" COLSPAN="2" BGCOLOR="silver">
+						<P ALIGN="CENTER"><FONT SIZE="1">COLSPAN=2, ROWSPAN = 2</FONT>
+					</TD>
+				</TR>
+				<TR>
+					<TD WIDTH="33">&nbsp;</TD>
+				</TR>
+			</TABLE>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">VALIGN</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">VALIGN=&quot;TOP|MIDDLE|BOTTOM&quot;</FONT></B><font size="2"> -- Specifies the vertical text alignment in
+			the cell. The default is MIDDLE. The following example illustrates the three VALIGN methods:</FONT> 
+			<TABLE BORDER="1" CELLPADDING="0" CELLSPACING="0" WIDTH="300" HEIGHT="75">
+				<TR>
+					<TD WIDTH="33%" VALIGN="TOP"><font size="2">Text aligned to the TOP of the cell.</FONT></TD>
+					<TD WIDTH="33%" VALIGN="MIDDLE"><font size="2">Text aligned to the MIDDLE of the cell.</FONT></TD>
+					<TD WIDTH="34%" VALIGN="BOTTOM"><font size="2">Text aligned to the BOTTOM of the cell</FONT></TD>
+				</TR>
+			</TABLE>
+</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD WIDTH="4"></TD>
+		<TD WIDTH="87" VALIGN="TOP"><font size="2">WIDTH</FONT></TD>
+		<TD VALIGN="TOP" width="560"><B><FONT SIZE="2">WIDTH=&quot;</FONT></B><font size="2"><i>pixels</i></FONT><B><FONT SIZE="2">&quot;</FONT></B><font size="2"> specifies the number of pixels occupied by
+			the cell in the horizontal direction (left to right). Optionally, may be specified in percent of the total table
+			width -- </FONT><B><FONT SIZE="2">WIDTH=&quot;</FONT></B><font size="2"><i>n</i></FONT><B><FONT SIZE="2">%&quot;</FONT></B><font size="2">.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;TITLE&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Gives the page a title. Not used by Amulet, but tolerated. Windowed Internet browsers use the text
+			marked by this tag to set the window title string.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;TR&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Creates a new table row to hold &lt;TD&gt; cells.</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD COLSPAN="2" BGCOLOR="silver" width="95"><B><FONT SIZE="2">&lt;U&gt;</FONT></B></TD>
+		<TD width="560"><font size="2">Displays text with a solid underline (Same visual effect as the logical &lt;INS&gt; tag).</FONT></TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+	<TR>
+		<TD HEIGHT="1" COLSPAN="3" width="659">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+            <td width="0"></td>
+            <td width="0"></td>
+            <td width="0"></td>
+	</TR>
+</TABLE>
+</CENTER>
+<P>
+<CENTER>
+<P>
+<HR ALIGN="CENTER" WIDTH="60%">
+<BR>
+<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I><p></P>
+
+<P><I><FONT SIZE="2"><BR>
+</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</CENTER>
+
+</HTML>

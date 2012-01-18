@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 2.0 for Windows">
+	<TITLE>Welcome</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+		<h1 align="CENTER">WELCOME</h1>
+		<p>Congratulations on your purchase of Amulet's Starter Kit. Please take 
+  a few minutes to read this file which contains the latest information about 
+  setting up and using your Amulet starter kit.
+This documentation is valid for software version 3.2.</p>
+		<H2>Table of Contents</H2>
+		<OL>
+  <LI><a href="#Overview">Overview</a>
+    <li><a href="compiler.htm#firmware_upgrade">Updating Or Restoring Your Amulet 
+    OS</a>
+  </li>
+<LI><A HREF="#PackingSlip" target="info">What is contained in the starter kit</A> 
+  
+    <li><a href="WhatsNew.htm">What is new in this release</a></li>
+<LI><A HREF="#Quickie" target="info">Quick Start</A> and <a href="Examples.htm" target="info">Example 
+    Projects</a> 
+  <LI><A HREF="#Install" target="info">Installing the Compiler</A>
+			<li><a href="#Trial" target="info">Installing a Trial Version HTML Drag-N-Drop Tool</a>
+			<LI><A HREF="compiler.htm" target="info">Compiling HTML and programming the 
+    Amulet Flash</A> 
+  <LI><A HREF="HTMLSupport.htm" target="info">HTML Support -- What IS supported, 
+    and what is NOT</A> 
+  <LI><A HREF="Widgets.htm" target="info">Amulet Widgets -- A guide to adding 
+    dynamic UI elements to your GUI</A>
+  <LI><a href="functions.htm" target="info">Widget Functions</a> 
+  <LI><a href="IWC.htm" target="info">Inter-Widget Communications</a>
+  <LI><a href="AppendixB.htm" target="info" 2">Function Matrix</a>
+  
+    <li><a href="AmuletFontConverter.htm">Amulet Font Converter -- How to add 
+    a new&nbsp;font to the Amulet module</a></li>
+<LI><A HREF="Protocol.htm" target="info" 2">Serial Protocol -- How to interface 
+    your hardware to the Amulet module</A>
+			<LI><a href="Simulator.htm">Amulet Simulator -- How to interface the Amulet 
+    module to the Amulet Simulator</a> 
+  <LI><A HREF="#LegalInformation">Warranty and Returns</A> 
+  <LI><A HREF="#Support">Contacting Amulet for Support</A> 
+</OL>
+
+<P>
+<HR ALIGN="CENTER">
+
+<H2><A NAME="Overview"></A>Overview</H2>
+<p>The Amulet method of displaying graphics on an LCD is totally different 
+from traditional methods. The Amulet Browser Chip handles all the LCD and 
+touchpanel functions so your micro doesn't have to. Hardware wise, the only 
+requirement is that your micro&nbsp;needs  a UART in order to use the Amulet system. On the software 
+side, you need to create an Amulet serial protocol handler. Generally, the only 
+thing that is being sent via the serial link is data.</p>
+<p>Here's the Amulet system in a nutshell.<br>1. HTML authoring tools 
+are used to create a Graphical User Interface(GUI).<br>2. The Amulet HTMLCompiler is 
+used
+to compile your GUI to a small binary file which is then downloaded into the 
+Amulet module.<br>3. The Amulet module displays the GUI and&nbsp;handles 
+all touchpanel interaction.<br>4. The Amulet module receives 
+input data from your host microprocessor via the serial link  and also sends command messages to 
+your micro based upon timer-based or touchpanel events.</p>
+<p>There are two types of variables in the Amulet system. External variables 
+(byte, word and string) which reside on your micro's side and <a href="internalRAM.htm">InternalRAM 
+variables</a> (byte, word and string) which reside on the Amulet module. InternalRAM&nbsp;is 
+quasi-dual port RAM that can be read from and written to by the Amulet chip 
+through commands inserted in the HTML code. Your micro interfaces&nbsp;to InternalRAM 
+through the serial link. There are specific UART commands that can read from 
+and write to InternalRAM.</p>
+<p>There are four major types of serial messages that will be sent between the 
+Amulet module and your micro.<br>1. A request of a variable (byte, word or 
+string)<br>2. A setting of a variable (byte, word or string)<br>3. A Remote 
+Procedure Call, which is a completely generic message which allows the Amulet module to inform your micro of a certain event. You can have up to 256 unique 
+RPC's. What those RPC's signify is entirely up to you.<br>4. A raw byte, or 
+group of bytes,&nbsp;can be sent from the Amulet module to your micro. This 
+option is not part of the Amulet serial protocol, but rather it gives you the 
+flexibility to have the Amulet  module send you small commands that do not 
+need to be answered.<br>Please see the <a href="Protocol.htm">UART Protocol 
+document</a> for more details.</p>
+<p>Your LCD's user interface is created using standard HTML authoring tools, 
+such as Front Page, Dreamweaver, Namo etc... To complement the standard HTML, 
+Amulet has created a number of I/O objects, referred to&nbsp;as <a href="Widgets.htm">Amulet 
+Widgets</a> which can be inserted into the HTML source code via the APPLET tag. 
+There are two types of Amulet Widgets, Control Widgets and View Widgets. Control 
+Widgets are input objects, like function buttons, sliders, radio buttons, etc... 
+Control Widgets have a <a href="functions.htm">function</a>, or a set of functions, 
+that can be applied to them. For instance, a function button can be set to send 
+a Remote Procedure Call #5 out the UART every time it is pressed. View Widgets 
+are output objects, like bargraphs, numeric fields, string fields, etc... View 
+Widgets call a function which returns the data used as the input for that particular 
+widget. For instance, a bargraph can have a function which requests external 
+byte variable #3 every 100ms over the UART.</p>
+<p>The complexity of the serial protocol handler depends upon the type of communication 
+you will be using in your system. You can set up your project so that the Amulet module is the master, requesting data at given update rates and sending 
+command messages asynchronously. Or your micro can be the master, sending data 
+to the Amulet module unsolicited. And you can also use a dual master setup, 
+where the Amulet module is sending asynchronous command messages to your micro, 
+yet your micro is also sending unsolicited data to the Amulet.</p>
+<HR ALIGN="CENTER">
+
+<h2><A NAME="PackingSlip"></A>Starter Kit Contents</h2>
+<P>The Amulet starter kit contains everything you need to start creating feature-rich user interfaces for any
+embedded device.
+
+<UL>
+	<LI>The Amulet LCD Module which integrates a 320x240 monochrome LCD, backlighting
+	and a clear analog touch screen on a controller board featuring Amulet's revolutionary GUI Browser ASIC;
+	<LI>Serial Cable for programming the Amulet Flash;
+	<LI>5V power supply with the 3.8&quot; module, or 12V power supply with the 5.7&quot; 
+    module, so you can get started today;
+	<LI>Touch screen stylus;
+	<LI>and a CD-ROM containing Amulet's HTMLCompiler and documentation.
+</UL>
+
+<P><BR>
+
+<HR ALIGN="CENTER">
+
+<H2><A NAME="Quickie"></A>Running the Quick Start</H2>
+<P>If you haven't already done so, please take the time to work through the informative 
+  tour and example projects that are included in your Amulet Starter Kit. The 
+  tour will provide you with an overview of how to configure, compile and program 
+  the Flash of your Amulet Starter Kit. The Examples are provided to show you 
+  how to use some of Amulet's most powerful features.<BR>
+  <BR>
+  What will I learn in Quick Start? 
+<ul>
+  <li>How to configure and use the Amulet hardware. 
+  <li>Creating and Compiling a GUI. 
+  <li>Programming your GUI into the Amulet Flash. 
+</ul>
+<p><a href="QuickStart57.htm">Click here, to run the 5.7&quot; Quick Start.</a> 
+If you have the 3.8&quot; Starter Kit, <a href="QuickStart38.htm">click here 
+for the 3.8&quot; Quick Start.<br></a><p>What will I learn from the Examples? 
+<ul>
+  <li>Various methods to accept user input from the touch screen,
+  <li>Displaying dynamic data from the serial port or another on screen control,
+  <li>Advanced UI techniques that utilize communications between on screen objects. 
+</ul>
+<p><a href="Examples.htm">Click here, to view more info about the Example projects.</a><br>&nbsp;<HR ALIGN="CENTER">
+		<H2><A NAME="Install"></A>Installing the HTMLCompiler</H2>
+		<P>If you are reading this, it is likely that you have already installed the compiler. If not, then Insert the
+Amulet installation CD into your CD-ROM drive. The Setup program should launch automatically. If this does not
+happen, follow the steps below:
+
+		<OL>
+	<LI>Click on the Windows <B>Start</B> menu and select <B>Run.</B> You will be presented with the Run dialog box.
+	<LI>Click the <B>Browse</B> button. You will be presented with a file dialog box.
+	<LI>Use the controls in the file dialog to navigate to the file named <B>Setup.exe</B> located on the CD-ROM drive.
+	<LI>Click the <B>Open</B> button.
+	<LI>In the Run dialog box, click <B>OK</B>.
+</OL>
+		<P>Follow the onscreen directions to complete the rest of this installation.<BR>
+<BR>
+		<HR ALIGN="CENTER">
+		<h2><a name="Trial"></a>Installing a Trial Version HTML Drag-N-Drop Tool</h2>
+		<p>With the permission of Namo, Amulet has provided a trial version of Namo WebEditor 5.5 on the install CD which you must install separate from the Amulet HTMLCompiler. By installing Namo WebEditor 5.5, you adhere to the End User License Agreement set forth by Namo during the install. If you would like to purchase the full version of Namo WebEditor 5.5, you can do so by either going to Namo's web site, <a href="http://www.namo.com">http://www.namo.com,</a> or by contacting Enova Software:</p>
+		<p>Enova Software<br>
+			2203 Timberlock Place, Suite 250<br>
+			The Woodlands, TX 77380<br>
+			Tel: 1-281-363-2000<br>
+			Fax: 1-281-298-1060<br>
+			Email: info@enovasoftware.com<br>
+			URL: <a href="http://www.EnovaSoftware.com">http://www.EnovaSoftware.com</a></p>
+		<p>To install the trial version of Namo WebEditor 5.5, insert the Amulet installation CD into your CD-ROM drive. If the Amulet HTMLCompiler Setup program should launch automatically, cancel the Setup program and follow the steps below:</p>
+		<ol>
+			<li>Click on the Windows <B>Start</B> menu and select <B>Run.</B> You will be presented with the Run dialog box.
+			<li>Click the <B>Browse</B> button. You will be presented with a file dialog box.
+			<li>Use the controls in the file dialog to navigate to the file named <B>WE55Enu_Trial.exe</B> located on the CD-ROM drive.
+			<li>Click the <B>Open</B> button.
+			<li>In the Run dialog box, click <B>OK</B>.
+		</ol>
+		<p>Follow the onscreen directions to complete the rest of this installation.<br>
+			<br>
+		</p>
+		<hr align="CENTER">
+		<h2><a name="Install"></a>Using HTML Compiler Help</h2>
+		<P>HTMLCompiler help is actually a website made up of HTML pages. The home page is named readme.htm and is installed
+on your hardrive in the HTMLCompiler's main directory -- typically C:\Program Files\Amulet\readme.htm. HTMLCompiler
+help can be &quot;browsed&quot; from most recent browsers, however, frames capability is recommended for best results.</P>
+		<P>When you invoke help from within HTMLCompiler, help\help.htm is invoked by passing it to the Windows API ShellExecute.
+This will perform the equivalent of double-clicking on the HTML file in Windows Explorer. In most cases, this will
+invoke your preferred browser.</P>
+<P><B>NOTE</B>: If you have the file association for .HTM files set to open an HTML editor, or some other program,
+that program will be opened, instead of your browser, when you invoke help from within HTMLCompiler.<BR>
+
+<HR ALIGN="CENTER">
+
+<H2>Copyright And Patent Information</H2>
+<P>Copyright © 2000-2003 Amulet Technologies, LLC. All rights reserved. This documentation and the accompanying
+software are copyrighted materials.<BR>
+<BR>
+U.S. and Foreign patents pending.<BR>
+<BR>
+
+<HR ALIGN="CENTER">
+
+<H2><A NAME="LegalInformation"></A>Warranty and Returns</H2>
+<H3>Return Policy</H3>
+<P>If you need to return a product, please <A HREF="http://www.amulettechnologies.com/contact.html"><FONT COLOR="#0000AA">Contact</FONT></A> 
+  us. You may return any product for a refund of the purchase price within 30 
+  days of purchase. Products must be in new condition (unpacked but not used, 
+  damaged, or modified), packed safely in original or equivalent packaging, and 
+  shipped to:</P>
+
+<BLOCKQUOTE>
+	<BLOCKQUOTE>
+		<P>AMULET TECHNOLOGIES<BR>
+		275 SARATOGA AVE. #230<BR>
+		SANTA CLARA, CA 95050</P>
+	</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<P>We cannot be responsible for returned items lost during shipping.</P>
+<H3>Warranty</H3>
+<P>Amulet Technologies, LLC warrants the products it sells against defects in materials and workmanship for a period
+of 90 days. If you discover a defect, we will, at our option, repair, replace, or refund the purchase price. Return
+the product with a description of the problem. We will return the product or its replacement via standard shipping.
+<B>IMPORTANT:</B> Subjecting the product to conditions outside specified limits, or attempting to repair or modify
+the product, voids this warranty.</P>
+<H3>Liability</H3>
+<P>Other than the warranty described above, Amulet Technologies, LLC gives no additional warranty either expressed
+or implied and specifically disclaims all other warranties, including warranties for merchantability and fitness.
+In no event shall the liability of Amulet Technologies, LLC exceed the buyer's purchase price, nor shall Amulet
+Technologies be liable for any indirect or consequential damages.</P>
+<H3>Medical Products</H3>
+<P>Products sold by Amulet Technologies, LLC have not been approved for use in critical medical, life-support,
+or life-saving devices or applications.
+<H3>Trademarks</H3>
+<P>Amulet Technologies, the Amulet Logo, Easy GUI, and µHTML are trademarks of Amulet Technologies, LLC.
+Windows® is a registered trademark of Microsoft, Inc. Other trademarked names that may be mentioned in the
+body of these documents are the property of their respective holders. <BR>
+<BR>
+
+<HR ALIGN="CENTER">
+
+<H2><A NAME="Support"></A>Support Information</H2>
+<P>If you find a bug, have a question, or would like to suggest an enhancement, please contact us via e-mail at
+<A HREF="mailto:support@amulettechnologies.com">support@AmuletTechnologies.com</A></P>
+<P>The most current version of the HTMLCompiler, including any bug corrections, 
+  may be found on our website at <A HREF="http://www.amulettechnologies.com/index.html">http://www.AmuletTechnologies.com</A></P>
+<CENTER>
+<P>
+<HR ALIGN="CENTER" WIDTH="60%">
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I>
+			
+  <P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact 
+    Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet 
+    Home</A> 
+</CENTER>
+
+</BODY>
+
+</HTML>

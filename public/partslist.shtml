@@ -1,0 +1,95 @@
+<!--#set var="document_title" value="6.115 Parts List" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2011-02-06 18:32:54 -0500 (Sun, 06 Feb 2011) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+<h2>Parts List</h2>
+<p>
+Please note that this list only includes parts that we have purchased in the
+past and that may therefore be available in the TA office. Other resources
+include parts from 6.115 labs, chips from the equipment desk, special parts
+from Professor Leeb, and your own purchases from Radio Shack or Digikey.
+</p>
+<table border='0' width='100%' cellspacing='2' cellpadding='3'><tr><th>Description</th><th>Quantity</th><th>Vendor</th><th>Vendor Part&nbsp;#</th><th>Part&nbsp;#</th></tr>
+<tr bgcolor='#ccccff'><td>Atmel 256KB 5 volt r/w flash memory</td><td align='center'>7</td><td align='right'>Digikey</td><td>AT29C020-12PC-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>64k 8x8 SRAM</td><td align='center'>15</td><td align='right'>Digikey</td><td>428-1057-ND</td><td>CY7C185-35PC</td></tr>
+<tr bgcolor='#ccccff'><td>Red LEDs (like in SpinDude)</td><td align='center'>500</td><td align='right'>Digikey</td><td>404-1106-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>16 Channel Analog Mux/DeMux</td><td align='center'>100</td><td align='right'>Digikey</td><td>296-3517-5-ND</td><td>CD4067BE</td></tr>
+<tr bgcolor='#ccccff'><td>4-to-16 Decoder</td><td align='center'>100</td><td align='right'>Digikey</td><td>296-9180-5-ND</td><td>CD74HC154E</td></tr>
+<tr bgcolor='#aaaaff'><td>8 bit ADC in SSOP-24 package</td><td align='center'>5</td><td align='right'>Digikey</td><td>ADC1175-50CIMT-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>NPN SML SIG G.P. AMP & SWITCH T092</td><td align='center'>1</td><td align='right'>Digikey</td><td> 2N3904-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Connector female 7x2 2MM</td><td align='center'>4</td><td align='right'>Digikey</td><td> H2006-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Connector female 10x2 2MM</td><td align='center'>4</td><td align='right'>Digikey</td><td> H2008-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Crystal LAN Ethernet, has header and RJ45 connections</td><td align='center'>1</td><td align='right'></td><td></td><td>CS8900A-CQ</td></tr>
+<tr bgcolor='#ccccff'><td>National Semi 10-bit ADC</td><td align='center'>1</td><td align='right'></td><td></td><td> ADC10158GIN</td></tr>
+<tr bgcolor='#aaaaff'><td>TxDAC 8-bit ADC</td><td align='center'>1</td><td align='right'></td><td></td><td> AD9708AR</td></tr>
+<tr bgcolor='#ccccff'><td>USB female sockets</td><td align='center'>4</td><td align='right'>Digikey</td><td>921K-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>8-24 pin TTSOP adapter (very cool)</td><td align='center'>2</td><td align='right'></td><td> </td><td></td></tr>
+<tr bgcolor='#ccccff'><td>60.000 KHz XTAL C-2 type</td><td align='center'> 4</td><td align='right'>Digikey</td><td> SE3320-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Female/Female connector</td><td align='center'> 1</td><td align='right'>Digikey</td><td> WM6981-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>14.7456 MHz crystal</td><td align='center'> 1</td><td align='right'>Digikey</td><td> X175-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>8-Pin, 96 kHz Stereo D/A Converters with I2C, in SOIC package</td><td align='center'> 15</td><td align='right'></td><td></td><td>CS4334K</td></tr>
+<tr bgcolor='#ccccff'><td>8-Pin, 96 kHz Stereo D/A Converters with I2C, in SOIC package</td><td align='center'> 3</td><td align='right'></td><td></td><td>CS4331</td></tr>
+<tr bgcolor='#aaaaff'><td>5x7 LED grid</td><td align='center'>1</td><td align='right'></td><td></td><td> LTP2757</td></tr>
+<tr bgcolor='#ccccff'><td>4x4 LED grid</td><td align='center'>1</td><td align='right'></td><td></td><td> LTP2044</td></tr>
+<tr bgcolor='#aaaaff'><td>T1-3/4 IR LED</td><td align='center'>4</td><td align='right'>Digikey</td><td> 67-1001-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Universal Dual Filter Building Block, for making notch/bandpass/etc filters</td><td align='center'>1</td><td align='right'></td><td></td><td>LTC1060</td></tr>
+<tr bgcolor='#aaaaff'><td>2^12 Encoder for IR transmission</td><td align='center'>1</td><td align='right'></td><td></td><td>HT12A</td></tr>
+<tr bgcolor='#ccccff'><td>2^12 Decoder for IR transmission</td><td align='center'>1</td><td align='right'></td><td></td><td>HT12D</td></tr>
+<tr bgcolor='#aaaaff'><td>2^18 Encoder for IR transmission</td><td align='center'>1</td><td align='right'></td><td></td><td>HT640</td></tr>
+<tr bgcolor='#ccccff'><td>2^18 Decoder for IR transmission</td><td align='center'>1</td><td align='right'></td><td></td><td>HT648L</td></tr>
+<tr bgcolor='#aaaaff'><td>LCD, maybe 20x4</td><td align='center'>4</td><td align='right'></td><td></td><td>UC20401</td></tr>
+<tr bgcolor='#ccccff'><td>315 MHz Transmitter (RF) (one may be broken)</td><td align='center'>3</td><td align='right'>Digikey</td><td>TXE-315-KH</td><td>TXE-315-KH</td></tr>
+<tr bgcolor='#aaaaff'><td>315 MHz Receiver (RF) (one may be broken)</td><td align='center'>3</td><td align='right'>Digikey</td><td>RXD-315-KH</td><td>RXD-315-KH</td></tr>
+<tr bgcolor='#ccccff'><td>315 MHz Transmitter (RF)</td><td align='center'>1</td><td align='right'></td><td></td><td>TXE-315-LC</td></tr>
+<tr bgcolor='#aaaaff'><td>315 MHz Receiver (RF)</td><td align='center'>1</td><td align='right'></td><td></td><td>RXD-315-LC</td></tr>
+<tr bgcolor='#ccccff'><td>Antenna for Linx</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>8-bit ADC</td><td align='center'>1</td><td align='right'></td><td></td><td>AD7819YR</td></tr>
+<tr bgcolor='#ccccff'><td>Sensory Voice Direct 364 Speech Recognition uC on breakout board</td><td align='center'>1</td><td align='right'></td><td></td><td>RSC-300</td></tr>
+<tr bgcolor='#aaaaff'><td>Miniature buttons</td><td align='center'>4</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Miniature microphone</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>IC Voice Recorder/Player 8 minutes (one DIP, one SOIC)</td><td align='center'>2</td><td align='right'>Digikey</td><td> ISD4003-08MS-ND</td><td> ISD-4003</td></tr>
+<tr bgcolor='#ccccff'><td>Set of RF transmitters/receivers that have no part number</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>PS/2 and VGA ports that go to pins</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#ccccff'><td>PS/2 port with soldered-on wires</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Socket adapter for SOICs</td><td align='center'>Various</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Socket adaptor for big sqare chip</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Resonator 455kHz</td><td align='center'>2</td><td align='right'>Digikey</td><td> TK9942-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>MP3 Decoder</td><td align='center'>7</td><td align='right'></td><td></td><td>STA013</td></tr>
+<tr bgcolor='#aaaaff'><td>Tone Decoder</td><td align='center'>36</td><td align='right'>Digikey</td><td>LM567CN-ND</td><td>LM567</td></tr>
+<tr bgcolor='#ccccff'><td>Temperature Sensor</td><td align='center'>6</td><td align='right'></td><td></td><td>LM35D</td></tr>
+<tr bgcolor='#aaaaff'><td>DTMF Tone Generator</td><td align='center'>2</td><td align='right'></td><td></td><td>CM8870</td></tr>
+<tr bgcolor='#ccccff'><td>NPN Darlington Transistors</td><td align='center'>5</td><td align='right'></td><td></td><td>ZTX603</td></tr>
+<tr bgcolor='#aaaaff'><td>Pressure Sensor 16.7 PSI max.</td><td align='center'>1</td><td align='right'>Digikey</td><td>MPXA4115A6U-ND</td><td> MPX4115A</td></tr>
+<tr bgcolor='#ccccff'><td>Crimp Terminal</td><td align='center'>100</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Dual USB Port Transient Suppressor</td><td align='center'>2</td><td align='right'></td><td></td><td>SN65240P</td></tr>
+<tr bgcolor='#ccccff'><td>2.000 MHz Crystal</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Ultrasonic Receiver</td><td align='center'>3</td><td align='right'>Digikey</td><td>P9894-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>8-Channel/Dual 4-Channel, High-Performance, CMOS Analog Multiplexers </td><td align='center'> 2</td><td align='right'></td><td></td><td>MAX308CPE</td></tr>
+<tr bgcolor='#aaaaff'><td>Dual USB Port Transient Suppressor</td><td align='center'> 2</td><td align='right'>Digikey</td><td> 296-6596-5-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>I2C Controller to 8051</td><td align='center'>2</td><td align='right'></td><td></td><td>PCF8584</td></tr>
+<tr bgcolor='#aaaaff'><td>Wide Bandwidth 4 x 1 VIDEO MULTIPLEXER</td><td align='center'>1</td><td align='right'></td><td></td><td>MPC100AP</td></tr>
+<tr bgcolor='#ccccff'><td>Very Wideband, Low Distortion Monolithic Op-Amp</td><td align='center'>2</td><td align='right'></td><td></td><td>CLC409</td></tr>
+<tr bgcolor='#aaaaff'><td>Dual 7-Segment LED Display (same as the ones on the kit)</td><td align='center'>3</td><td align='right'>Digikey</td><td>MAN6910-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Operational Amplifier</td><td align='center'>2</td><td align='right'></td><td></td><td>LM741</td></tr>
+<tr bgcolor='#aaaaff'><td>11.0592 MHz crystal</td><td align='center'>2</td><td align='right'>Digikey</td><td>X125-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>BCD to 7-segment decoder</td><td align='center'>6</td><td align='right'>Digikey</td><td>296-3712-5-ND</td><td>74LS47</td></tr>
+<tr bgcolor='#aaaaff'><td>Voice Record and playback, 20 seconds</td><td align='center'> 2</td><td align='right'></td><td></td><td>ISD1420P</td></tr>
+<tr bgcolor='#ccccff'><td>38.000 kHz Crystal</td><td align='center'>2</td><td align='right'>Digikey</td><td>SE3314-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>PIN PHOTO DIODE</td><td align='center'>2</td><td align='right'>Digikey</td><td>PN323BPA-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>32-bit floating point math coprocessor</td><td align='center'>1</td><td align='right'></td><td></td><td>PAK-II</td></tr>
+<tr bgcolor='#aaaaff'><td>Octal bus transceiver/register</td><td align='center'>14</td><td align='right'></td><td></td><td>74HC646</td></tr>
+<tr bgcolor='#ccccff'><td>8-channel Analog Multiplexer</td><td align='center'>1</td><td align='right'></td><td></td><td>74HC4051</td></tr>
+<tr bgcolor='#aaaaff'><td>Big LCD, enormous, with 16 buttons</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Photodiode IC Infrared</td><td align='center'>10</td><td align='right'>Digikey</td><td>PNA4602M-ND</td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Atmel 8-bit microcontroller (in ZIF socket)</td><td align='center'>1</td><td align='right'></td><td></td><td>AT89C52</td></tr>
+<tr bgcolor='#ccccff'><td>10W, 1-channel Audio Amp with Fin</td><td align='center'>2</td><td align='right'>Digikey</td><td>AN7586-ND</td><td>AN7586</td></tr>
+<tr bgcolor='#aaaaff'><td>Counter Binary Decade</td><td align='center'>6</td><td align='right'>Digikey</td><td>DM74LS90N-ND</td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Solenoids</td><td align='center'>N</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Old hard drive</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Old floppy drive</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#aaaaff'><td>Cypress USB Host Chip</td><td align='center'>1</td><td align='right'></td><td></td><td>SL811HS</td></tr>
+<tr bgcolor='#ccccff'><td>Intel Universal Peripheral Interface</td><td align='center'>1</td><td align='right'></td><td></td><td>82C42</td></tr>
+<tr bgcolor='#aaaaff'><td>Card reader swipe device</td><td align='center'>1</td><td align='right'></td><td></td><td></td></tr>
+<tr bgcolor='#ccccff'><td>Video Driver chip</td><td align='center'>k</td><td align='right'></td><td></td><td>MC6847</td></tr>
+</table>
+<!--#include file="include/footer.shtml"-->

@@ -1,0 +1,45 @@
+C1	22uF	Digikey P976-ND
+C3	.1uF	Digikey 1109PHCT-ND
+C4	22uF	Digikey P976-ND
+C5	.1uF	Digikey 1109PHCT-ND
+C6	.1uF	Digikey 1109PHCT-ND
+D1	1N4001  Digikey 1N4001-E3/54GICT-ND
+D2	1N4001  Digikey 1N4001-E3/54GICT-ND
+D3	GREEN LED	Digikey 160-1659-ND	
+D4	1N4001  Digikey 1N4001-E3/54GICT-ND
+D5	1N4001  Digikey 1N4001-E3/54GICT-ND
+D6	1N4001  Digikey 1N4001-E3/54GICT-ND	
+J1	SERIAL	Digikey A32075-ND
+R1	10K	Digikey 10KQBK-ND
+R2	200 ohm Digikey 200QBK-ND
+R3	10K	Digikey 10KQBK-ND
+R4	300K	Digikey 300KQBK-ND		
+U1	AT89C2051	Digikey AT89C2051-24PU-ND
+U2	ATMEGA644	Digikey ATMEGA644-20PU-ND
+U3	MAX233		Digikey MAX233CPP+G36-ND
+U6	LM7805	        Digikey 296-13996-5-ND
+U5	74LS07	        Digikey 296-14878-5-ND
+U4	LM7812		Digikey LM340T-12-ND
+SW	DP3T Switch	Digikey 401-2004-ND
+
+Terminal Block		Digikey	281-1435-ND
+GAL22V10 - Lattice P/N: GAL22V10D-25LPN
+PIC16F628 - Digikey PIC16F628A-I/P-ND
+
+Receptacles
+
+3M5477-ND   for MAX233
+3M5474-ND   for 74LS07
+3M5483-ND   for ATMEGA
+
+ZIF socket Aries Electronics Part 24-6554-10 Digikey Part: A300-ND
+
+Standoffs and screws:
+
+1   Screw for LM7812 (4-40, 0.25")	Digikey	H342-ND
+2   Screws for Serial(4-40, 0.25")	Digikey	H342-ND
+3   Nut for Screw    (4-40, hex)	Digikey	H216-ND
+4   Standoff	     (4-40, 0.625")	Digikey	1808K-ND
+4   Standoff Screw   (4-40, 0.375")	Digikey	H781-ND
+
+

@@ -1,0 +1,31 @@
+#block-text.block
+  .content
+    %h2.title 8051/R31JP Info
+    .inner
+      :markdown
+        Datasheets
+        -----------
+        * [8051](/datasheets/8051.pdf) -Intel MCS 51 Microcontroller Family User's Manual [15MB]
+        * [AT28C64](/datasheets/AT28C64.pdf)-64K EEPROM \*
+
+        *Note that this chip is only 8 Kbytes.  Both the datasheet and your R31JP might confuse you on this point.*
+
+        Software
+        ----------
+        * [minmon](/miscfiles/minmon.asm) - Default Copy of Minmon
+        * [Rasm51e](/miscfiles/rasm51e.exe) - Windows/DOS 8051 Assembler (use this [batch file](/miscfiles/rasm.bat) to give it the proper flags).
+        * [Rasm51e](/miscfiles/rasm_manual.pdf) - Manual [PDF]
+        * On Linux, OS X, BSD, etc, Rasm51e can be executed using [DOSBox](http://dosbox.sourceforge.net/).
+        * On Athena, we have provided a script to automate this:
+            <blockquote><tt>
+            add 6.115 <br>
+            rasm <em>filename</em>.asm</tt></blockquote>
+        * Any serial communication software that can transmit raw text files will work with the [proper configuration](/miscfiles/hyper.txt/).
+        * Some useful software programs are listed on the  page.
+
+        Support Documentation
+        ---------------------
+        * [Lab Familiarization](/miscfiles/familiarization.pdf) - Short introduction to using the ROM burners, Rasm, and Hyperterminal. Handed out at lab familiarizations.
+        * [Configuring Hyperterminal](/miscfiles/hyper.txt) - How to configure Hyperterminal to communicate with your R31JP
+
+- content_for :sidebar, render(:partial => 'sidebar')

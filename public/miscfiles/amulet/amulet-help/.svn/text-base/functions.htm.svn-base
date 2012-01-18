@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title>Amulet Function Calls</title>
+
+<meta name="GENERATOR" content="Namo WebEditor v5.0">
+</head>
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Amulet Function Calls</h1>
+<p> Amulet widgets use the <B>href</B> 
+parameter to specify a function call.  See <a href="Widgets.htm">Widgets.htm</a> 
+for a detailed description of widgets. A function call can be 
+a hyperlink to another page, a request for the value of an external variable, 
+a command to invoke a Remote Procedure Call and much more. A function call can 
+also send a command to other widgets, known as <a href="IWC.htm">Inter-Widget Communication (IWC)</a>. 
+ See <a href="AppendixB.htm">Appendix B</a> for a comprehensive 
+list of all available functions. </p>
+<p>The Easy GUI operating system uses 
+  two general types of widgets: Control Widgets and View Widgets.</p>
+<p>Control Widgets 
+  are user input widgets such as list widgets, slider widgets, radio buttons, 
+  checkboxes and function buttons. Anchors, META REFRESH objects and area maps can also 
+call functions, like Control Widgets, but because they are not created using 
+the &lt;APPLET&gt; tag, they are referred to as <a href="Objects.htm#ControlObjects">Control Objects</a>. 
+Typically, Control Widget/Object function calls are initiated by a &quot;hit&quot; of the 
+widget. A &quot;hit&quot; can occur one of two ways. </p>
+<p>The typical way is the 
+physical &quot;hit&quot;, which occurs when the active region of the object/widget 
+on the touchscreen is touched  and then released while still within the 
+bounds of the active region. The object/widget must 
+be in focus when letting up on the touchscreen for the&nbsp;object/widget to 
+initiate its function calls. If you touch an active region, but move off the 
+region while still touching the touchscreen, the object/widget will lose 
+focus, therefore, letting up on the touchscreen will do nothing.  </p>
+<p>The alternative way a &quot;hit&quot; can occur is to have one Control Object/Widget 
+invoke the forceHit() method of another Control Object/Widget. See <a href="IWC.htm">IWC 
+documentation</a> for more information. </p>
+<p>There are two exceptions to the rule that a &quot;hit&quot; initiates all 
+function calls. The first exception is&nbsp;the Slider Widget. As soon as a 
+pen down event occurs within the boundaries of a slider, a function call is 
+initiated. If, while still in the pen down state, new values of the slider are&nbsp;selected, 
+new function calls will be initiated. The second exception is&nbsp;Custom/Function 
+Buttons which are set up to auto-repeat. If an auto-repeatable&nbsp;Custom/Function 
+Button is touched, and stays in a pen down state&nbsp;longer than the time specified 
+by the repeatDelay attribute, then a function call is initiated. As long as 
+the button remains in a pen down state,&nbsp;the&nbsp;function calls will repeat 
+at the frequency specified by the&nbsp;repeatRate attribute.</p>
+<p>Control Objects/Widgets cannot call functions that 
+return a value. See <A HREF="AppendixB.htm#Control_functions">Appendix B</A> for a comprehensive 
+list of all valid control functions.</p>
+<h3><a name="Multiple_Function "></a>Multiple Function Calls</h3>
+<p>Control Objects/Widgets&nbsp;can call multiple functions at one time by  
+  separating the functions by a comma. There is a limit of 36 multiple functions that can be attached to a single Control Widget/Object <B>href</B>. To 
+illustrate how to use multiple functions, see the following example. To create 
+a function button that invokes an external RPC 
+#5 and then links to <B>page2.html</B>, use the following:</p>
+<BLOCKQUOTE><B>&lt;APPLET CODE=&quot;FunctionButton.class&quot; 
+  WIDTH=&quot;150&quot; HEIGHT=&quot;25&quot; NAME=&quot;Button1&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.invokeRPC(5), page2.html&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;spring-loaded&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;label&quot; VALUE=&quot;test 5&quot;&gt;<BR>
+  &lt;/APPLET&gt;</B></BLOCKQUOTE>
+<p>Multiple function calls are performed 
+in the order they are entered on the line, from <a href="#leftToRight">left to right</a><SUP>*</sup>. In the previous example, <B>Amulet:UART.invokeRPC(5) 
+</B>would be called first, 
+and then a hyperlink to <B>page2.html 
+</B>would follow. As soon as a 
+page is linked to, any subsequent function calls are discarded. For this reason, 
+if it is desired to link to another page, that must be the last function call 
+within a multiple function call. </p>
+<p><b><sup><a name="leftToRight"></a>*</sup>Important notes regarding the order 
+of multiple 
+function calls:</B> If there is a mix of UART and InternalRAM or IWC function, 
+the functions might not be performed from left to right. The reason for this 
+is that UART functions are loaded into a UART transmit buffer whereas InternalRAM 
+and IWC functions are loaded into a different function buffer. Due to the nature 
+of UART transmissions, they will take a considerable amount of processor time 
+to complete the function call in comparison to InternalRAM and IWC functions. 
+Therefore, any InternalRAM or&nbsp;IWC function which is&nbsp;part of a multiple 
+function call will most likely be finished prior to any UART function call which 
+is part of the same multiple function call.</p>
+<p>Another important point to note is that when functions are loaded into the 
+function buffer, the value of the argument is loaded at that time. Most of the 
+time, this is of no consequence. But, when you have a multiple function call 
+that performs an action on an InternalRAM variable and then later within the 
+multiple function call that same InternalRAM variable is used as an argument 
+for another function, 
+things might not happen in the order that you expect. The reason this is a problem 
+is that the value of the InternalRAM used as the argument is loaded into the 
+function buffer prior to the action taken on that InternalRAM variable.&nbsp;For example, let's 
+say you  have 
+a multiple function call that looks like this:</p>
+<p><B>Amulet:InternalRAM.byte(0).inc(),Amulet:InternalRAM.byte(1).setValue(InternalRAM.byte(0))</B></p>
+<p>Most likely, the person who created this multiple function call would expect 
+InternalRAM.byte(0) to be incremented and the result of that increment will 
+be 
+saved into&nbsp;InternalRAM.byte(1). Unfortunately, this will not happen as 
+expected. This is because both functions are loaded into the function buffer 
+at the same time and the value of InternalRAM.byte(0) at that time is loaded 
+as the argument for the second function. So, even though the increment takes 
+place before InternalRAM.byte(1) has the setValue performed on it, the value 
+used to store into InternalRAM.byte(1) is the value of InternalRAM.byte(0) prior 
+to the increment. </p>
+<p>Assuming you understand this explanation, the next obvious question is &quot;how 
+do I work around this?&quot; The way to handle this is to use a separate META 
+Refresh tag which will hold the second function call and the new multiple function 
+call will perform a forceHit() on this META. This fixes the problem because 
+the META Refresh's function isn't loaded into the function buffer until after 
+the first function is actually performed. For example, the META Refresh would 
+look like this:</p>
+<p><B>&lt;META http-equiv=&quot;Refresh&quot; content=&quot;0;URL=Amulet:InternalRAM.byte(1).setValue(InternalRAM.byte(0));NAME=metaSet1&quot;&gt;</B></p>
+<p>and the new multiple function call will look like this:</p>
+<p><B>Amulet:InternalRAM.byte(0).inc(),Amulet:document.metaSet1.forceHit()</B>&nbsp;</p>
+<hr width="70%" align="center"><h3><a name="Sequenced_Function"></a>Sequenced Function Calls</h3>
+<p>Control Objects/Widgets can also call sequenced functions by separating the 
+functions by semi-colons. Sequenced functions allow for different&nbsp;function 
+calls at each successive &quot;hit&quot;. Sequenced function calls are performed 
+in the order they are entered on the line, from left to right. The sequences 
+continually wrap, so the first sequence&nbsp;follows the last sequence. To 
+illustrate how to use sequenced functions, see the following example. To create 
+a toggle type custom button that invokes an external RPC 
+#5 when toggled&nbsp;down and invokes an external RPC #6 when toggled up, use the following:</p>
+<BLOCKQUOTE><B>&lt;APPLET CODE=&quot;CustomButton.class&quot; 
+  WIDTH=&quot;150&quot; HEIGHT=&quot;25&quot; NAME=&quot;CustomBtn1&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.invokeRPC(5);Amulet:UART.invokeRPC(6)&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;toggle&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;upImage&quot; VALUE=&quot;myUpImage.gif&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;downImage&quot; VALUE=&quot;myDownImage.gif&quot;&gt;<BR>
+  &lt;/APPLET&gt;</B> </BLOCKQUOTE>
+<p>Sequenced function calls can also be made up of multiple function calls. There 
+is a limit of 36 different sequences per Control Widget/Object <B>href </B>and 
+each sequence can have a maximum of 36 multiple function calls<B>. </B>To help 
+illustrate this, use the previous example, but instead of invoking RPC #5 for 
+one sequence, and then RPC #6 for another sequence, let's assume we would like 
+the first sequence to invoke RPC #4 and RPC #5, and the second sequence to invoke 
+RPC #6 and RPC #7. To accomplish this, use: <B>Amulet:UART.invokeRPC(4),Amulet:UART.invokeRPC(5);Amulet:UART.invokeRPC(6),Amulet:UART.invokeRPC(7) </B>notice 
+the sequences are separated by the semi-colon, and the multiple function calls 
+are separated by the commas.</p>
+<h3>View Widget Function Calls</h3>
+<p>View Widgets are used for displaying data. 
+  View Widgets include lineplots and bargraphs. View Widget function 
+calls are initiated by either a timer event or the IWC method <B>forceUpdate</B>. The frequency of the timer event is specified 
+by the <B>updateRate</B> 
+parameter. They can only call a single function, 
+and that function must return either a byte, word(2-bytes), or ASCII string. 
+The returned value is used as the input to the View Widget.</p>
+<h3><A NAME="FunctionConventions"></A>Function Call Conventions</h3>
+<p>Amulet function calls borrow some of it syntax from 
+Java Script, a scripting language used within HTML. Except for hyperlinks to 
+other pages, all Amulet function calls start 
+with &quot;<B>Amulet:</B>&quot;. 
+The <B>Amulet:</B> 
+signifies that what follows is an Amulet specific command. If it is desired to hyperlink to another HTML page, then just use the name 
+of the file to link to in the <B>href</B> parameter.</p>
+<p> Amulet function calls also borrow concepts from Java, an Object-Oriented 
+Programming(OOP) language. When it is required to interface to an external server, 
+use &quot;<B>Amulet:UART.</B>&quot; 
+The  <B>UART. </B>can 
+be thought of as a UART object. As in OOP, each 
+object has its own set of data and a set of well-defined interfaces to that 
+data. As in Java,  these interfaces are known as methods. Methods are just functions 
+that are specific to a particular object. Each object has its own set of methods. 
+</p>
+<p>Examples: &nbsp;</p>
+<p>&quot;<B>Amulet:UART.byte(0).value()</B>&quot;<br><B>UART</B> specifies that a serial 
+message will go out the UART.<br><B>byte(0)</B> specifies byte variable 0.<br><B>value()</B> 
+specifies the value of byte variable 0 is returned.</p>
+<p><B>&quot;Amulet:internalRAM.word(5).setValue(0xF020)&quot;<br>internalRAM</B> 
+specifies the dual port RAM onboard the Amulet.<br><B>word(5)</B> specifies the internal 
+RAM word variable 5.<br><B>setValue(0xF020)</B> specifies internal RAM word variable 
+5 is to be set to the value 0xF020.</p>
+<p><B>'Amulet:internalRAM.string(5).setValue(&quot;Your String&quot;)'<br>internalRAM</B> 
+specifies the dual port RAM onboard the Amulet.<br><B>string(5)</B> specifies the internal 
+RAM string variable 5.<br><B>setValue(&quot;Your String&quot;)</B> specifies 
+that internal RAM string variable 
+5 is to contain the null terminated string&nbsp;&quot;Your String&quot;. Note 
+that the string variable is enclosed within double quotes while the entire function 
+is enclosed within single quotes. For more information regarding string variables, 
+see the note <a href="Widgets.htm#stringVariables">regarding string variables.</a></p>
+<p>The same nomenclature as Java 
+is used, where a method is called by using the object's name followed 
+by the dot operator, followed by the method. Amulet has added a new wrinkle 
+with  the concept of multiple byte, word and string variables. Since there can 
+be 256 different byte variables, 256 different word variables and 201 different 
+19-character string variables, there needs to be a way of&nbsp;specifing the 
+type of variable as well as the variable number. Therefore, if the object is 
+a byte, word, or string variable, the nomenclature is of the following type: 
+<br><B>Amulet:<i>object</i>.<i>variable</i>(variable #).<i>method</i>(argument, 
+if needed).</B> <br><B>Amulet:</B> specifies an Amulet specific command. <br><B><i>object</i></B> 
+can be UART or InternalRAM. variable.<br><B><i>variable</i> </B>can be byte, 
+word or string.<br><B>variable #</B> can be a number from 0-255 for byte and 
+word variables, and 0-200 for string variables.<br><B><i>method</i></B> can 
+be any number of methods described in Appendix B.</p>
+<p>See example below, where a function 
+button, when pressed, causes a Remote Procedure Call # 5 to be sent out the 
+UART to the external server:</p>
+<BLOCKQUOTE><B>&lt;APPLET CODE=&quot;FunctionButton.class&quot; 
+  WIDTH=&quot;150&quot; HEIGHT=&quot;25&quot; NAME=&quot;Button1&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.invokeRPC(5)&quot;&gt;<BR>
+  &lt;PARAM NAME=&quot;label&quot; VALUE=&quot;test 5&quot;&gt;<BR>
+  &lt;/APPLET&gt;</B></BLOCKQUOTE>
+<p>The <B>href</B> line  invokes the <B>invokeRPC()</B> 
+method on <B>UART</B>. 
+That is, it calls <B>invokeRPC()</B> 
+relative to the UART 
+object. Thus, the call 
+to <B>UART.invokeRPC()</B> 
+causes the UART in the Amulet controller to send out an &quot;invokeRPC&quot; 
+command.</p>
+<p>The method <B>invokeRPC()</B> requires 
+an argument (a parameter that is passed to the method that the method uses as 
+its input).  As a rule of thumb, the argument passed to any method is the intrinsic 
+value of the calling widget/object. Only Control Widgets/Objects have an intrinsic 
+value. Function buttons can specify an intrinsic value by using <B>&lt;PARAM NAME=&quot;buttonValue&quot; VALUE=&quot;5&quot;&gt;</B><font size="2"><b> 
+</b></FONT>or by including a number 
+between the ()'s. Widgets that can have multiple intrinsic values, like lists 
+and sliders, must not include a number between the ()'s, since their intrinsic 
+value is dependent upon the state of the widget. </p>
+<p>For a list of all available functions, 
+see <a href="AppendixB.htm">Appendix B</a>. </p>
+<HR width="60%">
+<CENTER>
+<BR>
+<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I><p>&nbsp;<I><FONT SIZE="2"><BR>
+</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</P>
+
+</CENTER>
+
+<p align="center">&nbsp;</p>
+</body>
+</html>

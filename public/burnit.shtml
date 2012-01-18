@@ -1,0 +1,66 @@
+<!--#set var="document_title" value="6.115 BurnIt Info" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2010-02-24 21:21:34 -0500 (Wed, 24 Feb 2010) $ by \$Author: taoffice $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>BurnIt Information</h2>
+
+<h3>Datasheets</h3>
+<ul>
+ <li><a href="datasheets/2051.pdf">Atmel AT89C2051</a> -
+     8-bit 8051-like microcontroller
+ <li><a href="datasheets/22v10.pdf">GAL22V10</a> -
+     Programmable Logic Device
+ <li><a href="datasheets/simple2051.sch">Simple2051 Schematic</a> -
+     Simple 2051 application schematic in ExpressSCH format
+ <li><a href="datasheets/simple2051.bmp">Simple2051 Bitmap</a> -
+     Simple 2051 application schematic in BMP format
+ <li><a href="datasheets/16f628.pdf">PIC16F628</a> -
+     8-bit CMOS FLASH-based microcontroller
+ <li><a href="datasheets/16f628_errata.pdf">PIC16F628 errata</a> -
+     PIC16F62X Silicon/Data Sheet Errata (check this if you're having 
+     problems)
+</ul>
+
+<h3>Programming Hardware</h3>
+<ul>
+ <li><a href="miscfiles/burnit.bmp">BurnIt Schematic</a> -
+     BMP format
+ <li><a href="miscfiles/burnit.exe">BurnIt Layout</a> -
+     Self-Extracting Zip format - Email Leeb for password
+ <li><a href="miscfiles/burnitbom.txt">BurnIt BOM</a> -
+      Parts for BurnIt
+ <li><a href="miscfiles/burnit.hex">BurnIt Atmega Hex code</a> -
+      Code required for BurnIt's ATMEGA644
+ <li><a href="miscfiles/burnitcode.zip">BurnIt Source</a> -
+      Source code for BurnIt firmware
+</ul>
+
+<h3>Programming Software</h3>
+<ul>
+   <li><a href="http://www.htsoft.com/products/compilers/PICClite.php">
+      Hi-Tech PICC Lite C Compiler</a> - link to vendor's homepage
+   <li><a href="miscfiles/picclite-805PL2.exe">
+      Hi-Tech PICC Lite C Compiler</a> - local copy of the version of
+      PICC Lite used on the lab computers
+   <li><a href="miscfiles/picclite.pdf">
+      Hi-Tech PICC Lite</a> - user's manual
+   <li><a href="miscfiles/installWinCupl.exe">
+      Stripped WinCupl</a> - version used on lab machines without graphical interface
+</ul>
+
+<h3>Support</h3>
+<ul>
+<!--   <li><a href="miscfiles/picguide.txt">PIC Guide</a> - Guide to
+     Programming the PIC16F628 using older JimPic programmer-->
+   <li><a href="miscfiles/burnitreadme.txt">BurnIt README</a> -
+      Instructions for using BurnIt
+   <li><a href="miscfiles/blinky.c">blinky.c</a> - PIC code from Lab 2
+     to blink an LED on pin B0
+   <li><a href="miscfiles/test051.asm">test051.asm</a> - 2051 code
+     to blink an LED
+   <li><a href="http://www.howstuffworks.com/c.htm">
+     How C Programming Works</a> - link to a decent tutorial on the C language
+</ul>     
+
+<!--#include file="include/footer.shtml"-->

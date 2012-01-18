@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title>Graphic Primitives</title>
+
+<meta name="GENERATOR" content="Namo WebEditor v5.0">
+</head>
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Graphic Primitives</h1>
+<p>Using HTML to create your projects at compile time allows you to make rich user interfaces quickly 
+and easily. Sometimes, though, the ability to draw 
+graphic primitives like lines, rectangles, filled rectangles and single pixels 
+at runtime, 
+is needed. Amulet's uHTML does not inherently give you the ability to do this.</p>
+<p>With the addition of a new communications protocol that allows the external 
+processor to be the master and the Amulet to be the slave comes a way to send 
+unsolicited graphic primitives to the Amulet. The drawing of these graphic primitives 
+is independent of the uHTML that is currently being run on the Amulet. You do 
+need to keep in mind that the uHTML will still be running, so any widgets or 
+objects that write to the LCD&nbsp;might write over the graphics primitive you 
+send to the LCD.</p>
+<p>By default, the Amulet will respond to all graphic primitive commands with 
+a response opcode (0xE9-0xEC) and an echo of all other bytes. If it is desired 
+to have the Amulet respond with an ACK(0xF0) or no response at all, a META tag 
+using SlaveAckRsp or Slave NoRsp can be used on the home page of the project. 
+One thing to keep in mind is that the Amulet will use that attribute for all 
+&quot;Set&quot; or &quot;Draw&quot; commands coming from your external processor.</p>
+<p>The line primitive draws a line from point 1(x and y coordinates)&nbsp;to 
+point 2(x and y coordinates), that has a line weight of 1-15 and is one of 16 
+different patterns. The line primitive is drawn by sending out the &quot;Draw 
+line primitive&quot; opcode(0xD9), followed by the x-coordinate of point 1, the y-coordinate 
+of point 1, the x-coordinate of point 2, the y-coordinate of point 2, the line 
+pattern&nbsp;and finally the line weight. The x and y coordinates are 16-bit 
+numbers. The line pattern and line weight are both 4-bit numbers. Because Amulet 
+uses an ASCII protocol, each coordinate that is sent to the Amulet is comprised 
+of four different bytes. For example, if the x-coordinate of point 1 is 0x0020, 
+the 4 bytes that would be sent to the Amulet for that particular coordinate 
+would be 0x30,0x30,0x32,0x30. The line pattern and line weight, when sent to 
+the Amulet, are one byte 
+each. The line pattern byte specifies&nbsp;the desired&nbsp;line pattern. Sixteen 
+different patterns are available, Figure 1. The line weight specifies&nbsp;the 
+thickness of the line, range of 1-15.&nbsp;The entire 
+line primitive message sent to the Amulet is a total of 19 bytes. </p>
+<p>The rectangle primitive draws a rectangle with a given starting top left 
+point(x and y coordinates) and a delta x and delta y, plus a line weight and 
+line pattern. The rectangle primitive is drawn by sending out the &quot;Draw rectangle primitive&quot; opcode(0xDA), followed by the x-coordinate of the 
+topleft point, the y-coordinate 
+of the topleft point, the delta x, the delta y, the line 
+pattern&nbsp;and finally the line weight. The x and y coordinates and the delta 
+x and delta y are all 16-bit 
+numbers. The line pattern and line weight are both 4-bit numbers. The delta x is a 16-bit number specifying the length of the rectangle 
+in the x direction and the delta y is a 16-bit number specifying the height 
+of the rectangle in the y direction. The line weight specifies&nbsp;the thickness 
+of the line, range of 1-15. The line pattern specifies 
+the desired line pattern. Sixteen different patterns are available, Figure 1.</p>
+<p>The fill rectangle primitive draws a solid rectangle with a given starting top left 
+point(x and y coordinates) and a delta x and delta y, plus a line weight and 
+line pattern. The fill rectangle primitive is drawn by sending out the &quot;Draw fill 
+rectangle primitive&quot; opcode(0xDB), followed by the x-coordinate of the 
+topleft point, the y-coordinate 
+of the topleft point, the delta x, the delta y, the fill 
+pattern&nbsp;and finally the line weight. The x and y coordinates and the delta 
+x and delta y are all 16-bit 
+numbers. The delta x is a 16-bit number specifying the length of the rectangle 
+in the x direction and the delta y is a 16-bit number specifying the height 
+of the rectangle in the y direction. The fill pattern and line weight are both 4-bit numbers. The line weight is not used by this 
+primitive, but the parameter still must be included, range of&nbsp;1-15. The fill&nbsp;pattern specifies the desired fill&nbsp;pattern. 
+Sixteen different patterns are available, Figure 1.</p>
+<p>The pixel primitive draws a single pixel at a given  
+point(x and y coordinates), plus a line weight and 
+line pattern. The pixel primitive is drawn by sending out the &quot;Draw rectangle primitive&quot; opcode(0xDC), followed by the x-coordinate of the 
+point, the y-coordinate 
+of the point, the fill 
+pattern&nbsp;and finally the line weight. The x and y coordinates  are  16-bit 
+numbers.  The fill pattern and line weight are both 4-bit numbers. The line weight specifies&nbsp;the thickness 
+of the pixel in the x direction, range of 1-15. Using a line weight of 2-15 
+will result in a horizontal line the length of the line weight, starting from 
+a topleft point specified by the point x,y. The fill&nbsp;pattern specifies the desired fill&nbsp;pattern. 
+Sixteen different patterns are available, Figure 1. When dealing with a single 
+pixel, unexpected results can occur if using a pattern other than black(0) or 
+white(15).</p>
+<p>If a graphics primitive is sent that does not fit within the bounds of the 
+given LCD (i.e. a delta x of 380 pixels on a 320 x 240 LCD) the Amulet will 
+just ignore the request. It will respond back serially, but the graphic primitive 
+will not be drawn.</p>
+<TABLE BORDER="0" align="center">
+	<TR>
+		<TD WIDTH="80">
+			<P ALIGN="CENTER"><IMG SRC="Images/PAT0.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+			<B>Pattern 0</B>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT1.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 1</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT2.gif" WIDTH="74" HEIGHT="74" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 2</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT3.gif" WIDTH="74" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 3</B>
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT4.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 4</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT5.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 5</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT6.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 6</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT7.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 7</B>
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT8.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 8</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT9.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 9</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT10.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 10</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT11.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 11</B>
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT12.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 12</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT13.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 13</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT14.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 14</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT15.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 15</B>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+
+<P ALIGN="CENTER"><B>Figure 1. Line, Rectangle and Fill Rectangle  line/fill 
+patterns (values 0 through 15).</B></P>
+
+<HR width="100%">
+<h3 align="left">Examples:</h3>
+<p align="left">To draw a line from (0x05,0x07) to (0x65,0x67), line weight 
+of 4 and using line pattern 1(gray), the following would be sent to the Amulet:</p>
+<p align="left"><font face="Courier New" size="1">0xD9,0x30,0x30,0x30,0x35,0x30,0x30,0x30,0x37,0x30,0x30,0x36,0x35,0x30,0x30,0x36,0x37,0x31,0x34<br>&nbsp;| 
+&nbsp;&nbsp;{-----------------} {-----------------} {-----------------} {-----------------} 
+&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;|<br>&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 
+1, x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 1, 
+y &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 
+2, x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 2, y &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line 
+&nbsp;&nbsp;|<br>draw &nbsp;&nbsp;&nbsp;&nbsp;(0x05)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x07)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x65)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x67)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pattern 
+| <br>line&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line<br>opcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x04)</font></p>
+<hr><p align="left">To draw a rectangle that is 0x10C pixels wide, 0x82 pixels tall, 
+has a topleft point at&nbsp;(0x0A,0x05), a line weight of 2 and using line pattern 
+0 (black), the following would be sent to the Amulet:</p>
+<p align="left"><font face="Courier New" size="1">0xDA,0x30,0x30,0x30,0x41,0x30,0x30,0x30,0x35,0x30,0x31,0x30,0x43,0x30,0x30,0x38,0x32,0x30,0x32<br>&nbsp;| 
+&nbsp;&nbsp;{-----------------} {-----------------} {-----------------} {-----------------} 
+&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;|<br>&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 
+1, x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 1, 
+y &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta 
+x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta y 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line  &nbsp;&nbsp;|<br>draw &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x0A)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x05)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x10C)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x82)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pattern 
+| <br>rectangle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line<br>opcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x02)</font></p>
+<hr>
+<p align="left">To draw a filled rectangle that is 0x140 pixels wide, 0xF0 pixels 
+tall, has a topleft point at (0x00,0x00) and using  fill pattern 15 (which 
+equals to 0x0F in hex)(white), the following would be sent to the Amulet:</p>
+<p align="left"><font face="Courier New" size="1">0xDB,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0x30,0x31,0x34,0x30,0x30,0x30,0x46,0x30,0x46,0x31<br>&nbsp;| 
+&nbsp;&nbsp;{-----------------} {-----------------} {-----------------} {-----------------} 
+&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;|<br>&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 
+1, x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 1, 
+y &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta 
+x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta y 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill &nbsp;&nbsp;|<br>draw &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x00)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x00)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x140)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0xF0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pattern 
+| <br>fill &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x0F) 
+line<br>rectangle&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight<br>opcode 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(N/A)</font></p>
+<hr>
+<p align="left">To draw a single pixel at  point  (0x32,0x54) and using  fill pattern 0(black) , the following would be sent to the Amulet:</p>
+<p align="left"><font face="Courier New" size="1">0xDC,0x30,0x30,0x33,0x32,0x30,0x30,0x35,0x34,0x30,0x31<br>&nbsp;| 
+&nbsp;&nbsp;{-----------------} {-----------------} &nbsp;| &nbsp;&nbsp;&nbsp;|<br>&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 
+1, x &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pnt 1, 
+y &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill &nbsp;&nbsp;|<br>draw &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x32)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x54)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pattern 
+|<br>pixel &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x00) 
+line<br> opcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weight<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0x01)</font></p>
+<HR width="60%">
+<CENTER>
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright &copy; </FONT><span style='font-size:10.0pt'>2000-2004</span><font size="2"> by<BR>
+					
+Amulet Technologies, LLC</font></I>
+			<p>&nbsp;<I><FONT SIZE="2"><BR>
+</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</P>
+		</CENTER>
+
+<p align="center">&nbsp;</p>
+</body>
+</html>

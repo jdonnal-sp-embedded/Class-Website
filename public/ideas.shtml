@@ -1,0 +1,119 @@
+<!--#set var="document_title" value="6.115 Final Project Ideas" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2007-02-13 06:13:13 -0500 (Tue, 13 Feb 2007) $ by \$Author: avestruz $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Technical Writing</h2>
+
+Your proposal, writeup, etc, should completely describe the technical
+aspects of your project.  Good technical writing should include
+textual descriptions, block diagrams, circuit schematics, mechanical
+drawings, and other details (as appropriate).  Browsing through
+patents at the <a href="http://www.uspto.gov/patft/index.html">US
+Patent Office</a> is one source of examples (both good and bad).  In
+particular, Professor Leeb's patent <a href="miscfiles/US6198230.pdf">
+6,198,230: Dual-use Electronic Transceiver Set for Wireless Data
+Networks</a> has good examples of the kind of stuff we're looking for.
+
+<h2>Final Project Ideas</h2>
+
+These are just some ideas to help you think about the different ways
+that you can use a micrcontroller and to help you come up with a
+project idea.  Many of these are not complete projects on their own,
+or may be too difficult.
+
+<h3>USB</h3>
+<ul>
+  <li>Allow MINMON to download new code via USB instead of RS232</li>
+  <li>Make a USB host and interface with USB devices (eg. keyboards, storage, PDAs)</li>
+  <li>Build a USB analog to digital conversion board</li>
+  <li>Make an 8051-based USB to something else adapter</li>
+</ul>
+
+<h3>PC Interfaces</h3>
+<ul>
+  <li>Build an IDE bus and interface with CD-ROMs or hard drives</li>
+  <li>Interface with some ISA card (eg. VGA card, network card, etc)</li>
+  <li>Talk to PS/2 keyboards and mice</li>
+  <li>Read from and write to floppy disks or tapes</li>
+</ul>
+
+<h3>Audio</h3>
+<ul>
+  <li>Make a multifunction DSP to process audio in various ways</li>
+  <li>Make a modem (eg. 300 baud, acoustically-coupled)</li>
+  <li>Build a player for MIDI, MOD, S3M, or some other tracked music format</li>
+</ul>
+
+<h3>Light</h3>
+<ul>
+  <li>Build a device that sniffs ethernet traffic from an ethernet card's LED by using a phototransistor.</li>
+  <li>Build a "learning" remote control that can record and playback IR signals</li>
+  <li>Use the 8051 to control your home PC via IR remote</li>
+</ul>
+
+<h3>Cards and Codes</h3>
+<ul>
+  <li>Build a magnetic-stripe card decoder</li>
+  <li>Decode barcodes with an LED and a photodiode</li>
+  <li>Make a smartcard reader/writer</li>
+</ul>
+
+<h3>Security</h3>
+<ul>
+  <li>Make a cryptographic processor to encrypt/decrypt data in realtime</li>
+  <li>Crack encryption with the 8051 or 8051-controlled hardware</li>
+  <li>Build a hardware token to provide secure authentication</li>
+</ul>
+
+<h3>Gaming</h3>
+<ul>
+  <li>Emulate a Atari 2600 or other early gaming system</li>
+  <li>Build an interface to use a console game controller with a PC or vice versa</li>
+  <li>Record game controller button presses and play them back later</li>
+  <li>Recreate a vector-based video game on a scope (eg. asteroids)</li>
+  <li>Build an interface that allows you to download and run arbitrary games on an NES</li>
+  <li>Write some AI and make an appropriate interface to play a computer or board game</li>
+</ul>
+
+<h3>Other Languages</h3>
+<ul>
+  <li>Write an 8051 Java or BASIC interpreter</li>
+  <li>Emulate some other CPU on the 8051</li>
+  <li>Develop a new 32-bit instruction set and write an interpreter for it</li>
+</ul>
+
+<h3>Other Chips</h3>
+<ul>
+  <li>Add and use a math coprocessor such as the 8087</li>
+  <li>Build a general-purpose (EE)PROM / flash burner</li>
+</ul>
+
+<h3>Communications</h3>
+<ul>
+<li>Make a "software radio" that digitally tracks an FM carrier and tunes
+the RF circuits to the appropriate frequency.</li>
+</ul>
+
+<h3>Mechatronics</h3>
+<ul>
+<li>Have the 6.115 robot arm perform a complex task.</li>
+<li>Create an 8051 based motor controller.</li>
+<li>Have the 8051 control a servo system.</li>
+</ul>
+
+<h3>Amulet Board</h3>
+<ul>
+<li>Make a reconfigurable TV remote control using the Amulet board.</li>
+<li>Use the drawing capability on the Amulet board to control some other device or system.</li>
+</ul>
+
+<h3>Other Sources Of Ideas</h3>
+The following sites are good for generating ideas, but your
+project should contain your own unique work.
+<ul>
+<li><a href="http://www.hackaday.com/">Hack A Day</a></li>
+<li><a href="http://www.makezine.com/">Make:</a></li>
+</ul>
+
+<!--#include file="include/footer.shtml"-->

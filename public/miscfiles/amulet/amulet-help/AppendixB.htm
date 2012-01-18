@@ -1,0 +1,1082 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title>Appendix B</title>
+
+<meta name="GENERATOR" content="Namo WebEditor v5.0">
+</head>
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Appendix B</H1>
+<h2><a name="Control_functions"></a>Valid 
+  Control Widget href functions</h2>
+<p><B>Table 1.</B> Control Widget href 
+  functions.</p>
+<table border="1" width="648">
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:back()</FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Returns to calling page.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:calibrate()</FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Runs touchscreen calibration, returns 
+        to calling page when calibration completed.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:clearLCD()</FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Clears the entire LCD.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:fileNumber(<i>x</i>)</FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Hyperlink to the file whose internal index is <i>x</i>. 
+            See <a href="LinkMap.htm#Amulet:fileNumber(x)">Amulet link map file documentation</a> for more information.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2"><a name="setCalPOC()"></a>Amulet:internal.setCalPOC()</FONT></p>
+    </td>
+    <td width="322">
+            <p><font size="2">Sets the software calibration bit in the flash 
+            memory. Causes Amulet to go in calibration mode upon a soft or hard 
+            reset. Bit is cleared after succesful calibration.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:internalRAM.byte(</FONT><I><FONT SIZE="2">z</FONT></I><font size="2">)<sup><b>2</b></sup>.<i>method</i>(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Performs the named&nbsp;Internal RAM byte method. See<a href="internalRAM.htm#InternalRAM_byte"> 
+            Internal RAM documentation</a> for list of available methods.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:internalRAM.clearRPCBuf()</FONT></p>
+    </td>
+    <td width="322">
+            <p><font size="2">Clears the internalRAM RPC buffer.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:internalRAM.invokeRPC(<i>x</i>)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Adds   
+        the RPC number, </FONT><I><FONT SIZE="2">x, </FONT></I><font size="2">to 
+            the internalRAM RPC buffer.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:internalRAM.saveToFlash()</FONT></p>
+    </td>
+    <td width="322">
+            <p><font size="2">Saves the current state of all the Internal RAM variables (byte, 
+            word and string) in the serial data flash</FONT>.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:internalRAM.string(</FONT><I><FONT SIZE="2">z</FONT></I><font size="2">)<sup><b>2</b></sup>.<i>method</i>(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Performs the named&nbsp;Internal RAM string&nbsp;method. 
+            See<a href="internalRAM.htm#InternalRAM_string"> Internal RAM documentation</a> 
+            for list of available methods.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:internalRAM.word(</FONT><I><FONT SIZE="2">z</FONT></I><font size="2">)<sup><b>2</b></sup>.<i>method</i>(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Performs the named&nbsp;Internal RAM word&nbsp;method. 
+            See<a href="internalRAM.htm#InternalRAM_word"> Internal RAM documentation</a> 
+            for list of available methods.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:loadFlash(back)</FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Used internally to halt all current 
+        activity and await flash programming commands from the Amulet HTML compiler. 
+            Performs Amulet:back() upon exit.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:loadFlash(reset)</FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Used internally to halt all current 
+        activity and await flash programming commands from the Amulet HTML compiler. 
+            Performs software reset upon exit.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:loadFlash(return)</FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Used to halt all current 
+        activity and await flash programming commands. 
+            Stays in same uHTML page upon exit.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:NOP()</FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Non-operational function; does 
+        nothing.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310"> 
+      <p><font size="2">Amulet:screenDump()</FONT></p>
+    </td>
+    <td width="322"> 
+            <p><font size="2">Causes Amulet to jump to the screenDump page embedded 
+            in the OS files. ScreenDump page uploads the image on the LCD in 
+            the <a href="Bitmap.htm">Amulet Bitmap Format</a> using the <a href="xmodem.htm">xmodem 
+            with crc</a> protocol.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310"> 
+      <p><font size="2">Amulet:SPI(<i>z</i>).byteOut(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Sends a raw byte&nbsp;<i>x </i>out the SPI bus while 
+            taking Amulet SPI slave select  line <i>z </i>low. Put <i>x</i> in 
+            single quotes to be treated as an ASCII character. (i.e. '9' is 
+            equal to 0x39)</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310"> 
+      <p><font size="2"><A NAME="Amulet:togglePolarity()"></A>Amulet:togglePolarity()</FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Toggles the display polarity of the LCD between positive 
+            and negative. Once toggled, the state of the polarity is saved in 
+            the flash. Need to reload a page to see the resultant change of 
+            polarity.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310"> 
+      <p><font size="2">Amulet:UART.byteOut(<i>x</i>)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Sends out a raw byte&nbsp;<i>x</i>. Put <i>x</i> in 
+            single quotes to be treated as an ASCII character. (i.e. '9' is 
+            equal to 0x39)</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310"> 
+      <p><font size="2">Amulet:UART.invokeRPC(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Sends out the invokeRPC command 
+        over the UART, with </FONT><I><FONT SIZE="2">x</FONT></I><font size="2"> 
+        being the RPC number.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310"> 
+      <p><font size="2">Amulet:UART.byte(</FONT><I><FONT SIZE="2">z</FONT></I><font size="2">)<sup><b>2</b></sup>.setValue(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322"> 
+      <p><font size="2">Sends out the setByte command over 
+        the UART, where <i>z</i> is the byte variable number, and <i>x</i> is 
+            the value 
+        to set it to.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="310">
+      <p><font size="2">Amulet:UART.string(</FONT><I><FONT SIZE="2">z</FONT></I><font size="2">)<sup><b>2</b></sup>.setValue(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Sends out the setString command over 
+        the UART, where <i>z</i> is the string variable number, and <i>x</i> 
+            is the string to set it to.</FONT></p>
+    </td>
+  </tr>
+    <TR>
+    <td width="310">
+      <p><font size="2">Amulet:UART.word(</FONT><I><FONT SIZE="2">z</FONT></I><font size="2">)<sup><b>2</b></sup>.setValue(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Sends out the setWord command over 
+        the UART, where <i>z</i> is the word variable number, and <i>x</i> is 
+            the value 
+        to set it to.</FONT></p>
+    </td>
+    </TR>
+  <tr> 
+    <td width="310">
+      <p><I><FONT SIZE="2">filename.html</FONT></I></p>
+    </td>
+    <td width="322">
+      <p><font size="2">Hyperlink to the file </FONT><I><FONT SIZE="2">filename.html.</FONT></I></p>
+    </td>
+  </tr>
+</table>
+<p><B><FONT SIZE="2">1. Regarding </FONT></B><i><b><font size="2">x</font></b></i><B><FONT SIZE="2">:</FONT></B><I><FONT SIZE="2"> 
+   </FONT></I><font size="2">For Control Widgets that have intrinsic values, 
+  such as lists and sliders, leave the argument field empty, since the intrinsic 
+  value of the selection will be sent out. <a href="Objects.htm#Anchors">Anchors</a>,  <a href="Objects.htm#META">META REFRESH tags</a>, 
+  <a href="Objects.htm#Area Maps">area maps</a> and<A HREF="Widgets.htm#Function_Button"> 
+Function</A>/<A HREF="Widgets.htm#Custom_Button">Custom Buttons</A> should use<i> x</i>. 
+The range for </FONT><I><FONT SIZE="2">x</FONT></I><font size="2"> is 0-255 (0x00-0xff) 
+for a BYTE, 0-65535 (0x00-0xffff) for a WORD and 250-character strings in <A HREF="Widgets.htm#stringVariables">double 
+quotes for STRING</A>s.</FONT></p>
+<p><FONT SIZE="2"><b>2. Regarding <i>z</i>:</b><i> 
+  </i>When using the setValue(<i>z</i>) method, <i>z</i> is the  variable number. The value to set variable 
+<i>z</i> to is determined by either the intrinsic value of &nbsp;the Control 
+Widget or the value in <i>x</i>. </FONT></p>
+<hr>
+<p><B>Table 2.</B> Control Widget href 
+  functions for <a href="IWC.htm">Inter-Widget Communications (IWC)</a>.</p>
+<table border="1" width="665">
+  <tr> 
+    <td width="323" height="29"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.buttonDown()</FONT></p>
+    </td>
+    <td width="326" height="29"> 
+            <p><font size="2">The named Function/Custom Button Widget will appear 
+            as if it is currently being touched.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323" height="29"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.buttonUp()</FONT></p>
+    </td>
+    <td width="326" height="29"> 
+            <p><font size="2">The named Function/Custom Button Widget will appear&nbsp;as 
+            if it is currently NOT being touched.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323" height="29"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.clearCanvas()</FONT></p>
+    </td>
+    <td width="326" height="29"> 
+            <p><font size="2">The named Scribble/Dynamic Image Widget clears 
+            its canvas, including any background images.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323" height="29"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.disappear()</FONT></p>
+    </td>
+    <td width="326" height="29"> 
+      <p><font size="2">The named widget</FONT><I><FONT SIZE="2"> 
+        </FONT></I><font size="2">will clear itself from 
+        the LCD; if it is a View Widget it will also stop updating.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.forceHit()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named Control Widget will act 
+        as if it was &quot;hit&quot;.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.forceRefresh()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named View Image Sequence Widget will paint the 
+            image at the next update, even if the incoming value is the same 
+            as the current state. Useful if an anchor is used around an Image 
+            Sequence Widget.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.forceUpdate()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named View Widget will act 
+        as if it's update rate time was activated. Allows for asynchronous updating.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.inverseRegionColor()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget</FONT><I><FONT SIZE="2"> 
+        </FONT></I><font size="2">will display in reverse video.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.inverseStringColor()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget's text string will display in reverse 
+            video.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.nextEntry()</FONT></p>
+    </td>
+    <td width="326"> 
+            <p><font size="2">The named List widget will move its highlighted 
+            bar down&nbsp;to the next entry. Does not perform a &quot;hit&quot; 
+            on the new entry.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.normalRegionColor()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget</FONT><I><FONT SIZE="2"> 
+        </FONT></I><font size="2">will display in normal&nbsp;video.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.normalStringColor()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget's text string</FONT><I><FONT SIZE="2"> 
+        </FONT></I><font size="2">will display in normal&nbsp;video.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.previousEntry()</FONT></p>
+    </td>
+    <td width="326"> 
+            <p><font size="2">The named List widget will move its highlighted 
+            bar up to the previous&nbsp;entry. &nbsp;Does not perform a &quot;hit&quot; 
+            on the new entry.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.reappear()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget</FONT><I><FONT SIZE="2"> 
+        </FONT></I><font size="2">will reappear on the 
+        LCD in its original location; if it is a View Widget it will also start 
+        updating.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.reset()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget will initialize 
+        internal variables and re-draw.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setMethod(<i>m</i>)<sup><b>2</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The href method for the named widget will change to  <i>m</i>, where <i>m</i> is the method name. 
+        (such as value() or disappear())</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setOnVarMethod(<i>m</i>)<sup><b>2</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The <a href="HTMLSupport.htm#ONVAR">ONVAR</a> method for the named widget will change to  <i>m</i>, where <i>m</i> is the method name. 
+        (such as value() or disappear())</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setOnVarUARTMethod(<i>m</i>)<sup><b>2</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The <a href="HTMLSupport.htm#ONVAR">ONVAR</a> UART method for the named widget will change to  <i>m</i>, where <i>m</i> is the method name. 
+        (such as Value())</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setOnVarVariableNumber(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The  variable number used in the <a href="HTMLSupport.htm#ONVAR">ONVAR</a>&nbsp;of  
+            the named  widget 
+        will change to <i>x, </i>where <i>x</i> is the variable index used  in the following  variable 
+            types: byte(<i>x</i>), word(<i>x</i>) 
+         or string(<i>x</i>).</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setTrigger(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named Widget will change its trigger, trigger.gt 
+            or trigger.lt value 
+            to the byte value <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setUARTMethod(<i>m</i>)<sup><b>2</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The href UART method for the named widget will change to 
+            <i>m</i>, where <i>m</i> is the UART:method name. 
+        (such as Value())</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setUpdateRate(</FONT><I><FONT SIZE="2">f</FONT></I><font size="2">)<sup><b>3</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The update rate for the named widget will change to 
+             <i>f</i>, where <i>f</i> is a floating 
+        point number that represents the update rate in seconds.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setValue(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget will receive 
+        the intrinsic value of the calling widget, where <i>x</i> is the intrinsic 
+        value.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setVariableNumber(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">)<sup><b>1</b></sup></FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The  variable number used in the href of  
+            the named  widget 
+        will change to <i>x, </i>where <i>x</i> is the variable index used  in the following  variable 
+            types: byte(<i>x</i>), word(<i>x</i>) 
+         or string(<i>x</i>).</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setX<sup><b>4</b></sup>(<i>x</i>)</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named Widget will change its topleft x coordinate 
+            to the word value <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setY<sup><b>4</b></sup>(<i>x</i>)</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named Widget will change its topleft y&nbsp;coordinate 
+            to the word value <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.startUpdating()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named View Widget will start 
+        updating the displayed data.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.stopUpdating()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named View Widget will stop 
+        updating the displayed data.</FONT></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.toggleRegionColor()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named widget will either 
+        start or stop displaying in reverse video.</FONT></p>
+    </td>
+    </tr>
+    <tr>
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.toggleStringColor()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p><font size="2">The named  widget's text string will either 
+        start or stop displaying in reverse video.</FONT></p>
+    </td>
+    </tr>
+    <tr>
+    <td width="323">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.toggleUpdating()</FONT></p>
+    </td>
+    <td width="326"> 
+      <p> <font size="2">The named View Widget will either 
+        start or stop updating the displayed data.</FONT></p>
+    </td>
+    </tr>
+</table>
+<p><B><FONT SIZE="2">1. Regarding </FONT></B><i><b><font size="2">x</font></b></i><B><FONT SIZE="2">:</FONT></B><I><FONT SIZE="2"> 
+   </FONT></I><font size="2">For Control Widgets that have intrinsic values, 
+  such as lists and sliders, leave the argument field empty, since the intrinsic 
+  value of the selection will be sent out. <a href="Objects.htm#Anchors">Anchors</a>,  <a href="Objects.htm#META">META REFRESH tags</a>, 
+  <a href="Objects.htm#Area Maps">area maps</a> and<A HREF="Widgets.htm#Function_Button"> 
+Function</A>/<A HREF="Widgets.htm#Custom_Button">Custom Buttons</A> should use<i> x</i>.  The range for </FONT><I><FONT SIZE="2">x</FONT></I><font size="2"> is 0-255 (0x00-0xff) 
+for a BYTE, 0-65535 (0x00-0xffff) for a WORD and 250-character strings in <A HREF="Widgets.htm#stringVariables">double 
+quotes for STRING</A>s.</FONT></p>
+<P><B><FONT SIZE="2">2.</FONT></B><FONT SIZE="2"><b> Regarding</b></FONT><B><i>m</i></B> <font size="2">- When setMethod(),setOnVarMethod(),setOnVarUARTMethod() 
+    or setUARTMethod(), is the IWC method, the argument 
+    should be the name of the method you want to set. i.e. disappear() or byte.value(). 
+Notice when dealing with a method that relies on a type (byte, word or string) 
+you need to include the type separated by a dot and then the method (i.e. word.value()) 
+instead of just the method by itself. See </FONT><a href="../projects/Examples/setMethod()/ReadMe.htm"><font size="2">example 
+  regarding setMethod().</font></a></P>
+<p><B><FONT SIZE="2">3. Regarding </FONT><I><FONT SIZE="2">f</FONT></I><FONT SIZE="2">:</FONT></B><I><FONT SIZE="2"> 
+   </FONT></I><font size="2">For Control Widgets that have intrinsic values, 
+  such as lists and sliders, leave the argument field empty, since the intrinsic 
+  value of the selection will be sent out. <a href="Objects.htm#Anchors">Anchors</a>, 
+  <a href="Objects.htm#META">META REFRESH tags</a>,  <a href="Objects.htm#Area Maps">area 
+  maps</a> and <A HREF="Widgets.htm#Function_Button">Function</A>/<A HREF="Widgets.htm#Custom_Button">Custom 
+Buttons</A> should use<i> f</i>. Like the regular <b>updateRate</b>, use 
+  a floating point number to specify the update rate in seconds. Range for <i>f</i> 
+  is 0-655.35</FONT></p>
+<p><FONT SIZE="2"><b>4. Regarding setX and setY: </b>These methods should most 
+always be preceded by a disappear() method and followed by a reappear() method. 
+The setting of the x and y coordinates are independent of the removal of the 
+widget in the old coordinates and the displaying in the new coordinates. See 
+<a href="../projects/Examples/setX()/ReadMe.htm">example regarding setX().</a></FONT></p>
+<hr>
+<p>&nbsp;<B>Table 3.</B> Control Widget href 
+  functions for inter-widget communications with animated GIFs.</p>
+<table border="1" width="90%">
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.oneFrame()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image advances one frame.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.fastSpeed()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image animates quickly.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.pause()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image stops animating.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.play()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image starts animating 
+        in current direction.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.playBackwards()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image starts animating 
+        backwards.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.playForward()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image starts animating 
+        forward.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.regularSpeed()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image animates at normal 
+        speed.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.slowSpeed()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image animates slowly.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.superFastSpeed()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image animates very quickly.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.<i>imageName</i>.superSlowSpeed()</FONT></p>
+    </td>
+    <td width="352"> 
+      <p><font size="2">The named image animates very slowly.</FONT></p>
+    </td>
+  </tr>
+</table>
+<br>
+<hr>
+<p><B>Table 4.</B> Control Widget href 
+  functions for inter-widget communications with Scribble Widgets.</p>
+<table border="1" width="90%">
+  <tr> 
+    <td width="330" height="13"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.clearCanvas()</FONT></p>
+    </td>
+    <td width="352" height="13"> 
+            <P><font size="2">Clears the scribble canvas completely, including any background 
+            images in the canvas.</FONT></P>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.reset()</FONT></p>
+    </td>
+    <td width="352"> 
+      <P><font size="2">Redraws the canvas image from flash.</FONT> </P>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.saveCanvas()</FONT></p>
+    </td>
+    <td width="352"> 
+            <P><font size="2">Saves the current state of the canvas to the flash. Writes over 
+            the original canvas specified at compile time.</FONT></P>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setLinePattern(<i>x</i>)</FONT></p>
+    </td>
+    <td width="352"> 
+            <p><font size="2">The named Scribble widget will set its active 
+            freehand drawing line pattern to pattern <i>x</i>. <a href="Widgets.htm#Figure1">(range 
+            0-15)</a></FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.setLineWeight(<i>x</i>)</FONT></p>
+    </td>
+    <td width="352"> 
+            <p><font size="2">The named Scribble widget will set its active 
+            freehand drawing line weight&nbsp;to <i>x</i>. (range 1-15)</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.uploadImage()</FONT></p>
+    </td>
+    <td width="352"> 
+      <P><font size="2">Scribble widget uploads its raw image data via the connection and protocol 
+            described in the </FONT><A HREF="Widgets.htm#ScribbleParams"><font size="2">href parameter</font></A><font size="2">.</FONT></P>
+    </td>
+  </tr>
+</table>
+<hr>
+<h2><a name="View_functions"></a>Valid View Widget (except StringField) 
+  href functions</h2>
+<p><B>Table 5.</B> View Widget href 
+  functions (except StringField widget).</p>
+<table border="1" width="90%">
+  <tr> 
+    <td width="330">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.value()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the intrinsic value 
+            (byte or word) of the named Control Widget.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the intrinsic value 
+            (byte or word) of the named Control Widget ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330">
+      <p><font size="2">Amulet:internal.fileNumber.value()</FONT></p>
+    </td>
+    <td width="353">
+            <p><font size="2">Returns the internal flash index number of the 
+            current page. See <a href="LinkMap.htm#Amulet:internal.fileNumber.value()">Amulet link map file documentation</a> for more information.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330">
+      <p><font size="2">Amulet:internal.lostCommByte.value()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the count of consecutive 
+        communication time-outs.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:internalRAM.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the value of internalRAM byte variable <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:internalRAM.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the value of internalRAM byte variable <i>x 
+            </i>ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:internalRAM.word(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the value of internalRAM word&nbsp;variable 
+            <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:internalRAM.word(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns the value of internalRAM word&nbsp;variable 
+            <i>x </i>ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:math.randomByte.value()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns a pseudo-random byte.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:math.randomByte.maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns a pseudo-random byte ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:math.randomFilteredByte.value()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns a pseudo-random byte that 
+        is filtered.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330">
+      <p><font size="2">Amulet:math.randomFilteredByte.maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns a pseudo-random byte that 
+        is filtered<i> </i>ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330">
+      <p><font size="2">Amulet:NOP()</FONT></p>
+    </td>
+    <td width="353">
+      <p><font size="2">Returns nothing.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:UART.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="353"> 
+      <p><font size="2">Sends a getByte request over the 
+        UART, where <i>x</i> is the byte variable number; returns the value 
+            of the byte variable <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:UART.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353"> 
+      <p><font size="2">Sends a getByte request over the 
+        UART, where <i>x</i> is the byte variable number; returns the value 
+            of the byte variable <i>x </i>ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="330"> 
+      <p><font size="2">Amulet:UART.word(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="353"> 
+      <p><font size="2">Sends a getWord request over the 
+        UART, where <i>x</i> is the word variable number; returns the value 
+            of the word variable <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="330"> 
+      <p><font size="2">Amulet:UART.word(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="353"> 
+      <p><font size="2">Sends a getWord request over the 
+        UART, where <i>x</i> is the word variable number; returns the value 
+            of the word variable <i>x </i>ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+    </tr>
+</table>
+<hr>
+<hr>
+<h2><a name="StringField_functions"></a>Valid 
+  StringField widget href functions</h2>
+<p><B>Table 6.</B> StringField Widget 
+  href functions.</p>
+<table border="1" width="90%">
+  <tr> 
+    <td width="331">
+      <p><font size="2">Amulet:document.</FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">.value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Returns the intrinsic value 
+            (byte, word&nbsp;or string) of the named Control Widget. </FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331">
+      <p><font size="2">Amulet:internal.lostCommByte.value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Receives the count of consecutive 
+        communication time-outs. (Only valid if option field populated.)</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:internal.OSVersionString.value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Returns the string of &nbsp;the current Amulet OS version 
+            number.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:internalRAM.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Returns the value of internalRAM byte variable <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:internalRAM.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Returns the value of internalRAM byte variable <i>x 
+            </i>ANDed with the mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:internalRAM.string(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Returns the string&nbsp;of internalRAM string&nbsp;variable 
+            <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:math.randomByte.value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Receives a pseudo-random byte.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:math.randomByte.maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Receives a pseudo-random byte<i> </i>ANDed with the 
+            mask <i>y</i>.</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:UART.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Sends a getByte request over the 
+        UART, where <i>x</i> is the byte variable number; returns the value 
+            of the byte variable <i>x</i>. (Only valid if option 
+        field populated.)</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:UART.byte(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).maskedValue(<i>y</i>)</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Sends a getByte request over the 
+        UART, where <i>x</i> is the byte variable number; returns the value 
+            of the byte variable <i>x </i>ANDed with the mask <i>y</i>. (Only valid if option 
+        field populated.)</FONT></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="331"> 
+      <p><font size="2">Amulet:UART.string(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="354"> 
+      <p><font size="2">Sends a getString request over 
+        the UART, where <i>x</i> is the string variable number; returns a null 
+            terminated ASCII string.</FONT></p>
+    </td>
+  </tr>
+</table>
+<hr>
+<h2><a name="Scribble_functions"></a>Valid 
+  Scribble widget href functions</h2>
+<p><B>Table 7.</B> Scribble Widget 
+  href function.<BR></p>
+<table border="1" width="90%">
+  <tr> 
+    <td width="332"> 
+      <p><font size="2">Amulet:UART.xmodemUploadImage()</FONT></p>
+    </td>
+    <td width="355"> 
+      <p><font size="2">The Scribble Widget will upload raw image data 
+            out the UART using an xmodem protocol upon receiving the uploadImage() 
+            IWC method.</FONT></p>
+    </td>
+  </tr>
+</table>
+<HR width="100%">
+<h2><a name="LineGraph_functions"></a>Valid 
+  Line Graph widget href functions</h2>
+<p><B>Table 8.</B> Line Graph Widget 
+  href function.<BR></p>
+<table border="1" width="90%">
+  <tr> 
+    <td width="332"> 
+      <p><font size="2">Amulet:internalRAM.bytes(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="355"> 
+      <p><font size="2">Returns the array of internalRAM bytes starting at variable <i>x</i>.</FONT></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="332"> 
+      <p><font size="2">Amulet:internalRAM.words(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="355"> 
+      <p><font size="2">Returns the array of internalRAM words&nbsp;starting 
+            at variable <i>x</i>.</FONT></p>
+    </td>
+    </tr>
+    <tr>
+    <td width="332"> 
+      <p><font size="2">Amulet:UART.bytes(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="355"> 
+      <p><font size="2">Sends a getByteArray request over the 
+        UART, where <i>x</i> is the starting byte variable number; returns the array 
+            starting at  byte variable <i>x</i>.</FONT></p>
+    </td>
+    </tr>
+    <tr>
+    <td width="332"> 
+      <p><font size="2">Amulet:UART.words(</FONT><I><FONT SIZE="2">x</FONT></I><font size="2">).value()</FONT></p>
+    </td>
+    <td width="355"> 
+      <p><font size="2">Sends a getWordArray request over the 
+        UART, where <i>x</i> is the starting word variable number; returns the array 
+            starting at  word variable <i>x</i>.</FONT></p>
+    </td>
+    </tr>
+</table>
+<HR width="60%">
+<CENTER>
+<BR>
+<I>Amulet HTMLCompiler,<BR>
+  <FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I><P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</CENTER>
+
+<p align="center">&nbsp;</p>
+</body>
+</html>

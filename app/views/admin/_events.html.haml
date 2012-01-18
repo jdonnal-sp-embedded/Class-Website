@@ -1,0 +1,10 @@
+.inner
+  %h2 Scheduled Events
+  -modifiable=current_user.can_modify_events?
+  #event_table
+    =render(:partial=>'shared/event_table',:locals=>{:events=>@events, :modifiable=>modifiable})
+  .actions-bar.wat-cf
+    -if modifiable
+      .actions
+        =link_to 'Create Event', new_admin_event_path, :class=>'button', :rel=>"facebox"
+        

@@ -1,0 +1,48 @@
+<!--#set var="document_title" value="6.115 8051 / R31JP Info" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2008-05-12 12:31:34 -0400 (Mon, 12 May 2008) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>8051 / R31JP Information</h2>
+
+<h3>Datasheets</h3>
+<ul>
+  <li><a href="datasheets/8051.pdf">8051</a> -
+      Intel MCS 51 Microcontroller Family User's Manual (15MB)
+  <li><a href="datasheets/AT28C64.pdf">AT28C64</a> -
+      64K EEPROM*
+</ul>
+*<em> Note that this chip is only 8 Kbytes.  Both the datasheet and your R31JP might confuse you on this point.</em>
+
+<h3>Software</h3>
+<ul>
+   <li><a href="miscfiles/minmon.asm">minmon.asm</a> -
+      Default Copy of Minmon
+   <li><a href="miscfiles/rasm51e.exe">Rasm51e</a> -
+      Windows/DOS 8051 Assembler (use this <a href="miscfiles/rasm.bat">batch file</a> give it the proper flags).
+   <li><a href="miscfiles/rasm_manual.pdf">Rasm51e</a> -
+      Manual (PDF)
+
+   <li>On Linux, OS X, BSD, etc, Rasm51e can be executed using
+      <a href="http://dosbox.sourceforge.net/">DOSBox</a>.
+      
+   <li>On Athena, we have provided a script to automate this:
+<blockquote><tt>
+  add 6.115<br>
+  rasm <em>filename</em>.asm
+</tt></blockquote>
+   <li>Any serial communication software that can transmit raw text files will work
+       with the <a href="miscfiles/hyper.txt">proper configuration</a>.
+   <li>Some useful software programs are listed on the <a href="misc.shtml">Miscellaneous</a> page.
+</ul>
+
+<h3>Support Documentation</h3>
+<ul>
+   <li><a href="miscfiles/familiarization.pdf">Lab Familiarization</a>
+      - Short introduction to using the ROM burners, Rasm, and
+      Hyperterminal. Handed out at lab familiarizations.
+   <li><a href="miscfiles/hyper.txt">Configuring Hyperterminal</a> -
+      How to configure Hyperterminal to communicate with your R31JP
+</ul>
+
+<!--#include file="include/footer.shtml"-->

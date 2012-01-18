@@ -1,0 +1,730 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Monday, December 11, 2000 02:30 PM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>Examples</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Examples</H1>
+<P>We have assembled a number of examples to show you how to use some of Easy 
+  GUI's most powerful features. The examples are located in the <a href="../projects/Examples/" target="_blank">\projects\Examples\</a> 
+  subdirectory of the Amulet main directory. By default, the Amulet main directory 
+  is C:\Program Files\Amulet, however you may have specified a different path 
+  during the install.
+<P align="center"><img src="Images/ExampDir.gif" width="432" height="405"> 
+<P align="left">Each example project is contained in its own subdirectory and 
+  each contains at least two html files:
+<UL>
+  <li>CompileMe.htm -- This is the source code for the Easy GUI example project. 
+    It is intended to be compiled by the HTMLCompiler and programmed into your 
+    Easy GUI module's onboard FLASH. 
+  <LI>ReadMe.htm -- This 
+    browser viewable description explains how the CompileMe.htm file works. 
+</UL>
+<P>Feel free to use any of these pages as templates for your own GUI. Just copy 
+  the appropriate pages to your own subdirectory in \projects\ . 
+<P>&nbsp;
+<hr align="CENTER">
+<h2><a name="ControlWidgets"></a>Control Widgets</h2>
+<p>The group of visual controls that accept user input are called Control Widgets. 
+  Examples are list widgets, slider widgets, radio buttons, checkboxes and function 
+  buttons. The following examples illustrate how to use these control widgets 
+  to (1) remotely control another microprocessor via the serial port, (2) control 
+  other widgets on the same page, or (3) control navigation to other pages.</p>
+<table width="100%" border="2" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CheckBox/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/CheckBox/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Check_Box"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Check Box</B><br>
+        A checkbox is a labeled, square box used to invoke a function (or set 
+        of functions) whose argument is the value of the checkbox. This example 
+        features a checkbox that changes the update rate of a lineplot widget.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CustomButton/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/CustomButton/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Custom_Button"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Custom Button</B><br>
+         Custom buttons are Amulet anchors that are comprised of two different 
+            images, a pressed and a not pressed. They can be set up either as 
+            a &quot;spring-loaded&quot; or a &quot;toggle&quot; button. This example 
+            has a line plot widget which is tied to a slider widget using Inter 
+            Widget Communication. There is also a &quot;toggle&quot; styled 
+            custom button which looks like a light switch. The light switch&nbsp;can 
+            be either turned &quot;on&quot; or &quot;off&quot;. Initially, the 
+            light switch is in the &quot;on&quot; position, and the line plot 
+            is updating. When the custom button 
+            is  pressed, it moves to the &quot;off&quot; position and the line plot 
+            stops updating. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CustomSlider/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/CustomSlider/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#CustomSlider"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Custom Slider</B><br>
+         Custom Slider Widgets act the same as traditional sliders except&nbsp;you 
+            get to determine the handle image, both pressed and released, and 
+            the background image on which the handle travels. This particular 
+            example uses a sailboat&nbsp;sailing on a sea as the custom slider. 
+            To show the functionality of the Custom Slider, the InternalRAM 
+            variable that is set is also used as an input to a Linear Gauge 
+            Widget. The Linear Gauge is equally as whimsical, with an aquarium 
+            as the background image and a fish as the pointer icon which travels 
+            vertically up and down the aquarium. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/FunctionButton/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/FunctionButton/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Function_Button"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Function Button</B><br>
+        Function buttons are Amulet anchors that can have the visual appearance of 
+        either a &quot;spring-loaded&quot; or a &quot;toggle&quot; button image. This example is made up of two 
+        pages. The first page has two &quot;spring-loaded&quot; buttons on the bottom. The bottom left button 
+        sends a command out the serial port. The bottom right button hyperlinks 
+        to the second page. The second page has a button on the bottom that forces 
+        a return to the calling page. This is not a direct jump, it is similar 
+        to the backup button on an internet browser.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/List/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/List/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#List"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>List</B><br>
+        The List Widget creates a list of selectable text objects that share a 
+        common function (or set of functions) and are vertically aligned 
+        in a box. The list widget in this example is tied to an image sequence 
+            widget via Inter Widget Communication. Depending upon the list entry 
+            selected, the image sequence will display a unique bitmap image without jumping to 
+        a new page.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/BarGraph/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/BarGraph/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Radio_Button"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Radio Buttons</B><br>
+        A radio button is a labeled, round button used to make a single selection 
+        from several options. This example is actually the same example as the 
+        bargraph example. The radio buttons allow the user to specify whether 
+        the bargraph is updated via UART requests, or via an on screen slider 
+        widget. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/BarGraph/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/BarGraph/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Slider"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Slider</B><br>
+        The Slider Widget invokes a function (or set of functions) upon pen down. 
+        The argument is determined by the location of the handle and the limits 
+        setup with the <B>min</B> and <B>max</B> attributes. This example is actually 
+        the same example as the bargraph example. The slider is used to change 
+        the value displayed by the bargraph.</p>
+    </td>
+  </tr>
+</table>
+<br>
+<HR ALIGN="CENTER">
+
+<H2><A NAME="ViewWidgets"></A>View Widgets</H2>
+<p>View Widgets are used for displaying data. View Widgets include bargraphs, 
+  image sequences, lineplots, and string fields. The following examples show various 
+  views of the same byte value received from a serial port request. Additionally, 
+  most of the examples also feature one of the above control widgets that can 
+  optionally control the byte value viewed via the view widget.</p>
+<table width="100%" border="2" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/BarGraph/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/BarGraph/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#bargraph"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Bargraph</B><br>
+        A Bargraph Widget is a live bargraph that represents the byte (or word) 
+        value returned from a function call. The bargraph moves from left-to-right, 
+        right-to-left, bottom-to-top, or top-to-bottom. This example features 
+        a bar graph that fills from left to right with a &quot;brick wall&quot; 
+        pattern.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/DynamicImage/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/DynamicImage/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#DynamicImage"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Dynamic Image</B><br>
+        A Dynamic Image Widget  allows for the uploading of images, serially, at 
+runtime. This example allows you to upload one of two different images using 
+            the Windows terminal program, HyperTerminal.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/ImageBar/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/ImageBar/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Image_Bar"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Image Bar</B><br>
+        The Image Bar Widget uses two images (empty bar and full bar) to create 
+        a custom &quot;bargraph&quot;. Based upon the value being displayed, a 
+        percentage of the empty bar and a percentage of the full bar are displayed. 
+        The custom bar graph creates the illusion of a glass of wine with a linearly 
+        variable volume.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/ImageSequence/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/ImageSequence/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Image_Sequence"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Image Sequence</B><br>
+        The Image Sequence Widget is similar to an animated bitmap. However, instead 
+        of being linked to a timer event, the transition between images is linked 
+        to a byte (or word) returned from an <B>href</B> function call. This example 
+        is similar to that of the list widget. The byte value returned by 
+        the UART/Slider determines which unique bitmap image of six is displayed 
+            by the image sequence widget.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/LinePlot/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/LinePlot/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Plot"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Line Plot</B><br>
+        The Line Plot Widget is a live line plot that represents a byte (or word) 
+        returned from an <B>href</B> function call. The line plots from left-to-right 
+        and continuously wraps. This example shows a single line plot that is 
+        updated by either the UART or a slider.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/LinearGauge/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/LinearGauge/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#LinearGauge"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Linear Gauge</B><br>
+        The Linear Gauge Widget is comprised of a background image and a pointer 
+            icon whose position is determined by a byte (or word) 
+        returned from an <B>href</B> function call. The pointer icon can be 
+            set up to travel horizontally or vertically along the background 
+            image. This example shows a horizontal&nbsp;linear gauge which is 
+        updated by a slider.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Field/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/Field/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#Numeric_Field"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Numeric Field</B><br>
+        The numeric field can display a mixture of static text and a live number. 
+        The string is input using the standard C printf format. This is an enhanced 
+        version of the bargraph example. We added a numeric field just above the 
+        bargraph to show the percentage of bargraph fill.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/StringField/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/StringField/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Widgets.htm#String_Field"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>String Field</B><br>
+        The String Field Widget calls a function that returns either a null-terminated 
+        string of ASCII characters, or a one-byte index into a list of pre-built 
+        strings. This example shows both variations. The top half of the LCD displays 
+        a string returned from a serial port request. You can use the included 
+        <a href="Simulator.htm">Amulet Protocol Simulator</a> to vary the string 
+        displayed on the LCD. The bottom half of the LCD has a list widget that 
+        changes the byteValue of the string field to control which of the predefined 
+        strings to display.</p>
+    </td>
+  </tr>
+</table>
+<br>
+<hr align="CENTER">
+<h2><a name="ControlObjects"></a>Control Objects</h2>
+<p>The group of visual controls that can be entered using standard HTML  are called Control Objects. 
+  Examples are anchors, area maps and META Refresh tags. The following examples touch 
+on how to use these control objects.</p>
+<table width="100%" border="2" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td width="36"> 
+      <div align="center">&nbsp;</div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/Anchors/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="HTMLSupport.htm#<A>"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Anchors</B><br>
+        A series of six different examples all using the &lt;A&gt; anchor tag. 
+            Anchor tags are used to hyperlink to other pages as well as launch 
+            <A HREF="AppendixB.htm#Control_functions">Amulet functions</A>. 
+            In the Image folder, an&nbsp;anchor is placed around an image. In 
+            the ONTIME folder, an anchor is given the ONTIME attribute, which 
+            triggers the anchor after a given amount of time. In the Text folder, 
+            an anchor is placed around static text. In the trigger folder, an 
+            anchor is given the ONVAR attribute, as well as the trigger attribute, 
+            in order to trigger the anchor based upon an&nbsp;external variable 
+            equaling the trigger value. In the trigger.gt folder, an anchor 
+            uses the trigger.gt attribute to trigger the anchor based upon an 
+            external variable being greater than the trigger value. In the trigger.lt 
+            folder, an anchor uses the trigger.lt attribute to trigger the anchor 
+            based upon an external variable being less than the trigger value.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="Objects.htm#MetaExamples:"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><A HREF="../projects/Examples/Meta/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="Objects.htm#META"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Meta Refresh Tags</B><br>
+        A series of four&nbsp;different examples all using the Meta Refresh&nbsp;tag. 
+            Meta Refresh tags can be thought of as invisible anchors that are 
+            not present on the LCD, but they can be triggered via timer, via 
+            an ONVAR trigger&nbsp;or they can be forceHit() to launch their 
+            function(s). All of the examples require the use of the Amulet Simulator 
+            to fully test them out.</p>
+    </td>
+  </tr>
+</table>
+<hr>
+<h2><a name="IWComm"></a>Inter-Widget Communication</h2>
+<p>These examples feature advanced UI techniques that utilize communications between 
+  on screen objects. Inter-Widget Communications (IWC) give Amulet widgets the 
+  ability to invoke the methods of other Amulet widgets. (See <a href="AppendixB.htm">Appendix 
+  B</a> for a comprehensive listing of all available widget methods.)</p>
+<table width="100%" border="2" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/RunningMan/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/RunningMan/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="IWC.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Running Man</B><br>
+        This example uses radio buttons to call the various methods of an animated 
+        GIF object. The methods affect the playback of the animation, giving it 
+        VCR like controls.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/AdvancedLinePlot/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/AdvancedLinePlot/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="IWC.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Advanced Line Plot</B><br>
+        The lineplot in this example is manipulated by two separate onscreen controls: 
+        An update rate selection list, and a start/stop button.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/fileNumber()/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/fileNumber()/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center">&nbsp;</div>
+    </td>
+    <td> 
+      <p><B>fileNumber()</B><br>
+        This example implements a Jump Menu.  There is a list 
+        widget which gives the user a choice of pages to jump to, and a &quot;go&quot; 
+        button which gives the user a chance to confirm the choice before performing 
+        the jump to the selected page. It uses the Amulet:fileNumber() function 
+            to launch to the various pages. Each page has an Amulet:internal.fileNumber.value() 
+            function in it to display the value of its internal page number. 
+            This example makes use of the Amulet Link Map and the initInternalRAM 
+            Meta Tag and Internal RAM variables. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setMethod()/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setMethod()/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="IWC.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>setMethod()</B><br>
+        This example shows how one Control Widget (a radio button) can set another 
+            Control Widget's (a function button) href method. The function button 
+            beneath the line plot invokes a method to 
+        make the line plot&nbsp;either disappear or reappear. The radio buttons  control which method 
+            is sent by invoking the setMethod() method of 
+        the function button.</p>
+    </td>
+  </tr>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setUpdateRate()/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setUpdateRate()/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="IWC.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>setUpdateRate()</B><br>
+        This example shows how one Control Widget (a radio button) can set a 
+            View Widget's (a line plot) updateRate parameter. This example requires 
+            the use of the Amulet Simulator.</p>
+      </td>
+    </tr>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setValue()/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setValue()/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="IWC.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>setValue()</B><br>
+        This example implements a Jump Menu.  There is a list 
+        widget which gives the user a choice of pages to jump to, and a &quot;go&quot; 
+        button which gives the user a chance to confirm the choice before performing 
+        the jump to the selected page. This same technique can be used to allow 
+        the user to confirm a variable change before sending it out the UART. 
+        Also exploited here is a technique that forces a page jump via the value 
+        of an internal or external variable. </p>
+      </td>
+    </tr>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setX()/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/setX()/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="IWC.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B><a name="setX()"></a>setX()</B><br>
+        This example shows how the setX() and setY() methods can be used to 
+            move a widget/object on the display at run time. </p>
+      </td>
+    </tr>
+</table>
+<p></P>
+<hr align="CENTER">
+<h2><a name="MiscExamples"></a>Miscellaneous</h2>
+<p>These examples are varied in their scope. They show how to use some of the 
+special features of the Amulet Easy GUI.</p>
+<table width="100%" border="2" cellspacing="0" cellpadding="2">
+  <tr> 
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Calibrate/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Calibrate/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="hardware38.htm#Touch"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Calibrate</B><br>
+        This example shows how to use the href function call Amulet:calibrate() 
+            to launch the touchscreen calibration routine via software, as opposed 
+            to dealing with the calibration DIP switch.</p>
+    </td>
+  </tr>
+    <TR>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CCAd/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CCAd/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center">&nbsp;</div>
+    </td>
+    <td> 
+      <p><B>CCAd</B><br>
+        This example is one used in an advertisement located in Circuit Cellar 
+            magazine. It's a lineplot that uses a random byte value as its input 
+            and can be stopped by touching a STOP image. There are tabs which 
+            adjust the plot tick marks.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CustomOS/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/CustomOS/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="compiler.htm#customOS"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B><A name="CustomOS"></A>CustomOS</B><br>
+        This example shows how to combine&nbsp;a RAW AmuletOS file and a .uht 
+            project file using a .AmuletOS file to create a &quot;production 
+            ready&quot; custom OS. It also shows how to use the LCD Settings 
+            menu to load a custom LCD type as part of your custom OS.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Factory/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Factory/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center">&nbsp;</div>
+    </td>
+    <td> 
+      <p><B>Factory</B><br>
+        This is a sample user interface which you might see in an industrial 
+            setting.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/InitInternalRAM/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/InitInternalRAM/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="internalRAM.htm#Initializing_IR"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>InitInternalRAM</B><br>
+        This example shows how to initialize InternalRAM variables at compile 
+            time.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/InternalRAM/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/InternalRAM/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="internalRAM.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>InternalRAM</B><br>
+        This example shows how to use Amulet's Internal RAM as an input to a 
+            View Widget, as an output from a Control Widget, and how to save 
+            the contents of Internal RAM to the serial data flash.</p>
+    </td>
+    </TR>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Keyboard/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Keyboard/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="internalRAM.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Keyboard</B><br>
+        This example shows how to use Amulet's Internal RAM strings as a means 
+            of creating a keyboard. This example lets you change the name of 
+            six individual buttons at runtime. The changes are saved to the 
+            serial data flash, so cycling the power will not affect the button's 
+            labels.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Macro/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/Macro/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="preprocessor.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>Macro Preprocessor</B><br>
+        This example shows how to use Amulet's Macro Preprocessor.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/SlotMachine/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/SlotMachine/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center">&nbsp;</div>
+    </td>
+    <td> 
+      <p><B>SlotMachine</B><br>
+        This is an example of a slot machine that we had on display during the 
+            2001 Embedded Systems Conference West.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/SpiContrast/ReadMe.htm"><img src="Images/IconRead.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center"><a href="../projects/Examples/SpiContrast/" target="_blank"><img src="Images/IconFolder.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td width="36"> 
+      <div align="center">&nbsp;<a href="contrast.htm"><img src="Images/IconHelp.gif" width="36" height="36" border="0"></a></div>
+    </td>
+    <td> 
+      <p><B>SpiContrast</B><br>
+        This example shows how to use a couple of sliders to adjust the SPI-based 
+            contrast and backlight digital pots. This example requires an Easy 
+            GUI module with SPI-based digital pots installed.</p>
+    </td>
+    </tr>
+</table>
+<CENTER>
+<HR ALIGN="CENTER" WIDTH="60%">
+<B><BR>
+</B><I>Amulet HTMLCompiler,<BR>
+  <FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I><p></P>
+
+  <P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact 
+    Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet 
+    Home</A> 
+</CENTER>
+
+</BODY>
+
+</HTML>

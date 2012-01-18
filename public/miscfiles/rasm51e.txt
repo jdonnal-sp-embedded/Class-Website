@@ -1,0 +1,213 @@
+                 Rasm51E MCS-51 Cross Assembler
+
+                         Included in 
+       Programming and Interfacing 8051 Microcontrollers 
+                   Courtesy Rigel Corporation
+
+
+             Copyright 1991-1994 Rigel Corporation
+
+                        P.O. Box 90040
+                     Gainesville, FL 32607
+                     Phone: (904) 373-4629
+                     BBS:   (904) 377-4435
+
+
+Rasm51E is a cross assembler for the Intel MCS-51 assembly language used 
+by the 8031/8051 family of microcontrollers.  It is intended to be used 
+by the hardware and software products available from Rigel Corporation.  
+Rasm51E is a two-pass assembler.  Forward references are resolved during 
+the second pass. 
+
+Rasm51E has a few options activated by the command line parameters.  
+Invoke Rasm51E from DOS by typing
+
+    Rasm51E filename[.asm] [-c] [-d|-dx] [-h|-h1|-h2] [-l|-lx] [-o] [-s]
+
+Note that the command line parameters as well as the asm extension are 
+optional.  The command line parameters are described below.
+
+
+COMMAND LINE OPTIONS
+------------------------------------------------------------------------
+-c      case sensitive labels
+The c option causes the assembler to save the labels and symbols in a 
+case sensitive fashion.  Thus Label1 and label1, for example, are 
+interpreted as two different labels.
+
+------------------------------------------------------------------------
+-d      display assembly progress
+The d option displays the progress of the assembler on the standard 
+output device, which by default is the screen.  The output may be 
+redirected to another device or file.  For example,
+
+Rasm51E myprog.asm -d > myprog.out
+
+redirects the progress report to the file myprog.out.  Similarly, the 
+output may be redirected to a port.
+
+Rasm51E myprog.asm -d > prn
+
+redirects the progress report to the standard print device connected to 
+LPT1 (parallel port 1), and
+
+Rasm51E myprog.asm -d > lpt2
+
+redirects the progress report to the second parallel port, LPT2.  See 
+your DOS manual for further information on output redirection.
+
+------------------------------------------------------------------------
+-dx     extended display assembly progress
+
+This option is similar to the d option.  It gives further information 
+about the assembly process.  For example, it notifies if a label was 
+resolved during the first pass or during the second pass.  See option d 
+to redirect the output.
+
+------------------------------------------------------------------------
+-h1            hold (terminate) on pass 1 errors
+
+When used, the -h1 option prevent the assembler from proceeding with the 
+second pass.  Note that Pass 1 errors does not include forward references 
+not resolved during the first pass.  Unrecognized operations, operands or 
+pseudo operations, illegal labels, and fatal errors (such as memory 
+allocation or file creation errors) are reported during the first pass.  
+This is a useful option to check a long source code for possible errors 
+before generating a list file.
+
+------------------------------------------------------------------------
+-h or -h2       hold (terminate) on after pass 2 errors
+
+When used, the -h (or -h2) option prevent the assembler from creating a 
+LST or OBJ file.
+
+------------------------------------------------------------------------
+-l              write regular lst file
+This option causes the creation of a LST file.  The LST file will have 
+the same name as the source (assembly) file, and the extension lst.  If 
+the file already exists, it will be overwritten.  Any include files 
+specified in the source code will not be listed in the LST file.
+
+
+------------------------------------------------------------------------
+-lx             write extended lst file (descends into include files)
+This option is similar to the -l option.  Any include files specified in 
+the source code will be listed in the LST file, that is, the LST file 
+will descend into the include files..
+
+------------------------------------------------------------------------
+-o              write obj file (in Intel Hex format)
+This option causes the creation of a OBJ file in the Intel hex format.  
+The OBJ file will have the same name as the source (assembly) file, and 
+the extension obj.  If the file already exists, it will be overwritten. 
+
+
+------------------------------------------------------------------------
+-s              generate symbol list (appended to lst file)
+When invoked, this option will generate a list of labels and symbols 
+specified in the source (assembly) file.  The label and symbol lists will 
+be appended to the LST file.
+
+
+PSEUDO OPERATIONS
+
+There are three pseudo-operations recognized by Rasm51E.  These are db 
+(define byte), dw (define word), and org (origin) pseudo-operations.
+
+
+COMPILER DIRECTIVES
+
+The only compiler directive is the include directive used as
+
+#include filename.ext
+
+where filename.ext must be found in the current directory or path.  The 
+file filename.ext will be opened and merged with the source (assembly) 
+code.  The number of include files is limited by the DOS parameters 
+BUFFERS and FILES.  See your DOS manual for further details.  Up to 8 
+include file may be nested.  That is, include files may be specified 
+inside include files, stacked up to 8 levels.
+
+
+EXPRESSIONS
+
+The four basic arithmetic operations (+ - * /) are supported.  
+Parentheses may be used to group terms of an expression.  The Parentheses 
+may be nested.  The number of such nestings is limited only be the amount 
+of dynamic memory available.
+
+
+FUNCTIONS
+
+There are two built-in functions: high() and low().  They return the high 
+byte and the low byte of a word (two-byte expression), respectively.
+
+
+CONSTANTS
+
+Constants may be decimal, binary, octal, hexadecimal, or ASCII.  
+Hexadecimal constants must start with a numerical digit between 0 and 9.  
+The suffixes b, o, d, and h are used to denote binary, octal, decimal, 
+and hexadecimal constants, respectively.  If no suffix is present, the 
+constant is assumed to be decimal.  ASCII constants are placed within 
+single quotation marks.  See the following examples.
+
+10, 10d, 10D, 0ah, 0aH, 0Ah, 0AH, 12o, 12O, 1010b, 1010B  all have the 
+value 10.
+'A' has the value 65 or 41h.
+
+
+EXAMPLE
+
+Run Rasm51E with the example code DEMO.ASM given below.  Try the -l and -
+lx options and observe the LST files generated in each case.  Also try 
+the -d and -dx options.  DEMO.ASM will not assemble with the -c option, 
+since some symbols are written without regard to cases, e.g. "One" and 
+"one".
+ 
+------------------------------------------------------------------------
+DEMO.ASM
+------------------------------------------------------------------------
+value equ 6/2*3*2/3
+
+      mov a, value
+      mov a, high(value*100h)
+      mov b, low(value*100h)
+      mov a, #high(value*100h)
+      mov b, #low(value*100h)
+l1:
+      mov a, (five/two)-
+one+two+three+four+(((((five)+five)+five)+five)+five)
+
+      anl a, One
+l2:
+      orl a, oNe
+l3:
+      org 8000h
+l4:
+      orl b, #ONE
+
+      org 0a00h
+
+#include demo1.inc
+; end of file
+
+------------------------------------------------------------------------
+DEMO1.INC
+------------------------------------------------------------------------
+; first level include file
+
+  one equ 1
+  two equ (one+one)
+three equ (one+two)
+
+#include demo2.inc
+
+------------------------------------------------------------------------
+DEMO2.INC
+------------------------------------------------------------------------
+; second level include file
+
+ four equ (two+two)
+ five equ (two+three);
+

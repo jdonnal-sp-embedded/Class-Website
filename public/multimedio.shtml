@@ -1,0 +1,26 @@
+<!--#set var="document_title" value="MultiMedio" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2011-02-06 18:43:05 -0500 (Sun, 06 Feb 2011) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>MultiMedio</h2>
+
+<p>MultiMedio is your gateway to all things peripheral, and is
+especially useful for final projects.  It is an FPGA based device
+designed to interface with the 8051 family of microcontrollers and
+provide access to an assortment of peripherals, including a video
+system capable of resolutions up to 800x600, and a 16-bit CD quality
+audio system.
+
+<p>
+Multimedio is "experimental".  It has been used successfully by many
+students, but it may have bugs.  This is a "use at your own risk"
+peripheral.
+
+<h3>Documentation</h3>
+<ul>
+<li><a href="miscfiles/multimedio/UsersGuide.pdf">MultiMedio User's Guide</a>
+</ul>
+
+<!--#include file="include/footer.shtml"-->
+

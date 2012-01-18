@@ -1,0 +1,83 @@
+Guide to Programming the PIC16F628
+originally by Sheldon Chan, modified by Jim Paris
+
+I. The PIC Programmer Hardware
+------------------------------
+
+Part 1: Understanding the Circuit
+
+The schematic for our low-voltage PIC programmer is available from
+
+  http://web.mit.edu/6.115/www/pic.shtml
+
+It takes advantage of software control of the PC parallel port to
+control the timings and signals to read and program the PIC16F628.
+The 7404-inverter chip is used to buffer the signals coming to and
+from the parallel port.  The LED is used to indicate that power 
+has been applied.  The various resistors are to limit current into 
+the LED and parallel port pins.
+
+Part 2: Assembling the PCB version of the PIC Programmer
+
+There are several components on the PCB board that are sensitive to
+which direction they are soldered onto the board. Please always double
+check the direction or polarity of each device to make sure it matches
+the labeled direction on the board.
+
+Please also note that the capacitor's positive terminal should face
+away from the parallel port connector; the 7404 should be plugged into
+the machine socket with the top facing towards the parallel port; and
+the 7805 should be oriented so that the quarter inch screw and nut
+will secure it to the PCB.
+
+II. PIC Programmer Software
+---------------------------
+
+Part 1: Installing the Software
+
+The software is already installed on all machines in the 6.115 lab.
+To install it elsewhere, download the PICC Lite compiler and jimpic
+from:
+
+  http://web.mit.edu/6.115/www/pic.shtml
+
+If you're running under Windows NT/2K/XP, you will also need to
+download and install the giveio driver, at the same location, for
+jimpic to work.  Just uncompress giveio.zip and run ginstall.bat.
+
+If you're running Linux, you can download the source code for jimpic
+from the same place and compile it yourself.  The C compiler is now
+available for Linux from the Hi-Tech site.  jimpic will need to be run
+as root, or made setuid root, in order to gain access to the parallel
+port.
+
+Part 2: Compiling a Simple Program
+
+In this example, we will compile a simple C program into a hex file
+that can be programmed onto the 16F628 chip.  This assumes that your
+program files are stored on a floppy disk.  You can download a sample
+program blinky.c from the 6.115 webpage.
+
+1. Open a console window, and type the following:
+
+   a:                       (to go to your floppy disk)
+   c:\picc\pcc blinky       (or blinky.c, to compile the program)
+
+This should compile your program and generate a corresponding file
+that ends in .hex that will be stored on your disk as well.
+
+Part 3: Programming the PIC Chip
+
+1. Insert a PIC16F628 into the ZIF socket with the bottom of the chip
+   in the closest slot to the parallel port connector.
+2. Lock the PIC into place.
+3. Attach a +7-20V power supply and ground to the terminal block.
+4. Open a command console and type
+   
+   a:                       (to go to your floppy disk)
+   c:\picc\burnpic blinky   (or blinky.hex, to burn the file to the PIC)
+
+5. Turn off the power source and remove the chip.
+
+Congratulations! If all has gone well, your PIC16F628 chip is now
+programmed and ready to be used.

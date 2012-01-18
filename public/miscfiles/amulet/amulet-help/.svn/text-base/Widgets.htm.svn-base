@@ -1,0 +1,2679 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 2.0 for Windows">
+	<TITLE>Widgets</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">Amulet Widgets</H1>
+<div align="left">
+    <table border="1" width="640">
+        <tr>
+            <td width="50%" valign="middle"><h3 align="left">Control Widgets:</h3></td>
+            <td width="50%" valign="middle">
+                <h3>View Widgets:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%" valign="top"><a href="Widgets.htm#Check_Box">Check Box</a><br><a href="Widgets.htm#Custom_Button">Custom Button</a><br><a href="#CustomSlider">Custom 
+                Slider</a><br><a href="Widgets.htm#Function_Button">Function 
+Button</a><br><a href="Widgets.htm#List">List</a><br><a href="Widgets.htm#Radio_Button">Radio Button</a><BR><A HREF="#Scribble">Scribble</A><br><a href="Widgets.htm#Slider">Slider</a></td>
+            <td width="50%" valign="top">
+                <p><a href="Widgets.htm#bargraph">Bargraph</a><br><a href="#DynamicImage">Dynamic Image</a><br><a href="Widgets.htm#Image_Bar">Image 
+                Bar</a><br><a href="Widgets.htm#Image_Sequence">Image 
+                Sequence</a><br><a href="#LineGraph">Line Graph</a><br><a href="Widgets.htm#Plot">Line 
+                Plot</a><br><a href="#LinearGauge">Linear Gauge</a><br><a href="Widgets.htm#Numeric_Field">Numeric 
+                Field</a><br><a href="Widgets.htm#String_Field">String 
+                Field</a></p>
+            </td>
+        </tr>
+    </table>
+</div>
+<p>Amulet µHTML™ pages can be created using standard HTML. There are some 
+user interface (UI) objects that are supported by HTML. An overview of these 
+objects can be found in <a href="Objects.htm">Objects.htm</a>. However, there are a 
+group of UI objects
+common to embedded systems that are not supported by standard HTML. We refer 
+to these UI objects as Amulet Widgets. Currently, there are fourteen Amulet Widgets available:</p>
+<TABLE BORDER="0" CELLSPACING="10">
+	<TR>
+		<TD VALIGN="MIDDLE">
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET4.gif" WIDTH="112" HEIGHT="35" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Bargraph Widget —</B> A live bargraph that represents the value returned from a function
+			call. The bargraph moves from left-to-right, right-to-left, bottom-to-top, or top-to-bottom. <A HREF="#bargraph">Click
+			here for a detailed description of Bargraph.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/checkbox.gif" WIDTH="96" HEIGHT="39" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Checkbox Widget —</B> A checkbox is a labeled, square box used to invoke a function (or set of functions) whose argument is the value
+			of the checkbox. Checkboxes can also be grouped to invoke functions whose argument is the ORed value of all checked
+			boxes within the group. All checkboxes that have the same groupName are considered part of a checkbox group. To
+			toggle (check or uncheck) a checkbox, click on the checkbox (or label). <A HREF="#Check_Box">Click here
+			for a detailed description of Checkbox.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+			
+      <P ALIGN="CENTER"><IMG SRC="Images/WIDGET8.gif" WIDTH="118" HEIGHT="64" ALIGN="BOTTOM" BORDER="0">
+    </TD>
+		<TD><B>Custom Button Widget —</B>  Two images (a pressed and a not pressed) 
+            are used to create a custom button. When pressed, the button invokes a function (or set of functions). Custom buttons 
+            can either be set up to be a toggle button or a spring-loaded button. 
+            <a href="Widgets.htm#Custom_Button">Click here
+			for a detailed description of Custom Button.</a></TD>
+	</TR>
+	<TR>
+		<TD>
+            <p align="center">&nbsp;<img src="Images/dynSlider.gif" width="112" height="55" border="0"></p>
+		</TD>
+		<TD><B>Custom Slider Widget —</B>  Three images (a channel and 
+            two handle&nbsp;states) 
+            are used to create a custom slider. A custom slider launches a function (or set of functions) upon a 
+            pen down or pen up event.
+			As the &quot;handle&quot; is moved, the argument given to the function(s) changes (based on
+			the minimum and maximum values specified). 
+            <a href="Widgets.htm#CustomSlider">Click here
+			for a detailed description of Custom Slider.</a></TD>
+	</TR>
+	<TR>
+		<TD>
+            <p align="center"><img src="Images/dynImage.jpg" width="153" height="58" border="0"></p>
+
+		</TD>
+		<TD><B>Dynamic Image Widget —</B>  An uncompressed image which 
+            provides a space holder to display images which can be loaded serially 
+            at runtime. 
+            Images are uploaded using an <a href="xmodem.htm">xmodem</a> protocol.&nbsp;<a href="Widgets.htm#DynamicImage">Click here
+			for a detailed description of Dynamic Image.</a></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET6.gif" WIDTH="100" HEIGHT="50" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Function Button Widget —</B> A button used to invoke a function (or set of functions) when
+			hit. Function buttons can either be set up to be a toggle button 
+            or a spring-loaded button. <a href="Widgets.htm#Function_Button">Click here
+			for a detailed description of Function Button.</a></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET2.gif" WIDTH="64" HEIGHT="116" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Image Bar Widget —</B> Two images (an empty and a full) are used to create a custom &quot;bargraph&quot;. 
+			A byte (or word) returned from a function call is the input. Based upon the value of the byte (or
+			word) returned, a percentage of the empty bar and a percentage of the full bar are displayed. For further
+			customization, the wipe between empty and full can be from left-to-right, right-to-left, bottom-to-top, or top-to-bottom.
+			<A HREF="#Image_Bar">Click here for a detailed description of Image Bar.</A></TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="40">
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET7.gif" WIDTH="95" HEIGHT="35" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD HEIGHT="40"><B>Image Sequence Widget —</B> Similar to an animated bitmap. However, instead of being linked
+			to a timer event, the transition between images is linked to a byte (or word) returned from a  function call.<B> </B><A HREF="#Image_Sequence">Click here for
+			a detailed description of Image Sequence.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+            <p align="center"><img src="Images/lineGraph.gif" width="108" height="101" border="0"></p>
+
+		</TD>
+		<TD><B>Line Graph Widget —</B> A 2-dimensional line graph is 
+            drawn on a background image, which uses a byte (or word) array returned
+			from a function call as its input. The line weight (thickness) is user-defined, as well as the number of
+			samples in the x direction and the sampling rate.  <a href="Widgets.htm#LineGraph">Click
+			here for a detailed description of Line Graph.</a></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET1.gif" WIDTH="105" HEIGHT="116" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Line Plot Widget —</B> A live 2-dimensional line plot which uses a byte (or word) returned
+			from a function call as its input. The line weight (thickness) is user-defined, as well as the number of
+			samples in the x direction and the sampling rate. The line plot moves from left-to-right only. <A HREF="#Plot">Click
+			here for a detailed description of Line Plot.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+            <p align="center"><img src="Images/linGauge.gif" width="82" height="163" border="0"></p>
+
+		</TD>
+		<TD><B>Linear Gauge Widget —</B> Two images (a background and pointer&nbsp;icon) are used to create a custom &quot;linear 
+            gauge&quot;. 
+			A byte (or word) returned from a function call is the input. The 
+            pointer&nbsp;icon travels the length of the background image based upon the value of the byte (or
+			word) returned. The pointer can travel either horizontally 
+            or vertically.
+			<a href="Widgets.htm#LinearGauge">Click here for a detailed description of Linear 
+            Gauge.</a> </TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET3.gif" WIDTH="45" HEIGHT="95" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>List Widget —</B> A list of user-defined strings linked to a single function (or set of
+			functions). Selecting an object within the list invokes the function(s), with the argument being the value of the
+			list entry selected. <A HREF="#List">Click here for a detailed description of List.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/WIDGET5.gif" WIDTH="127" HEIGHT="35" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Numeric Field Widget —</B> A live numeric field that uses a byte (or word) returned from
+			a function call as its input. Static text can also be added to the &quot;live&quot; numeric field, using
+			the standard C printf format. Hexadecimal, integer, and floating-point display formats are all supported. <A HREF="#Numeric_Field">Click
+			here for a detailed description of Numeric Field</A>.</TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/radio.gif" WIDTH="105" HEIGHT="49" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Radio Button Widget —</B> A labeled round button used to make a single selection from several
+			options. When a radio button is hit, its function(s) are called with the argument being the intrinsic value of
+			the radio button. Each radio button can invoke its own function (or set of functions). <A HREF="#Radio_Button">Click
+			here for a detailed description of Radio Button.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+            <P ALIGN="center">&nbsp;<IMG SRC="Images/scribble.gif" WIDTH="96" HEIGHT="78" BORDER="0"></P>
+
+		</TD>
+		<TD><B>Scribble Widget — </B>A canvas used for freehand&nbsp;drawing. 
+            A background image can be included. It includes a method to send 
+            out the raw image data out the serial port using an <a href="xmodem.htm">xmodem</a> protocol. 
+            <A HREF="#Scribble">Click here for a detailed description of Scribble.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/slider.gif" WIDTH="96" HEIGHT="38" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>Slider Widget —</B> A slider launches a function (or set of functions) upon a 
+            pen down or pen up event.
+			As the &quot;handle&quot; is moved, the argument given to the function(s) changes (based on
+			the minimum and maximum values specified). <A HREF="#Slider">Click here for a detailed description of Slider.</A></TD>
+	</TR>
+	<TR>
+		<TD>
+			<P ALIGN="CENTER"><IMG SRC="Images/strField.gif" WIDTH="102" HEIGHT="38" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD><B>String Field Widget —</B> A live string field that displays dynamic text based upon an ASCII
+			string received from a function call. An alternative setup returns a byte used to index a list of pre-built strings.
+			Static text, surrounding the dynamic string, can also be added to the &quot;live&quot; string field, using
+			the standard C printf format. <A HREF="#String_Field">Click here for a detailed description of String Field.</A></TD>
+	</TR>
+</TABLE>
+<P>Amulet widgets are entered into HTML pages using the Java applet tag. However, Amulet widgets ARE NOT written
+in Java. They use the Applet tag so that drag-and-drop HTML editors will accept the source code. In addition, most
+drag-and-drop HTML editors provide some form of an EDIT PARAMETERS dialog box associated with the Applet tag. This
+makes it easier to edit the Amulet Widget parameters for your specific needs.</P>
+<P>To simplify the task of incorporating Amulet Widgets in your pages, a drag-and-drop library of Amulet Widgets
+is included with the Easy GUI Development Software. The library is in the form of an HTML file called <A HREF="../WidgetLibrary/Library.htm">Library.htm</A>
+and is located in a subdirectory of the Amulet main directory called <A HREF="../WidgetLibrary/"
+target="_blank">\Library\</A>. By default, the Amulet main directory is C:\Program Files\Amulet, however
+you may have specified a different path during the install.</P>
+<H3><A NAME="WidgetAttributes"></A>Attribute Fields for Amulet Widgets</H3>
+<P>Amulet widgets use the following applet attributes:</P>
+
+<UL>
+	<LI><B>CODE —</B> Specifies the widget type, by class name (e.g. BarGraph.class)
+	<LI><B>HEIGHT —</B> Specifies the widget height in pixels. This is a required field. The HTML compiler generates
+	an error if this field is missing.
+	<LI><B>WIDTH —</B> Specifies the widget width in pixels. This is a required field. The HTML compiler generates
+	an error if this field is missing.
+	<LI><B>ALIGN —</B> Specifies the method for vertically aligning the widget to the surrounding text/objects on the
+	same line. Options are TOP, MIDDLE, BOTTOM; BOTTOM is the default.
+	<LI><B>NAME</B> <B>— </B>Specifies the internal name of the widget. Used for Inter-Widget Communication only.
+</UL>
+
+<P>To provide arguments to an applet, the <B>&lt;param&gt;</B> tag is used. The <B>&lt;param&gt;</B> attributes
+are, as follows:</P>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;</B><I>text</I><B>&quot; —</B> Specifies the parameter name, which is defined by the widget. Each
+	widget has its own set of parameter names.</P>
+	<P><B>VALUE=&quot;</B><I>number</I><B>&quot; </B>and/or<B> &quot;</B><I>text</I><B>&quot; —</B> Specifies the parameter
+	value identified with the NAME attribute. Each parameter name has a set of values. Depending on the parameter,
+	the value can be numeric or textual.</P>
+</BLOCKQUOTE>
+
+<H4>Numbers and µHTML</H4>
+<P>Integers can be entered in hexadecimal or decimal. Decimal examples are used in this document. If hexadecimal
+is desired, precede the number with 0x. For example:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;A HREF=&quot;Amulet:UART.invokeRPC(10)&quot;&gt;Click for RPC #10&lt;/A&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>is equivalent to</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;A HREF=&quot;Amulet:UART.invokeRPC(0x0A)&quot;&gt;Click for RPC #10&lt;/A&gt;</B></P>
+</BLOCKQUOTE>
+
+<H3><a name="ControlWidgetsIntrinsicValues">Control Widgets and Intrinsic Values</a></H3>
+<p>The intrinsic values for most Control Widgets can be either a BYTE, WORD 
+or STRING. The exceptions to this are the slider widget and the grouped check 
+box widget, which can only have numbers (BYTES or WORDS) for their intrinsic 
+value. If the <B>href</B> function call is BYTE specific, (i.e. Amulet:UART.byte(5).setValue()), 
+then the range of the intrinsic value should be 0-255(0x00-0xFF). You can alternately 
+specify a BYTE by putting an ASCII character between single quotes (i.e. 'A', 
+which would be the BYTE equivalent of 0x41 or 65 decimal.) </p>
+<p>If the intrinsic value can become greater than 255, then you should use WORD 
+specific function calls. If the <B>href</B> function call is WORD specific, (i.e. Amulet:UART.word(5).setValue()), 
+then the range of the intrinsic value is 0-65535(0x0000-0xFFFF). </p>
+<p><a name="stringVariables"></a>If the <B>href</B> 
+function call is STRING specific, (i.e. Amulet:UART.string(5).setValue()), then 
+the intrinsic value should be specified between double quotes (i.e. &quot;My 
+string&quot;). The maximum length of a string value is 254 characters. Unfortunately, because double quotes are used as a token separator 
+in HTML, just putting in double quotes in the HTML will not work. It will usually 
+work in most HTML editor front ends for editing Applet parameters, though. If 
+dealing with the actual HTML source code, 
+there are three ways to specify a STRING value.</p>
+<p>1) Use single quotes as the token separator around&nbsp;the entry&nbsp;that 
+has the double quotes around the STRING.<br>Example: <B>&lt;PARAM NAME=&quot;href&quot; 
+VALUE='Amulet:UART.string(5).setValue(&quot;My string&quot;)'&gt;</B> </p>
+<p>2) Use single quotes as the quotes around the STRING. Note: if single quotes 
+are around a single character, the Amulet HTMLCompiler will assume a BYTE instead 
+of a one character string, so if a one character string is desired, do not use 
+this method.<br>Example: <B>&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.string(5).setValue('My 
+string')&quot;&gt;</B></p>
+<p>3) Use the HTML escape character for double quotes (&amp;quot;) around the 
+STRING.<br>Example: <B>&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.string(5).setValue(&amp;quot;My 
+string&amp;quot;)&quot;&gt;</B></p>
+<p>If you are using an advanced HTML editor, like NAMO or DreamWeaver, inserting 
+the double quoted string in the front end of the applet editor will result in 
+the HTML looking like one of the above methods. In that case, just put double 
+quotes around your STRING value and the HTML editor will take care of the rest.</p>
+<HR ALIGN="CENTER">
+
+<H3><A NAME="bargraph"></A>Bargraph Widget (BarGraph.class)</H3>
+<P>A Bargraph Widget is a live bargraph that represents the byte (or word) value returned from
+a function call. The bargraph moves from left-to-right, right-to-left, bottom-to-top, or top-to-bottom.</P>
+<H4>Bargraph Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the widget input. See
+        <A HREF="AppendixB.htm#View_functions">Appendix B</A>
+	for all available functions for the Bargraph Widget. The function is called at an update
+	rate specified by the <B>updateRate</B> attribute.</P>
+	<P><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot;
+        —</B> Minimum value returned from the <B>href</B>
+	 function; must be less than <B>max</B>. If
+	the function returns a byte, the range is 0 - 254 (0x00 - 0xFE). If the function returns a word, the range is 0
+	- 65534 (0x00 - 0xFFFE).</P>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B> function; must be greater than <B>min</B>.
+	If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF). If the function returns a word, the range is
+	1 - 65535 (0x01 - 0xFFFF).</P>
+	<P><B>NAME=&quot;fillPattern&quot; VALUE</B>=&quot;<I>number</I>&quot; — Specifies the desired bargraph fill pattern.
+	Sixteen different fill patterns are available (0 through 15), Figure 1. If no fill pattern is specified, the default
+	is pattern 0.</P>
+</BLOCKQUOTE>
+
+<CENTER>
+<P>&nbsp;
+    <A NAME="Figure1"></A><TABLE BORDER="0">
+	<TR>
+		<TD WIDTH="80">
+			<P ALIGN="CENTER"><IMG SRC="Images/PAT0.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+			<B>Pattern 0</B>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT1.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 1</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT2.gif" WIDTH="74" HEIGHT="74" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 2</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT3.gif" WIDTH="74" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 3</B>
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT4.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 4</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT5.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 5</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT6.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 6</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT7.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 7</B>
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT8.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 8</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT9.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 9</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT10.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 10</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT11.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 11</B>
+			</DIV>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT12.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 12</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT13.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 13</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT14.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 14</B>
+			</DIV>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT15.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 15</B>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>
+<P ALIGN="CENTER"><B>Figure 1. Bargraph widget fill patterns (values 0 through 15).</B></P>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;sweepFrom&quot; VALUE=&quot;LEFT&quot;|&quot;RIGHT&quot;|&quot;TOP&quot;|&quot;BOTTOM&quot; —</B>
+	Determines where to begin drawing the bargraph. The options are:</P>
+<UL>
+	<LI><B>LEFT —</B> The bargraph is drawn from left-to-right.
+	<LI><B>RIGHT —</B> The bargraph is drawn from right-to-left.
+	<LI><B>TOP —</B> The bargraph is drawn from top-to-bottom.
+	<LI><B>BOTTOM —</B> The bargraph is drawn from bottom-to-top.
+</UL>
+	<P><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot; —</B> The first number specifies the <B>href</B>
+	function call frequency (specified in seconds, with a single floating-point number). The range is 0.00 - 655.35.
+	 
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01 - 655.35.
+	If the second number is not specified, then the delay time defaults to the first number (frequency).</P>
+</BLOCKQUOTE>
+
+<H4>Optional Bar Graph Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Bar Graph&nbsp;is to start out invisible or not. If the attribute is 
+    not present, then by default the Bar Graph&nbsp;is visible. If&nbsp;the 
+    Bar Graph&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+</blockquote>
+<H4>Example Bargraph</H4>
+<P>Use the <B>BarGraph.class </B>applet<B> </B>to create a bargraph. For example, to create a bargraph 260 pixels
+wide and 30 pixels tall that sweeps left-to-right, updates every 200ms, starts 10ms after the page is loaded,
+and is linked to external byte variable 3 with a range of 0 - 255, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;BarGraph.class&quot; WIDTH=&quot;260&quot; HEIGHT=&quot;30&quot;
+	NAME=&quot;Bar1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(3).value()&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;255&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;fillPattern&quot; VALUE=&quot;6&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;sweepFrom&quot; VALUE=&quot;left&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.20,.01&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/BarGraph/" target="_blank">\projects\Examples\BarGraph\</a> 
+directory for an HTML file showing an example bargraph widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="Check_Box"></A>Checkbox Widget (CheckBox.class)</H3>
+<P>A checkbox is a labeled, square box used to invoke a function (or set of functions) whose
+argument is the value of the checkbox. To toggle (check or uncheck) a checkbox, click on the checkbox (or label).
+Checkboxes can also be grouped to invoke functions whose argument is the cumulative value of all checked boxes
+(logical ORing). Boxes that have the same groupName are considered part of a checkbox group.</P>
+<P>Within a checkbox group, any combination of boxes can be checked. If none of the boxes are
+set within a group, then 0x00 is the <B>href</B> function
+call argument. Therefore, you must give each box a checked value that is different on a binary bit level. If one
+box has a checked value of 0x01, then another box could have a value of 0x02, and the next a value of 0x04 (not
+0x03 because that would be the ORed value of boxes 1 and 2 when checked).</P>
+<H4>Checkbox Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE</B>=<B>&quot;</B><I>function(s)</I><B>&quot;</B> —  The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked when  a checkbox is toggled (checked or unchecked). If the checkbox is NOT part of a
+	checkbox group, the argument of the function is determined by the state of the checkbox. If checked, the argument
+	is determined by the <B>checkedValue </B>parameter; if unchecked,
+	the argument is determined by the <B>unCheckedValue</B> parameter.
+	If the checkbox is part of a group, the argument is the cumulative value of all &quot;checked&quot; boxes (logical
+	ORing). All checkboxes within a group must call the same <B>href </B>function(s).
+	See <A HREF="AppendixB.htm#Control_functions">Appendix B</A>
+	for all available <B>href</B> functions for the checkbox
+	widget.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the checkbox label.  The corresponding 
+    .amf file must be included in the Amulet/Configuration/Fonts folder. See 
+    <a href="AmuletFontConverter.htm">AmuletFontConverter</a> for more information 
+    regarding&nbsp;the creation of .amf files. Default is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the checkbox label. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font <LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported.</UL>
+    <p><B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the checkbox label font. To create a custom look, styles
+	can be combined by using the &quot;logical or&quot; (|). However, PLAIN overrides any other style. The available
+	font styles are:</p>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+	<P><B>NAME=&quot;boxAlign&quot; VALUE=&quot;LEFT&quot;|&quot;RIGHT&quot; —</B> Specifies the location of the checkbox in relation to the label text.</P>
+    <p><B>NAME=&quot;label&quot; VALUE=&quot;</B><I>text</I><B>&quot; —</B> Specifies the name that appears to the right or left of the
+	checkbox.</p>
+	<P><B>NAME=&quot;checkedValue&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the checked box value. If the box is part of a
+	group, single bits should be used, such as 0x01, 0x02, 0x04 etc. All boxes within a checkbox group must be assigned
+	unique binary numbers. That is, if one checkbox has a value of 0x01(bit 0), no other checkbox within the group
+	can use bit 0. If the box is part of a group, the range is 1 - 255 (0x01 - 0xFF). If a lone box, the 
+    checkedValue can be a BYTE, WORD or STRING. See note regarding <a href="#ControlWidgetsIntrinsicValues">Control 
+    Widget intrinsic values</a>.</P>
+	<P><B>NAME=&quot;unCheckedValue&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the unchecked box value. This attribute is only
+	valid when NOT part of a checkbox group. The checkedValue can be a BYTE, 
+    WORD or STRING. See note regarding <a href="Widgets.htm#ControlWidgetsIntrinsicValues">Control 
+    Widget intrinsic values</a>.</P>
+	<P><B>NAME=&quot;groupName&quot; VALUE=&quot;</B><I>text</I><B>&quot; —</B> For a grouped checkbox, specifies the checkbox group assignment. 
+    Attribute not needed if a lone checkbox.</P>
+	<P><B>NAME=&quot;initialCondition&quot; VALUE=&quot;ON&quot;|&quot;OFF&quot;|&quot;FromInitHref&quot;
+	—</B> Specifies the initial condition of a checkbox when the page is loaded; ON specifies
+	a checked box; OFF an unchecked box. If <B>FromInitHref</B>
+	is selected, the function specified by the<B> initHref</B>
+	attribute is called. The returned value determines the initial condition of all checkboxes within the group.
+	If part of a group, a  box is checked when its <B>checkedValue</B> corresponds
+	to a set bit in the returned byte (logical ANDing). If a lone checkbox, 
+    the box is checked when its <B>internalNumber</B> equals the returned <B>initHref</B> 
+    value.</P>
+</BLOCKQUOTE>
+
+<H4>Optional Checkbox Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Specifies the function called when the page is loaded. Use
+	this attribute when <B>FromInitHref </B>is used as the <B>initialCondition</B>. All boxes within a group must have the same function(s).
+	If part of a group,  the function must return a BYTE value, and the 
+    value returned is compared to the <B>checkedValue</B>. If the <B>checkedValue</B> 
+    bit is set in the returned value, the box will initially start out in the 
+    &quot;on&quot; position. If a lone check box, then the returned value is 
+    compared to the <B>internalNumber</B> and if equal, the lone check box initially 
+    starts out in the &quot;on&quot; position. See <A HREF="AppendixB.htm#View_functions">Appendix B</A>
+	for all available functions.</P>
+	<P><B>NAME=&quot;hrefOnHitOnly&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the check box&nbsp;<B>href</B> function(s) is launched&nbsp;only upon a 
+    &quot;hit&quot; or not. By default, <B>hrefOnHitOnly</B> is false, which 
+    means if the check box&nbsp;has an <B>initHref</B> function, the <B>href</B> 
+    of the check box&nbsp;(group or lone)&nbsp;is launched upon loading the 
+    page. The <B>href</B> is also launched after a forceUpdate() call. By setting 
+    <B>hrefOnHitOnly</B> to true, the <B>href</B> will only be launched upon 
+    the check box&nbsp;physically being selected or upon a forceHit() call.</P>
+    <p><B>NAME=&quot;emptyImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the image to use when the
+	checkbox is in the unchecked state. If this attribute is not present, then a default image, emptyImage.gif, located
+	in Amulet/Configuration/Widgets/CheckBox/, is used. (Images can be either .GIF or .JPEG.)</p>
+	<P><B>NAME=&quot;trackingImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the image to use when
+	the checkbox is in the pen down state. If this attribute is not present, then a default image, trackingImage.gif,
+	located in Amulet/Configuration/Widgets/CheckBox/, is used. (Images can be either .GIF or .JPEG.)</P>
+	<P><B>NAME=&quot;fullImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the image to use when the
+	checkbox is in the checked state. If this attribute is not present, then a default image, fullImage.gif, located
+	in Amulet/Configuration/Widgets/CheckBox/, is used. (Images can be either .GIF or .JPEG.)</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Check Box is to start out invisible or not. If the attribute is not 
+    present, then by default the Check Box is visible. If&nbsp;the Check Box 
+    starts out invisible, the only way to make it&nbsp;visible again is via 
+    the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+	<P><B>NAME=&quot;internalNumber&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the internal 
+    number of the lone checkbox, which is used  to determine if the initial 
+    condition&nbsp;of the lone check 
+    box is on or off, if <B>FromInitHref </B>is used as the <B>initialCondition</B>. Should only be used if using <B>initHref</B>. If 
+    the value returned from the <B>initHref</B> 
+function  matches the <B>internalNumber</B> of  the lone check box, then the 
+    check box starts out in the &quot;on&quot; position. If the <B>internalNumber</B> 
+    is not specified, the <B>checkedValue </B>is used instead.</P>
+</blockquote>
+<h4>Example Checkbox</h4>
+<P>Use the <B>CheckBox.class</B> applet
+to create a checkbox<B>.</B> For example, to create a checkbox
+150 pixels wide and 22 pixels tall that is positioned left of the label &quot;Box 1&quot;, and whose checked value
+is 0x20 and unchecked value is 0x10, sets the value of external byte variable 5, and with an initial condition
+that is set by first requesting the value of external byte variable 5, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;CheckBox.class&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;22&quot;
+	NAME=&quot;CB1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(5).setValue()&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;label&quot; VALUE=&quot;Box 1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;checkedValue&quot; VALUE=&quot;0x20&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;unCheckedValue&quot; VALUE=&quot;0x10&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;boxAlign&quot; VALUE=&quot;left&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;groupName&quot; VALUE=&quot;CB1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;FromInitHref&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;initHref&quot; VALUE=&quot;Amulet:UART.byte(5).value()&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+
+<P>
+See the <A HREF="../projects/Examples/CheckBox/" target="_blank">\projects\Examples\CheckBox\</a> 
+directory for an HTML file showing an example check box widget.<HR ALIGN="CENTER">
+
+<H3><a name="Custom_Button"></a>Custom Button Widget (CustomButton.class)</H3>
+<P>The Custom Button Widget uses two images (a pressed and a not pressed) to create a custom button. 
+Custom buttons are Amulet anchors that allow a separate pressed image to appear 
+instead of merely inverting the image.  Custom buttons can be set to be either 
+a &quot;spring-loaded&quot; or a &quot;toggle&quot; button. By 
+default, when hit, a custom button invokes a function
+(or set of functions). Optionally, custom buttons can be set to auto-repeat 
+while pressed. Initial delay and repeat frequency can both be customized.</P>
+<P>Each
+custom button can have a user-defined label (text or numeric) within the button image. 
+If  the label is specified as &quot;fromInitHref&quot;, the label will&nbsp;be 
+based upon a string variable that is passed across the serial link at run-time. The label text will automatically 
+wrap if the string exceeds the width of the custom button. User-defined wraps 
+can be specified by entering &quot;\n&quot; at the point of the desired wrap.</P>
+<p>Custom buttons can also be set up to auto-repeat. When pressed, an auto-repeat 
+button delays a user-defined amount of time then invokes a function (or set 
+of functions) at a user-defined&nbsp;frequency while the button is still&nbsp;being 
+pressed. As a side benefit of the auto-repeat functionality, a&nbsp;button can 
+be created that will appear to invoke its function(s) immediately upon being 
+pressed instead of waiting&nbsp;until the button is released. To create an instant 
+hit button, set&nbsp;the 
+delay very small and the frequency at 0. The button will invoke its 
+function(s) after the very short delay time and not repeat again.</p>
+<P><B>NOTE: </B>To display a literal \ symbol in the label, use a double backslash 
+in the string (e.g. <B>25 \\ 5 </B>would display<B> 25 \ 5 </B>within the button).</P>
+<H4>Custom Button Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function(s)</I><B>&quot; —</B> The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked when the button is hit. See <A HREF="AppendixB.htm#Control_functions">Appendix
+	B</A> for all available functions for the Custom Button widget.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the button label.  The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the button label. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font <LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported.</UL>
+	<P><B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the button label font. To create a custom look, styles
+	can be combined by using the &quot;logical or&quot; (<B>|</B>). However, PLAIN overrides any other style, and UNDERLINE
+	and STRIKE cannot be used together. The available font styles are:</P>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+	<P><B>NAME=&quot;label&quot; VALUE=&quot;</B><I>text</I><B>&quot;|&quot;FromInitHref&quot; </B>— Specifies the text that appears inside
+	the button. The button will NOT automatically re-size to fit the text. If 
+    there is enough vertical room, text will automatically wrap. Any text that 
+    will not fit within the confines of the button will be truncated. User-defined 
+    wraps can be specified by entering &quot;\n&quot; within the text at the 
+    spot you would like the wrap to occur.  There is a maximum of 5 lines for 
+    a button label. The name field can be left blank; blank
+	is the default. </P>
+    <p>To have the label be dynamically entered at runtime by the 
+    server, enter <B>FromInitHref</B>. By default, 
+    the dynamic button label can be a maximum of 25 characters in length. To increase 
+    the maximum number of characters, put the desired number in parentheses 
+    after <B>FromInitHref</B>. For example, to have a dynamic label up to 50 
+    characters long, use <B>FromInitHref(50)</B>.&nbsp;The attribute <B>initHref</B> needs to 
+    be of the type Amulet:UART.label(<I>x</I>).value(). It will be called only once upon the 
+    loading of the page, with the string  returned from the server  
+    becoming the button label. See <A HREF="internalRAM.htm#InternalRAM.label">note</A> 
+    regarding the use of InternalRAM label variables as button labels.</p>
+    <p><B>NAME=&quot;buttonType&quot; VALUE=&quot;TOGGLE&quot;|&quot;SPRING-LOADED&quot; </B>— Specifies the action 
+    of the button when hit. <B>TOGGLE</B> causes the button to depress (or invert) 
+    on a pen down event and stay depressed on the ensuing pen up event. <B>SPRING-LOADED</B> 
+    causes the button to depress on a pen down event and return to its original 
+    state on the following pen up event. <STRONG>SPRING-LOADED </STRONG>is the default.</p>
+    <p><B>NAME=&quot;onButtonPress&quot; VALUE=&quot;CUSTOM&quot;|&quot;INVERT&quot; </B>— Specifies the look of the
+	button during a pen down condition. <B>CUSTOM</B> causes the <B>downImage</B> to 
+    appear and label text, if any, 
+    to shift down and to the right to give the illusion of being pressed. <B>INVERT</B>
+	inverts the <B>upImage</B> and prohibits the <B>downImage</B> from appearing. 
+    <B>CUSTOM</B> is the default.</p>
+    <p><B>NAME=&quot;upImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used when custom 
+    button is not pressed. Image file must be of type .GIF or .JPG.</p>
+	<P><B>NAME=&quot;downImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used when custom 
+    button is pressed. Image file must be of type .GIF or .JPG.</P>
+</BLOCKQUOTE>
+
+
+<H4>Optional Custom Button Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;dualAction&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; </B>— Specifies if 
+    the Custom Button&nbsp;is to launch the href function(s) twice, once upon 
+    pressing the button and once upon releasing the button. If the attribute 
+    is not present, then by default the Custom Button only launches its href 
+    function(s) upon release.</p>
+    <p><B>NAME=&quot;repeatDelay&quot; VALUE=&quot;</B><I>number</I><B>&quot; </B>— Time 
+    to delay from when button is initially pressed until it starts to auto-repeat. 
+    Specified in seconds, with a single floating-point number. The range is 0.01 - 655.35.</p>
+    <p><B>NAME=&quot;repeatRate&quot; VALUE=&quot;</B><I>number</I><B>&quot; </B>— The <B>href</B>
+	function call frequency while button is being pressed, after the initial 
+    delay determined by <B>repeatDelay</B>. Specified in seconds, with a single floating-point number. The range is 0.00 - 655.35. 
+    0.00 means do not repeat.</p>
+	<P><B>NAME=&quot;verticalAlign&quot; VALUE=&quot;TOP&quot;|&quot;MIDDLE&quot;|&quot;BOTTOM&quot;
+	—</B> Specifies the vertical alignment of the string associated with the 
+    <B>label</B> attribute within the Custom Button dimensions. Only one value is allowed; you cannot mix vertical 
+    alignments. Default is MIDDLE.</P>
+	<P><B>NAME=&quot;horizontalAlign&quot; VALUE=&quot;LEFT&quot;|&quot;CENTER&quot;|&quot;RIGHT&quot;
+	—</B> Specifies the horizontal alignment of the string associated with the 
+    <B>label</B> attribute within the Custom Button dimensions. Only one value is allowed; you cannot mix horizontal 
+    alignments. Default is CENTER.</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Custom Button&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the Custom Button&nbsp;is visible. If&nbsp;the 
+    Custom Button&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Specifies the function called when the page is loaded. Use
+	this attribute only when <B>FromInitHref </B>is used as the
+	<B>label</B>. Only available function is of type Amulet:UART.label(<I>x</I>).value(). 
+    See <A HREF="internalRAM.htm#InternalRAM.label">note</A> regarding the use 
+    of InternalRAM label variables as button labels.</p>
+</blockquote>
+<H4>Example Custom Button</H4>
+<P>Use the <B>CustomButton.class </B>applet<B> </B>to create a Custom Button. For example, to create a 
+custom button that is 115 pixels wide and 35 pixels tall, uses the image 
+myButtonUp.gif when not pressed, uses the image myButtonDown.gif when pressed, 
+delays for 1.5 seconds while pressed before starting to auto-repeat, auto-repeats every 500 ms, and launches RPC #5, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;CustomButton.class&quot; WIDTH=&quot;115&quot; HEIGHT=&quot;35&quot; NAME=&quot;CustomBtn1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.invokeRPC(5)&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;upImage&quot; VALUE=&quot;myButtonUp.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;downImage&quot; VALUE=&quot;myButtonDown.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;SPRING-LOADED&quot;&gt;<br>&lt;PARAM NAME=&quot;repeatDelay&quot; VALUE=&quot;1.5&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;repeatRate&quot; VALUE=&quot;0.5&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>To create a 
+custom button that is 115 pixels wide and 35 pixels tall, uses the image myButtonUp.gif 
+initially, displays&nbsp;myButtonDown.gif and launches RPC #1 when first hit, 
+then displays myButtonUp.gif and launches RPC #2 when next hit, etc...,  use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;CustomButton.class&quot; WIDTH=&quot;115&quot; HEIGHT=&quot;35&quot; NAME=&quot;CustomBtn2&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.invokeRPC(1);Amulet:UART.invokeRPC(2)&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;upImage&quot; VALUE=&quot;myButtonUp.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;downImage&quot; VALUE=&quot;myButtonDown.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;TOGGLE&quot;&gt;<br>&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/CustomButton/" target="_blank">\projects\Examples\CustomButton\</a> 
+directory for an HTML file showing an example custom button widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="CustomSlider"></A>Custom Slider Widget (CustomSlider.class)</H3>
+<P>The Custom Slider Widget acts like a regular Slider Widget, except for the 
+fact that you get to specify the channel image and two different handle images. 
+The Custom Slider Widget invokes a function (or set of functions) either upon the 
+<B>hrefEvent</B> parameter. If <B>hrefEvent</B> 
+is setup as <B>onChange</B>, the slider invokes the function(s) whenever&nbsp;the 
+handle moves. If <B>hrefEvent</B>&nbsp;is setup as <B>onPenUp</B>, the slider 
+invokes the function(s) only upon releasing the handle. Touching anywhere on the channel causes the handle to snap to that location and
+invoke the function(s) with the corresponding argument. The argument is
+determined by the location of the handle and the limits setup with the <B>min</B> and <B>max</B> attributes. The 
+location of the <B>min</B> value is determined by the <B>minAt</B> attribute(left, 
+right, top or bottom). The height and
+width dimensions entered in the APPLET CODE Attribute Field determine whether the slider is horizontal or vertical.
+The longer dimension establishes the path that the slider handle travels. </P>
+<p>An 
+image, <B>channelImage</B>,&nbsp;is used as the slider's channel, which must 
+be the same dimensions as the Custom Slider Widget. Two different images are 
+used for the slider handle.&nbsp;One image, <B>handleImage,</B> is used when 
+the handle is not touched, and another, <B>handleTrackingImage,</B>&nbsp;for 
+when the handle is active. As an option, you can specify the offset of the handle 
+from the center of the channel by using the <B>handleOffset</B> parameter.</p>
+<p><B>&nbsp;Custom Slider Parameter Attributes:</B></p>
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function(s)</I><B>&quot;</B> — The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked upon the event specified in <B>hrefEvent</B>. See <A HREF="AppendixB.htm#Control_functions">Appendix B</A> for all available functions for the Slider widget.</P>
+	<P><B>NAME=&quot;hrefEvent&quot; VALUE=&quot;onChange&quot;|&quot;onPenUp&quot;
+	—</B> The event which triggers the launching of the href function. If set 
+    to <B>onChange</B>, the slider will launch the function call whenever the 
+    handle is moved. If set to <B>onPenUp</B>, the slider will only launch the 
+    function call upon the releasing of the slider handle. If <B>hrefEvent</B> 
+    is not specified, the default is <B>onChange</B>. </P>
+    <p><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> The minimum value used as the argument given to the function(s)
+	specified in <B>href</B>. By default, minimum value is achieved when handle is full-left on a horizontal slider, or full-bottom on
+	a vertical slider. The range is 0 - 65534 (0x00 - 0xFFFE).</p>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> The 
+    maximum value used as the argument given to the function(s)
+	specified in <B>href</B>. By default, maximum
+	value is achieved when handle is full-right on a horizontal slider, or full-top on a vertical slider. The range
+	is 1 - 65535 (0x01 - 0xFFFF).</P>
+    <p><B>NAME=&quot;minAt&quot; VALUE=&quot;&quot;LEFT&quot;|&quot;RIGHT&quot;|&quot;TOP&quot;|&quot;BOTTOM&quot;&quot; —</B> Determines where the 
+    minimum value of the slider is located. As the handle sweeps from the <B>minAt</B> 
+    location, the value increases until the maximum value is reached at the 
+    opposite extreme of the <B>minAt</B> location. Default values are LEFT for 
+    horizontal sliders and BOTTOM for vertical sliders. The options are:</p>
+<UL>
+	<LI><B>LEFT —</B> The slider value increases from left to right. (horizontal 
+    slider only)
+	<LI><B>RIGHT —</B> The slider value increases from right&nbsp;to left. 
+    (horizontal slider only)
+	
+	<LI><B>TOP —</B> The slider value increases from top&nbsp;to bottom. 
+    (vertical slider only)
+	
+	
+	<LI><B>BOTTOM —</B> The slider value increases from bottom to top. 
+    (vertical slider only)
+</UL>
+    <p><B>NAME=&quot;handleImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used as 
+    the slider handle when not pressed. Image file must be of type .GIF or .JPG.</p>
+    <p><B>NAME=&quot;handleTrackingImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used as 
+    the slider handle when  pressed. Image file must be of type .GIF or .JPG.</p>
+    <p><B>NAME=&quot;channelImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used as 
+    the background over which the slider handle travels. Image dimensions MUST be exactly 
+    the same as the dimensions of the Custom Slider Widget. Image file must be of type .GIF.</p>
+    <p><B>NAME=&quot;initialCondition&quot; VALUE=&quot;</B><I>number</I><B>&quot;|&quot;FromInitHref&quot; —</B> Specifies handle position when the
+	page is loaded. The position value becomes the argument given to the <B>href</B> function(s). If <B>FromInitHref</B>
+	is selected, the function specified by the <B>InitHref</B>
+	attribute is called. The returned  value determines the handle position. [The range is 0 - 65535 (0x00 - 0xFFFF)]</p>
+</blockquote>
+<H4>Optional Custom Slider Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+    <p><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Specifies the function called when the page is loaded. Use
+	this attribute whenever <B>FromInitHref </B>is used as the
+	<B>initialCondition</B>. The value returned from this function call 
+    will be used as the initial condition of the Custom Slider handle. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available functions.</p>
+    <p><B>NAME=&quot;waitForInit&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Only 
+    valid if   <B>FromInitHref </B>is used as the
+	<B>initialCondition</B>. Specifies if 
+    the Custom Slider handle&nbsp;will wait for valid data&nbsp;before being displayed 
+    on the channel.&nbsp;If 
+    TRUE,  the Custom Slider handle will not display until the  data from the 
+    <B>initHref</B> function is received. If FALSE, or the attribute 
+    is not present, the Custom Slider&nbsp;handle momentarily starts at the 
+    <B>minAt</B> location until the <B>initHref</B> function receives its data.</p>
+    <p><B>NAME=&quot;handleOffset&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the 
+    number of pixels from the center of the channel the handle is located. If 
+    a vertical slider, positive numbers shift the handle to the right and negative 
+    numbers shift it to the left. If a horizontal slider, positive numbers shift 
+    the handle to the bottom and negative numbers shift it to the top. [The range is -100 through 
+    100]</p>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Custom Slider&nbsp;is to start out invisible or not. If the attribute is not 
+    present, then by default the Custom Slider&nbsp;is visible. If&nbsp;the Custom 
+    Slider&nbsp;starts 
+    out invisible, the only way to make it&nbsp;visible again is via the IWC 
+    method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;orientation&quot; VALUE=&quot;HORIZONTAL&quot;|&quot;VERTICAL&quot; —</B> Specifies if 
+    the handle&nbsp;is to travel&nbsp;horizontally or vertically. The <B>orientation</B> 
+    parameter will override the orientation determined by the height and
+width dimensions entered in the APPLET CODE Attribute Field.</p>
+</blockquote>
+<h4>Example Custom Slider Widget</h4>
+<P>Use the <B>CustomSlider.class </B>applet<B> </B>to create a Custom Slider Widget. For example, to create a horizontal slider
+that is 120 pixels wide and 20 pixels tall which uses handle.gif and handleTr.gif 
+for the handle images and channel.gif for the channel image,  sends a minimum value of 0x00 and a maximum
+value of 0x55 from right to left, initially starts based on the value of Internal RAM byte variable 
+7, and sets Internal RAM byte variable 7, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;CustomSlider.class&quot; WIDTH=&quot;120&quot; HEIGHT=&quot;20&quot; NAME=&quot;CustomSlider1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:InternalRAM.byte(7).setValue()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0x00&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;0x55&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;minAt&quot; VALUE=&quot;right&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;handleImage&quot; VALUE=&quot;handle.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;handleTrackingImage&quot; VALUE=&quot;handleTr.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;channelImage&quot; VALUE=&quot;channel.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;fromInitHref&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;initHref&quot; VALUE=&quot;Amulet:InternalRAM.byte(7).value()&quot;&gt;<br>&lt;PARAM 
+    NAME=&quot;waitForInit&quot; VALUE=&quot;true&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/CustomSlider/" target="_blank">\projects\Examples\CustomSlider\</a> 
+directory for an HTML file showing an example custom slider widget.<HR ALIGN="CENTER">
+
+<h3><A NAME="DynamicImage"></A>Dynamic Image Widget (DynamicImage.class)</h3>
+<P>The Dynamic Image Widget allows for the uploading of images, serially, at 
+runtime. The size of the image to be uploaded must be the exact same size as 
+the <B>canvas</B> image. Images are uploaded via <a href="xmodem.htm">xmodem crc protocol</a>. The image 
+must be in the <a href="Bitmap.htm">Amulet bitmap format</a>. The first 11-bytes 
+of any image being uploaded, known as the header bytes, must be the same as 
+the header bytes of the <B>canvas</B> image. The first six bytes are the flash 
+header bytes and the next five bytes are the image header bytes. These first 
+11 bytes can be found in the <a href="LinkMap.htm">link map file</a>, which 
+will be generated after saving or programming your project.</P>
+<p>To correctly use the Dynamic Image Widget, the IWC method, Amulet:loadFlash(return), 
+needs to be used. Once that method is invoked, the Amulet will start sending 
+'C's, ready to receive the incoming xmodem data from an external source. Once 
+the image is fully sent, and the xmodem protocol is complete, meaning the external 
+source sent an EOT(0x04) and the Amulet answered back with an ACK(0x06), the 
+external source needs to send an ETB(0x17), which will take&nbsp;the Amulet 
+out of the xmodem mode and return to the active page. The Dynamic Image Widget 
+must then be sent a reset IWC method. The easiest way to accomplish this all 
+is via a META REFRESH using a trigger. The META would look something like:</p>
+<p><B>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;0,0.25;ONVAR=Amulet:UART.byte(5).value();TRIGGER=0xFF;URL=Amulet:loadFlash(reset),Amulet:document.Dyn1.reset()&quot;&gt;</B></p>
+<p>In the above case, when the external processor is ready to send over a new 
+image, it would respond back to the Amulet:UART.byte(5).value() request with 
+a value of 0xFF, which would cause the Amulet to enter the loadFlash routine, 
+which means C's will start coming from the Amulet. After the image has been 
+uploaded to the Amulet and the external processor sends the ETB(0x17), the Amulet 
+returns to the active page and then performs a reset condition to the Dynamic 
+Image Widget called Dyn1, which forces a repaint using the new image which was 
+just uploaded.</p>
+<H4><A NAME="DynImageParams"></A>Dynamic Image Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+    <P><B>NAME=&quot;canvas&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the  
+    image used for the canvas of the Dynamic Image Widget. This is a required parameter. The canvas can contain a default 
+    image or it can 
+    be a completely blank image, but the dimensions&nbsp;of the canvas MUST 
+    be exactly the&nbsp;same as the dimensions of the Dynamic Image Widget. &nbsp;Image file must be of type .GIF.</P>
+</BLOCKQUOTE>
+<H4>Example Dynamic Image Widget</H4>
+<P>Use the <B>DynamicImage.class </B>applet<B> </B>to create a Dynamic Image Widget. For example, to create a dynamic 
+image 
+widget
+that is 75 pixels wide and 75 pixels tall and has the image 
+canvas.gif as a space holder, 
+use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;DynamicImage.class&quot; WIDTH=&quot;75&quot; HEIGHT=&quot;75&quot; NAME=&quot;Dyn1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;canvas&quot; VALUE=&quot;canvas.gif&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/DynamicImage/" target="_blank">\projects\Examples\DynamicImage\</a> 
+directory for an HTML file showing an example Dynamic Image widget.<HR ALIGN="CENTER">
+
+<h3><A NAME="Function_Button"></A>Function Button Widget (FunctionButton.class)</h3>
+<P>Function buttons are Amulet anchors that provide either a &quot;spring-loaded&quot; or 
+a &quot;toggle&quot; button image, depending upon the button type. By default, function
+button images appear to depress when touched. You can also setup the button image to invert when touched. By 
+default, when hit, a button invokes a function
+(or set of functions). Optionally, function buttons can be set to auto-repeat 
+while pressed. Initial delay and repeat frequency can both be customized.</P>
+<P>Each
+button can have a user-defined label (text or numeric) within the button image. 
+If  the label is specified as &quot;fromInitHref&quot;, the label will&nbsp;be 
+based upon a string variable that is passed across the serial link at run-time. The label text will automatically 
+wrap if the string exceeds the width of the function button. User-defined wraps 
+can be specified by entering &quot;\n&quot; at the point of the desired wrap.</P>
+<p>Function&nbsp;buttons can also be set up to auto-repeat. When pressed, an 
+auto-repeat button delays a user-defined amount of time then invokes a function 
+(or set of functions) at a user-defined&nbsp;frequency while the button is still&nbsp;being 
+pressed. As a side benefit of the auto-repeat functionality, a&nbsp;button can 
+be created that will appear to invoke its function(s) immediately upon being 
+pressed instead of waiting&nbsp;until the button is released. By setting&nbsp;the 
+delay very small and the frequency at 0, the button will invoke its 
+function(s) after the very short delay time and not repeat again.</p>
+<p><B>NOTE: </B>To display a literal \ symbol in the label, use a double backslash 
+in the string (e.g. <B>25 \\ 5 </B>would display<B> 25 \ 5 </B>in the button).</p>
+<H4>Function Button Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function(s)</I><B>&quot; —</B>The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked when the button is hit.. See <A HREF="AppendixB.htm#Control_functions">Appendix
+	B</A> for all available functions for the Function Button widget.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the button label.  The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the button label. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font 
+		<LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.
+		<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported. 
+	</UL>
+<P>
+
+    <B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the button label font. To create a custom look, styles
+	can be combined by using the &quot;logical or&quot; (<B>|</B>). However, PLAIN overrides any other style, and UNDERLINE
+	and STRIKE cannot be used together. The available font styles are:</li>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+	<P><B>NAME=&quot;label&quot; VALUE=&quot;</B><I>text</I><B>&quot;|&quot;FromInitHref&quot; </B>— Specifies the text that appears inside
+	the button. The button will NOT automatically re-size to fit the text. If 
+    there is enough vertical room, text will automatically wrap. Any text that 
+    will not fit within the confines of the button will be truncated. User-defined 
+    wraps can be specified by entering &quot;\n&quot; within the text at the 
+    spot you would like the wrap to occur. There is a maximum of 5 lines for 
+    a button label. The name field can be left blank; blank
+	is the default. </P>
+    <p>To have the label be dynamically entered at runtime by the 
+    server, enter <B>FromInitHref</B>. By default, 
+    the dynamic button label can be a maximum of 25 characters in length. To increase 
+    the maximum number of characters, put the desired number in parentheses 
+    after <B>FromInitHref</B>. For example, to have a dynamic label up to 50 
+    characters long, use <B>FromInitHref(50)</B>. The attribute <B>initHref</B> needs to 
+    be of the type Amulet:UART.label(<I>x</I>).value(). It will be called only once upon the 
+    loading of the page, with the string  returned from the server  
+    becoming the button label. See <A HREF="internalRAM.htm#InternalRAM.label">note</A> 
+    regarding the use of InternalRAM label variables as button labels.</p>
+    <p><B>NAME=&quot;buttonType&quot; VALUE=&quot;TOGGLE&quot;|&quot;SPRING-LOADED&quot; </B>— Specifies the action 
+    of the button when hit. <B>TOGGLE</B> causes the button to depress (or invert) 
+    on a pen down event and stay depressed on the ensuing pen up event. <B>SPRING-LOADED</B> 
+    causes the button to depress on a pen down event and return to its original 
+    state on the following pen up event. <STRONG>SPRING-LOADED </STRONG>is the default.</p>
+    <p><B>NAME=&quot;onButtonPress&quot; VALUE=&quot;DEPRESS&quot;|&quot;INVERT&quot; </B>— Specifies the look of the
+	button during a pen down condition. <B>DEPRESS</B> gives the illusion of the button being pressed. <B>INVERT</B>
+	inverts the image inside the button. Depress is the default.</p>
+</blockquote>
+<H4>Optional Function Button Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B><a name="Function_Button_dualAction"></a>NAME=&quot;dualAction&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; </B>— Specifies if 
+    the Function Button&nbsp;is to launch the href function(s) twice, once upon 
+    pressing the button and once upon releasing the button. If the attribute 
+    is not present, then by default the Function Button only launches its href 
+    function(s) upon release.</p>
+    <p><B>NAME=&quot;repeatDelay&quot; VALUE=&quot;</B><I>number</I><B>&quot; </B>— Time 
+    to delay from when button is initially pressed until it starts to auto-repeat. 
+    Specified in seconds, with a single floating-point number. The range is 0.01 - 655.35.</p>
+    <p><B>NAME=&quot;repeatRate&quot; VALUE=&quot;</B><I>number</I><B>&quot; </B>— The <B>href</B>
+	function call frequency while button is being pressed, after the initial 
+    delay determined by <B>repeatDelay</B>. Specified in seconds, with a single floating-point number. The range is 0.00 - 655.35. 
+    0.00 means do not repeat.</p>
+	<P><B>NAME=&quot;verticalAlign&quot; VALUE=&quot;TOP&quot;|&quot;MIDDLE&quot;|&quot;BOTTOM&quot;
+	—</B> Specifies the vertical alignment of the string associated with the 
+    <B>label</B> attribute within the Function Button dimensions. Only one value is allowed; you cannot mix vertical 
+    alignments. Default is MIDDLE.</P>
+	<P><B>NAME=&quot;horizontalAlign&quot; VALUE=&quot;LEFT&quot;|&quot;CENTER&quot;|&quot;RIGHT&quot;
+	—</B> Specifies the horizontal alignment of the string associated with the 
+    <B>label</B> attribute within the Function Button dimensions. Only one value is allowed; you cannot mix horizontal 
+    alignments. Default is CENTER.</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Function Button&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the Function Button&nbsp;is visible. If&nbsp;the 
+    Function Button&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Specifies the function called when the page is loaded. Use
+	this attribute only when <B>FromInitHref </B>is used as the
+	<B>label</B>. The string value returned from the function call will be used 
+    as the button label. Only available function is of type Amulet:UART.label(<I>x</I>).value(). 
+    See <A HREF="internalRAM.htm#InternalRAM.label">note</A> regarding the use 
+    of InternalRAM label variables as button labels.</p>
+</blockquote>
+<h4>Example Function Button</h4>
+<P>Use the <B>FunctionButton.class </B>applet<B> </B>to create a Function Button. For example, to create a &quot;DONE&quot;
+button that is 60 pixels wide and 20 pixels tall, appears momentarily pressed when hit and links to home.htm,
+use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;FunctionButton.class&quot; WIDTH=&quot;60&quot; HEIGHT=&quot;20&quot; NAME=&quot;Button1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;home.htm&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;BOLD&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;label&quot; VALUE=&quot;DONE&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;SPRING-LOADED&quot;&gt;<br>&lt;PARAM NAME=&quot;onButtonPress&quot; VALUE=&quot;DEPRESS&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>To create a &quot;BUZZER&quot; button that is 80 pixels wide and 24 pixels tall, appears momentarily inverted
+when hit, delays for 1 second while pressed before starting to auto-repeat, 
+auto-repeats every 650 ms, and launches RPC # 12, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;FunctionButton.class&quot; WIDTH=&quot;80&quot; HEIGHT=&quot;24&quot; NAME=&quot;Button2&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.invokeRPC(12)&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;2&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;ITALIC&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;label&quot; VALUE=&quot;BUZZER&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;SPRING-LOADED&quot;&gt;<br>&lt;PARAM NAME=&quot;onButtonPress&quot; VALUE=&quot;INVERT&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;repeatDelay&quot; VALUE=&quot;1.00&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;repeatRate&quot; VALUE=&quot;0.65&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>To create a dynamically labeled button that is 58 pixels wide and 22 pixels tall, appears momentarily pressed
+when hit, uses external string variable 1 as its label and sets external byte variable 7 to 0xFF, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;FunctionButton.class&quot; WIDTH=&quot;58&quot; HEIGHT=&quot;22&quot; NAME=&quot;Button3&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(7).setValue(0xFF)&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;4&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;BOLD&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;label&quot; VALUE=&quot;FromInitHref&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;buttonType&quot; VALUE=&quot;SPRING-LOADED&quot;&gt;<br>&lt;PARAM NAME=&quot;onButtonPress&quot; VALUE=&quot;DEPRESS&quot;&gt;<br>&lt;PARAM 
+    NAME=&quot;initHref&quot; VALUE=&quot;Amulet:UART.label(1).value()&gt;&quot;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/FunctionButton/" target="_blank">\projects\Examples\FunctionButton\</a> 
+directory for an HTML file showing an example function button widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="Image_Bar"></A>Image Bar Widget (ImageBar.class)</H3>
+<P>The Image Bar Widget uses two images (empty bar and full bar) to create a custom &quot;bargraph&quot;. A byte
+(or word) returned from a function call is the widget input. Based upon the value of the byte (or word) returned,
+a percentage of the empty bar and a percentage of the full bar are displayed. For further customization, the wipe
+between empty and full can be from left-to-right, right-to-left, bottom-to-top, or top-to-bottom. When the minimum
+value is returned, the entire &quot;empty&quot; image is displayed. When the maximum value is returned, the entire
+&quot;full&quot; image is displayed.</P>
+<H4>Image Bar Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the
+	widget input. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available
+	functions for the Image Bar widget. The function is called at an update rate specified by the <B>updateRate</B>
+	attribute.</P>
+	<P><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Minimum value returned from the <B>href</B>
+	function; must be less than <B>max</B>. If the function returns a byte, the range is 0 - 254 (0x00 - 0xFE). If
+	the function returns a word, the range is 0 - 65534 (0x00 - 0xFFFE).</P>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B>
+	function; must be greater than <B>min</B>. If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF).
+	If the function returns a word, the range is 1 - 65535 (0x01 - 0xFFFF).</P>
+	<P><B>NAME=&quot;empty&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Image used when minimum value is returned
+	from the <B>href</B> function. Image file must be of type .GIF or .JPG.</P>
+	<P><B>NAME=&quot;full&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Image used when maximum value is returned
+	from the <B>href</B> function. Image file must be of type .GIF or .JPG.</P>
+	<P><B>NAME=&quot;sweepFrom&quot; VALUE=&quot;LEFT&quot;|&quot;RIGHT&quot;|&quot;TOP&quot;|&quot;BOTTOM&quot; —</B>
+	Determines where (within the image bar cell) to begin the image transition. The options are:</P>
+	<UL>
+		<LI><B>LEFT —</B> The &quot;full&quot; and &quot;empty&quot; images transition from left-to-right.
+		<LI><B>RIGHT —</B> The &quot;full&quot; and &quot;empty&quot; images transition from right-to-left.
+		<LI><B>TOP —</B> The &quot;full&quot; and &quot;empty&quot; images transition from top-to-bottom.
+		<LI><B>BOTTOM —</B> The &quot;full&quot; and &quot;empty&quot; images transition from bottom-to-top.
+	</UL>
+	<P><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot;
+	—</B> The first number specifies the <B>href</B> function call frequency (specified in seconds, with a single floating-point
+	number). The range is 0.00 - 655.35.  
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until
+	the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.00
+	- 655.35. If the second number is not specified, then the delay time defaults to the first number (frequency).</P>
+</BLOCKQUOTE>
+
+<H4>Optional Image Bar Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Image Bar&nbsp;is to start out invisible or not. If the attribute is 
+    not present, then by default the Image Bar&nbsp;is visible. If&nbsp;the 
+    Image Bar&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+</blockquote>
+<h4>Example Image Bar Widget</h4>
+<P>Use the <B>ImageBar.class</B> applet to create an Image Bar. For example, to create a drinking glass Image Bar
+80 pixels wide and 170 pixels tall with a bottom-to-top sweep, a 250ms update rate, a 50ms start delay, and that
+uses external byte variable 17 as its input (with a range of 0 - 255), use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;ImageBar.class&quot; WIDTH=&quot;80&quot; HEIGHT=&quot;170&quot; NAME=&quot;ImageBar1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(17).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;255&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;empty&quot; VALUE=&quot;glassE.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;full&quot; VALUE=&quot;glassF.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;sweepFrom&quot; VALUE=&quot;bottom&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.25,.05&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/ImageBar/" target="_blank">\projects\Examples\ImageBar\</a> 
+directory for an HTML file showing an example image bar widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="Image_Sequence"></A>Image Sequence Widget (ImageSeq.class)</H3>
+<P>The Image Sequence Widget is similar to an animated bitmap. However, instead of being linked to a timer event,
+the transition between images is linked to a byte (or word) returned from an <B>href</B> function call. The displayed
+image is determined by scaling the value returned from the <B>href</B> function call. The following algorithm is
+used:</P>
+<CENTER>
+<P>&nbsp;
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
+	<TR>
+		<TD VALIGN="MIDDLE"  NOWRAP ROWSPAN="3"><B>Image # =</B></TD>
+		<TD VALIGN="BOTTOM"  NOWRAP><B>(total # of images) * (value of byte from function - min)</B></TD>
+	</TR>
+	<TR>
+		<TD>
+			<CENTER>
+			<P>&nbsp;
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+
+</CENTER>
+		</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP>
+			<P ALIGN="CENTER"><B>(max - min + 1)</B>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>
+<P>The resultant number, truncated to an integer, is the number of the image to display, where the first image
+in the sequence is numbered 0. For all images to be displayable, (max-min+1) must be greater than or equal to the
+number of images. Also, if the <B>href</B> function returns a value less than the specified min, the value will
+be treated as equal to the specified min. Likewise, if the <B>href</B> function returns a value greater than the
+specified max, the value will be treated as equal to the specified max.</P>
+<P>Consider the following example.
+
+<OL>
+	<LI>A sequence of 7 separate images: Image0 = <IMG SRC="Images/potsw.gif" WIDTH="20" HEIGHT="22" ALIGN="BOTTOM"
+	BORDER="0">, ... Image6 = <IMG SRC="Images/potse.gif" WIDTH="20" HEIGHT="22" ALIGN="BOTTOM" BORDER="0">.
+	<LI>An <B>href</B> function that returns a byte that ranges between a min of 23 and a max of 232.
+</OL>
+
+<P>Although the value returned by the <B>href</B> function may vary with time, only one of the seven images will
+be displayed at any one time. Table 1, below, maps each value range to the image that will be displayed. Note that
+values below 23 are treated like a 23, and values above 232 are treated like a 232.</P>
+<CENTER>
+<P>&nbsp;
+<TABLE BORDER="0">
+	<TR>
+		<TD WIDTH="200" VALIGN="TOP" ROWSPAN="9">
+			<P ALIGN="RIGHT"><IMG SRC="Images/imgseq.gif" WIDTH="184" HEIGHT="237" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD HEIGHT="11"  NOWRAP>&nbsp;</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(203-23)/((232-23)+1) = 6</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(173-23)/((232-23)+1) = 5</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(143-23)/((232-23)+1) = 4</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(113-23)/((232-23)+1) = 3</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(83-23)/((232-23)+1) = 2</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(53-23)/((232-23)+1) = 1</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="24"  NOWRAP>7*(23-23)/((232-23)+1) = 0</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="20"  NOWRAP>&nbsp;</TD>
+	</TR>
+</TABLE>
+<BR>
+<B>Table 1. Image Sequence Example</B><p></P>
+</CENTER>
+<P><B>Image Sequence Parameter Attributes:</B></P>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the
+	widget input. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available
+	functions for the Image Sequence widget. The function is called at an update rate specified by the <B>updateRate</B>
+	attribute.</P>
+	<P><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Minimum value returned from the <B>href</B>
+	function; must be less than <B>max</B>. If the function returns a byte, the range is 0 - 254 (0x00 - 0xFE). If
+	the function returns a word, the range is 0 - 65534 (0x00 - 0xFFFE).</P>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B>
+	function; must be greater than <B>min</B>. If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF).
+	If the function returns a word, the range is 1 - 65535 (0x01 - 0xFFFF).</P>
+	
+  <P><B>NAME=&quot;sequence&quot; VALUE=&quot;</B><I>image1;image2;image3(etc.)</I><B>&quot; 
+    —</B> List of images used, separated by semicolons. (Images can be either 
+    .GIF or .JPEG.) The range is 1 - 255 images.</P>
+    <p><B>NAME=&quot;waitForInit&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Image Sequence&nbsp;will wait for valid data&nbsp;before any image will 
+    be displayed 
+    on the LCD.   If 
+    TRUE,  the Image Sequence will not display any  image until the first 
+    packet of data is received. If FALSE, or the attribute 
+    is not present, the Image Sequence&nbsp;starts out&nbsp;displaying the first 
+    image until the first packet of data is received.</p>
+    <p><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot;
+	—</B> The first number specifies the <B>href</B> function call frequency (specified in seconds, with a single floating-point
+	number). The range is 0.00 - 655.35. 
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until
+	the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01
+	- 655.35. If the second number is not specified, then the delay time defaults to the first number (frequency).</p>
+</blockquote>
+<H4>Optional Image Sequence Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Image Sequence&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the Image Sequence&nbsp;is visible. If&nbsp;the 
+    Image Sequence&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+</blockquote>
+<H4>Example Image Sequence</H4>
+
+<P>Use the <B>ImageSeq.class </B>applet<B> </B>to create an image sequence. For example, to create a sequence of
+6 separate images (seq0.gif, seq1.gif, seq2.gif, seq3.gif, seq4.gif, seq5.gif) linked to external variable 17 (Min
+value 0, max value 5) with an update rate of 220ms, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;ImageSeq.class&quot; WIDTH=&quot;200&quot; HEIGHT=&quot;110&quot; NAME=&quot;ImageSeq1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(17).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;5&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;sequence&quot; VALUE=&quot;seq0.gif;seq1.gif;seq2.gif;seq3.gif;seq4.gif;seq5.gif&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.22,0.01&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/ImageSequence/" target="_blank">\projects\Examples\ImageSequence\</a> 
+directory for an HTML file showing an example image sequence widget.<HR ALIGN="CENTER">
+
+<H3>Line Graph Widget (LineGraph.class)</H3>
+<P><a name="LineGraph"></a>The Line Graph Widget is a static line graph that represents an 
+array of  bytes (or words) returned from an <B>href</B> function
+call. Each byte (or word) in the array represents a point on the line graph. 
+The line graph can be&nbsp;drawn over a background image. The graph is scaled in the y-direction based
+on <B>yMin</B> and <B>yMax</B>. There is a slight, yet noticeble, flicker every 
+time the line graph is updated. Because of this, it is recommended that you 
+update only when there is a change in data. The IWC method, forceUpdate(), can 
+be used to force an update at asynchronous intervals. To see an example of the 
+forceUpdate() method, see the <a href="../projects/Examples/LineGraph/ReadMe.htm">LineGraph 
+example</a>.</P>
+<p><a name="Multiple_Graphs"></a>Multiple line graphs can be handled by a single line graph widget. Each line 
+graph shares the same <B>yMin</B>, <B>yMax</B>, <B>xSamples </B>and<B> updateRate</B>, 
+but each graph needs its own <B>href</B>, <B>lineWeight</B> and <B>linePattern 
+</B>values. The line graph that uses the first function specified in <B>href</B> 
+has the line weight specified by the first number in <B>lineWeight</B> and the 
+pattern specified by the first number in <B>linePattern</B>. The array specified 
+in the second <B>href</B> function must be adjacent to the array specified in 
+the first <B>href</B> function. For example, if displaying two line graphs, 
+with an <B>xSample</B> of 10, the <B>href</B> functions would have to look something 
+like this: Amulet:InternalRAM.bytes(0).value(),Amulet:InternalRAM.bytes(10).value().</p>
+<H4>Line Graph Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the
+	widget input. See <A HREF="AppendixB.htm#LineGraph_functions">Appendix B</A> for all available
+	functions for the Line Graph Widget. The function is called at an update rate specified by the <B>updateRate</B>
+	attribute. If dealing with <a href="Widgets.htm#Multiple_Graphs">multiple graphs</a>, functions are comma delimited.</P>
+	<P><B>NAME=&quot;yMin&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Minimum value returned from the <B>href</B>
+	function; must be less than <B>yMax</B>. If the function returns a byte, the range is 0 - 254 (0x00 - 0xFE). If
+	the function returns a word, the range is 0 - 65534 (0x00 - 0xFFFE).</P>
+	<P><B>NAME=&quot;yMax&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B>
+	function; must be greater than <B>yMin</B>. If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF).
+	If the function returns a word, the range is 1 - 65535 (0x01 - 0xFFFF).</P>
+	<P><B>NAME=&quot;xSamples&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Number of samples along the horizontal
+	x-axis. The range is 2 - 125 (for a UART byte array), 2 - 62 (for a 
+    UART word array), 2 - 256 (for an InternalRAM byte array) and 2 - 256 (for 
+    an InternalRAM word array). <B>NOTE:</B> The value must be less than the value specified in the
+	<B>WIDTH</B> attribute of the &lt;APPLET&gt; tag. <B>TIP:</B> In order 
+    for&nbsp;the graph to reach the far right&nbsp;of the dimensions of the 
+    Line Graph, refer to the following algorithm: # of pixels between plot points 
+    = (WIDTH of &lt;APPLET&gt; - 1) / (xSamples-1). &nbsp;For example, if you 
+    want to completely fill the graph of a 101 pixel wide line graph, then you 
+    should have a number that is one greater than a perfect divisor of 100 as 
+    your xSamples. So, your xSamples could be 3, 5, 6, 11, 21, 26, 41, 51. If 
+    6 is chosen, the # of pixels between plot points is (201-1)/(6-1) = 40 pixels.</P>
+	<P><B>NAME=&quot;lineWeight&quot; VALUE=&quot;</B><I>pixels</I><B>&quot; —</B> Defines the weight (thickness) of
+	the active line graph in pixels. The range is 1- 7 (0x01 - 0x07). If dealing 
+    with <a href="Widgets.htm#Multiple_Graphs">multiple graphs</a>, weights are comma delimited.</P>
+	<P><B>NAME=&quot;linePattern&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Defines the pattern of
+	the active line graph. 
+	Four different fill patterns are available (0 through 1), Figure 2. If no fill pattern is specified, the default
+	is pattern 0. If dealing with <a href="Widgets.htm#Multiple_Graphs">multiple graphs</a>, patterns are comma delimited.</P>
+</BLOCKQUOTE>
+
+
+<CENTER>
+<TABLE BORDER="0" width="170">
+	<TR>
+		<TD WIDTH="80">
+			<P ALIGN="CENTER"><IMG SRC="Images/PAT0.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+			<B>Pattern 0</B>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT1.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 1</B>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>
+<blockquote>
+    <p align="center"><B>Figure 2. LineGraph widget line patterns (values 0 through 1).</B></p>
+    <p><B>NAME=&quot;backgroundImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used as 
+    the Line Graph background image. Image dimensions should be  
+    the same as the dimensions of the Line Graph Widget. Image file must be of type .GIF 
+    or .JPG. If no image specified, the default background will be blank.</p>
+    <p><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot;
+	—</B> The first number specifies the <B>href</B> function call frequency (specified in seconds, with a single floating-point
+	number). The range is 0.00 - 655.35.  
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until
+	the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01
+	- 655.35. If the second number is not specified, then the delay time defaults to the first number (frequency).</p>
+</blockquote>
+<H4>Optional Line Graph Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Line Graph&nbsp;is to start out invisible or not. If the attribute is 
+    not present, then by default the Line Graph&nbsp;is visible. If&nbsp;the 
+    Line Graph&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;noFrame&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Line Graph&nbsp;is to have an x and y axis frame. This attribute is 
+    only applicable when <B>columnClear</B> is true. By default the Line Graph&nbsp;does 
+    not have&nbsp;a frame. If <B>columnClear</B> is true, then the Line Graph 
+    defaults to having a frame. Setting <B>noFrame</B> to true will cause the 
+    Line Graph to not have a frame.</p>
+    <p><B>NAME=&quot;columnClear&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Line Graph&nbsp;is cleared a column at a time. If set to true, flicker 
+    may be minimized, but because of the incremental clearing, the <B>backgroundImage</B> 
+    cannot be used. Due to the lack of a background image, the x and y-axis' are drawn based on the width and height. 
+    If the attribute is 
+    not present, it defaults to false.</p>
+    <p><B>NAME=&quot;enableVertical&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Line Graph&nbsp;can have vertical lines or not.  If set to true, then 
+    two data points are needed for every plot point. If a vertical line is not 
+    desired, then both points should be the same value. Basically, every x coordinate 
+    gets two y-coordinates. So, if xSamples is set to 10, you will need to furnish 
+    the Line Graph with 20 data points. If this attribute is not present, it 
+    defaults to false.</p>
+</blockquote>
+<h4>Example Line Graph</h4>
+<P>Use the <B>LineGraph.class </B>applet<B> </B>to create a line graph. For example, to create a line graph 
+150
+pixels wide by 150 pixels tall that graphs a 3-pixel weight black line linked to an 
+InternalRAM byte array starting at variable 0, with a range
+of 0-255, and takes 30 X-axis samples, with a 300ms update rate, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;LineGraph.class&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;150&quot; NAME=&quot;LineGraph1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:InternalRAM.bytes(0).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMin&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMax&quot; VALUE=&quot;255&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;xSamples&quot; VALUE=&quot;30&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;lineWeight&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;linePattern&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;backgroundImage&quot; VALUE=&quot;backImg.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.3,0.01&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>To create a Line Graph 150
+pixels wide by 150 pixels tall that graphs a 1-pixel weight black line linked to an 
+external byte array starting at variable 0 
+and a 5-pixel weight gray line linked to an external byte array starting at 
+variable 20, with a range
+of 0-255, and takes 20 X-axis samples, with a 2 second update rate, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;LineGraph.class&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;150&quot; NAME=&quot;LineGraph2&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.bytes(0).value(),Amulet:UART.bytes(20).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMin&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMax&quot; VALUE=&quot;255&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;xSamples&quot; VALUE=&quot;20&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;lineWeight&quot; VALUE=&quot;1,5&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;linePattern&quot; VALUE=&quot;0,1&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;backgroundImage&quot; VALUE=&quot;backImg.gif&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;2,0.01&quot;&gt; <BR>&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/LineGraph/" target="_blank">\projects\Examples\LineGraph\</a> 
+directory for an HTML file showing an example line graph widget.<HR ALIGN="CENTER">
+
+<h3><A NAME="Plot"></A>Line Plot Widget (LinePlot.class)</h3>
+<p>The Line Plot Widget is a live line plot that represents a byte (or word) returned from an <B>href</B> function
+call. The x and y-axis' are drawn based on the width and height. The line plots from left-to-right, 
+continuously
+wrapping and does not get erased upon the wrap. The plot is updated at each new x-sample and the current location
+is kept via a vertical cursor that is the same height as the y-axis. The plot is scaled in the y-direction based
+on <B>yMin</B> and <B>yMax</B>.</p>
+<p><a name="Multiple_Plots"></a>Multiple lineplots can be handled by a single line plot widget. Each line 
+plot shares the same <B>yMin</B>, <B>yMax</B>, <B>xSamples </B>and<B> updateRate</B>, 
+but each plot needs its own <B>href</B>, <B>lineWeight</B> and <B>linePattern 
+</B>values. The line plot that uses the first function specified in <B>href</B> 
+has the line weight specified by the first number in <B>lineWeight</B> and the 
+pattern specified by the first number in <B>linePattern</B>.</p>
+<H4>Line Plot Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the
+	widget input. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available
+	functions for the Line Plot Widget. The function is called at an update rate specified by the <B>updateRate</B>
+	attribute. If dealing with <a href="#Multiple_Plots">multiple plots</a>, functions are comma delimited.</P>
+	<P><B>NAME=&quot;yMin&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Minimum value returned from the <B>href</B>
+	function; must be less than <B>yMax</B>. If the function returns a byte, the range is 0 - 254 (0x00 - 0xFE). If
+	the function returns a word, the range is 0 - 65534 (0x00 - 0xFFFE).</P>
+	<P><B>NAME=&quot;yMax&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B>
+	function; must be greater than <B>yMin</B>. If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF).
+	If the function returns a word, the range is 1 - 65535 (0x01 - 0xFFFF).</P>
+	<P><B>NAME=&quot;xSamples&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Number of samples along the horizontal
+	x-axis. The range is 2 - 638 (0x02 - 0x27E). <B>NOTE:</B> The value must be less than the value specified in the
+	<B>WIDTH</B> attribute of the &lt;APPLET&gt; tag.</P>
+	<P><B>NAME=&quot;lineWeight&quot; VALUE=&quot;</B><I>pixels</I><B>&quot; —</B> Defines the weight (thickness) of
+	the active line plot in pixels. The range is 1- 7 (0x01 - 0x07). If dealing 
+    with <a href="#Multiple_Plots">multiple plots</a>, weights are comma delimited.</P>
+	<P><B>NAME=&quot;linePattern&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Defines the pattern of
+	the active line plot. 
+	Four different fill patterns are available (0 through 1), Figure 2. If no fill pattern is specified, the default
+	is pattern 0. If dealing with <a href="#Multiple_Plots">multiple plots</a>, patterns are comma delimited.</P>
+</BLOCKQUOTE>
+
+
+<CENTER>
+<TABLE BORDER="0" width="170">
+	<TR>
+		<TD WIDTH="80">
+			<P ALIGN="CENTER"><IMG SRC="Images/PAT0.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+			<B>Pattern 0</B>
+		</TD>
+		<TD WIDTH="80">
+			<DIV ALIGN="CENTER">
+				<P><IMG SRC="Images/PAT1.gif" WIDTH="73" HEIGHT="73" ALIGN="BOTTOM" BORDER="0"><BR>
+				<B>Pattern 1</B>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+</CENTER>
+<blockquote>
+    <p align="center"><B>Figure 2. LinePlot widget line patterns (values 0 through 1).</B></p>
+    <p><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot;
+	—</B> The first number specifies the <B>href</B> function call frequency (specified in seconds, with a single floating-point
+	number). The range is 0.00 - 655.35.  
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until
+	the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01
+	- 655.35. If the second number is not specified, then the delay time defaults to the first number (frequency).</p>
+</blockquote>
+<H4>Optional Line Plot Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Line Plot&nbsp;is to start out invisible or not. If the attribute is 
+    not present, then by default the Line Plot&nbsp;is visible. If&nbsp;the 
+    Line Plot&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;noFrame&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Line Plot&nbsp;is to have an x and y axis frame. If the attribute is 
+    not present, then by default the Line Plot&nbsp;has a frame.</p>
+</blockquote>
+<h4>Example Line Plot</h4>
+<P>Use the <B>LinePlot.class </B>applet<B> </B>to create a line plot. For example, to create a line plot cell 150
+pixels wide by 150 pixels tall that plots a 3-pixel weight black line linked to external byte variable 4, with a range
+of 0-255, and takes 30 X-axis samples, with a 50ms update rate, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;LinePlot.class&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;150&quot; NAME=&quot;LinePlot1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(4).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMin&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMax&quot; VALUE=&quot;255&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;xSamples&quot; VALUE=&quot;30&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;lineWeight&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;linePattern&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.05&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>To create a line plot cell 150
+pixels wide by 150 pixels tall that plots a 1-pixel weight black line linked to external byte variable 2 
+and a 5-pixel weight gray line linked to external byte variable 4, with a range
+of 0-255, and takes 20 X-axis samples, with a 70ms update rate, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;LinePlot.class&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;150&quot; NAME=&quot;LinePlot2&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(2).value(),Amulet:UART.byte(4).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMin&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;yMax&quot; VALUE=&quot;255&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;xSamples&quot; VALUE=&quot;20&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;lineWeight&quot; VALUE=&quot;1,5&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;linePattern&quot; VALUE=&quot;0,1&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.07&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/LinePlot/" target="_blank">\projects\Examples\LinePlot\</a> 
+directory for an HTML file showing an example line plot widget.<P>
+&nbsp;<HR ALIGN="CENTER">
+
+<h3><A NAME="LinearGauge"></A>Linear Gauge Widget (LinearGauge.class)</h3>
+<P>The Linear Gauge Widget uses two images (a background image and a pointer 
+image) to create a custom &quot;linear gauge&quot;. The pointer travels linearly on the background image 
+and is positioned based upon the value of the byte (or word) returned from an 
+<B>href</B> function call. The height and
+width dimensions entered in the APPLET CODE Attribute Field determine whether the pointer 
+travels horizontal or vertical.
+By default, the longer dimension establishes the path that the pointer travels. 
+Optionally, the orientation can be specified if it is desired to have the pointer 
+travel the shorter dimension.</P>
+<H4>Linear Gauge Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the
+	widget input. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available
+	functions for the Linear Gauge widget. The function is called at an update rate specified by the <B>updateRate</B>
+	attribute.</P>
+	<P><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Minimum value returned from the <B>href</B>
+	function; must be less than <B>max</B>. If the function returns a byte, the range is 0 - 254 (0x00 - 0xFE). If
+	the function returns a word, the range is 0 - 65534 (0x00 - 0xFFFE).</P>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B>
+	function; must be greater than <B>min</B>. If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF).
+	If the function returns a word, the range is 1 - 65535 (0x01 - 0xFFFF).</P>
+    <p><B>NAME=&quot;minAt&quot; VALUE=&quot;&quot;LEFT&quot;|&quot;RIGHT&quot;|&quot;TOP&quot;|&quot;BOTTOM&quot;&quot; —</B> Determines where the 
+    minimum value of the linear gauge  is located. When the minimum value is 
+    returned, the pointer is located at the <B>minAt</B> 
+    location. As the value increases, the pointer travels the length of the 
+    linear background image until the maximum value is reached and the pointer 
+    is then located at the 
+    opposite extreme of the <B>minAt</B> location. Default values are LEFT for 
+    horizontal linear gauges and BOTTOM for vertical linear gauges. The options are:</p>
+<UL>
+	<LI><B>LEFT —</B> The pointer value increases from left to right. (horizontal 
+    linear gauge only)<LI><B>RIGHT —</B> The pointer value increases from right&nbsp;to left. 
+    (horizontal 
+    linear gauge only)<LI><B>TOP —</B> The pointer value increases from top&nbsp;to bottom. 
+    (vertical 
+    linear gauge only)<LI><B>BOTTOM —</B> The pointer value increases from bottom to top. 
+    (vertical 
+    linear gauge only)</UL>
+    <p><B>NAME=&quot;pointerImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used as 
+    the pointer which travels across the linear background image. Image file must be of type .GIF or .JPG.</p>
+    <p><B>NAME=&quot;backgroundImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; </B>— Image used as 
+    the linear background image. Image dimensions must be exactly 
+    the same as the dimensions of the Linear Gauge Widget. Image file must be of type .GIF.</p>
+    <p><B>NAME=&quot;waitForInit&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Linear Gauge pointer&nbsp;will wait for valid data&nbsp;before being displayed 
+    on the <B>linearImage</B>.&nbsp;If 
+    TRUE,  the Linear Gauge pointer will not display until valid  data is received. If FALSE, or the attribute 
+    is not present, the Linear Gauge&nbsp;pointer&nbsp;starts at the <B>minAt</B> 
+    location until the first packet of data is received.</p>
+    <p><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot;
+	—</B> The first number specifies the <B>href</B> function call frequency (specified in seconds, with a single floating-point
+	number). The range is 0.00 - 655.35.  
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until
+	the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01
+	- 655.35. If the second number is not specified, then the delay time defaults to the first number (frequency).</p>
+</blockquote>
+<H4>Optional Linear Gauge Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+    <p><B>NAME=&quot;pointerOffset&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the 
+    number of pixels from the center of the channel the handle is located. If 
+    a vertical slider, positive numbers shift the handle to the right and negative 
+    numbers shift it to the left. If a horizontal slider, positive numbers shift 
+    the handle to the bottom and negative numbers shift it to the top. [The range is -100 through 
+    100]</p>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Linear Gauge&nbsp;is to start out invisible or not. If the attribute is 
+    not present, then by default the Linear Gauge&nbsp;is visible. If&nbsp;the 
+    Linear Gauge&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;orientation&quot; VALUE=&quot;HORIZONTAL&quot;|&quot;VERTICAL&quot; —</B> Specifies if 
+    the pointer icon is to travel&nbsp;horizontally or vertically. The <B>orientation</B> 
+    parameter will override the orientation determined by the height and
+width dimensions entered in the APPLET CODE Attribute Field.</p>
+</blockquote>
+<h4>Example Linear Gauge Widget</h4>
+<P>Use the <B>LinearGauge.class</B> applet to create a Linear Gauge. For example, to create a temperature 
+gauge
+80 pixels wide and 170 pixels tall with a bottom-to-top sweep, using a&nbsp;background 
+image called&nbsp;background.gif and a&nbsp;pointer image called pointer.gif, 
+a 250ms update rate, a 50ms start delay, and that
+uses external byte variable 15 as its input (with a range of 0 - 255), use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;LinearGauge.class&quot; WIDTH=&quot;80&quot; HEIGHT=&quot;170&quot; NAME=&quot;LinGauge1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(15).value()&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;255&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;minAt&quot; VALUE=&quot;bottom&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;backgroundImage&quot; VALUE=&quot;background.gif&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;pointerImage&quot; VALUE=&quot;pointer.gif&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.25,.05&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/LinearGauge/" target="_blank">\projects\Examples\LinearGauge\</a> 
+directory for an HTML file showing an example linear gauge widget.<br>&nbsp;<HR ALIGN="CENTER">
+
+<h3><A NAME="List"></A>List Widget (List.class)</h3>
+<P>Use the <B>List Widget</B> to create
+a list of selectable text objects that share a common function (or set of functions) and that are vertically aligned
+in a box. Selecting a list object highlights that object on the display and invokes the href function(s) with the
+value of the list item being the argument. The values associated with each list entry are specified similar to
+C's &quot;enum&quot; specifier, where the first object in the list will have a value of 00, the second item 01,
+etc, unless an explicit value is given. If not all values are specified, unspecified values continue the progression
+from the last specified value. By specifying an initial condition, that option is highlighted when the page is
+loaded, the <B>href</B> function(s) are invoked and the value
+associated with that list object is used as the argument.</P>
+
+<BLOCKQUOTE>
+	<BLOCKQUOTE>
+		<P><B>Important note:</B> The HEIGHT and WIDTH attributes for <B>List.class</B> DO NOT specify the actual size
+		of the List Box drawn on the screen. Instead, these attributes specify the size of the cell that contains
+		the list box, and the relative position of other objects on the screen. The µHTML code draws the box starting
+		from the top-left corner of the cell. The code optimizes the width of the drawn box based on the width of the option
+		titles and the specified font. The maximum number of visible list items that can fit in a box based on the HEIGHT
+		attribute determines the actual height of the drawn box. Any remaining list items will be hidden from view, but
+		are reachable via an arrow that allows for page scrolling through a list. You can also scroll through the list
+		an item at a time by keeping the pen down and moving above or below the drawn list box.</P>
+	</BLOCKQUOTE>
+</BLOCKQUOTE>
+
+<H4>List Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function(s)</I><B>&quot; — </B>The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked when a list item is hit. See <A HREF="AppendixB.htm#Control_functions">Appendix
+	B</A> for all available functions for the List widget.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the option names within the list box.  The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the option names within the list box. Only one value is allowed per list box; you cannot
+	mix font sizes. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font 
+		<LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.
+		<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported. 
+	</UL>
+	<P><B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the list box font. To create a custom look, styles can be combined by
+	using the &quot;logical or&quot; (|). However, PLAIN overrides any other style. The available font styles are:</P>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+	<P><B>NAME=&quot;options&quot; VALUE=&quot;</B><I>string1</I><B><i>,</i></B><I>string2</I><B><i>,</i></B><I>string3(etc.)</I><B>&quot;
+	—</B> Specifies the list strings. All strings are comma delimited. Note: Any spaces before or after the commas
+	are included in the text string. To specify an intrinsic value, append &quot;= xxx&quot; to
+	the individual titles; (where xxx is a number from 0 - 65535 (0x00 - 0xFFFF) 
+    or a STRING. See note regarding <a href="Widgets.htm#ControlWidgetsIntrinsicValues">Control 
+    Widget intrinsic values</a>.) The first option displays at the top
+	of the list and each subsequent option displays directly below the previous.</P>
+	<P><B>NAME=&quot;initialCondition&quot; VALUE=&quot;</B><I>string</I><B>&quot;|&quot;FromInitHref&quot; —</B> Specifies which option string is
+	highlighted when the page is loaded. The value associated with the highlighted option string is the argument given
+	to the <B>href</B> function(s). If <B>&quot;FromInitHref&quot;</B> is selected, the function specified by the <B>InitHref</B> attribute is called. Whichever 
+    option has the same intrinsic value as the returned value from the initHref 
+    function will be initially highlighted.</P>
+</BLOCKQUOTE>
+
+<H4>Optional List Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Specifies the function called when the page is loaded. Use
+	this attribute whenever <B>FromInitHref </B>is used as the
+	<B>initialCondition</B>. The value returned from this function call 
+    will determine which option string starts out&nbsp;highlighted. The value 
+    should match the intrinsic value of one of the <B>options</B> strings. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available functions.</P>
+    <p><B>NAME=&quot;upArrow&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the &quot;page up arrow&quot;
+	image to use when the list has more items than can be viewed. If this attribute is not present, then a default
+	image, upArrow.gif, located in Amulet/Configuration/Widgets/List/, is used. (Images can be either .GIF or .JPEG.)</p>
+	<P><B>NAME=&quot;downArrow&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the &quot;page down arrow&quot;
+	image to use when the list has more items than can be viewed. If this attribute is not present, then a default
+	image, downArrow.gif, located in Amulet/Configuration/Widgets/List/, is used. (Images can be either .GIF or .JPEG.)</P>
+	<P><B>NAME=&quot;delimiter&quot; VALUE=&quot;</B><I>char</I><B>&quot; —</B> Specifies the delimiter of strings
+	in the <B>options </B>attributes. By default the delimiter is &quot;,&quot;, but if it is desired to have a comma
+	within the string, you can specify any single ASCII character as the string delimiter. Just make sure none of your
+	strings is using the ASCII character.</P>
+	<P><B>NAME=&quot;equalSign&quot; VALUE=&quot;</B><I>char</I><B>&quot; —</B> Specifies the delimiter of string values
+	in the <B>options </B>attributes. By default the delimiter is &quot;=&quot;, but if it is desired to have an equal
+	sign within the string, you can specify any single ASCII character as the string value delimiter. Just make sure
+	none of your strings is using the ASCII character.</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the List&nbsp;is to start out invisible or not. If the attribute is not 
+    present, then by default the List&nbsp;is visible. If&nbsp;the List&nbsp;starts 
+    out invisible, the only way to make it&nbsp;visible again is via the IWC 
+    method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+</blockquote>
+<H4>Example List Widget</H4>
+<P>Use the <B>List.class </B>applet<B> </B>to create a list of selectable items. For example, to create a list
+box with four list items that use plain, 12-point Amulet Sans Serif type, with Item 2 initially highlighted, sets external byte variable 2, and Item 1 has a value of 0x10, Item 2 = 0x20, Item 3 = 0x30 and Item 4 = 0x31,
+use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;List.class&quot; WIDTH=&quot;20&quot; HEIGHT=&quot;110&quot; NAME=&quot;List1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(2).setValue()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;options&quot; VALUE=&quot;Item 1=0x10,Item 2=0x20,Item 3=0x30,Item 4&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;Item 2&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>To create a list
+box with four list items that use plain, 12-point Amulet Sans Serif type, with Str 2 initially highlighted, sets external string variable 3, and Str 1 has a value of &quot;String 
+1&quot;, Str 2 = &quot;String 2&quot;, Str 3 = &quot;String 3&quot; and Str 4 = &quot;String 
+4&quot;,
+use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;List.class&quot; WIDTH=&quot;20&quot; HEIGHT=&quot;110&quot; NAME=&quot;List1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.string(3).setValue()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;options&quot; VALUE='Str 1=&quot;String 1&quot;,Str 2=&quot;String 
+    2&quot;,Str 3=&quot;String 3&quot;,Str 4=&quot;String 4&quot;'&gt; <BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;Str 2&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<p>See the <A HREF="../projects/Examples/List/" target="_blank">\projects\Examples\List\</a> 
+directory for an HTML file showing an example list widget.</p>
+<HR ALIGN="CENTER">
+
+<H3><A NAME="Numeric_Field"></A>Numeric Field Widget (Field.class)</H3>
+<P>The Numeric Field Widget uses a byte (or word) returned from an <B>href</B> function call. The numeric field can display a mixture of static text and a live number.
+The string is input using the standard C printf format. The Numeric Field Widget can display in integer, hexadecimal,
+and floating-point formats. Like printf, the variable is entered using the % character. The first digit following
+the % specifies the number of character spaces allocated to the live numeric field (including a decimal point,
+and plus (+) or minus (-) symbols). You can also have static text preceding and following the live numeric field.
+For example, to create a numeric field that displays &quot;<B>Output = 2.25 Volts</B>&quot;, the printf field would
+read: <B>&quot;Output = %5.2f Volts&quot;</B>. In this example, &quot;<B>5</B>&quot; specifies the number of character
+spaces, &quot;<B>.2</B>&quot; specifies the number of digits to the right of the decimal, and &quot;<B>f</B>&quot;
+specifies floating-point numbers.</P>
+<p>If the width of the numeric field widget is less than 
+required, the string will be truncated. Make sure your dimensions are large 
+enough to hold all your text and numbers.</p>
+<H4>Numeric Field Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> The <a href="functions.htm">function</a> called to retrieve the widget input. See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available
+	functions for the Numeric Field Widget. The function is called at an update rate specified by the <B>updateRate</B> attribute.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the static text defined in <B>printf</B>.  The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the static text defined in <B>printf</B>. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font 
+		<LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.
+		<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported. 
+	</UL>
+    <p><B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the font of the static text defined 
+    in <B>printf</B>. To create a custom look, styles can be combined
+	by using the &quot;logical or&quot; (<B>|</B>). However, PLAIN overrides any other style. The available font styles
+	are:</p>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+    <p><B>NAME=&quot;numFont&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the dynamic numeric field.  This <B>MUST</B>&nbsp;be 
+    a fixed width font. The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif FW. Amulet Sans Serif FW .amf files are preloaded&nbsp;in 
+    the Amulet/Configuration/Fonts folder.</p>
+    <p><B>NAME=&quot;numFontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the dynamic numeric field. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font 
+		<LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.
+		<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported. 
+	</UL>
+    <p><B>NAME=&quot;numFontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the dynamic numeric field font. To create a custom look, styles can be combined
+	by using the &quot;logical or&quot; (<B>|</B>). However, PLAIN overrides any other style. The available font styles
+	are:</p>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+    <p><B>NAME=&quot;verticalAlign&quot; VALUE=&quot;TOP&quot;|&quot;MIDDLE&quot;|&quot;BOTTOM&quot;
+	—</B> Specifies the vertical alignment of the string associated with the 
+    <B>printf</B> attribute within the Numeric Field dimensions. Only one value is allowed; you cannot mix vertical 
+    alignments. Default is TOP.</p>
+	<P><B>NAME=&quot;horizontalAlign&quot; VALUE=&quot;LEFT&quot;|&quot;CENTER&quot;|&quot;RIGHT&quot;
+	—</B> Specifies the horizontal alignment of the string associated with the 
+    <B>printf</B> attribute within the Numeric Field dimensions. Only one value is allowed; you cannot mix horizontal 
+    alignments. Default is LEFT.</P>
+	<P><B>NAME=&quot;colorInvert&quot; VALUE=&quot;REGION&quot;|&quot;NONE&quot;
+	—</B> Specifies if the string is shown as reverse video or not.  If REGION selected, 
+    the entire region (including the text) of the Numeric Field will be inverted. If NONE selected, 
+    Numeric Field will not be inverted. Only one value is allowed; you cannot mix color 
+    inversion properties. Default is NONE.</P>
+    <p><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Minimum value returned
+	from the <B>href</B> function; must be less than <B>max</B>. If the function returns a byte, the range is 0 - 254 (0x00 -
+	0xFE). If the function returns a word, the range is 0 - 65534 (0x00 - 0xFFFE).</p>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Maximum value returned from the <B>href</B> function; must be greater than <B>min</B>.
+	If the function returns a byte, the range is 1 - 255 (0x01 - 0xFF). If the function returns a word, the range is
+	1 - 65535 (0x01 - 0xFFFF).</P>
+	<P><B>NAME=&quot;printf&quot; VALUE=&quot;</B><I>text</I> <B>%</B><I>format</I> <I>text</I><B>&quot; —</B> Specifies
+	the text and the formatted numeric field to be displayed (similar to the standard C program printf command). The
+	Numeric Field Widget can display integer, hexadecimal, and floating-point numbers.</P>
+</BLOCKQUOTE>
+
+<P>To display integers, the format is <B>%ai</B>, where &quot;<B>a</B>&quot; is the number of character spaces,
+and &quot;<B>i</B>&quot; specifies integers. With floating-point numbers, the format is <B>%a.bf</B>, where &quot;<B>a</B>&quot;
+is the total number of character spaces, &quot;<B>b</B>&quot; is the number of digits to the right of the decimal point,
+and &quot;<B>f</B>&quot; specifies floating-point numbers. With hexadecimal numbers, the format is <B>%aX</B> or
+<B>%ax</B>, where &quot;<B>a</B>&quot; is the number of character spaces, and &quot;<B>X</B>&quot; specifies that
+the hexadecimal digits will be upper case (A-F), while &quot;<B>x</B>&quot; specifies lower case (a-f).</P>
+
+<BLOCKQUOTE>
+	<P><B>NOTE:</B> To display a % symbol in the numeric field, use %% (e.g. <B>Duty Cycle(%%)=%5.2f</B> will display<B>
+	Duty Cycle(%)=<i>99.99</i></B>).</P>
+</BLOCKQUOTE>
+
+<P>There are also flags that change the numeric field format. Format flags are entered between the % and the character
+space specification. The flags are: &quot;-&quot;, &quot;+&quot;, &quot;0&quot;, &quot;#&quot; and &quot; &quot;.
+The flags are defined, as follows:</P>
+
+<BLOCKQUOTE>
+	<UL>
+		<LI><B>&quot;-&quot; —</B> specifies that the numeric field is left-justified. (The default is right-justified.)
+		<LI><B>&quot;+&quot; —</B> specifies that positive numbers are preceded with a plus sign.
+		<LI><B>&quot;0&quot; —</B> specifies that a right-justified numeric field lead with zeroes. (The default is right-justified
+		with leading spaces).
+		<LI><B>&quot;#&quot;—</B> specifies that displayed hexadecimal numbers are preceded with 0x.
+		<LI><B>&quot; &quot; —</B> a blank space specifies that a left-justified numeric field lead with a single space
+		when displaying a positive number, and lead with a negative sign (-) when displaying a negative number.
+	</UL>
+	<P><B>NAME=&quot;minFld&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies what the
+	numeric field displays when the minimum value is returned from the <B>href</B> function call. When using hexadecimal, you must precede the <B>minFld</B> number with 0x. By default, the 0x will NOT be displayed unless the &quot;#&quot; flag is used in
+	the <B>printf</B> field. The <B>minFld</B> value does NOT have to be less than the <B>maxFld</B>
+	value. (Negative slope is permissible.) Range is -65535 to 65535 when using integers and floating point numbers,
+	and 0 to 0xffff when using hex numbers. See <A HREF="Widgets.htm#Note_fldSpan">note</A> below regarding the span between <B>minFld</B> and <B>maxFld</B>.</P>
+</BLOCKQUOTE>
+
+<CENTER>
+<P>&nbsp;
+<TABLE BORDER="0" WIDTH="250">
+	<TR>
+		<TD><B>Formatting<BR>
+			Value</B></TD>
+		<TD><B>minFld<BR>
+			Example</B></TD>
+		<TD><B>maxFld<BR>
+			Example</B></TD>
+	</TR>
+	<TR>
+		<TD COLSPAN="3">
+<HR ALIGN="CENTER" SIZE="1" NOSHADE>
+		</TD>
+	</TR>
+	<TR>
+		<TD>%3i<BR>
+			%3i<BR>
+			%3i</TD>
+		<TD>-20<BR>
+			200<BR>
+			200</TD>
+		<TD>10<BR>
+			999<BR>
+			-40</TD>
+	</TR>
+	<TR>
+		<TD HEIGHT="29">%5.2f<BR>
+			%5.2f</TD>
+		<TD HEIGHT="29">-2.00<BR>
+			0.00</TD>
+		<TD HEIGHT="29">0.00<BR>
+			25.00</TD>
+	</TR>
+	<TR>
+		<TD>%6.2f</TD>
+		<TD>-50.00</TD>
+		<TD>50.00</TD>
+	</TR>
+	<TR>
+		<TD>%#4x<BR>
+			%2X</TD>
+		<TD>0x00<BR>
+        0xFF</TD>
+		<TD>0xff<BR>
+        0xAA</TD>
+	</TR>
+</TABLE>
+</CENTER>
+<P ALIGN="CENTER"><B>Table 1. Numeric Field formatting examples using the right-justified default.<BR>
+(The implied ranges are arbitrary.)</B></P>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;maxFld&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies what the numeric field displays
+	when the maximum value is returned from the <B>href</B> function call. When using hexadecimal, you must precede the <B>minFld</B> number with 0x. By default, the 0x will NOT be displayed unless the &quot;#&quot; flag is used in
+	the <B>printf</B> field. The <B>maxFld</B> value does NOT have to be greater than the <B>minFld</B> value. Range is -65535 to 65535 when using integers and floating point numbers and 0 to 0xffff when
+	using hex numbers. See <A HREF="Widgets.htm#Note_fldSpan">note</A>
+	below regarding the span between <B>minFld</B> and <B>maxFld</B>.</P>
+	<P><A NAME="Note_fldSpan"></A><B>Note regarding the span between minFld and maxFld:</B> When using integers and floating point numbers, the value stored by the Amulet OS is a 16-bit number.
+	When using a floating point number, the decimal point is removed and the digits to the right of the decimal point
+	are concatenated with those to the left of the decimal point. So, 655.35 is stored as 65535 (the maximum 16-bit
+	number). In addition, the span between <B>minFld</B> and
+	<B>maxFld</B> is limited to a 16-bit number. For example
+	if the min is -65535, then the largest <B>max</B> can be
+	is 0 (which would result in a span of 65535). Therefore, even though -65535 is a valid <B>min</B> and 65535 is a valid <B>max,</B> the span
+	is larger than a 16-bit number (causing an Amulet compiler error).</P>
+	<P><B>NAME=&quot;border&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B>
+	Specifies width, in pixels,&nbsp;of the border around the dimensions of 
+    the numeric&nbsp;field. Default is 0, meaning&nbsp;no border.</P>
+    <p><B>NAME=&quot;waitForInit&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Numeric Field&nbsp;will wait for valid data&nbsp;before being displayed 
+    on the LCD.   If 
+    TRUE,  the Numeric Field will not display any dynamic numbers until the first 
+    packet of data is received. If FALSE, or the attribute 
+    is not present, the Numeric Field&nbsp;starts out&nbsp;displaying 
+    the minimum value until the first packet of data is received. </p>
+    <p><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot; —</B> The first number specifies the <B>href</B>
+	function call frequency (specified in seconds, with a single floating-point number). The range is 0.00 - 655.35.
+ 
+	A value of 0.00 means update never. 
+	The second number specifies the delay time from when the page is loaded until the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01 - 655.35.
+	If the second number is not specified, then the delay time defaults to the first number (frequency).</p>
+</blockquote>
+<H4>Optional Numeric Field Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Numeric Field&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the Numeric Field&nbsp;is visible. If&nbsp;the 
+    Numeric Field&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+</blockquote>
+<h4>Example Numeric Field</h4>
+<P>Use the <B>Field.class </B>applet<B> </B>to create a numeric field. For example, to create a Numeric Field
+that uses the 14-point bold, italicized, Amulet Sans Serif font, and calls external byte variable 3 (with
+a range of 0-255) at an update rate of 330ms, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;Field.class&quot; WIDTH=&quot;160&quot; HEIGHT=&quot;25&quot; NAME=&quot;Field1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(3).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;4&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;BOLD|ITALIC&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;255&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;printf&quot; VALUE=&quot;Output = %5.2f Volts&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;minFld&quot; VALUE=&quot;-5.00&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;maxFld&quot; VALUE=&quot;5.00&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.33,0.01&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B>
+</BLOCKQUOTE>
+<P>
+See the <A HREF="../projects/Examples/Field/" target="_blank">\projects\Examples\Field\</a> 
+directory for an HTML file showing an example field widget.
+
+<HR ALIGN="CENTER">
+
+<H3><A NAME="Radio_Button"></A>Radio Button Widget (RadioButton.class)</H3>
+<P>A Radio Button is a labeled, round button used to make a single selection from several options.
+To set a radio button, click on either the button or the adjacent label. All radio buttons that have the same <B>groupName</B>
+are considered part of a radio button group. Only one radio button within a group can be set at any one time. When
+a radio button is selected, its <B>href</B> function(s) are
+invoked.
+<p>When using <B>initHref</B> to determine the <B>initialCondition</B> of the 
+radio button group, the value of the data returned from the <B>initHref</B> 
+function must match the <B>internalNumber</B> of one of the radio buttons in the group. 
+If the <B>internalNumber</B> is not specified, the first radio button found 
+in the html file will be assigned&nbsp;internal number 1, with the internal 
+numbers incrementing with each subsequent radio button found in the html which 
+is part of the same radio button<B> groupName</B>.</p>
+<H4>Radio Button Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE</B>=<B>&quot;</B><I>function(s)</I><B>&quot;</B> — The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked when  a radio button is set. Unlike checkboxes, radio buttons within a group can call
+	different <B>href</B> function(s). See <A HREF="AppendixB.htm#Control_functions">Appendix B</A> for all available functions for the Radio Button widget.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the radio button label.  The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the radio button label. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font 
+		<LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.
+		<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported. 
+	</UL>
+    <p><B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the radio button label font. To create a custom look, styles can be combined
+	by using the &quot;logical or&quot; (|). However, PLAIN overrides any other style. The available font styles are:</p>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+	<P><B>NAME=&quot;buttonAlign&quot; VALUE=&quot;LEFT&quot;|&quot;RIGHT&quot; —</B> Specifies the location of
+	the radio button in relation to the label text.</P>
+    <p><B>NAME=&quot;label&quot; VALUE=&quot;</B><I>text</I><B>&quot; —</B> Specifies the name that appears to the
+	right or left of the radio button.</p>
+	<P><B>NAME=&quot;groupName&quot; VALUE=&quot;</B><I>text</I><B>&quot; —</B> Specifies the radio button group this
+	radio button is a part of.</P>
+	<P><B>NAME=&quot;initialCondition&quot; VALUE=&quot;ON&quot;|&quot;OFF&quot;|&quot;FromInitHref&quot;
+	—</B> Specifies the initial condition of the radio button when the page is loaded. If
+	<B>&quot;FromInitHref&quot;</B> is selected, the function
+	specified by the <B>InitHref</B> attribute is called. The
+	returned byte value determines which single button (if any) within the group is selected; the returned value must
+	exactly match one of the button's <B>internalNumber</B>.</P>
+</BLOCKQUOTE>
+
+<H4>Optional Radio Button Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Specifies the function called when the page is loaded. Use
+	this attribute whenever <B>FromInitHref </B>is used as the
+	<B>initialCondition</B>. All radio buttons within a group
+	must have the same <B>initHref</B> function. The value of the data returned from the <B>initHref</B> 
+function must match the <B>internalNumber</B> of one of the radio buttons in the group. If 
+    there is 
+    See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available
+	functions.</P>
+	<P><B>NAME=&quot;hrefOnHitOnly&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the radio button <B>href</B> function(s) is launched&nbsp;only upon a &quot;hit&quot; 
+    or not. By default, <B>hrefOnHitOnly</B> is false, which means if the radio 
+    button has an <B>initHref</B> function, the <B>href</B> of the radio button 
+    which starts out &quot;on&quot; is launched upon loading the page. The <B>href</B> 
+    is also launched after a forceUpdate() call. By setting <B>hrefOnHitOnly</B> 
+    to true, the <B>href</B> will only be launched upon the radio button physically 
+    being selected or upon a forceHit() call.</P>
+    <p><B>NAME=&quot;emptyImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the image to use when the
+	radio button is in the not set state. If this attribute is not present, then a default image, emptyImage.gif, located
+	in Amulet/Configuration/Widgets/RadioButton/, is used.</p>
+	<P><B>NAME=&quot;trackingImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the image to use when
+	the radio button is in the pen down state. If this attribute is not present, then a default image, trackingImage.gif,
+	located in Amulet/Configuration/Widgets/RadioButton/, is used.</P>
+	<P><B>NAME=&quot;fullImage&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the image to use when the
+	radio button is in the set state. If this attribute is not present, then a default image, fullImage.gif, located
+	in Amulet/Configuration/Widgets/RadioButton/, is used.&nbsp;</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Radio Button&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the radio button&nbsp;is visible. If&nbsp;the 
+    Radio&nbsp;Button&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+	<P><B>NAME=&quot;internalNumber&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the internal 
+    number of the radio button, used by the OS to determine which radio button 
+    is on. Should only be used if using <B>initHref</B>. Each button within 
+    a radio button group must have a unique internal number. If the value of the data returned from the <B>initHref</B> 
+function  matches the <B>internalNumber</B> of  the radio button, then that 
+    radio button starts out in the &quot;on&quot; position. If the <B>internalNumber</B> 
+    is not specified, the first radio button found in the html file will be 
+    assigned&nbsp;internal number 1, with the internal numbers incrementing 
+    with each subsequent radio button found in the html which is part of the 
+    same radio button<B> </B>group.</P>
+</blockquote>
+<H4>Example Radio Button</H4>
+<P>Use the <B>RadioButton.class </B>applet<B> </B>to create a Radio Button. For example, to create a radio button 150
+pixels wide and 22 pixels tall that is positioned right of the label &quot;Button 1&quot;, and sets external
+byte variable 5 to 0x51 when on, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;RadioButton.class&quot; WIDTH=&quot;150&quot; HEIGHT=&quot;22&quot; NAME=&quot;RB1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(5).setValue(0x51)&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;3&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;label&quot; VALUE=&quot;Button 1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;buttonAlign&quot; VALUE=&quot;right&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;groupName&quot; VALUE=&quot;rbg1&quot;&gt;<BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;ON&quot;&gt;<BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/BarGraph/" target="_blank">\projects\Examples\BarGraph\</a> 
+directory for an HTML file showing an example radio button widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="Scribble"></A>Scribble Widget (Scribble.class)</H3>
+<P>The Scribble Widget allows for freehand drawing on a canvas. Assuming a stylus 
+is being used, when the stylus sets down in the canvas of the Scribble Widget 
+and starts moving within the canvas, a freehand line is drawn, following the 
+directions of the stylus. The freehand line can be 1 to 15 pixels thick and 
+can be one of 16 different patterns.&nbsp;The Scribble canvas 
+can have an optional background image and border. An InterWidget Communications 
+method, uploadImage(), allows for another widget/object to make the Scribble 
+Widget transfer&nbsp;the raw image data to an external&nbsp;processor via an xmodem protocol. 
+The raw image 
+is  in the <a href="Bitmap.htm">Amulet bitmap format</a>.</P>
+<H4><A NAME="ScribbleParams"></A>Scribble Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot;</B> — The <a href="functions.htm">function</a> invoked upon receiving 
+    the uploadImage() IWC method. Only valid function is currently&nbsp;<B>Amulet:UART.xmodemUploadImage()</B>.</P>
+	<P><B>NAME=&quot;lineWeight&quot; VALUE=&quot;</B><I>pixels</I><B>&quot; —</B> Defines the weight (thickness) of
+	the active freehand drawing line in pixels. The range is 1- 15 (0x01 - 0x0F).</P>
+	<P><B>NAME=&quot;linePattern&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Defines the pattern of
+	the active freehand line. 
+	Sixteen different fill patterns are available (0 through 15), <A HREF="#Figure1">Figure 1</A>. If no fill pattern is specified, the default
+	is pattern 0.</P>
+	<P><B>NAME=&quot;border&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B>
+	Specifies width, in pixels,&nbsp;of the border around the dimensions of 
+    the Scribble Widget. Default is 0, meaning&nbsp;no border.</P>
+    <P><B>NAME=&quot;canvas&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the  
+    image used for the canvas of the Scribble Widget. This is a required parameter. The canvas can contain a background image or it can 
+    be a completely blank image, but the dimensions&nbsp;of the canvas MUST 
+    be exactly the&nbsp;same as the dimensions of the Scribble Widget. &nbsp;Image file must be of type .GIF.</P>
+</BLOCKQUOTE>
+<H4>Optional Scribble Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+<p><B>NAME=&quot;background&quot; VALUE=&quot;</B><I>image</I><B>&quot; —</B> Specifies the optional 
+    background 
+    image used for the canvas of the Scribble Widget. This is an optional parameter. The 
+    image does not have to be the exact same dimensions as the Scribble Widget, 
+    but it will start drawing the background image from the topleft corner of 
+    the Scribble Widget. &nbsp;Image file must be of type .GIF or .JPG.</p></BLOCKQUOTE>
+<H4>Example Scribble Widget</H4>
+<P>Use the <B>Scribble.class </B>applet<B> </B>to create a Scribble Widget. For example, to create a scribble 
+widget
+that is 280 pixels wide and 200 pixels tall that uses the background image, 
+canvas.gif, and draws a 2-pixel wide black line and has a 1-pixel wide border, 
+use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;Scribble.class&quot; WIDTH=&quot;280&quot; HEIGHT=&quot;200&quot; NAME=&quot;Scrib1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.xmodemUploadImage()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;lineWeight&quot; VALUE=&quot;2&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;linePattern&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;border&quot; VALUE=&quot;1&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;canvas&quot; VALUE=&quot;canvas.gif&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/Scribble/" target="_blank">\projects\Examples\Scribble\</a> 
+directory for an HTML file showing an example scribble widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="Slider"></A>Slider Widget (Slider.class)</H3>
+<P>The Slider Widget invokes a function (or set of functions) either upon 1) 
+any movement&nbsp;of the handle&nbsp;(<B>onChange</B>) or&nbsp;2) only when 
+the handle has been released (<B>onPenUp</B>). The argument is
+determined by the location of the handle and the limits setup with the <B>min</B> and <B>max</B> attributes. The 
+location of the <B>min</B> value is determined by the <B>minAt</B> attribute(left, 
+right, top or bottom). The height and
+width dimensions entered in the APPLET CODE Attribute Field determine whether the slider is horizontal or vertical.
+The longer dimension establishes the path that the slider travels, while the shorter dimension determines the maximum
+handle size. In addition, the widget creates a 3-pixel wide &quot;channel&quot; along the slider path. To move
+the slider, touch the handle and drag it along the channel. If <B>hrefEvent</B> 
+is setup as <B>onChange</B>, the slider invokes the function(s) whenever&nbsp;the 
+handle moves. If <B>hrefEvent</B>&nbsp;is setup as <B>onPenUp</B>, the slider 
+invokes the function(s) only upon releasing the handle. Touching anywhere on the channel causes the handle to snap to that location and
+invoke the function(s) with the corresponding argument. Tick marks are optional. 
+As an option, you can specify the offset of the handle from the center of the 
+channel by using the <B>handleOffset</B> parameter.</P>
+<H4><a name="SliderAttributes"></a>Slider Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function(s)</I><B>&quot;</B> — The <a href="functions.htm">function</a> (or 
+    <a href="functions.htm#Multiple_Function ">multiple</a>/<a href="functions.htm#Sequenced_Function">sequenced</a> 
+    functions)
+	invoked upon the event specified in <B>hrefEvent</B>. See <A HREF="AppendixB.htm#Control_functions">Appendix B</A> for all available functions for the Slider widget.</P>
+	<P><B>NAME=&quot;hrefEvent&quot; VALUE=&quot;onChange&quot;|&quot;onPenUp&quot;
+	—</B> The event which triggers the launching of the href function. If set 
+    to <B>onChange</B>, the slider will launch the function call whenever the 
+    handle is moved. If set to <B>onPenUp</B>, the slider will only launch the 
+    function call upon the releasing of the slider handle. If <B>hrefEvent</B> 
+    is not specified, the default is <B>onChange</B>. </P>
+    <p><B>NAME=&quot;min&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> The minimum value used as the argument given to the function(s)
+	specified in <B>href</B>. Minimum value is achieved when handle is full-left on a horizontal slider, or full-bottom on
+	a vertical slider. The range is 0 - 65534 (0x00 - 0xFFFE).</p>
+	<P><B>NAME=&quot;max&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> The 
+    maximum value used as the argument given to the function(s)
+	specified in <B>href</B>. Maximum
+	value is achieved when handle is full-right on a horizontal slider, or full-top on a vertical slider. The range
+	is 1 - 65535 (0x01 - 0xFFFF).</P>
+    <p><B>NAME=&quot;minAt&quot; VALUE=&quot;&quot;LEFT&quot;|&quot;RIGHT&quot;|&quot;TOP&quot;|&quot;BOTTOM&quot;&quot; —</B> Determines where the 
+    minimum value of the slider is located. As the handle sweeps from the <B>minAt</B> 
+    location, the value increases until the maximum value is reached at the 
+    opposite extreme of the <B>minAt</B> location. Default values are LEFT for 
+    horizontal sliders and BOTTOM for vertical sliders. The options are:</p>
+<UL>
+	<LI><B>LEFT —</B> The slider value increases from left to right. (horizontal 
+    slider only)
+	<LI><B>RIGHT —</B> The slider value increases from right&nbsp;to left. 
+    (horizontal slider only)
+	
+	<LI><B>TOP —</B> The slider value increases from top&nbsp;to bottom. 
+    (vertical slider only)
+	
+	
+	<LI><B>BOTTOM —</B> The slider value increases from bottom to top. 
+    (vertical slider only)
+</UL>
+    <P><B>NAME=&quot;tickCount&quot; VALUE=&quot;</B><I>number</I><B>&quot;|&quot;NONE&quot;|&quot;AUTO&quot;
+	—</B> The total number of tick marks along the slider channel. If <B>NONE</B>, no tick marks are visible.
+	If <B>AUTO</B>, the number of tick marks is derived from the min and max values. If <B>tickCount</B>
+	is not given, the default is <B>NONE</B>. The range is 0 - 255 (0x00 - 0xFF).</P>
+    <p><B>NAME=&quot;initialCondition&quot; VALUE=&quot;</B><I>number</I><B>&quot;|&quot;FromInitHref&quot; —</B> Specifies handle position when the
+	page is loaded. The position value becomes the argument given to the <B>href</B> function(s). If <B>FromInitHref</B>
+	is selected, the function specified by the <B>InitHref</B>
+	attribute is called. The returned  value determines the handle position. [The range is 0 - 65535 (0x00 - 0xFFFF).]</p>
+</BLOCKQUOTE>
+
+<H4>Optional Slider Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;initHref&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B> Only 
+    valid if   <B>FromInitHref </B>is used as the
+	<B>initialCondition</B>. Specifies the function called when the page is loaded. The 
+    value returned from this function call will be used as the initial condition 
+    of the Slider handle.  See <A HREF="AppendixB.htm#View_functions">Appendix B</A> for all available functions.</P>
+    <p><B>NAME=&quot;waitForInit&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Only 
+    valid if   <B>FromInitHref </B>is used as the
+	<B>initialCondition</B>. Specifies if 
+    the Slider handle&nbsp;will wait for valid data&nbsp;before being displayed 
+    on the channel.&nbsp;If 
+    TRUE,  the Slider handle will not display until the  data from the <B>initHref</B> 
+    function is received. If FALSE, or the attribute 
+    is not present, the Slider&nbsp;handle momentarily starts at the <B>minAt</B> 
+    location until the <B>initHref</B> function receives its data.</p>
+    <p><B>NAME=&quot;handleOffset&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> Specifies the 
+    number of pixels from the center of the channel the handle is located. If 
+    a vertical slider, positive numbers shift the handle to the right and negative 
+    numbers shift it to the left. If a horizontal slider, positive numbers shift 
+    the handle to the bottom and negative numbers shift it to the top. [The range is -100 through 
+    100]</p>
+    <p><B>NAME=&quot;handleThickness&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> The width
+	(in pixels) of the handle if a horizontal slider, or the height of the handle if a vertical slider. If <B>handleThickness</B>
+	is not given, the default is 11 pixels. The range is 4 - 255 (0x04 - 0xFF).</p>
+	<P><B>NAME=&quot;tickLength&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B> The length (size)
+	of each tick mark, in pixels. The range is 1 - 255 (0x01 - 0xFF). If <B>tickLength</B> is not given, the default is 9 pixels.</P>
+	<P><B>NAME=&quot;tickPosition&quot; VALUE=&quot;CENTER&quot;|&quot;TOP&quot;|&quot;BOTTOM&quot;|&quot;LEFT&quot;|&quot;RIGHT&quot;
+	—</B> The position of the tick marks in relation to the channel. . The range for a horizontal slider is <B>CENTER</B>,
+	<B>TOP</B> or <B>BOTTOM</B>. The range for a vertical slider is <B>CENTER</B>, <B>LEFT</B> or <B>RIGHT</B>. If <B>tickPosition</B> is not given, the
+	default&nbsp;is <B>CENTER</B> (inside the channel).</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the Slider&nbsp;is to start out invisible or not. If the attribute is not 
+    present, then by default the Slider&nbsp;is visible. If&nbsp;the Slider&nbsp;starts 
+    out invisible, the only way to make it&nbsp;visible again is via the IWC 
+    method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+    <p><B>NAME=&quot;orientation&quot; VALUE=&quot;HORIZONTAL&quot;|&quot;VERTICAL&quot; —</B> Specifies if 
+    the handle&nbsp;is to travel&nbsp;horizontally or vertically. The <B>orientation</B> 
+    parameter will override the orientation determined by the height and
+width dimensions entered in the APPLET CODE Attribute Field.</p>
+</blockquote>
+<H4>Example Slider Widget</H4>
+<P>Use the <B>Slider.class </B>applet<B> </B>to create a Slider Widget. For example, to create a vertical slider
+that is 20 pixels wide and 170 pixels tall (without tick marks) that sends a minimum value of 0x00 and a maximum
+value of 0x05, initially starts with a value of 2 and sets external byte variable 6, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;Slider.class&quot; WIDTH=&quot;20&quot; HEIGHT=&quot;170&quot; NAME=&quot;Slider1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(6).setValue()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;5&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;tickCount&quot; VALUE=&quot;NONE&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;2&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B></P>
+</BLOCKQUOTE>
+
+<P>
+See the <A HREF="../projects/Examples/BarGraph/" target="_blank">\projects\Examples\BarGraph\</a> 
+directory for an HTML file showing an example slider widget.<HR ALIGN="CENTER">
+
+<H3><A NAME="String_Field"></A>String Field Widget (StringField.class)</H3>
+<P>The String Field Widget calls a function that returns either a null-terminated string of ASCII characters, or
+a one-byte index into a list of pre-built strings. The string field can display a mixture of static text and a
+dynamic string. The static text is input using the standard C printf format. Like printf, the conversion specification
+begins with a % and ends with the conversion character &quot;s&quot;. </P>
+<p>If an ASCII string is received, then the
+acquired string is inserted where the conversion specification resides in the printf string. By default, 
+    the dynamic string can be a maximum of 25 characters in length. To increase 
+    the maximum number of characters, see <a href="Widgets.htm#precision">precision</a> 
+    below. </p>
+<p>If a byte is received,
+the pre-built string that has the same value as the acquired byte is inserted where the conversion specification
+resides in the printf string. The values associated with each pre-built
+string are specified similar to C's &quot;enum&quot; specifier, where the first string will have a value of 00,
+the second item 01, etc, unless an explicit value is given. If not all values are specified, unspecified values
+continue the progression from the last specified value.<br></p>
+<p><a name="wrapping"></a>If the width of the String Field widget is less than 
+required, and the height of the string field widget is tall enough, the string 
+will wrap automatically. If there is not enough room to wrap, the string will be truncated. User-defined 
+wraps can be specified by entering &quot;\n&quot; within the static text, or 
+by sending a 0x0A in the dynamic text, at the spot 
+you would like the wrap to occur. There is a maximum of 20 wrapped lines per 
+String Field.</p>
+<p>If an upper ASCII character (0x80-0xFF) is to be sent as a dynamic string 
+to the stringField over the UART, you must use the DLE (0x10) escape character. 
+See the <a href="Protocol.htm#upperASCII">UART Protocol document</a> for more 
+specifics.</p>
+<H4>String Field Parameter Attributes:</H4>
+
+<BLOCKQUOTE>
+	<P><B>NAME=&quot;href&quot; VALUE=&quot;</B><I>function</I><B>&quot; —</B>
+	The <a href="functions.htm">function</a> called to retrieve the widget input. See <A HREF="AppendixB.htm#StringField_functions">Appendix
+	B</A> for all available functions for the String Field Widget. The function is called at an update rate specified
+	by the <B>updateRate</B> attribute.</P>
+	<P><B>NAME=&quot;font&quot; VALUE=&quot;</B><I>font</I><B>&quot;
+	—</B> Specifies the font used for the string field text.  The corresponding .amf 
+    file must be included in the Amulet/Configuration/Fonts folder. See <a href="AmuletFontConverter.htm">AmuletFontConverter</a> 
+    for more information regarding&nbsp;the creation of .amf files. Default 
+    is Amulet Sans Serif.</P>
+    <p><B>NAME=&quot;fontSize&quot; VALUE=&quot;1&quot;|&quot;2&quot;|&quot;3&quot;|&quot;4&quot;|&quot;5&quot;|&quot;6&quot;|&quot;7&quot;
+	—</B> Specifies the font size for the string field text. The assigned values are:</p>
+	<UL>
+		<LI>1 = 8-point font
+		<LI>2 = 10-point font
+		<LI>3 = 12-point font
+		<LI>4 = 14-point font
+		<LI>5 = 18-point font 
+		<LI>6 = 24-point font &nbsp;Note: font size 6 
+        for Amulet Sans Serif not supported.
+		<LI>7 = 36-point font &nbsp;Note: 
+        font size 7&nbsp;for Amulet Sans Serif not supported. 
+	</UL>
+    <p><B>NAME=&quot;fontStyle&quot; VALUE=&quot;PLAIN&quot;|&quot;BOLD&quot;|&quot;ITALIC&quot;|&quot;UNDERLINE&quot;|&quot;STRIKE&quot;
+	—</B> Specifies the style associated with the string field font. To create a custom look, styles can be combined
+	by using the &quot;logical or&quot; (<B>|</B>). However, PLAIN overrides any other style. The available font styles
+	are:</p>
+	<UL>
+		<LI><B>PLAIN —</B> The option text uses the standard font.
+		<LI><B>BOLD —</B> The option text is bold. (i.e. <B>text</B>)
+		<LI><B>ITALIC —</B> The option text is italicized. (i.e. <I>text</I>)
+		<LI><B>UNDERLINE —</B> The option text is underlined. (i.e. <U>text</U>)
+		<LI><B>STRIKE —</B> The option text is stricken through. (i.e. <STRIKE>text</STRIKE>)
+	</UL>
+	<P>This attribute defines&nbsp;the default font style of both the static 
+    text defined in the <B>printf</B> attribute as well as the dynamic string 
+    returned from the <B>href</B> function. If it is desired to change the dynamic 
+    string's font style at run time, see the <a href="Protocol.htm#fontStyle">UART 
+    Protocol documentation</a> regarding the font style escape byte.</P>
+    <p><B>NAME=&quot;verticalAlign&quot; VALUE=&quot;TOP&quot;|&quot;MIDDLE&quot;|&quot;BOTTOM&quot;
+	—</B> Specifies the vertical alignment of the string associated with the 
+    <B>printf</B> attribute within the String Field dimensions. Only one value is allowed; you cannot mix vertical 
+    alignments. Default is TOP.</p>
+	<P><B>NAME=&quot;horizontalAlign&quot; VALUE=&quot;LEFT&quot;|&quot;CENTER&quot;|&quot;RIGHT&quot;
+	—</B> Specifies the horizontal alignment of the string associated with the 
+    <B>printf</B> attribute within the String Field dimensions. Only one value is allowed; you cannot mix horizontal 
+    alignments. Default is LEFT.</P>
+	<P><B>NAME=&quot;colorInvert&quot; VALUE=&quot;REGION&quot;|&quot;STRING&quot;|&quot;NONE&quot;
+	—</B> Specifies if the string is shown as reverse video or not.  If REGION selected, 
+    the entire region (including the text) of the String Field will be inverted. If 
+    STRING selected, only the text will be inverted. If NONE selected, 
+    String Field will not be inverted. Only one value is allowed; you cannot mix color 
+    inversion properties. Default is NONE.</P>
+    <p><B>NAME=&quot;printf&quot; VALUE=&quot;</B><I>text</I> <B>%</B><I>format</I><B><i> </i></B><I>text</I><B>&quot;
+	—</B> Specifies the text and the formatted string field to be displayed (similar to the standard C program printf
+	command). The string is input using the standard C printf format. &nbsp;Like printf, the conversion specification begins
+	with a % and ends with the conversion character &quot;s&quot;. By default, 
+    the dynamic string can be a maximum of 25 characters in length. To increase 
+    the maximum number of characters, see <a href="#precision">precision</a> 
+    below. Between the % and the conversion character there
+	may be, in order:</p>
+</blockquote>
+<UL>
+	<UL>
+		<LI>A minus sign, which specifies left adjustment of the dynamic string.
+		<LI>A number that specifies the minimum field width. The dynamic string will be printed in a field at least this
+		wide. If necessary it will be padded on the left (or right, if left adjustment is called for) to make up the field
+		width.
+		<LI>A period, which separates the field width from the precision.
+		<LI><a name="precision"></a>A number, the precision, that specifies the maximum number of characters to be printed from a string.
+By default, the precision length is 25. If a dynamic string longer than 25 characters 
+        is desired, set the precision to the maximum length of the string. The 
+        maximum precision size is 250.</UL>
+</UL>
+
+
+<blockquote>
+    <p><B>NOTE ON WRAPPING:</B> If the width of the String Field widget is less than 
+required, and the height of the string field widget is tall enough, the string 
+will wrap automatically. If there is not enough room to wrap, the string will be truncated. User-defined 
+wraps can be specified by entering &quot;\n&quot; within the static text, or 
+    by sending a 0x0A in the dynamic text, at the spot 
+you would like the wrap to occur. There is a maximum of 20 wrapped lines per 
+    String Field.</p>
+    <p>The following table shows the effect of a variety of specifications in printing &quot;hello, world&quot; (12
+	characters). We have put colons around each field so you can see its extent.</p>
+</blockquote>
+<UL>
+	<UL>
+		<P><FONT FACE="Courier New">:%s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello,
+		world:<BR>
+		:%10s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello, world:<BR>
+		:%.10s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello, wor:<BR>
+		:%-10s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello, world:<BR>
+		:%.15s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello, world:<BR>
+		:%-15s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello, world &nbsp;&nbsp;:<BR>
+		:%15.10s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;hello, wor:<BR>
+		:%-15.10s: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:hello, wor &nbsp;&nbsp;&nbsp;&nbsp;:</FONT></P>
+	</UL>
+</UL>
+
+
+<UL>
+    <p><B>NOTE:</B> To display a literal % symbol in the string field, use a double percent command in the string (e.g.
+<B>%s at 100 %% </B>displays<B> <i>your string</i> at 100 %</B>). To display a literal \ symbol in the string field, 
+use a double backslash command in the string (e.g. <B>%s \\ 100 </B>displays<B> 
+    <i>your string</i> \ 100</B>). </p>
+</UL>
+
+
+<BLOCKQUOTE>
+	<P><B><a name="String_Field_options"></a>NAME=&quot;options&quot; VALUE=&quot;</B><I>string1</I><B><i>,</i></B><I>string2</I><B><i>,</i></B><I>string3,(etc...)</I><B>&quot;—</B>
+	Specifies the strings that can be displayed when using Amulet:UART.byte(<I>x</I>).value(). All strings are comma delimited.
+	Note: Any spaces before or after the commas are included in the text string. To specify a value 
+    associated with a static string, append &quot;= xxx&quot; to the individual titles; (where xxx is a number from 0 - 255 or 0x00 - 0xff). For example, VALUE=&quot;string1=0x01,string2=0x10, (etc...)&quot; The string whose intrinsic
+	value equals the value returned from the byte(<I>x</I>).Value(<I>) </I>function is displayed.</P>
+	<P><B>NAME=&quot;initialCondition&quot; VALUE=&quot;</B><I>string</I><B>&quot; —</B>
+	Specifies which <B>options</B> string is initially used when the page is loaded. It is acceptable
+	to use the <B>options </B>and <B>initialCondition</B>
+	attributes even when requesting the Amulet:UART.string(<I>x</I>).value(). The default string will be used until a
+	valid string is received.</P>
+	<P><B>NAME=&quot;border&quot; VALUE=&quot;</B><I>number</I><B>&quot; —</B>
+	Specifies width, in pixels,&nbsp;of the border around the dimensions of 
+    the string field. Default is 0, meaning&nbsp;no border.</P>
+    <p><B>NAME=&quot;waitForInit&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the String Field&nbsp;will wait for valid data&nbsp;before being displayed 
+    on the LCD.   If 
+    TRUE,  the String Field will not display any  text, static or dynamic, until the first 
+    packet of data is received. If FALSE, or the attribute 
+    is not present, the String Field&nbsp;starts out&nbsp;displaying only the 
+    static text, if any&nbsp;specified, until the first packet of data is received.</p>
+    <p><B>NAME=&quot;updateRate&quot; VALUE =&quot;</B><I>1st number</I><B><i>, </i></B><I>2nd number</I><B>&quot; —</B> The first number specifies the <B>href</B>
+	function call frequency (specified in seconds, with a single floating-point number). The range is 0.00 - 655.35.
+	 
+	A value of 0.00 means update never. The second number specifies the delay time from when the page is loaded until the first <B>href</B> function call (specified in seconds, with a single floating-point number). The range is 0.01 - 655.35.
+	If the second number is not specified, then the delay time defaults to the first number (frequency).</p>
+</blockquote>
+<H4>Optional String Field Parameter Attributes:</H4>
+
+<blockquote>
+    <p><B>NAME=&quot;delimiter&quot; VALUE=&quot;</B><I>char</I><B>&quot; —</B> Specifies the delimiter of strings in the <B>options </B>attributes. You can specify any single ASCII character as
+	the string delimiter. However, you MUST make sure the character is not used in any of your strings. The default
+	delimiter is &quot;,&quot;.</p>
+	<P><B>NAME=&quot;equalSign&quot; VALUE=&quot;</B><I>char</I><B>&quot; —</B> Specifies the delimiter of string values in the <B>options </B>attributes. You can specify any single ASCII character as
+	the string value delimiter. However, you MUST make sure the character is not used in any of your strings. The default
+	delimiter is &quot;=&quot;.</P>
+    <p><B>NAME=&quot;invisible&quot; VALUE=&quot;TRUE&quot;|&quot;FALSE&quot; —</B> Specifies if 
+    the String&nbsp;Field&nbsp;is to start out invisible or not. If the attribute 
+    is not present, then by default the String&nbsp;Field&nbsp;is visible. If&nbsp;the 
+    String&nbsp;Field&nbsp;starts out invisible, the only way to make it&nbsp;visible 
+    again is via the IWC method &quot;<a href="IWC.htm#reappear()">reappear()</a>&quot;.</p>
+</blockquote>
+<h4>Example String Field (dynamic strings)</h4>
+<P>Use the <B>StringField.class </B>applet<B> </B>to create a string field. For example, to create a String Field that
+uses the 14-point bold, italicized, Amulet Sans Serif font, and calls external string variable 3 at an update
+rate of 330ms, use the following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;StringField.class&quot; WIDTH=&quot;160&quot; HEIGHT=&quot;25&quot; NAME=&quot;SF1&quot;&gt;
+	<BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.string(3).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;4&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;BOLD|ITALIC&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;printf&quot; VALUE=&quot;User ID: [ %s ]&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.33,0.01&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B>
+</BLOCKQUOTE>
+
+<H4>Example String Field (pre-built strings)</H4>
+<P>For example, to create a string field that uses the 14-point bold, italicized, Amulet Sans
+Serif font, and calls external byte variable 3 to index one of 3 strings only 
+once 10ms upon loading the page, use the
+following:</P>
+
+<BLOCKQUOTE>
+	<P><B>&lt;APPLET CODE=&quot;StringField.class&quot; WIDTH=&quot;160&quot; HEIGHT=&quot;25&quot;
+	NAME = &quot;SF2&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:UART.byte(3).value()&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;4&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;BOLD|ITALIC&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;printf&quot; VALUE=&quot;User ID: [ %s ]&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;options&quot; VALUE=&quot;Jim=0x11,Ken=0x22,Ed=0x33&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;Jim&quot;&gt; <BR>
+	&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;0,0.01&quot;&gt; <BR>
+	&lt;/APPLET&gt;</B>
+</BLOCKQUOTE>
+<P>
+	See the <A HREF="../projects/Examples/StringField/" target="_blank">\projects\Examples\StringField\</a> 
+directory for an HTML file showing an example string field widget.
+
+<HR ALIGN="CENTER">
+
+<CENTER>
+<BR>
+<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I><p></P>
+</CENTER>
+<P ALIGN="CENTER"><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A></P>
+<P>&nbsp;
+
+</BODY>
+
+</HTML>

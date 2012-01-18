@@ -1,0 +1,50 @@
+<!--#set var="document_title" value="6.115 Miscellaenous Info" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2011-02-06 18:32:54 -0500 (Sun, 06 Feb 2011) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Miscellaenous</h2>
+
+<h3>Lab Equipment</h3>
+<ul>
+   <li><a href="miscfiles/tektronix.pdf">XYZs of Oscilloscopes</a> -
+      Tektronix's guide to oscilloscopes, including the new digital
+      phosphor scopes in the 6.115 lab.
+</ul>
+
+<h3>Useful Tools: Schematics</h3> 
+<ul> 
+<li><a href="expresspcb/ExpressPCBSetup-7.0.2.exe">ExpressSCH and ExpressPCB 7.0.2 for XP/2000/NT/Vista/7</a> - Schematic
+drawing and circuit layout software (9.72 MB)
+<li><a href="expresspcb/custom.zip">ExpressSCH Custom Components for 6.115</a> - 
+In WinXP, unzip this file to
+<ul>
+<li><tt>C:\Program&nbsp;Files\ExpressPCB\SchComponents_Custom</tt>
+</ul>
+Location may vary in other operating systems.  Some other places to try are:
+<ul>
+<li><tt>C:\Program&nbsp;Files\ExpressPCB\SchComponents_Library</tt>
+<li><tt>C:\Users\<i>your_username</i>\Documents\ExpressPCB\SchComponents_Custom</tt>
+</ul>
+<li>The powerful <a href="http://www.cadsoft.de/freeware.htm">Eagle</a> schematic and layout
+software has a free version available for Windows, Linux, and Mac.
+<li><a href="http://xcircuit.ece.jhu.edu/xcircuit.html">XCircuit</a> -
+Schematic drawing tools available on Athena (<tt>add xcircuit; xcircuit
+filename.ps &</tt>). It produces PostScript output files. 
+<li><a href="http://www.ece.uwaterloo.ca/~aplevich/Circuit_macros/index.html">Circuit_macros</a> - A non-wysiwyg way to draw circuits.
+</ul>
+
+<h3>Useful Tools: Editors</h3>
+<ul> 
+<li><a href="miscfiles/pn2061.exe">Programmer's Notepad 2 v0.6.1</a> - Text editor that can be used for 
+8051 assembly and PIC C code.  Students have found this useful in the past, but we don't offer
+any support or guarantees, so "use at your own risk".
+</ul>
+
+<h3>Peeping ROM Camera</h3>
+<ul> 
+<li><a href="miscfiles/peeping-rom-manual.pdf">Peeping Rom</a> - User's Manual (pdf)
+<li><a href="miscfiles/peeping-rom-matlab.zip">Peeping Rom</a> - Matlab files (zip)
+</ul>
+
+<!--#include file="include/footer.shtml"-->

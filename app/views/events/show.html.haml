@@ -1,0 +1,9 @@
+#box
+  .block
+    %h2= @event.name
+    .content
+      .timestamp=printTime(@event).html_safe
+      %p.first= @event.description
+      -if @event.slotable?
+        =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots})
+      

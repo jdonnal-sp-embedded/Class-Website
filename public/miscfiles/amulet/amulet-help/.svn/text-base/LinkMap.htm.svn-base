@@ -1,0 +1,136 @@
+<html>
+
+<head>
+<title>Amulet Link Map</title>
+<meta name="generator" content="Namo WebEditor v5.0">
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+		<div align="center">
+			
+  <h1>Amulet Link Map</h1>
+</div>
+<p>After any project is either saved or programmed into the flash, the HTMLCompiler 
+generates a link map for the specific project. The name of the link map has 
+the same name as the home page that was initially selected by the HTMLCompiler, 
+except instead of the .html extenstion, it has a .map extension. The .map file 
+is created in the same directory as the home page.</p>
+<p>The .map file is an unformatted&nbsp;text file which&nbsp;can be read by 
+any text editor. The .map file includes the name of each image and html file 
+in the given project.&nbsp;It is setup so a standard C compiler can use the 
+.map file as an include file, because all comments are bracketed by /* and */ 
+and the definitions are all preceded by #define. This was chosen so the .map 
+file could be directly included in a C or Java&nbsp;project. If you are using 
+a different programming language, you might have to modify or extract the information 
+that you need to appease your compiler.</p>
+<div align="CENTER"> 
+  <hr align="CENTER">
+</div>
+<h2>Sample .map file</h2>
+<p>The following is from an actual .map file for the Field example.</p>
+<p><pre> 
+/*      File Name                Flash Index                  */
+/*      ---------                -----------                  */
+#define OSCheck.html               0x20  /* File Size = 0x6C  */
+#define CompileMe.htm              0x21  /* File Size = 0x22A */
+#define PopUp.htm                  0x22  /* File Size = 0x26  */
+#define file.gif                   0x23  /* File Size = 0x1E  */
+#define UartBckGrnd.gif            0x24  /* File Size = 0x174 */
+#define emptyimage.gif             0x25  /* File Size = 0x1F  Flash Header = 25 00 14 C1 1F 00 0D 00 0D 00 02 */
+#define fullimage.gif              0x26  /* File Size = 0x1F  Flash Header = 26 00 15 01 1F 00 0D 00 0D 00 02 */
+#define trackingimage.gif          0x27  /* File Size = 0x1F  Flash Header = 27 00 15 41 1F 00 0D 00 0D 00 02 */
+#define Amulet Sans Serif FW_2.amf 0x28  /* File Size = 0x2BC */
+#define popup.gif                  0x29  /* File Size = 0x4A1 */
+#define fontHdr.amf                0xF   /* File Size = 0x30  */
+#define internalRAM.bin            0x6   /* File Size = 0x11F9*/
+</pre><p>&nbsp;</p>
+<h3><a name="Amulet:fileNumber(x)"></a>Amulet:fileNumber(<I>x</I>)</h3>
+<p>Following the File Name is the Flash Index in hexadecimal format. This is 
+the internal file number that the HTMLCompiler assigns to each file. This number 
+can be used to hyperlink directly to a given page within the project by using 
+the <B>Amulet:fileNumber(</B><I><b>x</b></I><B>)</B> function, where <I>x</I> is the Flash Index 
+number. Any Control Object/Widget could use <B>Amulet:fileNumber(</B><I><b>x</b></I><B>)</B> as 
+its href function.</p>
+<p>The <B>Amulet:fileNumber(</B><I><b>x</b></I><B>)</B> function works exactly the same as if 
+you entered just a File Name. Using the above .map file, </p>
+<ul>
+    <p><B>&lt;A HREF=CompileMe.htm&gt;link to CompileMe.htm&lt;/A&gt;</B></p>
+</ul>
+<p>is equal to:</p>
+<ul>
+    <p><B>&lt;A HREF=Amulet:fileNumber(0x21)&gt;link to CompileMe.htm&lt;/A&gt;</B></p>
+</ul>
+<h3><a name="Amulet:internal.fileNumber.value()"></a>Amulet:internal.fileNumber.value()</h3>
+<p>The <B>Amulet:internal.fileNumber.value()</B> function returns the value 
+of the flash index number of the given page. Any View Widget that expects a 
+word value can use the <B>Amulet:internal.fileNumber.value()</B> function. Using 
+the above .map file again, a View Widget in CompileMe.htm could have an href 
+function that looks like:</p>
+<ul>
+    <p><B>&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:internal.fileNumber.value()&quot;&gt;</B></p>
+</ul>
+<p>The above function would return a word value of 0x21.</p>
+<p>One&nbsp;way to use the <B>Amulet:internal.fileNumber.value() </B>function 
+is to have each page within a project have a couple of METAs that looks like:</p>
+<ul>
+    <p><B>&lt;META HTTP-EQUIV=&quot;Refresh&quot; CONTENT=&quot;0,0.01;URL=Amulet:nop();ONVAR=Amulet:internal.fileNumber.value();value=InternalRAM.word(0xFF)&quot;<br>&lt;META 
+    HTTP-EQUIV=&quot;Refresh&quot; CONTENT=&quot;0,0.02;URL=Amulet:UART.word(0xFF).setValue(InternalRAM.word(0xFF))&quot;</B></p>
+</ul>
+<p>The first META loads InternalRAM word variable #0xFF with the flash index 
+number of the given page. Just a note on why this saves the flash index number 
+to InternalRAM word variable #0xFF: META's by their nature, will hold data in 
+their own memory space, not in InternalRAM, but this can be changed by using 
+the <B>value</B> attribute in the META and specifying a specific Internal RAM 
+variable. In this case, we set the value to InternalRAM.word(0xFF), so instead 
+of saving its value in its own memory space, it now saves its value in Internal 
+RAM word variable # 0xFF.</p>
+<p>The second META then sends out a setWord command out the UART, setting external 
+word variable #0xFF to the value of Internal RAM word variable #0xFF, which 
+was just loaded with the flash index number of the given page. Notice that the 
+second META is launched 10ms after the first one. This allows for the updating 
+of Internal RAM word variable #0xFF. Using the above .map file again, if these 
+two METAs were in CompileMe.htm, they would be the equivalent to the following 
+META:</p>
+<ul>
+    <p><B>&lt;META HTTP-EQUIV=&quot;Refresh&quot; CONTENT=&quot;0,0.02;URL=Amulet:UART.word(0xFF).setValue(0x21)&quot;</B></p>
+</ul>
+<p>Following the Flash Index is the File Size, in comments, in hexadecimal format. 
+The file size is included for informational purposes only.</p>
+<h2>Image Files</h2>
+<p>All image files are saved in the serial data flash, and as thus, are included 
+in the .map file. Do NOT try to use Amulet:fileNumber(<I>x</I>) where <I>x</I> 
+is the Flash Index to an image file. The Amulet will crash and could potentially 
+trash the OS in the serial data flash, requiring a reloading of the Amulet OS 
+files.</p>
+<p>Any image which is not compressed will also have the first 11-bytes of the 
+Flash Header stored in the .map file. The Flash Header bytes are needed when 
+using the <a href="Widgets.htm#DynamicImage">Dynamic Image Widget</a>. Any image 
+used as a Dynamic Image&nbsp;<B>canvas</B> will not be compressed. Images can be sent to the Amulet via <a href="xmodem.htm">xmodem crc protocol</a> which 
+will overwrite the <B>canvas</B> image of a Dynamic Image Widget, located in 
+the serial data flash. Only images which are the exact same dimensions as the 
+<B>canvas</B> image can be sent to the Dynamic Image Widget to avoid overwriting 
+other files in the serial data flash. The 11-byte Flash Header for any image 
+sent to the Dynamic Image Widget must be the same as the original image used 
+for the Dynamic Image <B>canvas.</B> The first 6 bytes are created by the HTMLCompiler 
+and cannot be derived, thus the need for inclusion in the link map. The last 
+5 bytes are part of the <a href="Bitmap.htm">Amulet Bitmap Format</a> and can 
+be derived, but are included in the link map for cross checking purposes.</p>
+<p>The Flash Header bytes are all hexadecimal numbers. The &quot;0x&quot; was 
+left off for the sake of&nbsp;brevity.</p>
+<div align="center">
+    <hr align="CENTER" width="60%">
+</div>
+<p align="center"><br>
+			<I>Amulet HTMLCompiler,<br>
+    <FONT SIZE="2">Copyright &copy; </FONT><span style='font-size:10.0pt'>2000-2004</span><font size="2"> by<br>
+					
+    Amulet Technologies, LLC</font></I></p>
+<div align="center">
+<p></p>
+    <p><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact 
+      Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet 
+      Home</A> 
+</div>
+</body>
+
+</html>

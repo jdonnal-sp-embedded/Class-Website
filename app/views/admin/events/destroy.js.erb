@@ -1,0 +1,4 @@
+
+
+/*event was deleted so rerender  the event table*/
+$("#event_table").html("<%= render(:partial => 'shared/event_table',:locals=>{:events=>@events, :modifiable=>true}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")

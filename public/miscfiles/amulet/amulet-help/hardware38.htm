@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Sunday, December 10, 2000 10:50 PM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="Author" Content="Ken Klask">
+	<TITLE>Easy GUI Hardware Specs</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">Hardware Specifications</H1>
+<P ALIGN="CENTER"><IMG SRC="Images/gt38board.jpg" WIDTH="529" HEIGHT="424" ALIGN="BOTTOM" BORDER="0"><BR>
+<B>Figure 1. Amulet Easy GUI 3.8&quot; board assembly, component side.</B></P>
+<P><BR>
+
+<TABLE BORDER="1">
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>PCB Size</B>:</TD>
+		<TD>4.25&quot; x 3.58&quot;</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>LCD</B>:</TD>
+		<TD>Chip-on-glass, 3.48&quot; x 2.72&quot; (3.8&quot; diagonal); 320 x 240, monochrome, black on white; viewable area
+			3.14&quot; x 2.39&quot; (76.79 x 57.59mm)</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Dot Pitch</B>:</TD>
+		<TD>0.24 x 0.24mm</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Dot Size</B>:</TD>
+		<TD>0.225 x 0.225mm</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Touch Screen</B>:</TD>
+		<TD>4-wire resistive analog; active area is 80 x 62mm; utilizes full 320 x 240. <B>NOTE</B>: Since the touch screen
+			is touch activated, do NOT allow your mounting hardware to apply any compression forces <A HREF="#Module">inside
+			the active area</A>!</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Backlight</B>:</TD>
+		<TD>LED Rimshot, always ON adjustable brightness.</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Operating Temp</B>.:</TD>
+		<TD>-10° to 60°C; rh&gt;65% non-condensing</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Storage Temp</B>.:</TD>
+		<TD>-20° to 70°C</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Power</B>:</TD>
+		<TD>5 to 10 VDC @100mA (9-volt battery and adapter supplied)</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>SRAM</B>:</TD>
+		<TD>128k-Bytes</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Flash</B>:</TD>
+		<TD>One 128k-Bytes (64k-Bytes available)</TD>
+	</TR>
+	<TR>
+		<TD VALIGN="TOP"  NOWRAP><B>Serial Port</B>:</TD>
+		<TD>One RS-232, 9-pin DIN, up to 115.2 Kbps</TD>
+	</TR>
+</TABLE>
+<BR>
+		<HR ALIGN="CENTER">
+		<H2>DIP Switch Settings</H2>
+		<TABLE BORDER="1" CELLSPACING="1">
+	<TR>
+		<TD WIDTH="92">
+			<P ALIGN="RIGHT"><IMG SRC="Images/dip4.gif" WIDTH="77" HEIGHT="79" ALIGN="BOTTOM" BORDER="0">
+		</TD>
+		<TD>Switch 1 -- Boot Mode<BR>
+			Switch 2 -- Program Baud Rate<BR>
+			Switch 3 -- RAM Test<BR>
+			Switch 4 -- Touch Panel Mode</TD>
+	</TR>
+</TABLE>
+		<p><br>
+			<B>Boot Mode (DIP switch 1) -- </B>This switch is monitored during a reboot to determine the operational mode
+of the controller board; ON is the normal mode and OFF is the FLASH program mode. Upon clicking on the <B>Program FLASH</B> button in the Compiler window, the Compiler will attempt to send out an auto &quot;wake-up&quot; message to the Amulet controller. If the page currently being displayed is set up to use the same baud rate using the <a href="HTMLSupport.htm#META">META</a> tag (if META is not present, the default is 115200) as the Compiler's uP comm rate, 
+then the Amulet controller will change to a generic &quot;Please wait while programming flash...&quot; screen and commence programming. If the page has a baud rate different than what the Compiler is set to, then you should 
+set the <A HREF="compiler.htm#SerialSetup">uP comm rate</A> in the Settings-&gt;RS232 dialog 
+box to match the baud rate set by the META tag. This will allow the HTMLCompiler 
+to wake up the Amulet at one baud rate and then program it at&nbsp;another baud 
+rate. The only time you should have to set Switch 1 to OFF (program mode) is 
+when the project you compiled locks up the Amulet OS to the point where it won't 
+accept the wake up message or if the Amulet OS has been corrupted and you need 
+to <a href="compiler.htm#firmware_upgrade">reload the OS</a>.</p>
+		<P><B>Program Baud Rate (DIP switch 2) --</B> This switch sets the baud rate used during a Flash Reprogram. The
+ON position sets the hardware to 19,200 baud; OFF sets the hardware to 115,200 baud. This setting must match the
+baud rate selected in the <A HREF="compiler.htm#SerialSetup">Easy GUI HTMLCompiler software</A>.</P>
+		<P><B>RAM Test (DIP switch 3) -- </B>Turn this switch ON and then reboot the controller board to auto-execute a
+RAM test. A RAM test failure will result in a zero (0) volt signal on the MEM PASS test pad on the board; a pass
+will result in a 3.3 volt signal. The switch must be returned to the normal mode (OFF) before the next reboot to
+continue normal operation.</P>
+<P><B>Touch Panel Mode (DIP switch 4) --</B> This switch should remain ON during normal operation. Turn this switch
+OFF and then reboot the controller board to begin a touch panel calibration. The controller will display a series
+of three calibration targets. <a href="#Touch">Use a stylus to touch the center of each target</a>. If necessary,
+the controller will repeat the calibration. When calibration is complete, the controller will return to normal
+operation. The switch must be returned to the normal mode (ON) before the next reboot to continue normal operation.<BR>
+
+<HR ALIGN="CENTER">
+
+<H2>Power Supply and Reset</H2>
+<P>
+<TABLE ALIGN="LEFT" BORDER="0" CELLPADDING="2">
+	<TR>
+		<TD WIDTH="231">
+			<DIV>
+				
+        <P><IMG SRC="Images/powerin.gif" WIDTH="231" HEIGHT="143" ALIGN="BOTTOM" BORDER="0"> 
+      </DIV>
+		</TD>
+		<TD>
+			<DIV>
+				<P><b><font color="red">CAUTION</font></b><font color="red">: Do not reverse the polarity on the power input. Doing
+				so will permanently damage the module and invalidate your warranty.</font>
+			</DIV>
+		</TD>
+	</TR>
+</TABLE>
+<p></P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;</P>
+<P ALIGN="CENTER">&nbsp;&nbsp;</P>
+		<P><B>Figure 2. Power Input Power is applied to the 1.3mm connector. <BR>Power requirement 5 to 10 VDC @100mA<BR>
+<BR>
+Reset Switch --</B> This momentary pushbutton switch resets the Easy GUI controller chip as well as LCD power.</P>
+		<HR ALIGN="CENTER">
+		<H2><B>RS-232 Specs </B></H2>
+
+<UL>
+	<LI>Pin 1 - N/C
+	<LI>Pin 2 - TX (Amulet GUI module transmits data on Pin 2 while the PC receives data on Pin 2)	<LI>Pin 3 - RX (Amulet GUI module receives data on Pin 3 while the PC&nbsp;transmits data on Pin 3)	<LI>Pin 4 to 6 - Jumpered
+	<LI>Pin 5 - Ground
+	<LI>Pin 7 to 8 - Jumpered
+	<LI>Pin 9 - N/C
+</UL>
+
+<P>The serial parameters for communications between the Easy GUI client and the server are, as follows:</P>
+
+<BLOCKQUOTE>
+	<P><B>Baud Rate</B>: 9600, 19200, 57600, or 115200bps<BR>
+	<B>Parity</B>: None<BR>
+	<B>Data Bits</B>: 8<BR>
+	<B>Stop Bits</B>: 1</P>
+</BLOCKQUOTE>
+		<P>See Communications <a href="Protocol.htm">Protocol</a> for more information.</P>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Touch"></A>Touch Panel Calibration</H2>
+<P>Although the touch panel is factory calibrated, you may need to recalibrate it from time to time. The calibration
+data is stored in a FLASH ROM location called the Operating System (OS) resource segment. For this reason, you
+must always recalibrate the touch panel after restoring or updating the OS. To perform a touch panel calibration 
+through hardware,
+proceed as follows:
+
+		<OL>
+	<LI>Make sure that the DIP switch settings on SW2 are as follows:
+	<BLOCKQUOTE>
+		<P>Switch 1 ON — Boot Mode<BR>
+		Switch 2 OFF — Flash Mode Baud Rate<BR>
+		Switch 3 OFF — RAM Test<BR>
+		Switch 4 OFF — Touch Panel Mode</P>
+	</BLOCKQUOTE>
+	<LI>Press the Reset Switch to reboot the board.&nbsp;The board reboots in the calibration mode.
+	<LI>A series of three targets appear on the LCD. &nbsp;The first two targets are x and y calibration targets. &nbsp;Using
+	a touch screen stylus, touch the center of each target as it appears. &nbsp;(A stylus was included in the starter
+	kit.)&nbsp;As a target is touched, the next target is displayed.
+	<LI>The third target is a calibration &quot;check&quot; target. Unlike the first two targets, this target appears
+	momentarily pressed while touched.&nbsp;Depending on how you remove the stylus from this target, the calibration
+	will either restart, or the calibration will end.&nbsp;To check calibration accuracy, move the stylus within the
+	center of the target with a continuous touch, and then move the stylus off the edge of the target image.&nbsp;A
+	well-calibrated target will remain pressed with the stylus in the center area, and should return to its pre-pressed
+	state as the stylus moves off the edge of the target.
+	<LI>If the calibration is satisfactory, release the stylus anywhere within the target. &nbsp;(The unit will proceed
+	to the GUI Home Page.)&nbsp; If the calibration is NOT satisfactory, release the stylus anywhere outside the target
+	to restart the calibration.
+	<LI>Make sure you return the Touch Panel Mode DIP switch (Switch 4) to the Normal Mode (ON) before you reset or
+	restart the board.&nbsp; If not, the board will restart in the touch screen calibration mode.
+</OL>
+<p>Touchscreen calibration can also be entered via software, by using the Amulet:calibrate() 
+function call. See the <a href="../projects/Examples/Calibrate/ReadMe.htm">calibrate 
+example</a> for more information.</p>
+		<HR ALIGN="CENTER">
+		<H2><A NAME="Module"></A>Module Assembly Drawing, Easy GUI 3.8&quot; Starter Kit</H2>
+<CENTER>
+<P><IMG SRC="Images/g325mech.gif" WIDTH="548" HEIGHT="544" ALIGN="BOTTOM" BORDER="0">
+			
+				
+
+<HR ALIGN="CENTER" WIDTH="60%">
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright &copy; 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I>
+			<P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact Amulet</A>
+- <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+		</CENTER>
+
+</BODY>
+
+</HTML>

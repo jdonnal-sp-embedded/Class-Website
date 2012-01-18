@@ -1,0 +1,170 @@
+<!--#set var="document_title" value="Common Problems" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2008-04-25 17:43:52 -0400 (Fri, 25 Apr 2008) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Common (and uncommon) Problems</h2>
+
+<h4>Error output from rasm</h4>
+
+<p>Use care when running Rasm.  When it says "no errors found" it
+doesn't always mean that no errors were found.  Some errors cause it
+to output an error message and then incorrectly say "no errors found".
+When that happens, it doesn't change the .OBJ file, it just leaves the
+old code there.  This can be frustrating since it appears that you are
+making lots of changes to the code yet your program never behaves
+differently.  One known source of this problem is writing <tt>mov</tt>
+where you meant to write <tt>movx</tt> or <tt>movc</tt>.  The moral of
+this story is that eternal vigilance is the price of freedom.
+<b>Always check the lines above the "no errors found" line</b> to make
+sure no errors slipped by.</p>
+
+<h4>Labels that share names with constants</h4>
+
+<p>Jumps and calls can take constant values, so if you make a forward
+reference to a label with the same name as a predefined constant
+value, then the constant value will get substituted in assembler pass
+1 rather than the usual substitution in pass 2.  Therefore, in
+addition to any constants you've defined yourself, there are a number
+of label names you should avoid:</p>
+<p><font size=-2><i>acc, acc.0, acc.1, acc.2, acc.3, acc.4, acc.5, acc.6, acc.7, b, b.0, b.1, b.2, b.3, b.4, b.5, b.6, b.7, cprl2, ct2, cy, dph, dpl, ea, es, et0, et1, ex0, ex1, exen2, exf2, exti0, exti1, f0, ie, ie.0, ie.1, ie.2, ie.3, ie.4, ie.5, ie.6, ie.7, ie0, ie1, int0, int1, ip, ip.0, ip.1, ip.2, ip.3, ip.4, ip.5, ip.6, ip.7, it0, it1, ov, p, p0, p0.0, p0.1, p0.2, p0.3, p0.4, p0.5, p0.6, p0.7, p1, p1.0, p1.1, p1.2, p1.3, p1.4, p1.5, p1.6, p1.7, p2, p2.0, p2.1, p2.2, p2.3, p2.4, p2.5, p2.6, p2.7, p3, p3.0, p3.1, p3.2, p3.3, p3.4, p3.5, p3.6, p3.7, pcon, ps, psw, psw.0, psw.1, psw.2, psw.3, psw.4, psw.5, psw.6, psw.7, pt0, pt1, px0, px1, rb8, rcap2h, rcap2l, rclk, rd, ren, reset, ri, sbuf, scon, scon.0, scon.1, scon.2, scon.3, scon.4, scon.5, scon.6, scon.7, sint, sm0, sm1, sm2, sp, t0, t1, t2con, t2con.0, t2con.1, t2con.2, t2con.3, t2con.4, t2con.5, t2con.6, t2con.7, tb8, tclk, tcon, tcon.0, tcon.1, tcon.2, tcon.3, tcon.4, tcon.5, tcon.6, tcon.7, tf0, tf1, tf2, th0, th1, th2, ti, timer0, timer1, tl0, tl1, tl2, tmod, tr0, tr1, tr2, txd, wr</i></font>
+</p>
+<p>One easy way to do this would be to prefix all of your labels with a
+letter like <b>L</b>.</p>
+
+<h4>Things to watch out for with Rasm</h4>
+<p>If you are seeing strange behavior that you can narrow down to a
+single instruction, it may be worth checking the <tt>filename.lst</tt>
+output to make sure it was assembled correctly.  Currently, we know
+of a few issues that may crop up:
+<ul>
+<li>Constants defined with <tt>equ</tt> should not start with
+<tt>R</tt> or <tt>r</tt>.  When such constants are used by the
+<tt>inc</tt> or <tt>dec</tt> instructions, Rasm incorrectly reserves
+three bytes for the instruction even though it only takes two.  The
+third byte does not get filled and will contain unknown data when you
+download it.
+<pre>
+   ;; BAD: assembles to 15 55 ?? 00
+   ref  equ 55h
+        dec ref    
+        nop
+
+   ;; OK: assembles to 15 55 00
+   xref equ 55h
+        dec xref
+	nop
+</pre>
+<li>Constants defined with <tt>equ</tt> should be defined before you
+use them.  If they are defined later and resolved during the second
+pass of the assembler, Rasm forgets to reserve space for some
+instructions like <tt>setb</tt> or <tt>clr</tt>, and they get
+overwritten by subsequent instructions.
+<pre>
+   ;; BAD: assembles to 12 34
+        clr test
+        db 12h, 34h
+   test equ 00h
+
+   ;; OK: assembles to C2 00 12 34
+   test equ 00h
+        clr test
+        db 12h, 34h
+</pre>
+</ul>
+
+<h4>Representations of Numbers</h4>
+<p>Rasm demands that numbers start with a digit. 
+That means that if you're trying to use the value <tt>FF</tt>, you
+have to write it as <b><tt>#0FFh</tt></b>.  You should get in the
+habit of prefacing your hexadecimal numbers with the digit <tt>0</tt>
+in order to not be tripped up by this.</p>
+
+<h4><a href="http://www.hyperdictionary.com/dictionary/bypass+capacitor">
+AC-Decoupling Condensers (or Bypass Capacitors)</a></h4>
+<p>If your logic levels/signals look particularly noisy, look at the power
+rail (+5V). If this is noisy, you may need to add some
+<a href="http://www.seattlerobotics.org/encoder/jun97/basics.html">power-supply
+AC-decoupling capacitors</a>. Add some large capacitance at various places on
+your kit between +5V and GND. The larger the capacitance, the better the
+AC-decoupling you will see.</p>
+
+<h4>Mysterious O'Scope Traces</h4>
+<p>A few important tips on using the lab oscilloscopes: 
+<ol> 
+<li>Use the <b>Auto Set</b> function to reset the scope to a reasonable state,
+but don't rely on it to always do the right thing with displaying your signal.
+It's always best to configure it manually with the following steps:
+<li>Connect the scope probe's ground clip to the circuit's/kit's <b>earth
+ground</b>.  
+<li>Verify that the scaling on the probe (1X/10X) matches the setting
+on the scope.
+<li><b>Ground couple</b> the scope channel you are using. Adjust the
+vertical position to where you would like the "zero" voltage level to be
+for that trace.
+<li>Adjust the vertical (volts) scale on the channel to something
+reasonable (say 2.00V/DIV for TTL logic levels), and <b>DC couple</b> the
+scope channel in question. <b>Do not AC couple</b> your scope's channels
+unless you really know what you're doing. AC coupling will provide you with
+some pretty strange behavior.
+<li>Make sure the scope is in <b>Run/Roll</b> mode, not stopped (mainly
+applicable to the digital scopes).
+<li>Change the horizontal scaling (time) to see different levels of detail. 
+</ol>
+If you're lost when it comes to oscilloscopes, take a look at the Tektronix
+guide on the <a href="misc.shtml">Miscellaneous</a> page.
+
+<h4>Connecting Devices that are on</h4>
+<p>It is always a bad idea to connect a cable between two devices if
+one or both is on.  The only exception is that you can plug the the
+serial cable into the R31JP if the R31JP is off but the computer is
+on. But when you're connecting a bench power supply to your kit,
+running wires to a new chip on your board, hooking up the lamp, or
+anything at all, make sure both devices are powered off.  Often chips
+will fail in mysterious ways when they are connected while
+powered, and powering up pins out of sequence can damage chips.</p>
+
+<h4>Vcc</h4> 
+<p>The pins "Vcc" and "GND" on the breakout board on the kit powers
+your R31JP at 12V.  If you're having trouble powering your R31JP,
+check that these two wires are correctly connected.  Since it's 12V,
+<b>you should not use the R31JP's Vcc to power chips on your kit!</b> Most of
+the chips we will be using in 6.115 require Vcc be connected to +5V. Read
+the datasheets before connecting anything.  Doing so may lead to chip
+destruction and embarassment.</p>
+
+<h4>Using the correct book</h4>
+<p>Yeralan is a guide to programming the 8051; it is not a reference.
+Always keep the 8051 manual with you (it is the spiral-bound book
+labeled "MCS 51 Microcontroller Family User's Manual") to look up
+information.  Yeralan is known to contain a few errors that will mess
+you up if you do not also cross-check with the Intel manual.</p>
+
+<h4>Ground failure</h4>
+<p>There should be a wire running from the
+<tt>GND</tt> plug near the power switch to the <tt>GND</tt> plug on
+the top-surface power supply.  Most kits have these already, but yours
+may have fallen off by accident.  Check that it's securely connected.
+</p>
+
+<h4>Long filenames</h4>
+<p><b>Rasm</b> doesn't like filenames that are longer than 8 characters.
+The easiest way to avoid problems is to keep your filenames shorter than
+that.</p>
+
+<h4>Vertical rails</h4> 
+<p>The vertical rails on the breadboard are <b>not</b> connected
+across the break in the middle.  You have to make jumpers for them to
+be connected.  Jumper them all right now, as it will save you many
+hours of debugging later.  If you don't understand what we're talking
+about, ask a TA to show you.</p>
+
+<h4>Keypad debouncing capacitors</h4>
+<p>Debouncing capacitors are required on the 74HC922 for correct
+keypress behavior.  The datasheet does not tell you exactly what
+values to use, but it does give their relative sizes, and you can
+figure out reasonable values from looking at the graphs.
+</p>
+
+<!--#include file="include/footer.shtml"-->
+

@@ -1,0 +1,86 @@
+<!--#set var="document_title" value="Latex Information" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2007-02-13 06:13:13 -0500 (Tue, 13 Feb 2007) $ by \$Author: avestruz $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Using Latex in your Lab Reports</h2>
+
+<p>We've put together a set of files to make it easier to use LaTeX to
+write 6.115 lab reports.  We recommend the use of LaTeX, but do not
+require it.</p>
+
+<h3>Our LaTeX package</h3>
+
+<p>We have put together an 'everything you need' tarball for use on
+Athena.  It is accessible either from here:<br>
+<blockquote><a href="miscfiles/latex-package.tgz">latex-package.tgz</a></blockquote>
+Or by copying from<br>
+<blockquote><tt>/mit/6.115/www/miscfiles/latex-package.tgz</tt></blockquote>
+
+
+<p>Get ahold of the tarball and untar it somewere in your home
+directory (<tt>tar xzvf latex-package.tgz</tt>), and take a look inside.  It should contain:
+<ul>
+<li>report-template.tex - This is a LaTeX source file, which we have
+set up so you can just fill in the blanks.  You will want to copy or
+rename this to something like 'lab2.tex'.</li>
+<li>Makefile - Used by GNU make, it contains rules to build .dvi and
+.ps files from your LaTeX source.</li>
+<li>README - Brief description of what the package provides.</li>
+<li>dummy.eps - A graphic provided solely for the purpose of
+demonstration.</li>
+</ul>
+
+
+<h3>Getting started</h3>
+
+<p>You should be able to make a document off of the package we provide
+right away.  Simply type<br>
+<blockquote><tt>make</tt></blockquote><br> 
+
+Make will generate the file report-template.dvi (and a few other
+files).  This file is in the DVI format and can be viewed with
+<tt>xdvi</tt>.  Note that you have to be in the directory containing
+the Makefile for Make to do its thing.
+
+<h3>Our special TeX</h3>
+
+
+<p>We've defined several useful LaTeX commands that you can use to put
+together your report.  They are
+<ul>
+<li><b><tt>\exercise</tt></b> Put this command to start your answer to
+        the next exercise.  It automatically increments the exercise
+        number.
+</li>
+
+
+<li><b><tt>\bold{&lt;some text&gt;}</tt></b> This does exactly what it sounds
+        like.  One thing to note is that it doesn't deal well with
+        linebreaks inside of a <tt>code</tt> block (see the next
+        entry).  So if you're bolding parts of your code, give each
+        line its own <tt>\bold</tt>.
+</li>
+
+<li><b><tt>\begin{code} ... \end{code}</tt></b> This is a code
+				environment.  It sets off the code a little bit from
+				everything else and displays it in a monospaced font so it's
+				easier to read.  We've used alltt to accomplish this, so you
+				will be able to use LaTeX commands inside the body of the
+				code.  In particular, for exercises when you want to highlight
+				additions you have made to some code, we want you to use
+				<tt>\bold</tt> to emphasize your contributions.
+</li>
+
+<li><b><tt>\graphics{&lt;filename&gt;}{&lt;caption&gt;}{&lt;label&gt;}</tt></b>
+        This allows you to insert a graphic from another file as a
+        figure.  The file must be in eps format.  You can use the
+        label later to refer to the figure number when discussing that
+        figure.  You insert the command <tt>\ref{&lt;label&gt;}</tt>
+        and LaTeX will insert the figure's number.  It uses graphicx,
+        so you can pass in graphicx commands as an optional argument.
+</li>
+</ul>
+
+<!--#include file="include/footer.shtml"-->
+

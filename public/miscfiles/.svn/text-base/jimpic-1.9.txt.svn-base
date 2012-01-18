@@ -1,0 +1,75 @@
+JIMPIC(1)                        User Commands                       JIMPIC(1)
+
+
+
+NAME
+       jimpic - manual page for jimpic 1.9
+
+SYNOPSIS
+       jimpic [options]
+               -------
+
+DESCRIPTION
+       -p, --port port
+              specify the port address (default: auto)
+
+       -c, --chip name
+              specify chip (default: auto)
+
+       -b, --burn file
+              "fbp" mode: erase all, burn, and verify
+
+       -R, --run
+              run the PIC (set /MCLR high, PGM low)
+
+       -S, --stop
+              stop the PIC (set /MCLR low)
+
+       -r, --read file
+              read all memory, save in file
+
+       -w, --write file
+              write all memory from file
+
+       -e, --erase
+              erase program and data memory
+
+       -E, --erase-all
+              erase all memory, clear code protection
+
+       -v, --verify file
+              verify all memory from file
+
+       -t, --test
+              only test the hardware
+
+       -s, --slow
+              use slower delays
+
+       -n, --nodata
+              never touch the data memory
+
+       -W, --writeonly
+              never read from the PIC
+
+       -V, --version
+              show program version and exit
+
+       -P, --power
+              control power line on PIC burner
+
+       -G, --go
+              wait for signal on port before doing anything
+
+       -h, --help
+              this help
+
+AUTHOR
+       Written  by Jim Paris <jim@jtan.com>.  jimpic is free software; you can
+       redistribute it and/or modify it and it is provided under the terms  of
+       version  2  of  the GNU General Public License as published by the Free
+       Software Foundation.
+
+
+
+jimpic 1.9                       February 2006                       JIMPIC(1)

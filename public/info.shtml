@@ -1,0 +1,57 @@
+<!--#set var="document_title" value="6.115 Course Information and Staff" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2011-01-26 16:56:21 -0500 (Wed, 26 Jan 2011) $ by \$Author: drv $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Course Information</h2>
+
+<h3>Lectures</h3>
+<ul>
+   <li>Lectures are at TR1 in 34-101.  Chalk Talks are held most weeks
+   at W3 in 34-101.  You are expected to attend all lectures and chalk
+   talks.
+</ul>
+
+<h3>Course Calendar</h3>
+<ul>
+   <li>is on the <a href="calendar.shtml#current">calendar</a> page.
+</ul>
+
+<h3>Handouts</h3>
+<ul>
+   <li>Extra labs and datasheets are available in the filing cabinet
+   near 38-683.  The labs will not be made available online;
+   datasheets can be found <a href="data.shtml">here</a>.
+   <li>Lecture notes are only distributed in lecture. They will not be
+   posted here or placed in the filing cabinet.
+</ul>
+
+<h2>Staff Members</h2>
+
+<h3>Lecturer</h3>
+<ul>
+  <li> Professor Steven Leeb, Rm 10-069 - <a
+  href="mailto:sbleeb@mit.edu">sbleeb@mit.edu</a>
+</ul>
+
+<h3>Teaching Assistants - Office 38-691, x3-1938</h3>
+
+<em>If you have a question regarding a lab or administrative issues, you can reach all of the TAs
+at <a href="mailto:6.115-tas@mit.edu">6.115-tas@mit.edu</a>. 
+Lab hours for each week will be posted on the <a href="index.shtml">announcements</a> page.</em>
+<ul>
+  <li>Dan Vickery
+  <li>BJ Thompson
+  <li>Al Avestruz
+</ul>
+
+<h3>Lab Assistants</h3>
+<ul>
+  <li>Kesavan Yogeswaran
+  <li>Michael Ciuffo
+  <li>Robin Deits
+  <li>Krishna Settaluri
+  <li>Paul Hlebowitsh
+</ul>
+
+<!--#include file="include/footer.shtml"-->

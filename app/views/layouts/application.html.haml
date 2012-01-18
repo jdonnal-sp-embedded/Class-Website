@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %title 6.115 Course Site
+    = stylesheet_link_tag 'web_app_theme'
+    = stylesheet_link_tag 'facebox'
+    = stylesheet_link_tag 'event_calendar'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+  %body
+    #container
+      #header
+        %h1
+          %a{:href => "/"} 6.115 Spring 2012
+        #user-navigation
+          = render(:partial => "shared/navigation")
+        #main-navigation
+          = render_navigation
+      #wrapper.wat-cf
+        .flash
+          - flash.each do |type, message|
+            %div{:class => "message #{type}"}
+              %p= message
+        #main
+          = yield
+          #footer
+            .block
+              %p
+                Copyright &copy; #{Time.now.year} John Donnal.
+        #sidebar
+          = yield :sidebar
+

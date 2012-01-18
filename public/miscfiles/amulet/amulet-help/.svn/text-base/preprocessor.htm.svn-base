@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<title>Amulet HTMLCompiler Preprocessor</title>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+		<H1 ALIGN="CENTER">Amulet HTMLCompiler Macro Preprocessor</h1>
+		<p>The Amulet macro 
+preprocessor allows you to create macros which are used to make textual substitution 
+throughout the HTML project. The macros are defined in a text file which is&nbsp;included 
+in&nbsp;your HTML project by inserting a META tag in your main HTML page. Almost 
+all&nbsp;text within the HTML project will be scanned by the Amulet macro preprocessor 
+and text substitutions will be made. The only exception is the Amulet defined 
+APPLET &quot;NAME=&quot; parameters. All other text, including static text strings, 
+will be scanned by the macro preprocessor and substitutions will occur when 
+an exact match to the macro&nbsp;definition is found. Macro expansion occurs 
+at compile time within the HTMLCompiler.</p>
+<P>The Amulet macro preprocessor is case sensitive. To be considered an exact 
+match, the macro&nbsp;name must be found in the scanned string and must be surrounded 
+by word separators. The following are considered word separators:</P>
+<P><B><FONT face="Courier New">.?!,;()=&quot;</FONT></B></P>
+<P>and </P>
+<P>start of string, end of string, and spaces.</P>
+<P><B>Note:</B> &amp;nbsp; is NOT considered a space, so if it is desired to 
+use the literal macro&nbsp;name within the HTML project, it can be either preceded 
+or followed by a &amp;nbsp; which ends up looking on the Amulet LCD as a regular 
+space. Another option is to precede or follow the literal variable name with 
+a &amp;#03; which puts in a space holder that the Amulet doesn't display. The 
+only problem with using &amp;#03; is that some HTML editors &quot;help you&quot; 
+by changing &amp;#03; to &amp;amp;#03; which will not work.</P>
+<P>Because the preprocessor scans all the text in your HTML project, it is advised 
+to use macro&nbsp;names that will not show up normally. We suggest starting 
+all of your macro&nbsp;names with an uncommon character, like % or #. Another 
+common practice is to bracket the macro name with %, such as %macro%. This will 
+serve two purposes. One, it makes it easy to see your macros&nbsp;when looking 
+at your HTML source. Two,&nbsp;you won't have to worry about having the preprocessor 
+do a text substitution when you didn't really mean it. The Amulet macro preprocessor 
+is very flexible, though, so you are not required to use any special characters, 
+but care should be taken in the naming of macros.</P>
+<P><b><font size="4">Enabling the HTMLCompiler Preprocessor:<br>
+				<br>
+			</font></b>By default, the Amulet HTMLCompiler preprocessor is not enabled. You can enable the preprocessor by specifying an include file. <a href="../Projects/Examples/Macro/ReadMe.htm">Click here</a> to see an example. The syntax for specifying an include file is:<br>
+		<br>
+		<B>&lt;META NAME=&quot;Macro&quot; SRC=&quot;filename&quot;&gt;<br>
+			<br>
+		</B>The include file,<b><i> </i>filename<i>, </i></b>must be located in the same directory as the main HTML page.</P>
+<P> 	<font size="4"><b>Defining macros:<br>
+				<br>
+			</b></font>All macros must start with <B>#define</B>, followed by white 
+space, then the macro name, more white space, then the textual substitution. Neither 
+the macro name nor the textual substitution are allowed to have any white space 
+within it. White space is considered either spaces or tabs. Inside the include file, any 
+text to the right of the comment characters <B>//</B> is treated as a comment. 
+It is okay to have a comment on the same line as the macro definition.<br>
+	As an example, the syntax is as follows:<br>
+		<br>
+		<B>#define macroName textSubstitution<i><br>
+			<br>
+			
+		</i></b></P>
+<table border="0" width="927">
+			<tr>
+				<td width="62">
+					<p>Where:&nbsp;</p>
+				</td>
+				<td width="855">
+					<p>&nbsp;</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="62">
+					<p align="center">&nbsp;</p>
+				</td>
+				<td width="855">
+					<p><b><i>#define</i></b> specifies the 
+            creation of a macro.</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="62">
+					<p align="center">&nbsp;</p>
+				</td>
+				<td width="855">
+					<p><b><i>macroName </i></b>is the name of the macro.</p>
+				</td>
+			</tr>
+			<tr>
+				<td width="62">
+					<p align="center">&nbsp;</p>
+				</td>
+				<td width="855">
+					<p><b><i>textSubstitution </i></b>is the text which will replace the macro name.</p>
+				</td>
+			</tr>
+		</table>
+		<br>
+		Examples:<br>
+		<B><FONT face="Courier New">#define %hour%&nbsp;&nbsp;&nbsp;&nbsp;Amulet:UART.byte(0)// 
+Comment goes here.</FONT></B><FONT FACE="Courier New"><br>
+		</FONT><B><FONT face="Courier New">#define %getHour &nbsp;%hour%.value() 
+&nbsp;&nbsp;&nbsp;&nbsp;// expands to Amulet:UART.byte(0).value()<br>
+			#define *year &nbsp;&nbsp;&nbsp;&nbsp;word(3)<br>
+			#define +counter &nbsp;7 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Comment goes here.<br>
+			</FONT><br>
+		
+</B><P>As you can see from the examples above, it is legal to use macros to define 
+other macros. Forward references are allowed. For example, both of the following 
+are&nbsp;legal:</P>
+<P><B><FONT face="Courier New">#define &nbsp;%getCnt &nbsp;%cnt.value() &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+forward reference to %cnt is okay!<BR>#define &nbsp;%cnt &nbsp;&nbsp;&nbsp;&nbsp;Amulet:InternalRAM.byte()</FONT></B></P>
+<P>as well as</P>
+<P><B><FONT face="Courier New">#define &nbsp;%cnt &nbsp;&nbsp;&nbsp;&nbsp;Amulet:InternalRAM.byte()<BR>#define 
+&nbsp;%getCnt &nbsp;%cnt.value()<BR></FONT></B></P>
+<P><font size="4"><b>Using macros to initialize InternalRAM:</b><br>
+			<br>
+		</font>A powerful feature of the Amulet HTMLCompiler preprocessor is that it enables you to use defined macros anywhere in the HTML project, including in the initialization of Internal RAM variables. For example, to initialize an Internal RAM byte variable referenced by the macro <B>%counter</B> to a value of 16, you would use the following nomenclature in the Internal RAM initialization file:<br>
+		<B>InternalRAM.byte(%counter) = 16<br>
+		</B><br>
+		You can also use a macro&nbsp;as the value of an&nbsp;InternalRAM 
+variable as well. For example:
+</P>
+<P><B>InternalRAM.byte(%counter) = %time</B></P>
+<HR width="60%">
+		<CENTER>
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © </FONT><span style='font-size:10.0pt'>2000-2004</span><FONT SIZE="2"> by<BR>
+					
+Amulet Technologies, LLC<br>
+				</FONT></I>&nbsp;<I><FONT SIZE="2"><BR>
+				</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A></CENTER>
+		<p align="center">&nbsp;</p>
+</body>
+
+</html>

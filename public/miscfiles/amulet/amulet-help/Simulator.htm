@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+	<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 2.0 for Windows">
+	<TITLE>Using The Amulet Simulator</TITLE>
+</HEAD>
+
+	<body bgcolor="white">
+		<h1 align="CENTER">Using The Amulet Serial Protocol Simulator</h1>
+		<p>The Simulator program allows a user to interact with an Amulet Easy GUI module without an additional piece of hardware. The interaction is accomplished in one of two ways. The first way is by being able to view the different types of Amulet commands transmitted by an Easy GUI module and by simulating responses to the Amulet commands. The second way allows the Simulator to transmit Amulet commands instead of waiting for them and simulating responses.<br>
+			<br>For more detail on using the Simulator, click on the following topics:</p>
+		<ul>
+			<li><a href="#RunningHTMLCompiler">Starting The Simulator,</a>
+			<li><a href="#SerialSetup">Setting Up The RS-232 Port,</a>
+			<li><a href="#Flashing">Running The Simulator,</a>
+			<li><a href="#GetByte">Amulet Get Byte Variable,</a>
+			<li><a href="#GetWord">Amulet Get Word Variable,</a>
+			<li><a href="#GetString">Amulet Get String Variable,</a>
+			<li><a href="Simulator.htm#GetLabel">Amulet Get Label Variable,</a>
+			<li><a href="#Invoke">Amulet Invoke Remote Procedure Call (RPC),</a>
+			<li><a href="#SetByte">Amulet Set Byte Variable,</a>
+			<li><a href="#SetWord">Amulet Set Word Variable,</a>
+			<li><a href="#SetString">Amulet Set String Variable,</a>
+			<li>
+			<li>Menus: <a href="#File">File,</a> <a href="#RS-232">RS232</a>, <a href="#Help">Help</a>
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="RunningHTMLCompiler"></a>Starting The Simulator</h2>
+		<p>The Simulator runs on Windows 95, 98, ME or later. The Simulator may be invoked by any standard Windows method:</p>
+		<ul>
+			<li>From the Windows <b>START</b> menu,
+			<li>Double clicking on
+			<ul>
+				<li>the Simulator icon,				<li>any shortcut icons.
+			</ul>
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="SerialSetup"></a><b>Setting Up The RS-232 Port</b></h2>
+		<p>The Simulator uses an RS-232 port on your PC to communicate with the Easy GUI module. Prior to communicating with the Easy GUI module, you must select a comm port, baud rate, Simulator mode, and specify whether the Simulator is to use the old or new opcodes. The Simulator can be set up to run in either slave mode or master mode. In slave mode, the Simulator responds to valid Amulet request commands. In master mode, the Simulator sends out Amulet commands instead of responding to them. The factory default settings are &quot;COM1&quot; for Comm Port, &quot;115200&quot; for the Bit Rate, &quot;Slave&quot; for the Simulator Mode, and &quot;New Opcodes&quot; for the UART. In order for the Simulator to be able to communicate with your Easy GUI module, be sure to verify that the baud rate on the Simulator matches the baud rate of the currently programmed uHTML project. The baud rate can be found by viewing the META tag in the &lt;HEAD&gt; section of the default home page of the uHTML project. Example:</p>
+		<blockquote>
+			<p><b>&lt;META NAME=&quot;Amulet&quot; Content=&quot;baud=19200&quot;&gt;</b></p>
+		</blockquote>
+		<p>To select a serial port for communications:</p>
+		<ol>
+			<li>From the Simulators <b>RS232</b> menu, select <b>Settings</b>. You will be presented with a RS-232 dialog box similar to the one pictured below.<br>
+				<img src="Images/Com.gif" align="BOTTOM" border="0" width="232" height="222">
+			<li>Next, select any available serial port from the <b>Comm Port</b> list.
+			<li>Choose a baud from the <b>Bit Rate</b> list. The bit rate must match the bit rate selected by the home page of the uHTML project.		<li>Choose a Simulator mode from the <b>Mode</b> list.
+
+			<li>Then, choose the opcodes version from the <b>UART</b> list. For more information on the opcodes version, <a href="Protocol.htm#Customizing">click here</a>. 
+			<li>Finally, click the <b>OK</b> button.
+		</ol>
+		<p>If you haven't already done so, be sure to have the Easy GUI module connected to your PC's serial port via a standard serial cable.</p>
+		<hr align="CENTER">
+		<h2><a name="Flashing"></a>Running The Simulator</h2>
+		<p>By default, the Simulator will not be in simulation mode. To enable simulation, first setup the RS-232 port as mentioned in <a href="#SerialSetup">Setting Up The RS-232 Port</a>.<br>
+			Then, click on the &quot;Open Port&quot; button beneath the menu bar. Once the &quot;Open Port&quot; is pressed, the Simulator is now ready for serial interaction with an Easy GUI module. All RS-232 communications between an Easy GUI module and the Simulator are shown in the text area of the program window as long as the Stop Monitoring checkbox is left unchecked. The Simulator will respond to all Amulet commands transmitted by the Easy GUI module by echoing back the appropriate data as specified in the <a href="Protocol.htm">Protocol.htm</a> document.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>If the selected serial port is already open and in use by another application, the Simulator will abort trying to open the serial port and display the &quot;Port is in use&quot; error message. In this case, either close the conflicting application, or select a different serial port.			<li>If you check the Stop Monitoring Checkbox, then the Simulator will stop displaying any new RS-232 communications, but will continue communicating with the Amulet GUI module in the background. Even though you may not see data in the text area, you can still transmit data back to the Easy GUI module by entering valid data into the text fields.		</ul>
+		<hr align="CENTER">
+		<h2><a name="GetByte"></a>Amulet Get Byte Variable</h2>
+		<p>You may, at anytime while running the Simulator in slave mode, respond to an Easy GUI modules get byte variable command as long as the variable being requested is in one of the drop-down lists in the Amulet Get Command frame. The Amulet Get Command frame allows you to use a text field for entering a byte worth of data to transmit. To respond to a supported byte variable:</p>
+		<ol>
+			<li>First, select the byte variable from one of the drop-down lists in the Amulet Get Command frame.		<li>Next, enter the byte value in the text field next to the corresponding drop-down list.</ol>
+		<p>The following example shows the Simulator responding to a get byte variable command using the new opcodes.</p>
+		<p><img src="Images/getByte.gif" border="0" width="774" height="546"></p>
+		<p><br>If the byte variable being requested by the Easy GUI module is not selected in either drop-down list in the Amulet Get Command frame, then the Simulator will transmit an acknowledgement command back to the module.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>If you set both drop-down lists in the Amulet Get Command frame to the same byte variable, then the top most drop-down list gets priority.		<li>Inputting data into the text field can be done in one of two formats, decimal or hex format. For decimal format, enter a byte value from 0 - 255. For hex, enter a byte value from 0x00 - 0xFF. If you do not precede the hex value with &quot;0x&quot; or &quot;0X&quot;, then the Simulator will only respond with an acknowledgement and <b>NO</b> data.
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="GetWord"></a>Amulet Get Word Variable</h2>
+		<p>The get word variable command is very similar to the get byte variable command except that you can <b>ONLY USE</b> the lower drop-down list in the Amulet Get Command frame to select a word variable. To respond to a supported word variable:</p>
+		<ol>
+			<li>First, select the word variable from the lower drop-down list in the Amulet Get Command frame.		<li>Next, enter the word value in the text field next to the drop-down list.	</ol>
+		<p>The following example shows the Simulator responding to a get word variable command using the new opcodes.</p>
+		<p><img src="Images/getWord.gif" border="0" width="774" height="546"></p>
+		<p><br>
+			If the word variable being requested by the Easy GUI module is not selected in the lower drop-down list in the Amulet Get Command frame, then the Simulator will transmit an acknowledgment command back to the module.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>Inputting data into the text field can be done in one of two formats, decimal or hex format. For decimal format, enter a word value from 0 - 65535. For hex, enter a word value from 0x0000 - 0xFFFF. If you do not precede the hex value with &quot;0x&quot; or &quot;0X&quot;, then the Simulator will only respond with an acknowledgement and <b>NO</b> data.
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="GetString"></a>Amulet Get String Variable</h2>
+		<p>The get string variable command is also very similar to the get byte variable command, but instead of returning a single byte of data, a null-terminated ASCII string is returned. To respond to a supported string variable:</p>
+		<ol>
+			<li>First, select the string variable from the drop-down list in the Amulet String Command frame.			<li>Next, enter the string in the text field next to the drop-down list.		</ol>
+		<p>Each time the Easy GUI module requests a string variable that you have selected in the Amulet String Command frame, the Simulator will transmit the string you have entered in the text field along with a null character to signify the end of the string.</p>
+		<p>User-defined wraps can be specified by entering &quot;\n&quot; within the text field at the spot you would like the wrap to occur. As an example, entering &quot;This Line\nNext Line&quot; in the text field will result in a 0x0A being sent out between This Line and Next Line. The Amulet StringField Widget interprets the 0x0A as a line feed, so if the StringField Widget is tall enough to handle two lines of text, you would see on the Amulet:</p>
+		<p><b>This Line<br>
+				Next Line</b></p>
+		<p>&nbsp;The following example shows the Simulator responding to a get string variable command using the new opcodes.</p>
+		<h2><img src="Images/getString.gif" align="BOTTOM" border="0" width="774" height="546"></h2>
+		<p><br>If the string variable being requested by the Easy GUI module is not selected in the Amulet String Command frame, then the Simulator will transmit an acknowledgment command back to the module.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>For demonstration purposes only, the Simulator displays the null-terminated string as ASCII in the text area of the program window.  The Simulator response of &quot;0xE2 0x30 0x34 hello world 0x00&quot; is really transmitted as &quot;0xE2 0x30 0x34 0x68 0x65 0x6C 0x6C 0x6F 0x20 0x77 0x6F 0x72 0x6C 0x64 0x00&quot;.
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="GetLabel"></a>Amulet Get Label Variable</h2>
+		<p>The get label variable command is almost exactly like the get string variable command. The only differences are the first bytes in the request and response messages. Assuming the Simulator is using the new opcodes, the first byte of the get labels request message is a [0xD3] as opposed to the get strings [0xD2]. The first byte of the get labels response message is a [0xE3] as opposed to the get strings [0xE2]. The label text is taken from the same text field as the get string variable command. The Simulator automatically determines whether to respond to a get string variable or a get label variable command.</p>
+		<hr align="CENTER">
+		<h2><a name="Invoke"></a>Amulet Invoke Remote Procedure Call (RPC)</h2>
+		<p>The Amulet Invoke Command frame notifies the Simulator when the Easy GUI module has issued an invoke RPC command. While the Amulet Get Command frame is more of a read/write frame depending on whether you have the Simulator running in slave or master mode, the Amulet Invoke Command frame is read only. Whenever an invoke RPC&nbsp;command is received, the Simulator displays the value of the function in the Amulet Invoke Command frame. Also, the text color of the requested function toggles each time an invoke RPC&nbsp;command is received.</p>
+		<p>The following example shows the Simulator responding to an invoke RPC command using the new opcodes.</p>
+		<p><img src="Images/invokeCmnd.gif" align="BOTTOM" border="0" width="774" height="546"></p>
+		<p><br>The Simulator will automatically transmit an acknowledgment back to the module when an invoke RPC command is received.</p>
+		<hr align="CENTER">
+		<h2><a name="SetByte"></a>Amulet Set Byte Variable</h2>
+		<p>The Simulator can receive or transmit a set byte variable command depending on which mode the Simulator is running in. In slave mode, the Amulet Set Command frame operates much like the Amulet Invoke Command frame except that it notifies the Simulator when it has received a set byte variable command. For example, receiving &quot;[0xD5][0x36][0x35][0x46][0x46]&quot; can be interpreted as set byte variable 0x65 to a value of 0xFF. Just like the invoke RPC command, the text color toggles each time a set byte variable command is received. The Simulator will automatically transmit an acknowledgment back to the module when a set byte variable command is received.</p>
+		<p>The following example shows the Simulator responding to a set byte variable command using the new opcodes.</p>
+		<p><img src="Images/setCmnd.gif" align="BOTTOM" border="0" height="546" width="774"></p>
+		<p><br>In master mode, you can transmit a set byte variable command and specify the byte variable to set and the byte value associated with it. To set a byte variable:</p>
+		<ol>
+			<li>First, select the byte variable from the first drop-down list in the Amulet Get Command frame.			<li>Next, enter the byte value you wish to set the byte variable to in the text field next to the drop-down list.			<li>Now click on the corresponding &quot;&lt;&lt; Transmit&quot; button to the right to send the set byte variable command.	</ol>
+		<p>The following example shows the Simulator sending a set byte variable command using the new opcodes.</p>
+		<p><img src="Images/setByte.gif" border="0" height="546" width="774"></p>
+		<p><br>By clicking the corresponding &quot;&lt;&lt; Transmit&quot; button, a set byte variable command is transmitted serially. The Amulet module acknowledges the set byte variable command by responding with the appropriate server response.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>Inputting data into the text field can be done in one of two formats, decimal or hex. For decimal format, enter a byte value from 0 - 255. For hex, enter a byte value from 0x00 - 0xFF.		</ul>
+		<hr align="CENTER">
+		<h2><a name="SetWord"></a>Amulet Set Word Variable</h2>
+		<p>In master mode, the set word variable command is very similar to the set byte variable command except that you can <b>ONLY USE</b> the lower drop-down list in the Amulet Get Command frame to select the word variable. To set a word variable:</p>
+		<ol>
+			<li>First, select the word variable from the lower drop-down list in the Amulet Get Command frame.			<li>Next, enter the word value in the text field next to the drop-down list. 
+			<li>Now click on the corresponding &quot;&lt;&lt; Transmit&quot; button to the right to send the set word variable command.	</ol>
+		<p>The following example shows the Simulator sending a set word variable command using the new opcodes.</p>
+		<p><img src="Images/setWord.gif" border="0" width="774" height="546"></p>
+		<p><br>
+			By clicking the corresponding &quot;&lt;&lt; Transmit&quot; button, a set word variable command is transmitted serially. The Amulet module acknowledges the set word variable command by responding with the appropriate server response.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>Inputting data into the text box can be done in one of two formats, decimal or hex. For decimal format, enter a word value from 0 - 65535. For hex, enter a word value from 0x0000 - 0xFFFF.	</ul>
+		<hr align="CENTER">
+		<h2><a name="SetString"></a>Amulet Set String Variable</h2>
+		<p>In master mode, the set string variable command allows you to specify a string variable to set and the string value associated with it. To set a string variable: </p>
+		<ol>
+			<li>First, select the string variable from the drop-down list in the Amulet String Command frame.			<li>Next, enter the string value in the text field next to the drop-down list.
+			<li>Now click on the corresponding &quot;&lt;&lt; Transmit&quot; button to the right to send the set string variable command.	</ol>
+		<p>The following example shows the Simulator sending a set string variable command using the new opcodes.</p>
+		<p><img src="Images/setString.gif" border="0" width="774" height="546"></p>
+		<p><br>
+			By clicking the corresponding &quot;&lt;&lt; Transmit&quot; button, a set string variable command is transmitted serially. The Amulet module acknowledges the set string variable command by responding with the appropriate server response.</p>
+		<p><b>NOTES</b>:</p>
+		<ul>
+			<li>For demonstration purposes only, the Simulator displays the null-terminated strings as ASCII in the text area of the program window. The set string variable command of &quot;0xD7 0x30 0x32 Value= 0x00&quot; is really transmitted as &quot;0xD7 0x30 0x32 0x56 0x61 0x6C 0x75 0x65 0x3D 0x00&quot; and the Amulet module response of &quot;0xE7 0x30 0x32 Value= 0x00&quot; is really transmitted as &quot;0xE7 0x30 0x32 0x56 0x61 0x6C 0x75 0x65 0x3D 0x00&quot;.
+			<li>The Simulator will automatically append a null character to the end of the string you specify in the text field. 
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="File"></a><b>File Menu</b></h2>
+		<table border="1" width="100%">
+			<tr>
+				<td valign="TOP">Open...</td>
+				<td>Open text (*.txt) file for reviewing. Brings up a file dialog for choosing file.</td>
+			</tr>
+			<tr>
+				<td valign="TOP">Save...</td>
+				<td>Save a communication session in text (*.txt) format. Brings up a file dialog for choosing the name and location to save the *.txt file.</td>
+			</tr>
+			<tr>
+				<td valign="TOP">Exit</td>
+				<td>Exit the program.</td>
+			</tr>
+		</table>
+		<b><br>
+		</b>
+		<hr align="CENTER">
+		<h2><a name="RS-232"></a><b>RS232 Menu</b></h2>
+		<table border="1" width="100%">
+			<tr>
+				<td valign="TOP">Settings</td>
+				<td>Brings up RS-232 settings dialog. Used to configure the COM port for communicating with an Easy GUI module and the Simulator mode.</td>
+			</tr>
+		</table>
+		<b><br>
+		</b>
+		<hr align="CENTER">
+		<h2><a name="Help"></a><b>Help Menu</b></h2>
+		<table border="1" width="100%">
+			<tr>
+				<td valign="TOP">Help...</td>
+				<td>Brings up this help document.</td>
+			</tr>
+			<tr>
+				<td valign="TOP">About</td>
+				<td>Brings up a dialog containing information about the Amulet Serial Protocol Simulator and about your computer.</td>
+			</tr>
+		</table>
+		<center>
+			<hr align="CENTER" width="60%">
+			<b><br>
+			</b><i>Amulet Simulator<br>
+				<font size="2">Copyright &copy; 2000-2004 by<br>
+					Amulet Technologies, LLC</font></i>
+			<p></p>
+			<p><a href="welcome.htm">Back to Welcome</a> - <a href="mailto:support@amulettechnologies.com">Contact Amulet</a> - <a href="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</a></p>
+		</center>
+	</body>
+
+</HTML>

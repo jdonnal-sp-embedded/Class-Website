@@ -1,0 +1,123 @@
+<!-- menu.shtml start -->
+<td>
+<table border=0 width="100%">
+
+<!--#include file="color.shtml"-->
+
+<!-- Set up colors for each menu item based on what file included us -->
+
+<!--#if expr="$DOCUMENT_NAME = index.shtml" -->
+<!--#set var="color_home" value="$hilite" --><!--#else -->
+<!--#set var="color_home" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_home" -->" align=center>
+  <a href="index.shtml">Home</a>
+</td></tr>
+
+<tr><td bgcolor="<!--#echo var="normal"-->" align=center>
+  <a href="http://bucket.mit.edu/6.115/">Signups and Code</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = info.shtml" -->
+<!--#set var="color_info" value="$hilite" --><!--#else -->
+<!--#set var="color_info" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_info" -->" align=center>
+  <a href="info.shtml">Course&nbsp;Info&nbsp;&amp;&nbsp;Staff</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = object.shtml" -->
+<!--#set var="color_object" value="$hilite" --><!--#else -->
+<!--#set var="color_object" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_object" -->" align=center>
+  <a href="object.shtml">Course&nbsp;Objectives</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = labhours.shtml" -->
+<!--#set var="color_info" value="$hilite" --><!--#else -->
+<!--#set var="color_info" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_info" -->" align=center>
+  <a href="labhours.shtml">Lab Hours</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = calendar.shtml" -->
+<!--#set var="color_info" value="$hilite" --><!--#else -->
+<!--#set var="color_info" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_info" -->" align=center>
+  <a href="calendar.shtml">Calendar</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = 8051.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="8051.shtml">8051&nbsp;/&nbsp;R31JP&nbsp;Info</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = burnit.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="burnit.shtml">BurnIt</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = amulet.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="amulet.shtml">Amulet&nbsp;Module</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = multimedio.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="multimedio.shtml">MultiMedio</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = data.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="data.shtml">Useful&nbsp;Datasheets</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = misc.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="misc.shtml">Miscellaneous</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = common.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="common.shtml">Common Problems</a>
+</td></tr>
+
+
+<!--#if expr="$DOCUMENT_NAME = latex.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="latex.shtml">LaTeX Materials</a>
+</td></tr>
+
+
+
+<!--#if expr="$DOCUMENT_NAME = ideas.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="ideas.shtml">Final&nbsp;Project&nbsp;Ideas</a>
+</td></tr>
+
+<!--#if expr="$DOCUMENT_NAME = partslist.shtml" -->
+<!--#set var="color_data" value="$hilite" --><!--#else -->
+<!--#set var="color_data" value="$normal" --><!--#endif -->
+<tr><td bgcolor="<!--#echo var="color_data" -->" align=center>
+  <a href="partslist.shtml">Final&nbsp;Project&nbsp;Parts</a>
+</td></tr>
+
+</table>
+</td>
+<!-- menu.shtml end -->

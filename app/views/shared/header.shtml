@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html><!-- header.shtml start -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title><!--#echo var="document_title"--></title>
+</head>
+<!--#include file="color.shtml"-->
+<body bgcolor="<!--#echo var="c_bg"-->"
+      link="<!--#echo var="c_link"-->"
+      vlink="<!--#echo var="c_vlink"-->"
+      alink="<!--#echo var="c_alink"-->"
+      text="<!--#echo var="c_text"-->">
+<table border=0 cellspacing=10>
+<tr valign=middle>
+ <td>
+  <img alt="6.115" src=images/6115.jpg width=166 height=57>
+ </td>
+ <td>
+  <h1>Microcomputer Project Laboratory - Spring 2011</h1>
+ </td>
+</tr>
+<tr valign=top>
+  <!--#include file="menu.shtml"-->
+ <td>
+<!-- header.shtml end -->

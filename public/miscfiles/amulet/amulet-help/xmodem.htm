@@ -1,0 +1,251 @@
+<html>
+
+<head>
+<title>xmodem</title>
+<meta name="generator" content="Namo WebEditor v5.0">
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+<H1 ALIGN="CENTER">XModem Protocol with CRC</h1>
+<h3>Introduction</h3>
+<p>The Xmodem protocol was created
+years ago as a simple means of having
+two computers talk to each other. With
+its half-duplex mode of operation, 128-
+byte packets, ACK/NACK responses and
+CRC data checking, the Xmodem protocol
+has found its way into many
+applications. In fact most communication
+packages found on the PC today have a
+Xmodem protocol available to the user.
+</p>
+<h3>Theory of Operation</h3>
+<p>
+Xmodem is a half-duplex communication
+protocol. The receiver, after receiving a
+packet, will either acknowledge (ACK) or
+not acknowledge (NAK) the packet.
+The CRC extension
+to the original protocol uses a more
+robust 16-bit CRC to validate the data
+block and is used here. Xmodem can be
+considered to be receiver driven. That is,
+the receiver sends an initial character
+“C” to the sender indicating that it’s
+ready to receive data in CRC mode. The
+sender then sends a 133-byte packet,
+the receiver validates it and responds
+with an ACK or a NAK at which time
+the sender will either send the next
+packet or re-send the last packet. This
+process is continued until an EOT is
+received at the receiver side and is properly
+ACKed to the sender. After the initial
+handshake the receiver controls the flow
+of data through ACKing and NAKing the
+sender.</p>
+<p>Table 1. XmodemCRC Packet Format</p>
+<table border="1">
+    <tr>
+        <td width="190">
+            <p>Byte 1 </p>
+        </td>
+        <td width="190">
+            <p>Byte 2 </p>
+        </td>
+        <td width="190">
+            <p>Byte 3</p>
+        </td>
+        <td width="190">
+            <p>Bytes 4-131</p>
+        </td>
+        <td width="190">
+            <p>Bytes 132-133</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="190">
+            <p>Start of Header</p>
+        </td>
+        <td width="190">
+            <p>Packet Number</p>
+        </td>
+        <td width="190">
+            <p>(Packet Number)</p>
+        </td>
+        <td width="190">
+            <p>Packet Data</p>
+        </td>
+        <td width="190">
+            <p>16-bit CRC</p>
+        </td>
+    </tr>
+</table>
+<h3>Definitions</h3>
+<p>The following defines are used for protocol flow control.</p>
+<table border="1" width="620">
+    <tr>
+        <td width="112">
+            <p>Symbol</p>
+        </td>
+        <td width="395">
+            <p>Description </p>
+        </td>
+        <td width="91">
+            <p>Value</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>SOH </p>
+        </td>
+        <td width="395">
+            <p>Start of Header </p>
+        </td>
+        <td width="91">
+            <p>0x01</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>EOT </p>
+        </td>
+        <td width="395">
+            <p>End of Transmission </p>
+        </td>
+        <td width="91">
+            <p>0x04</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>ACK </p>
+        </td>
+        <td width="395">
+            <p>Acknowledge</p>
+        </td>
+        <td width="91">
+            <p>0x06</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>NAK</p>
+        </td>
+        <td width="395">
+            <p>Not Acknowledge </p>
+        </td>
+        <td width="91">
+            <p>0x15</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>ETB</p>
+        </td>
+        <td width="395">
+            <p>End of Transmission Block (Return to Amulet OS mode)</p>
+        </td>
+        <td width="91">
+            <p>0x17</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>CAN</p>
+        </td>
+        <td width="395">
+            <p>Cancel (Force receiver to start sending C's)</p>
+        </td>
+        <td width="91">
+            <p>0x18</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="112">
+            <p>C </p>
+        </td>
+        <td width="395">
+            <p>ASCII “C” </p>
+        </td>
+        <td width="91">
+            <p>0x43</p>
+        </td>
+    </tr>
+</table>
+<p>Byte 1 of the XmodemCRC packet can only have a value of
+SOH, EOT, CAN or ETB anything else is an error. Bytes 2 and 3 form
+a packet number with checksum, add the two bytes
+together and they should always equal 0xff. Please note
+that the packet number starts out at 1 and rolls over to 0 if
+there are more than 255 packets to be received. Bytes 4 -
+131 form the data packet and can be anything. Bytes 132
+and 133 form the 16-bit CRC. The high byte of the CRC is
+located in byte 132.
+The CRC is calculated only on the data packet bytes (4 - 131) .</p>
+<h3>Synchronization</h3>
+<p>The receiver starts by sending an ASCII “C” (0x43) character
+to the sender indicating it wishes to use the CRC
+method of block validating. After sending the initial “C” the
+receiver waits for either a 3 second time out or until a buffer
+full flag is set. If the receiver is timed out then another “C” is
+sent to the sender and the 3 second time out starts again.
+This process continues until the receiver receives a complete
+133-byte packet.
+</p>
+<h3>Receiver Considerations</h3>
+<p>
+This protocol NAKs the following conditions:
+1. Framing error on any byte
+2. Overrun error on any byte
+3. Duplicate packet
+4. CRC error
+5. Receiver timed out (didn't receive packet within 1
+second)
+On any NAK, the sender will re-transmit the last packet.
+Items 1 and 2 should be considered serious hardware failures.
+Verify that sender and receiver are using the
+samebaud rate, start bits and stop bits. Item 3 is usually the
+sender getting an ACK garbled and re-transmitting the
+packet. Item 4 is found in noisy environments. And the last
+issue should be self-correcting after the receiver NAKs the
+sender.</p>
+<p><img src="Images/xFlow1.gif" width="602" height="473" border="0"></p>
+<h3>Sample crc calculation code
+</h3>
+<pre>int calcrc(char *ptr, int count)
+{
+    int  crc;
+    char i;
+</pre>
+<pre>    crc = 0;
+    while (--count &gt;= 0)
+    {
+        crc = crc ^ (int) *ptr++ &lt;&lt; 8;
+        i = 8;
+        do
+        {
+            if (crc &amp; 0x8000)
+                crc = crc &lt;&lt; 1 ^ 0x1021;
+            else
+                crc = crc &lt;&lt; 1;
+        } while(--i);
+    }
+    return (crc);
+}</pre>
+<HR width="60%">
+<CENTER>
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright &copy; </FONT><span style='font-size:10.0pt'>2000-2004</span><font size="2"> by<BR>
+					
+Amulet Technologies, LLC</font></I>
+			<p>&nbsp;<I><FONT SIZE="2"><BR>
+</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</P>
+		</CENTER>
+
+</body>
+
+</html>

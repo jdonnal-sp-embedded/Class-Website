@@ -1,0 +1,19 @@
+<% unless @user.valid? %>
+	<% if @user.errors.messages[:username] != nil%>
+		error_field=$('.fieldWithErrors > .error')
+		error_field.hide()
+		error_field.html("<%=@user.errors.messages[:username][0] %>")
+		error_field.fadeIn()
+	<% else %>
+		alert("<%= @user.errors.messages %>")
+	<% end %>
+<%else%>
+	/*user was successfully built so insert into the correct table*/
+	<%table_id="#"+@role+"_table"%>
+	$("<%=table_id%>").html("<%= render(:partial => 'shared/user_table',:locals=>{:users=>@users, :modifiable=>true}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+	/*close the facebox*/
+	$(document).trigger('close.facebox')
+	/*display a flash message*/
+	<%=createFlash("Created user account for #{@user.username}","notice").html_safe%>
+	
+<%end%>

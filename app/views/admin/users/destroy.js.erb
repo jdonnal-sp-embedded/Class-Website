@@ -1,0 +1,7 @@
+
+
+/*user was deleted built so rerender  the correct table*/
+<%table_id="#"+@role+"_table"%>
+$("<%=table_id%>").html("<%= render(:partial => 'shared/user_table',:locals=>{:users=>@users, :modifiable=>true}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+/*display a flash message*/
+<%=createFlash("Deleted user account for #{@user.username}","notice").html_safe%>

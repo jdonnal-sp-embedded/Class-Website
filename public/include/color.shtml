@@ -1,0 +1,11 @@
+<!-- color.shtml start -->
+<!-- body: -->
+<!--#set var="c_vlink" value="#000080" -->
+<!--#set var="c_alink" value="#ff0000" -->
+<!--#set var="c_link" value="#0000ff" -->
+<!--#set var="c_text" value="#000000" -->
+<!--#set var="c_bg" value="#ffffff" -->
+<!-- backgrounds in tables: -->
+<!--#set var="normal" value="#ccccff" -->
+<!--#set var="hilite" value="#aaaaff" -->
+<!-- color.shtml end -->

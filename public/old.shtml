@@ -1,0 +1,8 @@
+<!--#set var="document_title" value="6.115 Old Announcements" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2008-12-23 11:15:41 -0500 (Tue, 23 Dec 2008) $ by \$Author: zacharyc $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Old Announcements</h2>
+
+<!--#include file="include/footer.shtml"-->

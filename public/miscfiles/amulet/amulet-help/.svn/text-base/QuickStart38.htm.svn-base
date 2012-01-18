@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Monday, December 11, 2000 04:06 PM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>Quick Start</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">Quick Start For The Amulet 3.8&quot; LCD</H1>
+<P>Your Amulet 3.8&quot; module comes pre-programmed from the factory with sample µHTML pages stored in the onboard flash.&nbsp;If you haven't already done so, please take a few minutes to power up the Amulet module to review the pre-programmed demo. To power up the Amulet Starter Kit and begin GUI navigation, proceed as follows:<OL>
+			<LI>Make sure that the jumper settings on J2 are set to the following default values:<BR>
+			<div align="left">
+				<table border="0" width="508">
+					<tr>
+						<td width="189"><img src="Images/GT380Jumpers.gif" width="189" height="196" border="0"></td>
+						<td width="309">
+                    <p>Boot M should be jumpered to ground, which puts the Amulet 
+                    in Run Mode.  (<a href="QuickStart38.htm#* Note">*See 
+                note below</a>)</p>
+</td>
+					</tr>
+				</table>
+				<br>
+				<img src="Images/Okaya PCB2.jpg" width="600" height="442" align="BOTTOM" border="0"></div>
+			<H4>Figure 1.&nbsp;Amulet 3.8&quot; board assembly, component side.</H4>
+			<LI>Connect  the included 5V power adapter to power input J3 on the Amulet 
+    3.8&quot; module.<BR>
+	<b><font color="red">CAUTION:&nbsp;Do not reverse the polarity on the power input.&nbsp;Do 
+    not use a power adapter greater than 5 Volts. Doing so will permanently
+	damage the module and invalidate your warranty.</font></b><BR><LI>The unit powers up and displays the &quot;Easy 
+    As 123&quot; home page.&nbsp;Use a touch panel stylus to navigate the GUI.&nbsp;
+	(A stylus is included with the Starter Kit.)</OL>
+		<HR ALIGN="CENTER">
+		<H2><a name="FirstGUI">Creating Your First Amulet Graphical User Interface</a></H2>
+<P>By now, you should be familiar with the operation and navigation of the Amulet module. The next step is to
+use the Amulet HTMLCompiler to compile and program a GUI. In keeping with a long-standing programming tradition,
+this section introduces you to the Amulet development tools by guiding you through the creation of a &quot;Hello,
+World!&quot; program -- Amulet Style. Proceed as follows:</P>
+<P>Launch the HTMLCompiler by whichever means you prefer.</P>
+
+<OL>
+	<LI>From the HTMLCompiler's <B>File</B> menu, select <B>Open</B>. You will be presented with a file dialog box.
+	
+  <LI>Use the controls in the file dialog to locate the file home.htm from the 
+    <A HREF="../projects/tour/" target="_blank">\projects\tour\</A> subdirectory 
+    of the Amulet main directory. By default the Amulet main directory is C:\Program 
+    Files\Amulet, however you may have specified a different path during the install. 
+  <LI>Select home.htm and click the <B>Open</B> button.
+</OL>
+
+<P ALIGN="CENTER"><IMG SRC="Images/openHome.gif" WIDTH="428" HEIGHT="266" ALIGN="BOTTOM" BORDER="0"></P>
+<P>The HTMLCompiler will open and compile home.htm and all other files that are linked from home.htm. When the
+conversion is complete the compiler will display:</P>
+<P ALIGN="CENTER"><B>&lt;Successful Compile!  Ready to Program 17 files (12032 bytes) into Flash&gt;</B></P>
+<P ALIGN="CENTER"><IMG SRC="Images/compiledHome.gif" WIDTH="608" HEIGHT="386" ALIGN="BOTTOM" BORDER="0"></P>
+		<P><B>NOTE:</B> DO NOT click on the <B>Program Flash</B> button yet because you must first prepare the Amulet module for programming.</P>
+		<HR ALIGN="CENTER">
+		<H2>Setting up the RS232 port for Flash programming</H2>
+<P>Before you can program your &quot;Hello, World&quot; program into the Amulet 
+Flash, you must first select
+a comm port and a programming baud rate.<BR>
+<BR>
+To select a serial port for programming:
+
+<OL>
+	<LI>From the HTMLCompiler's <B>Settings </B>menu, select <B>RS232</B>. You will be presented with an RS232 dialog
+	box similar to the one pictured below.<BR>
+	<IMG SRC="Images/baud1.gif" WIDTH="232" HEIGHT="190" ALIGN="BOTTOM" BORDER="0">
+	<LI>Next, select any available serial port from the <B>Comm Port</B> list. All ports listed in your Windows Registry will be listed.	<LI>Choose a baud from the <B>Flash Rate</B> list. The flash rate must match the baud rate determined 
+    by the state of JP3. From the factory, JP3 is open, meaning the default 
+    flash rate is 115200.  If
+	you select 19200, be sure&nbsp;JP3 is jumpered.
+    <li>Then, choose a baud from the <B>uP Comm Rate</B> list. The uP comm rate 
+    must match the baud rate specified in the home page of your project. By 
+    default, that rate is 115200. This is the baud rate that is used between 
+    the Amulet chip and your microprocessor. See the <a href="HTMLSupport.htm#META">META 
+    documentation</a> to change the uP comm rate within your HTML page.</li>
+<LI>Finally click the <B>OK</B> button.
+</OL>
+
+		<P>Connect one end of the 9-pin serial cable (included with the starter kit) to the serial port (J2) on the Amulet 
+3.8&quot; module and the other end to the assigned serial port on your computer.</P>
+<p> Upon clicking  the <B>Program Flash</B> button in the Compiler window, the Compiler will attempt to send out an auto &quot;wake-up&quot; message to the Amulet controller. If the page currently being displayed is set up to use the same baud rate using the <a href="HTMLSupport.htm#META">META</a> tag (if META is not present, the default is 115200) as the Compiler's uP comm rate, 
+then the Amulet controller will change to a generic &quot;Please wait while programming flash...&quot; screen and commence programming. If the page has a baud rate different than what the Compiler is set to, then you should 
+set the <A HREF="compiler.htm#SerialSetup">uP comm rate</A> in the Settings-&gt;RS232 dialog 
+box to match the baud rate set by the META tag. This will allow the HTMLCompiler 
+to wake up the Amulet at one baud rate and then program it at&nbsp;another baud 
+rate. </p>
+<p><a name="* Note">* Note</a>: &nbsp;If the project you compiled locks up the Amulet OS to the point where it won't 
+accept the wake up message, or if the Amulet OS has been corrupted and you need 
+to <a href="compiler.htm#firmware_upgrade">reload the OS</a>, you should open the 
+Boot M jumper on J2, which puts the Amulet chip in Programming Mode after cycling 
+the power. Once the flash is reprogrammed, you can re-jumper Boot M.</p>
+		<HR ALIGN="CENTER">
+		<H2>Programming The Flash</H2>
+<P>Click on the <B>Program Flash </B>button in the Compiler window. If there is a comm port conflict, the compiler will display &quot;Port is in use.&quot; If the compiler doesn't see the Amulet&nbsp;module, the compiler will display &quot;Serial port timed out.&quot; Normally, though, the compiler will display a series of messages as each file within the page is flashed. When the flash programming is complete, the compiler will display:</P>
+<P ALIGN="CENTER"><B>&lt;Successfully Flashed...&gt;</B></P>
+<P ALIGN="CENTER"><img src="Images/flashedHome.gif" width="608" height="386" border="0"></P>
+		<P><B>Congratulations!</B> You have successfully compiled and flashed your first Amulet uHTML page(s). The home page is now displayed on the LCD of the Amulet&nbsp;module. Navigate the GUI before proceeding to the next section.</P>
+		<HR ALIGN="CENTER">
+		<H2>Editing home.htm</H2>
+<P>Now, it is time to personalize your GUI. Using a text editor, such as Notepad 
+  or a &quot;WYSIWYG&quot; tool like Namo, open &quot;home.htm&quot; located in 
+  the <A HREF="../projects/tour/" target="_blank">\projects\tour\</A> subdirectory 
+  of the Amulet main directory. View the source code for the page and search for 
+  &quot;Hello, World!&quot; between the &lt;BODY&gt; and &lt;/BODY&gt; tags. </P>
+<P ALIGN="CENTER"><IMG SRC="Images/helloWorld.gif" WIDTH="600" HEIGHT="432" ALIGN="BOTTOM" BORDER="0"></P>
+<P>Replace &quot;World&quot; with your name. For example, &quot;Hello, World&quot; should now read &quot;Hello, John!&quot;</P>
+<P>Save the modified file and compile it.</P>
+<P>Click on the Program Flash button.</P>
+<P><B>Congratulations!</B> You have successfully modified an Amulet uHTML page. A personalized version of the home page is now displayed on the LCD of the Amulet module. If desired, see <A HREF="compiler.htm#Restore">Restoring
+The Flash To Factory Configuration.<BR>
+
+</A><HR ALIGN="CENTER">
+
+<H2>Creating A GUI from Scratch</H2>
+<P>Before you embark on creating your own GUI from scratch, a few tips are in 
+  order:</P>
+<ul>
+  <li><B>Learn from our examples:</B> We have assembled a number of examples to 
+    show you how to use HTML and Amulet Widgets. To find out more about the examples, 
+    <a href="Examples.htm">Click&nbsp;Here</a>. You may also want to examine the 
+    source code for the sample pages that were factory configured into your Amulet's Flash. The code resides in the <A HREF="../projects/EasyAs123/" target="_blank">\projects\EasyAs123</A> 
+    subdirectory of the Amulet main directory. The home page is called home.html. 
+    You can use any of these pages as templates for your own GUI. Just copy these 
+    pages to your own subdirectory in \projects\ </li>
+  <li><B>Minimum page requirements:</B> You MUST have at least one table on your 
+    HTML page. The table dimensions attributes must specify the Height and Width 
+    of the LCD (WIDTH=320, HEIGHT=240). All visible content must reside within 
+    this table. You may add any number of rows and columns to this table. You 
+    may also embed additional tables within any cell in this table. The width 
+    and height must be specified for every table and the width must be specified 
+    for every column in each table. Optionally, you can also specify the height 
+    of each row.</li>
+  <li><B>Start with a Template:</B> Finally, you should also be aware that there 
+    is an empty project which contains only one page: template.html. This file 
+    contains the MANDATORY 320x240 TABLE that is REQUIRED by the HTMLCompiler 
+    for every single GUI page. You may add any number of rows and columns to this 
+    table. You may also embed additional tables within any cell in this table. 
+    Template.html is located in the <a href="../projects/empty/" target="_blank">\projects\empty</a> 
+    subdirectory.</li>
+</ul>
+Have fun! 
+<HR ALIGN="CENTER">
+
+<h2>3.8&quot; Hardware Specific Issues</h2>
+<h3>Power Supply and Reset</h3>
+<p>The Easy GUI controller board comes equipped with a 2.5 mm external power connector 
+  (J3). The power requirement is 5 VDC @ 100 mA. A reset switch (momentary pushbutton, 
+  SW1 on the back of the board) resets the Easy GUI controller chip as well as 
+  LCD power.</p>
+		<div align="center">
+			<table border="1">
+				<tr>
+					<td width="92">
+						<p align="RIGHT"><img src="Images/powerin57.gif" width="231" height="143" align="BOTTOM" border="0"></p>
+					</td>
+					<td>
+						<p><b><font color="red">CAUTION</font></b><font color="red">: Do not reverse the polarity on the power input. <br>
+								Doing so will permanently damage the controller board.</font></p>
+					</td>
+				</tr>
+			</table>
+			<B>Power Supply Input</B></div>
+<HR ALIGN="CENTER">
+
+<h3>Jumper Settings</h3>
+		<p>The Amulet 3.8&quot; module can be powered up in different modes via the settings of the Jumper 
+header (J2). The power up modes include: programming mode and run mode.<BR>
+			</p>
+<OL type="1">
+<div align="left">
+				<table border="0" width="196">
+					<tr>
+						<td width="190"><img src="Images/GT380Jumpers.gif" width="189" height="196" border="0"></td>
+					</tr>
+				</table>
+</div>
+</OL>
+		<p><B>Boot Mode (Pins 3&amp;4) -- </B>This jumper is monitored during a reboot to determine the operational mode of the controller board; jumpered is the normal mode and open is the Flash program mode. Upon clicking on the <B>Program Flash</B> button in the Compiler window, the Compiler will attempt to send out an auto &quot;wake-up&quot; message to the Amulet controller. If the page currently being displayed is set up to use the same baud rate using the <a href="HTMLSupport.htm#META">META</a> tag (if META is not present, the default is 115200) as the Compiler's uP comm rate, 
+then the Amulet controller will change to a generic &quot;Please wait while programming flash...&quot; screen and commence programming. If the page has a baud rate different than what the Compiler is set to, then you should 
+set the <A HREF="compiler.htm#SerialSetup">uP comm rate</A> in the Settings-&gt;RS232 dialog 
+box to match the baud rate set by the META tag. This will allow the HTMLCompiler 
+to wake up the Amulet at one baud rate and then program it at&nbsp;another baud 
+rate. The only time you should have to remove the jumper between pins 3&amp;4 
+(program mode) is 
+when the project you compiled locks up the Amulet OS to the point where it won't 
+accept the wake up message or if the Amulet OS has been corrupted and you need 
+to <a href="compiler.htm#firmware_upgrade">reload the OS</a>.</p>
+    <hr>
+		
+<h3><a name="RS232"></a><B>RS-232 Spec</B></h3>
+<p>A serial connection is required between the controller board and a personal 
+  computer in order to program uHTML pages into the FLASH memory of the controller 
+  board.</p>
+		<ul>
+			<li>Pin 1 - N/C
+			<li>Pin 2 - TX (Amulet GUI module transmits data on Pin 2 while the PC receives data on Pin 2)
+			<li>Pin 3 - RX (Amulet GUI module receives data on Pin 3 while the PC&nbsp;transmits data on Pin 3)
+			<li>Pin 4 to 6 - Jumpered
+			<li>Pin 5 - Ground
+			<li>Pin 7 to 8 - Jumpered
+
+			<li>Pin 9 - N/C
+
+		</ul>
+		<p>The serial parameters for communications between the Easy GUI client and the server are, as follows:<br>
+			<br>
+		<blockquote>
+			<B>Baud Rate</B>: 9600, 19200, 57600, or 115200bps<br>
+			<B>Parity</B>: None<br>
+			<B>Data Bits</B>: 8<br>
+			<B>Stop Bits</B>: 1<br>
+		</blockquote>
+		See Communications <a href="Protocol.htm">Protocol</a> for more information.<CENTER>
+<P>
+<HR ALIGN="CENTER" WIDTH="60%">
+<B><BR>
+</B><I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I></CENTER>
+<P ALIGN="CENTER"><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A></P>
+<P>&nbsp;
+
+</BODY>
+
+</HTML>

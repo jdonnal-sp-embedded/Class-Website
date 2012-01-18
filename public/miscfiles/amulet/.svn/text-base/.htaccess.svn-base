@@ -1,0 +1,2 @@
+# Prevent amulet html from getting parsed by the browser
+AddType application/binary .html

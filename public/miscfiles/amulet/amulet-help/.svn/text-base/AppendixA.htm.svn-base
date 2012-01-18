@@ -1,0 +1,728 @@
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>Appendix A</title>
+</head>
+<body bgcolor=white lang=EN-US link=blue vlink=purple style='tab-interval:.5in'
+alink=red>
+<div class=Section1> 
+    <h1 align="center" style="text-align:center;">Appendix 
+    A</h1>
+  <p>Below you will find implementations of the Amulet UART protocol 
+    written in C, BASIC, and assembly. Please note that these code snippets are 
+    presented here to illustrate the workings of the protocol, not serve as a 
+    model implementation.</p>
+  <p><a href="#Csource">C source code</a> </p>
+  <p><a href="#Basic">BASIC source code</a> </p>
+  <p><a href="#Assembly">Assembly source code</a></p>
+  <p><font size="2"><a name=Csource><font face="Courier New, Courier, mono">/*</font></a><font face="Courier New, Courier, mono">*******************************************************************<br>
+    *MAIN ROUTINE - initializes RingBuffer and sets the baud to 9600, then<br>
+    *stays in an infinite loop polling the serial line to see if anything<br>
+    *has been received, and then handling the byte received.<br>
+    *NOTE: the serIn() function simply checks the serial line to see if<br>
+    *anything is there, if not it returns<br>
+    ***********************************************************************/</font></font></p>
+  <p><font size="2" face="Courier New, Courier, mono">int main()<br>
+    { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rbInit(buffer);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setbaud(BAUD9600);</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while(1)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serIn(&amp;buffer);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return(0);<br>
+    }<br>
+    <br>
+    /**************************************************************************<br>
+    *Checks to see if anything is waiting on the serial line to be handled, <br>
+    *if so, it puts it at the end of the Ringbuffer, otherwise it does nothing<br>
+    *and returns <br>
+    **************************************************************************/<br>
+    void serIn(RingBuf *buf)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ((SCSR &amp; RDRF) != 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tail = buf-&gt;tail;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buf-&gt;serData[tail++] 
+    = SCDR;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buf-&gt;tail = 
+    (tail &amp; RB_SIZE_MASK);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parseSerial();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    /*************************************************************************<br>
+    *This function acts as the byte handler to the bytes that serIn() puts <br>
+    *in the Ringbuffer. Checks to see if valid request type has been <br>
+    *received and then sets server response value. Using a standard state <br>
+    *machine, the program proceeds to set variables to hold the values of <br>
+    *the next byte received on the serial lines and when the correct number <br>
+    *of bytes have been received (3 bytes for all request types except <br>
+    *setByte which needs 5 bytes) later calls functions that put the <br>
+    *variables back out on the serial line for output <br>
+    *************************************************************************/<br>
+    void parseSerial(void)<br>
+    { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;static char caseType;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newByte = byteFromBuf(&amp;buffer);</font></p>
+  <p style='margin-bottom:12.0pt'><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((newByte 
+    &gt;= 0xD0) &amp;&amp; (newByte &lt;= 0xD8))<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverResp = respMake(newByte);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caseType = serverResp;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(state == 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;caseType = 0x00;</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((state==0) 
+    &amp;&amp; ((caseType &gt;= 0xD0) &amp;&amp; (caseType &lt;= 0xD5)))<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(state == 1)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hiNib = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(state == 2)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loNib = newByte;</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(caseType 
+    == 0xD5)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state 
+    = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(caseType)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    0xD0:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getByte();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    0xD1:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getString();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    0xD2:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getWord();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br> 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    0xD8:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invokeRPC();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if((state == 3) &amp;&amp; (caseType == 
+    0xD5))<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setValHi = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(state == 4)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setValLo = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setByte();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    <br>
+    /*********************************<br>
+    *Hex to ascii conversion routine <br>
+    **********************************/ <br>
+    char hex2ascii(char hex)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return ((hex &lt; 0x0A) ? (hex + '0') : (hex 
+    + ('A' - 0x0A)));<br>
+    }<br>
+    <br>
+    /*********************************<br>
+    *Ascii to hex conversion routine<br>
+    **********************************/ <br>
+    char ascii2hex(char ascii)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return((ascii &lt;= '9') ? (ascii - '0') : (ascii 
+    - ('A' - 0x0A)));<br>
+    }<br>
+    <br>
+    /*************************************************************************<br>
+    *Handler for a getByte function request <br>
+    * Format of request string is three bytes =&gt; 0xD0 vH&nbsp;vL, where v = variable being requested,<br> * 
+    vH is ASCII version of high nibble of v&nbsp;and vL is ASCII of low nibble 
+    of v.<br>
+    * Returns five&nbsp;bytes =&gt; 0xE0 vH vL NH NL, <br>* where N = value 
+    of variable v (low byte),<br>
+    * NH is ASCII version of high nibble of N and NL is ASCII of low nibble 
+    of N.<br>
+    ********************************************************************************/<br>
+    void getByte(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char index, byteValue, valueHiNib, valueLoNib;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index = ascii2hex(hiNib) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index |= ascii2hex(loNib);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byteValue = byteData[index];<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valueHiNib = hex2ascii(byteValue &gt;&gt; 4);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valueLoNib = hex2ascii(byteValue &amp; 0x0f);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(serverResp);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(hiNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(loNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(valueHiNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(valueLoNib);<br>
+    }<br>
+    <br>
+    /******************************************************************************<br>
+    *Handler for a getString function request <br>
+    * Format of request string is three bytes =&gt; 0xD2 vH&nbsp;vL, where v = index 
+    of string variable,<br> * vH is ASCII version of high nibble of v&nbsp;and 
+    vL is ASCII of low nibble of v.<br>
+    * Returns variable number of byte: 0xE2 vH vL String+Null to client <br>* 
+    <br>* This routine is only looking to respond with one of two strings. Therefore, 
+    it<br>* is only looking at the least significant nibble of string variable 
+    index.<br>*<br>
+    * Uses putchar from ICC C library to put individual characters onto serial 
+    line <br>
+    *******************************************************************************/<br>
+    void getString(void)<br>
+    { <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(serverResp);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(hiNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(loNib);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(loNib == 0x30)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putstring(string1);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(loNib == 0x31)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putstring(string2);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }<br>
+    <br>
+    /**********************************************************************<br>
+    *Handler for a setByte function request <br>
+    * Format of request string is five&nbsp;bytes =&gt; 0xD5 vH&nbsp;vL NH NL, where v = index 
+    of byte variable,<br> * vH is ASCII version of high nibble of v&nbsp;and 
+    vL is ASCII of low nibble of v,<br>
+    * N = value of variable v,<br>* NH is ASCII version of high nibble of N 
+    and NL is ASCII of low nibble of N.<br> * Returns five&nbsp;bytes =&gt; 
+    0xE5 vH vL NH NL, <br>* where P vH vL NH NL are all duplicates of the bytes 
+    that were in the request string.<br>
+     ***********************************************************************/<br>
+    void setByte(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char index, hexVal;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index = ascii2hex(hiNib) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index |= ascii2hex(loNib);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexVal = ascii2hex(setValHi) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hexVal |= ascii2hex(setValLo);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byteData[index] = hexVal;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(serverResp);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(hiNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(loNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(setValHi);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(setValLo);<br>
+    }<br>
+    <br>
+    /*******************************************************************************<br>
+    *Handler for a getWord function request <br>
+    * Format of request string is three bytes =&gt; 0xD1 vH&nbsp;vL, where v = index 
+    of word variable,<br> * vH is ASCII version of high nibble of v&nbsp;and 
+    vL is ASCII of low nibble of v.<br>
+    * Returns seven&nbsp;bytes =&gt; 0xE1 vH vL PH PL NH NL, <br>* where P = value of variable v 
+    (high byte), N = value of variable v (low byte),<br>
+    * PH is ASCII version of high nibble of P&nbsp;and PL is ASCII of low nibble 
+    of P,<br> * NH is ASCII version of high nibble of N and NL is ASCII of low 
+    nibble of N.<br>
+    ********************************************************************************/<br>
+    void getWord(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char index, valMSBhinib, valMSBlonib, valLSBhinib, 
+    valLSBlonib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int wordValue;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index = ascii2hex(hiNib) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index |= ascii2hex(loNib);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wordValue = wordData[index];<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valMSBhinib = hex2ascii((char)((wordValue &gt;&gt; 
+    12) &amp; 0x0f));<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valMSBlonib = hex2ascii((char)((wordValue &gt;&gt; 
+    8) &amp; 0x0f));<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valLSBhinib = hex2ascii((char)((wordValue &gt;&gt; 
+    4) &amp; 0x0f));<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valLSBlonib = hex2ascii((char)(wordValue &amp; 
+    0x0f));<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(serverResp);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(hiNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(loNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(valMSBhinib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(valMSBlonib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(valLSBhinib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(valLSBlonib);<br>
+    }<br>
+    </font></p>
+</div>
+
+<p><font size="2" face="Courier New, Courier, mono">/*******************************************************************************<br>
+    *Handler for an invokeRPC function  <br>
+    * Format of request string is three bytes =&gt; 0xD8 rH&nbsp;rL, where r = index 
+of RPC,<br> * rH is ASCII version of high nibble of r&nbsp;and rL is ASCII of 
+low nibble of r.<br>
+    * Returns three&nbsp;bytes =&gt; 0xD8 rH rL, <br>* where rH rL are duplicates 
+of the bytes that were in the request string.<br>
+     ********************************************************************************/<br>
+    void invokeRPC(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char rpc, valMSBhinib, valMSBlonib, valLSBhinib, 
+    valLSBlonib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;unsigned int wordValue;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rpc = ascii2hex(hiNib) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rpc |= ascii2hex(loNib);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;performRPC[rpc]; &nbsp;&nbsp;&nbsp;// this 
+code could do any number of things based upon<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// 
+which Remote Procedure Call is requested.<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(serverResp);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(hiNib);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(loNib);<br>
+    }<br></font></p>
+<p>
+    <font size="2" face="Courier New, Courier, mono">/*********************************************<br>
+    *Function to take a byte out of the buffer <br>
+    **********************************************/<br>
+    char byteFromBuf(RingBuf *buf)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char byte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;head = buf-&gt;head;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;byte = buf-&gt;serData[head];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buf-&gt;head = (head + 1) &amp; RB_SIZE_MASK;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return byte;<br>
+    }<br>
+    <br>
+    /*********************************************************************************<br>
+    *Function to assign a serverResp value based on the byte taken out of the 
+    buffer<br>
+    **********************************************************************************/<br>
+    char respMake(char byte)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//  Response is always 0x10 greater than the 
+    command opcode<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return (byte + 0x10);<br>}<br>
+    <br>
+    /**********************************************<br>
+    *Function to put a string onto the serial line <br>
+    **********************************************/<br>
+    void putstring(char *str)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char iloop;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char index = 0;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char value;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for(iloop=0; iloop &lt;= strlen(str); iloop++)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value = str[index];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;putchar(value);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index++;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    }</font></p>
+<div class=Section1> 
+  <p><font size="2" face="Courier New, Courier, mono">------------------------------------------------------------------------------------------------------------------------------------------</font></p>
+  <p>&nbsp;</p>
+  <p><font size="2" face="Courier New, Courier, mono"><a name=Basic>Th</a>e following 
+    BASIC source code was taken from actual server implementation based on a 
+    Basic Stamp interfaced to an Analog Devices ADXL202EB accelerometer. </font></p>
+  <p><font size="2" face="Courier New, Courier, mono">'*********************************************************************************************************************<br>
+    '* The main loop of this code waits for valid Client Start of Message (CSOM) 
+    characters then jumps to the appropriate <br>'* service routine<br>
+    '*********************************************************************************************************************<br>incoming 
+    VAR byte(6) &nbsp;' Incoming buffer<br><br>
+    </font><FONT FACE="Courier New" size="2">'********************************************************************************************************************<BR>' 
+serin Rpin, Baudmode, [STR incoming\L\E]<BR>' serin = receive asynchronous 
+serial data<BR>' Rpin = Rx (instruct BASIC Stamp to use dedicated serial-input 
+pin)<BR>' Baudmode = N9600 (9600 baud, 8-bit data, no-parity, true 
+polarity)<BR>' [STR amuletMsg\L\E] = receive string of length L or until end 
+character E is received into amuletMsg array<BR>'<BR>' The command serin Rx, 
+N9600, [STR incoming\L\E]<BR>' will poll the serial line looking for serial 
+data up to length L or until end character E is encountered.<BR>' Incoming data 
+will be stored in the amuletMsg 
+array.<BR>'********************************************************************************************************************<BR></FONT><font size="2" face="Courier New, Courier, mono">serial_in:<br><br>SERIN 16, 84, [RxType, VarType1, VarType2, SetVar1, SetVar2] <br>
+    SERIN 16, 84, [STR incoming\6\0] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'* Read a 
+    max of 6 bytes or stop when received a null termination character<br>
+    RxType = incoming(0)<br>VarType1 = incoming(1)<br>VarType2 = incoming(2)<br>
+    </font></p>
+</div>
+
+<p><font size="2" face="Courier New, Courier, mono">IF RxType = $D5 THEN setByte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'asking for a setByte<br>
+    IF RxType = $D0 THEN getByte&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'asking for a getByte<br>
+    IF RxType = $D2 THEN getString&nbsp;&nbsp;&nbsp;'asking for a getString<br>
+    IF RxType = $D1 THEN getWord&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'asking for a getWord<br>
+    IF RxType &gt; $D5 THEN serial_in&nbsp;&nbsp;&nbsp;'value on line is 
+    not a function, go back to wait for<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'another 
+    command</font></p>
+<div class=Section1> 
+  <p><font size="2" face="Courier New, Courier, mono">'******************************************************************************<br>
+    '* Handler for a getByte function request <br>
+    '* Format of request string = 0xD0xx, where xx = variable being requested 
+    <br>
+    '* Returns 0xE0xxNN, where NN equals the HEX data of the variable xx <br>
+    '******************************************************************************<br>
+    getByte:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp1 = $E0</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF 
+    VarType2 = &quot;5&quot; THEN RateReturn<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF VarType2 = &quot;6&quot; THEN TimeReturn<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF VarType2 = &quot;7&quot; THEN VariableReturn</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Variable 
+    5 is being requested so return value stored for rate (in register B20)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RateReturn:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, 
+    VarType1, VarType2, HEX2 B20]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Variable 6 is being requested so return value 
+    stored for time (in register B22)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TimeReturn:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, 
+    VarType1, VarType2, HEX2 B22]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Variable 
+    7 is being requested so return value stored for variable (in register B21)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VariableReturn:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, 
+    VarType1, VarType2, HEX2 B21]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in<br>
+    <br>
+    '****************************************************************************<br>
+    * Handler for a getString function request<br>
+    '* Format of request string = 0xD2xx, where xx = index of string variable<br>
+    '* Returns 0xE2xxString+Null to client<br>
+    '* Returns requested data back to the screen<br>
+    '****************************************************************************<br>
+    getString:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp1 = $E2</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF 
+    VarType2 = &quot;2&quot; THEN Author_string<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF VarType2 = &quot;3&quot; THEN Company_string</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author_string:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, 
+    VarType1, VarType2, &quot;Jacob Horn&quot;, NULL] <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Company_string:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, 
+    VarType1, VarType2, &quot;Amulet Technologies&quot;, <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NULL]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in</font></p>
+  <p><font size="2" face="Courier New, Courier, mono"><br>
+    '***********************************************************************<br>
+    '* Handler for a setByte function request <br>
+    '* Format of request string = 0xD5xxNN, where xx = variable to be set <br>
+    '* and NN = HEX data <br>
+    '* Returns 0xE5xxNN to client <br>
+    '***********************************************************************<br>
+    setByte:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp1 = $E5<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF VarType2 = &quot;5&quot; THEN Rate<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF VarType2 = &quot;6&quot; THEN Time</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Variable 
+    5 has been called to be set<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rate:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Choose which 
+    parameter associated with rate is to be set, using NN values<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;0&quot; 
+    THEN one<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;1&quot; 
+    THEN two<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;2&quot; 
+    THEN five<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;3&quot; 
+    THEN ten</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;one:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B20 
+    = 1<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;two:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B20 
+    = 2<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;five:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B20 
+    = 5<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ten:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B20 
+    = 10<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Variable 
+    6 has been called to be set<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Once again, choose 
+    which parameter is to be set using NN values<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;0&quot; 
+    THEN tenSeconds<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;1&quot; 
+    THEN thirtySeconds<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;2&quot; 
+    THEN fortyfiveSeconds<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF incoming(4) = &quot;3&quot; 
+    THEN sixtySeconds</font></p>
+  <p style='margin-bottom:12.0pt'><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tenSeconds:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B22 
+    = 10<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;thirtySeconds:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B22 
+    = 30<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fortyfiveSeconds:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B22 
+    = 45<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sixtySeconds:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B22 
+    = 60<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    setByteResp</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setByteResp:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, 
+    VarType1, VarType2, incoming(3), incoming(4)]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in</font></p>
+  <p> 
+    <font size="2" face="Courier New, Courier, mono"><![if !supportEmptyParas]>
+    &nbsp; 
+    <![endif]>
+    <o:p></o:p></font></p>
+  <p><font size="2" face="Courier New, Courier, mono">'*********************************************************************************************<br>
+    '* Handler for a getWord function request <br>
+    '* Format of request string = 0xD1xx, where xx = variable being requested 
+    <br>
+    '* Returns 0xE1xxPPNN, where PP = high byte of variable xx, and NN = low byte 
+    of variable xx <br>
+    '*********************************************************************************************<br>
+    getWord:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp1 = $E1</font></p>
+  <p style='margin-bottom:12.0pt'><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF 
+    VarType2 = &quot;1&quot; THEN YWORDvariable<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'Pulse X port pin, read, and save out x acceleration 
+    values<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSIN 4,1,xWord</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp2 
+    = xWord.HIGHBYTE<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp3 = xWord.LOWBYTE<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'server data sent out over RS232 to client<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 16,84,[ServerResp1, VarType1, VarType2, 
+    HEX2 ServerResp2,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HEX2 ServerResp3]<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO serial_in<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;YWORDvariable:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSIN 2,1,yWord</font></p>
+  <p><font size="2" face="Courier New, Courier, mono"><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp2 = 
+    yWord.HIGHBYTE<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ServerResp3 = 
+    yWord.LOWBYTE</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SEROUT 
+    16,84,[ServerResp1, VarType1, VarType2, HEX2 ServerResp2,<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HEX2 
+    ServerResp3]</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GOTO 
+    serial_in</font></p>
+  <p><font size="2" face="Courier New, Courier, mono">END</font></p>
+  <p>&nbsp;</p>
+  <p><font size="2">-------------------------------------------------------------------------------------------------------------------------------------------</FONT></p>
+  <p><font size="2"><a name=Assembly>Th</a>e following assembly code snippets 
+    were taken from an actual server implementation based on Atmel's AVR 8-bit 
+    RISC microcontroller (Part# AT90LS4433). </FONT></p>
+  <pre><font size="2"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New">;********************************************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">;Main loop of program. Waits for valid Client Start Of Message (CSOM)</FONT></pre>
+  <pre><FONT FACE="Courier New">;characters, then vectors to the appropriate service routine.</FONT></pre>
+  <pre><FONT FACE="Courier New">;******************************************************************** </FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New">.equ GetCommand<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>= 0xD0</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ GetResponse<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>= 0xE0</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ StringCommand<span style="mso-spacerun: yes">&nbsp; </span>= 0xD2</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ StringResponse = 0xE2</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ SetCommand<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>= 0xD5</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ SetResponse<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>= 0xE5</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ InvokeCommand<span style="mso-spacerun: yes">&nbsp; </span>= 0xD8</FONT></pre>
+  <pre><FONT FACE="Courier New">.equ InvokeResponse = 0xE8</FONT></pre>
+  <pre><FONT FACE="Courier New">try_again:</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>getch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Go and wait until a character is present in the buffer</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>cpi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,GetCommand<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>;Is it a get command?</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>brne<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>is_it_S<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Not get command, so check others</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>handleG</FONT></pre>
+  <pre><FONT FACE="Courier New">is_it_String:</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>cpi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,StringCommand;Is it a string command?</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>brne<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>is_it_S<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Not string command, so check for set</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>handleString </FONT></pre>
+  <pre><FONT FACE="Courier New">is_it_S:</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>cpi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,SetCommand<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>;Is it a set command?</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>brne<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>is_it_I<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Not set command, so check for I</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>handleS</FONT></pre>
+  <pre><FONT FACE="Courier New">is_it_I:</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>cpi buffer,InvokeCommand<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>;Is it an invoke command?</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>brne<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Not a valid request so start over and wait for next character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>handleI</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span></FONT></pre>
+  <pre><FONT FACE="Courier New">;********************************************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">;Handle Get Byte command to get variable data </FONT></pre>
+  <pre><FONT FACE="Courier New">; Format of request string = 0xD0xx</FONT></pre>
+  <pre><FONT FACE="Courier New">; where xx = variable requested</FONT></pre>
+  <pre><FONT FACE="Courier New">; Returns 0xE0xxNN to client where NN = HEX data of variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New">;********************************************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">handleG:</FONT></pre>
+  <pre><FONT FACE="Courier New"> <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;</span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>getByte<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Read both nibbles of xx and assemble into a byte. Return in buffer. </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>brcc<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;If carry cleared, then invalid value, so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>which,buffer</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>ldi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,GetResponse</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Acknowledge valid command</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>swap<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>buffer<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Rotate MSNibble into LSNibble position</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span>;Echo back MSNibble of variable (xx) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back LSNibble of variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>get_varH<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Go get data (msn) for variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Transfer data to the client</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>get_varL<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Go get data (lsn) for variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Transfer data to the client</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Done with Get command so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New">;Handle String command to tx a string back.</FONT></pre>
+  <pre><FONT FACE="Courier New">; Format of request string = 0xD2xx</FONT></pre>
+  <pre><FONT FACE="Courier New">; where xx = index of string variable </FONT></pre>
+  <pre><FONT FACE="Courier New">; Returns 0xE2xxString+Null to host.</FONT></pre>
+  <pre><FONT FACE="Courier New">;******************************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">handleString:</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>getByte<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Read both nibbles of xx and assemble into a byte. Return in buffer. </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>brcc<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;If carry cleared, then invalid value and start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>which,buffer</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>ldi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,StringResponse</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Acknowledge valid command</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>swap<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>buffer<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Rotate MSNibble into LSNibble position</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>;Echo back MSNibble of variable (xx) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back LSNibble of variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>...<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;To simplify this snippet, all the code which looks up the string(xx) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>...<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;in a look-up table was left out</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>icall<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Time to go pound the null terminated string out</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Done with string command so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New">;****************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">;Handle S command to Set variable data</FONT></pre>
+  <pre><FONT FACE="Courier New">; Format of request string = 0xD5xxNN</FONT></pre>
+  <pre><FONT FACE="Courier New">; where xx = variable to set</FONT></pre>
+  <pre><FONT FACE="Courier New">; NN = HEX data for variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New">; Returns 0xE5xxNN to client</FONT></pre>
+  <pre><FONT FACE="Courier New">;****************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">handleS:</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>getByte<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Read both nibbles of xx and assemble into a byte. Return in buffer. </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>brcc<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;If carry cleared, then invalid value, so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>which,buffer</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp; &nbsp;</span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>getByte<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Read both nibbles of NN and assemble into a byte. Return in buffer. </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>brcc<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;If carry cleared, then invalid value, so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>what,buffer</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>;This is where we would use the value of xx, now stored in 'which', to determine</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>;where to store the value of NN, now stored in 'what'. For the sake of brevity,</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>;this example only handles xx=00, while all other xx are ignored.</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>cpi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>which,0<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;If offset is zero, then VAR0 is the variable to set</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>brne<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>sts<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>VAR0,what<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Set VAR0 </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>ldi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,SetResponse</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Acknowledge valid command</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>swap<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>buffer<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>;Rotate MSNibble into LSNibble position</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back MSNibble of variable (xx) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back LSNibble of variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,what</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>swap<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>buffer<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Rotate MSNibble into LSNibble position</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back MSNibble of variable (NN) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,what</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back LSNibble of variable (NN)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Done with Set command so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span></FONT></pre>
+  <pre><FONT FACE="Courier New">;**************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">;Handle I command to Invoke a function</FONT></pre>
+  <pre><FONT FACE="Courier New">; Format of request string = 0xD8xx</FONT></pre>
+  <pre><FONT FACE="Courier New">; where xx = function to invoke</FONT></pre>
+  <pre><FONT FACE="Courier New">; Returns 0xE8xx to client</FONT></pre>
+  <pre><FONT FACE="Courier New">;**************************************</FONT></pre>
+  <pre><FONT FACE="Courier New">handleI: </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>getByte<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Read both nibbles of xx and assemble into a byte. Return in buffer. </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>brcc<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;If carry cleared, then invalid value, so start over</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>which,buffer</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>...<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;To simplify this snippet, all the code which looks up the function(xx) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>...<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;in a look-up table was left out</FONT></pre>
+  <pre><FONT FACE="Courier New"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>icall<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Time to go execute the function (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>ldi<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,InvokeResponse</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Acknowledge valid command</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>swap<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>buffer<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Rotate MSNibble into LSNibble position</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back MSNibble of variable (xx) </FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>mov<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>buffer,which<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;</span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>nib2ascii<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Convert LSNibble of buffer to an ASCII character</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rcall<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>putch<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Echo back LSNibble of variable (xx)</FONT></pre>
+  <pre><FONT FACE="Courier New"><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rjmp<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>try_again<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>;Done with Invoke command so start over </FONT></pre>
+  <pre><font size="2"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <pre><font size="2"><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></FONT></pre>
+  <div class=MsoNormal align=center style='text-align:center'> 
+    <hr size=2 width="60%" align=center>
+  </div>
+  <p align=center style='text-align:center'><font size="2"><br>
+    <i>Amulet HTMLCompiler,<br>
+    <span style='font-size:10.0pt'>Copyright © 2000-2004 by<br>
+    Amulet Technologies, LLC</span></i></font></p>
+  <p align=center style='text-align:center'><font size="2"><a
+href="welcome.htm">Back to Welcome</a> - 
+    <a
+href="mailto:support@amulettechnologies.com">Contact Amulet</a> - <a
+href="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</a></font></p>
+  <p>&nbsp;</p>
+</div>
+
+</body>
+
+</html>

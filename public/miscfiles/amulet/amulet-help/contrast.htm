@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="GENERATOR" Content="Visual Page 2.0 for Windows">
+	<TITLE>Software Controlled Contrast and Backlighting</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">Software Controlled Contrast and Backlighting</H1>
+<P>All new Amulet 3.8&quot; modules are being shipped with SPI-based digital 
+pots which are used to control the LCD's contrast settings and  backlight 
+intensity. These digital pots can be set&nbsp;via software commands which can 
+be entered into an .html page.
+See the <a href="../projects/Examples/spiContrast/ReadMe.htm">spiContrast example</a>.
+The Amulet 5.7&quot; modules have the ability to add these digital pots to get 
+this functionality, as well.<h3>Contrast Setting</h3>
+<p>The contrast adjust pot is tied to the Amulet Easy GUI browser chip's SPI 
+Slave Select line 2. It takes a single byte as its input and the resultant contrast 
+setting is determined 
+by the value of that byte. The valid range is from 0x00-0xFF.</p>
+<p>To send a byte to the contrast adjust pot, use the <B>byteOut()</B> command. For example, 
+to set the contrast adjust to midscale, use the following function call in any 
+control widget href:<br>Amulet:SPI(2).byteOut(0x80)<BR>
+			</p>
+<p>Notice the use of SPI(2). The 2 is used to determine which SPI Slave Select 
+to use for the communications.</p>
+<p>If you are using a Control Widget which has a variable intrinsic value, such 
+as a slider, you can leave the value of the <B>byteOut()</B> command empty. This will 
+result in the intrinsic value of the widget being sent to the byteOut command.</p>
+<hr width="60%">
+<h3>Backlight Intensity</h3>
+<p>The backlight intensity pot is tied to the Amulet Easy GUI browser chip's SPI 
+Slave Select line 3. It takes a single byte as its input and the resultant backlight 
+intensity is determined 
+by the value of that byte. The valid range is from 0x00-0xFF. When dealing with 
+LED backlighting, 0x00 is full off and 0xFF is full on. On the other hand, when 
+dealing with CCFL backlighting, 0x00 is full on and 0xFF is full off.</p>
+<p>To send a byte to the backlight intensity pot, use the <B>byteOut()</B> command. For example, 
+to set an LED backlight to full on, use the following function call in any 
+control widget href:<br>Amulet:SPI(3).byteOut(0xFF)<BR>
+			</p>
+<p>Notice the use of SPI(3). The 3 is used to determine which SPI Slave Select 
+to use for the communications.</p>
+<p>If you are using a Control Widget which has a variable intrinsic value, such 
+as a slider, you can leave the value of the <B>byteOut()</B> command empty. This will 
+result in the intrinsic value of the widget being sent to the byteOut command.</p>
+<hr width="60%">
+<h3>Using Amulet assigned InternalRAM variables to hold current contrast and 
+backlight settings</h3>
+<p>By default, the Amulet OS uses two InternalRAM byte variables to hold the 
+current value of the contrast and backlight settings, Amulet:InternalRAM.contrast 
+and Amulet:InternalRAM.backlight. These two variables are 
+initialized by the <a href="compiler.htm#LCDSetup">LCD Settings menu</a> options 
+<B>Contrast Adjust</B> and <B>Backlight Intensity</B>. Immediately upon powering 
+up, the Amulet OS takes the values in these two variables and sets the digital 
+pots accordingly.</p>
+<p>These InternalRAM variables can be written to, read from, and saved to flash. 
+The nomenclature is as follows:</p>
+<p><B>To read from the contrast and backlight InternalRAM variables:</B><br>Amulet:InternalRAM.contrast.value()<br>Amulet:InternalRAM.backlight.value()</p>
+<p><B>To write to the contrast and backlight InternalRAM variables:</B><br>Amulet:InternalRAM.contrast.setValue(0x80)<br>Amulet:InternalRAM.backlight.setValue(0x00)</p>
+<p><B>To save the contrast and backlight InternalRAM variables to flash:</B><br>Amulet:InternalRAM.saveContrast() 
+&lt;!-- This saves both the contrast and backlight settings to serial data flash 
+--&gt;</p>
+<p>Setting these variables at runtime will do nothing. These variables are only 
+sent 
+out to the contrast and backlight digital pots upon first powering the Easy 
+GUI module. If you have a page that is used for setting the contrast and backlight, 
+it is highly recommended that you save your settings to the appropriate variables 
+as well as saving them to flash memory. </p>
+<p>If you ever want to restore the contrast or backlight to the values saved 
+in the InternalRAM variables, you can send them directly out the SPI lines by 
+using the following:<br>Amulet:SPI(2).byteOut(InternalRAM.contrast),Amulet:SPI(3).byteOut(InternalRAM.backlight)</p>
+		<CENTER>
+<HR ALIGN="CENTER" WIDTH="60%">
+			<B><BR>
+</B><I>Amulet HTMLCompiler,<BR>
+  <FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I>
+			
+  <P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact 
+    Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet 
+    Home</A> 
+</CENTER>
+	</BODY>
+
+</HTML>

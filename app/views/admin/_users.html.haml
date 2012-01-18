@@ -1,0 +1,43 @@
+.inner
+  %h2 User Accounts
+  %hr
+  
+  -# Site Administrators
+  -modifiable=current_user.can_modify_admins?
+  %h3 Admins
+  #admin_table
+    =render(:partial=>"shared/user_table", :locals=>{:users=>@admins, :modifiable=>modifiable})
+  .actions-bar.wat-cf
+    -if modifiable
+      .actions
+        =link_to 'Add Admin', new_admin_user_path(:type=>"admin"), :class=>'button', :rel=>"facebox"
+        
+  -# Class TA's
+  -modifiable=current_user.can_modify_tas?
+  %h3 TA's
+  #ta_table
+    =render(:partial=>"shared/user_table", :locals=>{:users=>@tas, :modifiable=>modifiable})
+  .actions-bar.wat-cf
+    -if modifiable
+      .actions
+        =link_to 'Add TA', new_admin_user_path(:type=>"ta"), :class=>'button', :rel=>"facebox"
+    
+  -# Class LA's
+  -modifiable=current_user.can_modify_las?
+  %h3 LA's
+  #la_table
+    =render(:partial=>"shared/user_table", :locals=>{:users=>@las, :modifiable=>modifiable})
+  .actions-bar.wat-cf
+    -if modifiable
+      .actions
+        =link_to 'Add LA', new_admin_user_path(:type=>"la"), :class=>'button', :rel=>"facebox"
+   
+  -# Students
+  -modifiable=current_user.can_modify_students?
+  %h3 Students
+  #student_table
+    =render(:partial=>"shared/user_table", :locals=>{:users=>@students, :modifiable=>modifiable})
+  .actions-bar.wat-cf
+    -if modifiable
+      .actions
+        =link_to 'Add Student', new_admin_user_path(:type=>"student"), :class=>'button', :rel=>"facebox"

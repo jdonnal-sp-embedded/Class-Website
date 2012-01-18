@@ -1,0 +1,481 @@
+<html>
+<head>
+<title>Appendix C</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<div class=Section1> 
+  <h1 align=center style='text-align:center'>Appendix D</h1>
+  <p>Below you will find an implementation of the Amulet SPI protocol 
+    written in C. The code found below is a working model of the protocol, meant 
+    for demonstration use only and does not run on reset.</p>
+  <p><font face="Courier New, Courier, mono" size="2">#define _SPI<br>
+    #include &lt;hc11.h&gt;<br>
+    #include &lt;stdio.h&gt;<br>
+    #include &lt;string.h&gt;</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">//mapping of LED and IRQ 
+    pin (used in setting and clearing of IRQ)<br>
+    #define LED_ON() PORTA = 0x40<br>
+    #define LED_OFF() PORTA = 0x00<br>
+    #define PULSE_BIT bit(4)</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">//Client Start of Message 
+    (CSOM) values<br>
+    #define GETBYTE_REQUEST 0x11<br>
+    #define STRING_REQUEST 0x12<br>
+    #define SETBYTE_REQUEST 0x13<br>
+    #define INVOKE_REQUEST 0x14<br>
+    #define GETWORD_REQUEST 0x15</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">//Server Start of Message 
+    (SSOM) values<br>
+    #define GETBYTE_RESPONSE 0x21<br>
+    #define STRING_RESPONSE 0x22<br>
+    #define SETBYTE_RESPONSE 0x23<br>
+    #define INVOKE_RESPONSE 0x24<br>
+    #define GETWORD_RESPONSE 0x25</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">//States<br>
+    #define SSOM 1<br>
+    #define VARIABLE_HINIB 2<br>
+    #define VARIABLE_LONIB 3</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">#define GETBYTE_VARIABLE_HINIB 
+    11<br>
+    #define GETBYTE_VARIABLE_LONIB 12 <br>
+    #define GETBYTE_VALUE_HINIB 13<br>
+    #define GETBYTE_VALUE_LONIB 14<br>
+    #define GETBYTE_LAST_BYTE 15</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">#define STRING_VARIABLE_HINIB 
+    21<br>
+    #define STRING_VARIABLE_LONIB 22<br>
+    #define OUTPUT_STRING 23<br>
+    #define STRING_LAST_BYTE 24</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">#define SETBYTE_VARIABLE_HINIB 
+    31<br>
+    #define SETBYTE_VARIABLE_LONIB 32<br>
+    #define SETBYTE_VALUE_HINIB 33 <br>
+    #define SETBYTE_VALUE_LONIB 34<br>
+    #define SETBYTE_LAST_BYTE 35</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">#define INVOKE_VARIABLE_HINIB 
+    41<br>
+    #define INVOKE_VARIABLE_LONIB 42 <br>
+    #define INVOKE_LED_PULSE 43</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">#define GETWORD_VARIABLE_HINIB 
+    51<br>
+    #define GETWORD_VARIABLE_LONIB 52<br>
+    #define GETWORD_MSB_VALUE_HINIB 53<br>
+    #define GETWORD_MSB_VALUE_LONIB 54 <br>
+    #define GETWORD_LSB_VALUE_HINIB 55 <br>
+    #define GETWORD_LSB_VALUE_LONIB 56 <br>
+    #define GETWORD_LAST_BYTE 57</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/***********************************<br>
+    *GLOBAL VARIABLE ALLOCATIONS *<br>
+    ************************************/<br>
+    unsigned char serverResp; //Server Start of Message (SSOM) variable<br>
+    unsigned char hiNib; //high nibble of variable being requested <br>
+    unsigned char loNib; //low nibble of variable being requested<br>
+    unsigned char valueHiNib; //high nibble of value in getByte request<br>
+    unsigned char valueLoNib; //low nibble of value in getByte request<br>
+    unsigned char setValHi; //high nibble of set value in setByte //request<br>
+    unsigned char setValLo; //low nibble of set value in setByte //request <br>
+    unsigned char valMSBhinib; //MSB high nibble in getWord request <br>
+    unsigned char valMSBlonib; //MSB low nibble in getWord request<br>
+    unsigned char valLSBhinib; //LSB high nibble in getWord request<br>
+    unsigned char valLSBlonib; //LSB low nibble in getWord request<br>
+    unsigned char newByte; //byte read from spi buffer<br>
+    unsigned char state; //state that the state table is in<br>
+    unsigned char stringIndex; //index into the string that is being //outputted<br>
+    unsigned char firstByteResp; //byte sent when SSOM is received</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**************************<br>
+    *FUNCTION PROTOTYPES *<br>
+    ***************************/<br>
+    void spiIn();<br>
+    void parseSPI(void);<br>
+    void getByte(void);<br>
+    void getString(void);<br>
+    void setByte(void);<br>
+    void invoke(void);<br>
+    void getWord(void);<br>
+    void putstring(unsigned char *str);<br>
+    void initialize(void);<br>
+    void reinitialize(void);<br>
+    void PULSE_ON(void);<br>
+    void PULSE_OFF(void);<br>
+    unsigned char hex2ascii(unsigned char hex);<br>
+    unsigned char ascii2hex(unsigned char ascii);</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/***************************<br>
+    *ARRAY VALUES FOR TESTING *<br>
+    ****************************/<br>
+    unsigned char byteData[5] = {0x30, 0x31, 0x32, 0x33, 0x34};<br>
+    unsigned int wordData[5] = {0x100, 0x101, 0x102, 0x103, 0x104};<br>
+    unsigned char string1[7] = {'S','T','R','I','N','G',0x00};<br>
+    unsigned char string2[6] = {'T','R','I','N','G',0x00};<br>
+    unsigned char string3[5] = {'R','I','N','G',0x00};<br>
+    unsigned char string4[4] = {'I','N','G',0x00};</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************************************************<br>
+    *MAIN ROUTINE - stays in an infinite loop polling the spi line to see <br>
+    *if anything has been 
+    received, and then handling the byte received. <br>
+    *NOTE: the spiIn() function simply checks the SPI line to see if <br>
+    *anything is there, if not it returns. <br>
+    **********************************************************************/<br>
+    int main()<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;initialize();</font></p>
+  <p><font face="Courier New, Courier, mono" size="2"> &nbsp;&nbsp;&nbsp;while(1)<br>
+    &nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spiIn();<br>
+    &nbsp;&nbsp;&nbsp;}<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;return(0);<br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************************************************<br>
+    *Checks to see if anything is waiting on the spi line to be handled, <br>
+    *if so, it is read into the newByte variable, otherwise it does <br>
+    *nothing and returns. It also turns off the interrupt pulse that was <br>
+    *sent out to single that we are ready to receive another byte. <br>
+    **********************************************************************/<br>
+    void spiIn()<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;PULSE_OFF();<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;if((SPSR &amp; SPIF) != 0)<br>
+    &nbsp;&nbsp;&nbsp;{ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;newByte = read_spi();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;parseSPI();<br>
+    &nbsp;&nbsp;&nbsp;} <br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************************************************<br>
+    *This function acts as the byte parser to the bytes that spiIn() <br>
+    *assigns to newByte. Its state machine is made up of case statements <br>
+    *for all possible states in the processing and parsing of the request <br>
+    *for a function. The first 3 states (SSOM, VARIABLE_HINIB, and <br>
+    *VARIABLE_LONIB) are used by every function type (getByte, getString, <br>
+    *setByte, invokeRPC, and getWord), and the remainder of the states <br>
+    *are only called if their corresponding function is being requested. <br>
+    **********************************************************************/<br>
+    void parseSPI(void)<br>
+    { <br>
+    &nbsp;&nbsp;&nbsp;unsigned char stringVal;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;switch(state)<br>
+    &nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Determines which type of function is being requested (CSOM) and <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//puts the corresponding Server Start of Message (SSOM) into <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//the SPDR to be outputted on the next time a byte is received <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//on the SPI line. Sends out pulse on the IRQ line to tell <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Amulet that we are ready for another byte<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case SSOM:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(newByte)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETBYTE_REQUEST:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverResp = GETBYTE_RESPONSE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case STRING_REQUEST:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverResp = STRING_RESPONSE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case SETBYTE_REQUEST:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverResp = SETBYTE_RESPONSE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case INVOKE_REQUEST:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverResp = INVOKE_RESPONSE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETWORD_REQUEST:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;serverResp = GETWORD_RESPONSE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = serverResp;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = VARIABLE_HINIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Stores the High Nibble 
+    of the variable being requested and puts <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//value in SPDR sends IRQ pulse <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case VARIABLE_HINIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hiNib = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = hiNib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = VARIABLE_LONIB; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Stores 
+    the Low Nibble of the variable being requested and puts <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//value in SPDR, sends IRQ pulse. Also 
+    parses serverResp to <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//determine which type of function is 
+    being requested. sends IRQ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//pulse<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case VARIABLE_LONIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loNib = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = loNib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;switch(serverResp)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    GETBYTE_RESPONSE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state 
+    = GETBYTE_VALUE_HINIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    STRING_RESPONSE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state 
+    = OUTPUT_STRING;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    SETBYTE_RESPONSE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state 
+    = SETBYTE_VALUE_HINIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    INVOKE_RESPONSE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state 
+    = INVOKE_LED_PULSE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case 
+    GETWORD_RESPONSE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state 
+    = GETWORD_MSB_VALUE_HINIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Calls getByte() function which uses hiNib and loNib to <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//determine which value from the byteData array is being <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//requested. Loads high nibble of that value into SPDR for <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//output on the next transmission. Sends out IRQ pulse <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETBYTE_VALUE_HINIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getByte();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = valueHiNib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = GETBYTE_VALUE_LONIB; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Loads low nibble of value retrieved from the byteData array in <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//SPDR<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETBYTE_VALUE_LONIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = valueLoNib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = GETBYTE_LAST_BYTE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Outputs string based on which variable is being requested <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//(determined from high nibble and low nibble, only low nibble in <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//the implementation for simplicity's sake. Stays in this state <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//until null termination is encountered. sends IRQ pulse.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case OUTPUT_STRING:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(loNib == 0x30)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringVal = string1[stringIndex++];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(loNib == 0x31)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringVal = string2[stringIndex++];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(loNib == 0x32)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringVal = string3[stringIndex++];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(loNib == 0x33)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stringVal = string4[stringIndex++];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(stringVal == 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = STRING_LAST_BYTE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = stringVal;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON(); <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break; <br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Loads high nibble of value that variable is being set to in <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//SPDR, sends IRQ pulse<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case SETBYTE_VALUE_HINIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setValHi = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = setValHi;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = SETBYTE_VALUE_LONIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Loads low nibble of value that variable is being set to in <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//SPDR, calls setByte() which uses hiNib and loNib to determine <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//which variable is being set, and setValHi and setValLo to <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//determine what value to set that variable to, send IRQ pulse<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case SETBYTE_VALUE_LONIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setValLo = newByte;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = setValLo;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = SETBYTE_LAST_BYTE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setByte();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON(); <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//turns LED on or off depending 
+    on what variable is used. Also <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//calls reinitialize, which resets state machine and loads the <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//firstByteResp (0xFE) back into the SPDR <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//NOTE: a pulse is NOT needed at the end of a byte request<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case INVOKE_LED_PULSE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(loNib == 0x30)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LED_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reinitialize(); <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else if(loNib == 0x31)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LED_OFF();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reinitialize();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Calls getWord(), which uses hiNib and loNib to determine which <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//value from the wordData array is wanted. Loads the MSB high <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//nibble into the SPDR and sends an IRQ pulse<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETWORD_MSB_VALUE_HINIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getWord();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = valMSBhinib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = GETWORD_MSB_VALUE_LONIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//next 3 states load the remaining nibbles of the value <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//calculated in getWord() into SPDR, and send IRQ pulses when <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//ready to process another byte <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETWORD_MSB_VALUE_LONIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = valMSBlonib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = GETWORD_LSB_VALUE_HINIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETWORD_LSB_VALUE_HINIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = valLSBhinib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = GETWORD_LSB_VALUE_LONIB;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETWORD_LSB_VALUE_LONIB:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SPDR = valLSBlonib;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state = GETWORD_LAST_BYTE;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PULSE_ON();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//last state of getByte, getWord, and getString. Resets state <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//machine and loads firstByteResp into SPDR<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETBYTE_LAST_BYTE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case GETWORD_LAST_BYTE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case STRING_LAST_BYTE:<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;case SETBYTE_LAST_BYTE: <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reinitialize();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+    &nbsp;&nbsp;&nbsp;} <br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************<br>
+    *Hex to ascii conversion routine <br>
+    ***********************************/ <br>
+    unsigned char hex2ascii(unsigned char hex)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;return ((hex &lt; 0x0A) ? (hex + '0') : (hex + ('A' - 0x0A)));<br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/*********************************<br>
+    *Ascii to hex conversion routine <br>
+    **********************************/ <br>
+    unsigned char ascii2hex(unsigned char ascii)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;return((ascii &lt;= '9') ? (ascii - '0') : (ascii - ('A' - 0x0A)));<br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************************************************<br>
+    *getByte() - calculates the high and low nibble of value of the <br>
+    *variable being requested <br>
+    **********************************************************************/<br>
+    void getByte(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;unsigned char index, byteValue;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;index = ascii2hex(hiNib) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;index |= ascii2hex(loNib);</font></p>
+  <p><font face="Courier New, Courier, mono" size="2"> &nbsp;&nbsp;&nbsp;byteValue = byteData[index];<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;valueHiNib = hex2ascii(byteValue &gt;&gt; 4);<br>
+    &nbsp;&nbsp;&nbsp;valueLoNib = hex2ascii(byteValue &amp; 0x0f);<br>
+    } </font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************************************************<br>
+    *setByte() - sets the value of the variable being set in the byteData <br>
+    *array <br>
+    **********************************************************************/<br>
+    void setByte(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;unsigned char index, hexVal;<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;index = ascii2hex(hiNib) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;index |= ascii2hex(loNib);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;hexVal = ascii2hex(setValHi) &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;hexVal |= ascii2hex(setValLo);<br>
+    <br>
+    &nbsp;&nbsp;&nbsp;byteData[index] = hexVal;<br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/**********************************************************************<br>
+    *getWord() - calculates the 4 nibbles (word) of the value of the <br>
+    *variable being requested <br>
+    **********************************************************************/<br>
+    void getWord(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;unsigned char index; <br>
+    &nbsp;&nbsp;&nbsp;unsigned int wordValue;</font></p>
+  <p><font face="Courier New, Courier, mono" size="2"> &nbsp;&nbsp;&nbsp;index = ascii2hex(hiNib) 
+    &lt;&lt; 4;<br>
+    &nbsp;&nbsp;&nbsp;index |= ascii2hex(loNib);</font></p>
+  <p><font face="Courier New, Courier, mono" size="2"> &nbsp;&nbsp;&nbsp;wordValue = wordData[index];</font></p>
+  <p><font face="Courier New, Courier, mono" size="2"> &nbsp;&nbsp;&nbsp;valMSBhinib = hex2ascii((char)((wordValue 
+    &gt;&gt; 12) &amp; 0x0f));<br>
+    &nbsp;&nbsp;&nbsp;valMSBlonib = hex2ascii((char)((wordValue &gt;&gt; 8) &amp; 0x0f));<br>
+    &nbsp;&nbsp;&nbsp;valLSBhinib = hex2ascii((char)((wordValue &gt;&gt; 4) &amp; 0x0f));<br>
+    &nbsp;&nbsp;&nbsp;valLSBlonib = hex2ascii((char)(wordValue &amp; 0x0f));<br>
+    }<br>
+    /********************************************<br>
+    *Initialization <br>
+    *********************************************/<br>
+    void initialize(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;firstByteResp = 0xFE;<br>
+    &nbsp;&nbsp;&nbsp;stringIndex = 0;<br>
+    &nbsp;&nbsp;&nbsp;SPCR = 0x40;<br>
+    &nbsp;&nbsp;&nbsp;DDRD = 0x04;<br>
+    &nbsp;&nbsp;&nbsp;SPDR = firstByteResp;<br>
+    &nbsp;&nbsp;&nbsp;state = SSOM;<br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/******************************************************************<br>
+    *Reinitialize state machine after function has been performed <br>
+    ******************************************************************/<br>
+    void reinitialize(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;SPDR = firstByteResp;<br>
+    &nbsp;&nbsp;&nbsp;state = SSOM;<br>
+    &nbsp;&nbsp;&nbsp;stringIndex = 0;<br>
+    }<br>
+    /*******************************<br>
+    *Send IRQ pulse to Amulet <br>
+    ********************************/ <br>
+    void PULSE_ON(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;PORTA &amp;= ~PULSE_BIT;<br>
+    }</font></p>
+  <p><font face="Courier New, Courier, mono" size="2">/*******************************<br>
+    *Turn off IRQ pulse <br>
+    ********************************/<br>
+    void PULSE_OFF(void)<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;PORTA |= PULSE_BIT;<br>
+    }<br>
+    </font></p>
+  <p>&nbsp;</p>
+  <div class=MsoNormal align=center style='text-align:center'>
+<hr size=2 width="60%" align=center>
+  </div>
+  <p align=center style='text-align:center'><font size="2"><br>
+    <i>Amulet HTMLCompiler,<br>
+    <span style='font-size:10.0pt'>Copyright &copy; 2000-2004 by<br>
+    Amulet Technologies, LLC</span></i></font></p>
+  <p align=center style='text-align:center'><font size="2"><a
+href="welcome.htm">Back to Welcome</a> - 
+    <a
+href="mailto:support@amulettechnologies.com">Contact Amulet</a> - <a
+href="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</a></font></p>
+  <p>&nbsp;</p>
+</div>
+</body>
+</html>

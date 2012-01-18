@@ -1,0 +1,1857 @@
+<html>
+
+<head>
+<title>What's new:</title>
+<meta name="generator" content="Namo WebEditor v5.0">
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="purple" alink="red">
+<h1 align="center">Listing of Amulet OS changes</h1>
+<p><a href="WhatsNew.htm#Changes32">Change Log for Amulet OS version 3.2</a><a href="WhatsNew.htm#Changes31Bld13"><br>Change Log for Amulet OS version 3.1x Build13</a><br><a href="WhatsNew.htm#Changes31Bld12">Change Log for Amulet OS version 3.1x Build12</a><br><a href="WhatsNew.htm#Changes31Bld10">Change Log for Amulet OS version 3.1x Build10</a><br><a href="WhatsNew.htm#Changes31Bld9">Change Log for Amulet OS version 3.1x Build9</a><br><a href="WhatsNew.htm#Changes31Bld2">Change Log for Amulet OS version 3.1x Build2</a><br><a href="WhatsNew.htm#Changes310">Change Log for Amulet OS version 3.1x Build1</a><br><a href="WhatsNew.htm#Changes304">Change Log for Amulet OS version 3.0.4</a><a href="WhatsNew.htm#Changes303"><br>Change Log for Amulet OS version 3.0.3</a><br><a href="WhatsNew.htm#Changes301">Change 
+Log for Amulet OS version 3.0.1</a><br><a href="WhatsNew.htm#Changes30">Change 
+Log for Amulet OS version 3.0</a><br><a href="WhatsNew.htm#Changes219">Change 
+Log for Amulet OS version 2.1.9</a><br><a href="WhatsNew.htm#Changes218">Change 
+Log for Amulet OS version 2.1.8</a><br><a href="WhatsNew.htm#Changes217">Change 
+Log for Amulet OS version 2.1.7</a><br><a href="WhatsNew.htm#Changes21">Change 
+Log for Amulet OS version 2.1</a><br><a href="#Changes10">Change 
+Log for Amulet OS version 2.0</a><br></p>
+<hr align="left" size="4" width="690"><H3><a name="Changes32">Changes for Amulet OS version 3.2</a><br></H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug associated with Amulet master messages and time outs. Introduced 
+            with Build13 when fixing the&nbsp;bug described below. If&nbsp;no 
+            communication from the slave, it was possible to have the Amulet 
+            get into a state where it would no longer transmit any further master 
+            messages.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with Amulet Font Converter. Some very large font glyphs 
+            could be corrupted. Most likely to be found in size 36 fixed width 
+            fonts or larger.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added new Function/Custom Button methods buttonDown() and buttonUp() 
+            used to change the visual state of a button..</p>
+    </td>
+    </tr>
+</table>
+<br><hr align="left" size="4" width="690"><H3><a name="Changes31Bld13"></a>Changes for Amulet OS version 3.1x Build13<br></H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug associated with Amulet master messages. There was a race 
+            condition that could happen when the transmit&nbsp;buffer wrapped. 
+            It caused a single message to not be added to the outgoing buffer, 
+            meaning that message would not be transmitted.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added OS support for <a href="contrast.htm">software controlled 
+            contrast and backlight</a> adjustment.</p>
+    </td>
+    </tr>
+</table>
+<br>
+<hr align="left" size="4" width="690">
+<h3><a name="Changes31Bld12"></a>Changes for Amulet OS version 3.1x Build12<br></h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with byte and word array serial communications. Introduced 
+            in Build 10.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with &lt;B&gt; bold tag when used within a sentence. 
+            Introduced in Build 11.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with communications. If erroneous message starting 
+            with 0xFF was received by the Amulet, it was possible for the Amulet 
+            to get into a condition where it would stop sending master messages.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added quasi-software handshaking using the XON/XOFF opcodes.</p>
+    </td>
+    </tr>
+</table>
+<br><hr align="left" size="4" width="690">
+<h3>&nbsp;&nbsp;<a name="Changes31Bld10"></a>Changes for Amulet OS version 3.1x Build10<br></h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added <a href="Objects.htm#TRIGGER.NEQ">TRIGGER.NEQ</a> so META Refresh Objects and 
+            Anchors can now trigger on not equal 
+            to, as well as equal to, greater than and less than a given value.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>META Refresh Objects and Anchor trigger values are no longer limited to 
+            a byte. Trigger values can now be&nbsp;a byte, word or&nbsp;a value 
+            specified by either an InternalRAM byte or word variable.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>InternalRAM byte variables can now be used as <a href="internalRAM.htm#InternalRAM_Index">variable indices</a>. 
+            For example, the following is now a valid href: Amulet:InternalRAM.string(internalRAM.byte(0)).value(), 
+            which will return the value of the Internal RAM string variable 
+            specified by the value of Internal RAM byte variable 0.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Function and Custom Buttons have a new attribute called <a href="Widgets.htm#Function_Button_dualAction">dualAction</a>. 
+            This allows the button to launch its href function(s) twice, once 
+            upon touching the button and again upon releasing the button.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Strings can now be sent to the Amulet which contain <a href="Protocol.htm#fontStyle">font 
+            style attributes embedded in the string</a>. This allows you to 
+            send over a string via the serial port which contains a word or 
+            sequence of words which can have a different font style (bold, underline, 
+            italic, etc...) than the rest of the string. Styles can also be 
+            initialized inside an&nbsp;<a href="internalRAM.htm#InitializingStrings">initInternalRAM 
+            file</a>.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>The HTMLCompiler can now open and program a .pdb file generated 
+            by the HTMLCompiler.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>A new attribute, called enableVertical, has been added to the 
+            Line Graph Widget. If set to true, then each x-coordinate has two 
+            y-coordinates, thus allowing for vertical lines to appear in the 
+            Line Graph Widget.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with&nbsp;Amulet Simulator version 3.1x Build 9, which 
+            could not open a serial port if running Windows XP. </p>
+    </td>
+    </tr>
+</table>
+<hr align="left" size="4" width="690"><H3>&nbsp;&nbsp;<a name="Changes31Bld9"></a>Changes for Amulet OS version 3.1x Build9<br></H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added ability to use a mask to filter an incoming value by using the 
+            maskedValue(y) method.</p>
+    </td>
+    </tr>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>New File options in HTMLCompiler. Including Open Last and the 
+            saving of the last 5 files opened. New keyboard shortcuts have been 
+            added as well.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Ability to <A href="compiler.htm#FlashSize">specify the size</A> of the serial data flash on the Easy 
+            GUI module within the HTMLCompiler.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P><a href="preprocessor.htm">Macro preprocessor</a> upgraded to 
+            be much more powerful and flexible.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Added ability to create a single custom OS file comprised of 
+            a raw Amulet OS and a previously saved .uht project file using a 
+            <a href="compiler.htm#customOS">.AmuletOS script file</a>.  </P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>HTMLCompiler now requires a JVM to run. Upgrades can be downloaded 
+            with or without the JVM. Now shipping with Sun's 1.4.2_03. Dramatically 
+            improves the compile time of HTML projects. </P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Stronger error checking within the HTMLCompiler as far as href 
+            functions are concerned. View widgets now must use view widget functions 
+            and control widgets must use control widget functions.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>HTMLCompiler Skin menu item added under Settings. Allows you to change 
+            the skin (look and feel) of the HTMLCompiler.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <P>Certain serial ports will send out a bogus byte upon opening. 
+            This would cause the Amulet Easy GUI module to not program if in 
+            Program Mode. HTMLCompiler now handles the case where the opening 
+            of the serial ports sends out a bogus byte.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <P>Lone checkboxes no longer require a groupName. The documentation 
+            always said this, but if the groupName was left off, initHref might 
+            not work as expected.</P>
+    </td>
+    </TR>
+</table>
+<br><hr align="left" size="4" width="690"><H3>&nbsp;&nbsp;<a name="Changes31Bld2"></a>Changes for Amulet OS version 3.1x Build2<br></H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with dual master communications. Possible to miss Amulet 
+            master messages after receiving a master message from the external 
+            processor. This was a bug that was introduced in beta version 3.1x 
+            Build1.</p>
+    </td>
+    </tr>
+</table>
+<br><hr align="left" size="4" width="690">
+<h3><a name="Changes310"></a>Changes for Amulet OS version 3.1x Build1<br></h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added a macro&nbsp;<a href="preprocessor.htm">preprocessor</a> 
+            to the HTMLCompiler which allows you to use names for&nbsp;your 
+            variables used in the href, url or onvar parameters.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added <a href="Widgets.htm#CustomSlider">Custom Slider Widget</a>, which allows you to specify the images 
+            used as the slider &quot;handle&quot;, &quot;trackingHandle&quot; and the slider &quot;channel&quot;.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added <a href="Widgets.htm#LinearGauge">Linear Gauge Widget</a>, 
+            which is a view widget comprised of a background image and a pointer 
+            icon which can travel linearly either horizontally or vertically 
+            along the background image, based upon a value returned from a function 
+            call.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added <a href="Widgets.htm#LineGraph">Line Graph Widget</a>, 
+            which is a view widget similar to the Line Plot Widget. But instead 
+            of a live graph, the Line Graph is given an array of bytes (or words) 
+            and plots the points.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added OR, AND, XOR, MUL and DIV methods for Internal RAM bytes 
+            and words.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added stringToByte() and stringToWord() methods for Internal 
+            RAM strings. Converts the ASCII string of a decimal number stored 
+            in an Internal RAM string to an actual number to be&nbsp;stored 
+            in either Internal RAM bytes or words.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added a warning to the HTMLCompiler when a single page of a project 
+            gets too large for the Amulet's memory space. If too large, it will 
+            run into the InternalRAM string fields, and give you the choice 
+            of not using those string variables or making the offending page 
+            smaller.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added a warning to the HTMLCompiler when a  project 
+            has too many files within a project.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug in the Numeric Field widget regarding the printf attribute 
+            and the use of the '+' or '#' flag used in conjunction with the 
+            '0' flag. The 0 padding would erroneously show up prior to the plus 
+            sign or the '0x'.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with the Line Plot Widget and the reset() IWC method. 
+            The method did nothing when called.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed alignment bug with both the Radio Button Widget and the 
+            Check Box Widget. They were erroneously shifted two pixels to the 
+            right on left hand aligned images and two pixels to the left on 
+            right hand aligned images. The images are now flush with both&nbsp;boundaries. 
+            New images have been created in the Configuration/Widgets/RadioButton 
+            and Configuration/Widgets/CheckBox folders if the old alignment 
+            needs to be preserved.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug in HTMLCompiler with single IWC function calls that 
+            had a leading space. </p>
+    </td>
+    </tr>
+</table>
+<br><hr align="left" size="4" width="690"><H3>&nbsp;<a name="Changes304"></a>Changes for Amulet OS version 3.0.4<br></H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with multiple hrefs set up in a specific order. Problem occurs 
+            when an InvokeRPC(x) or byteOut(x) function precedes an Amulet:UART.<I>type</I>(x).setValue(y) 
+            in a multiple href. Results in the UART command being sent as if 
+            the function was&nbsp;Amulet:UART.<I>type</I>(0).setValue(y),&nbsp;instead 
+            of using the variable number specified by x.</p>
+    </td>
+    </tr>
+</table>
+<br><hr align="left" size="4" width="690"><H3>&nbsp;<a name="Changes303"></a>Changes for Amulet OS version 3.0.3<br></H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with the HTMLCompiler regarding older undocumented nomenclature. Caused 
+            the OS to request the wrong variable number. Introduced in version 
+            3.0.1.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed HTMLCompiler to accept the function Amulet:internal.lostCommByte.Value(). 
+            Was still looking for old nomenclature of Amulet:internal.lostComm.byteValue().</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with Numeric Field Widget and the <B>waitForInit</B> 
+            attribute. If set to true, the Numeric Field wouldn't update if 
+            sent a 0x00. As soon as a non-zero number was sent to it, the Numeric 
+            Field would&nbsp;start updating.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Removed the BASICStamp pages from the EasyAs123 project and added 
+            pages for the&nbsp;two new widgets, Dynamic Image Widget and Scribble 
+            Widget.</p>
+    </td>
+    </tr>
+</table>
+<br><hr align="left" size="4" width="690">
+<h3><a name="Changes301"></a>Changes for Amulet OS version 3.0.1<br></h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added the <B>waitForInit</B> attribute for the <a href="Widgets.htm#Image_Sequence">Image 
+            Sequence Widget</a>.</p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added ability to use InternalRAM.byte(<I>x</I>) as argument for the 
+            byteOut() function.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with the reappear() method when used on the StringField Widget. 
+            StringField Widget would only reappear upon a new string being sent 
+            to it.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with the <B>fromInitHref</B> attribute for the Check Box Widget. 
+            </p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with the byteOut() function when used as the only Amulet 
+            master command. Erroneously had a maximum of 51 bytes that could 
+            be sent out. Also, the response to an external processor's master 
+            command would have extra bytes appended to it.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with the <B>slaveAckRsp</B> META command. Caused intermittant bugs 
+            depending upon the master message being sent to the Amulet.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Changed help documentation regarding the Scribble and 
+            Dynamic Image Widgets. The <B>canvas</B> attribute only accepts 
+            .gif images, not .jpg.</p>
+    </td>
+    </tr>
+</table>
+<br>&nbsp;<hr size="4" width="690" align="left">
+<H3><a name="Changes30"></a>Changes for Amulet OS version 3.0</H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added dual port RAM called <a href="internalRAM.htm">Amulet Internal RAM</a>, which can be accessed 
+            by both Amulet Widgets and an external processor. The RAM has persistence 
+            from page to page and can also be saved to the serial data flash.</p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Two new methods, <a href="Examples.htm#setX()">setX(<i>x</i>) 
+            and setY(<i>x</i>)</a> have been added. Allows for placement of 
+            any object or widget anywhere on the LCD at run-time.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added a new <a href="Protocol.htm#AmuletAsSlaveProtocol">communications protocol</a> which&nbsp;allows for an external 
+            processor to send unsolicited messages to the Amulet. Projects can 
+            be set up where the Amulet is the master, where the external processor 
+            is the master, or as a dual master system.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>For systems where the Amulet is only a slave, Remote Procedure 
+            Calls can be sent to an <a href="Protocol.htm#RPCBuffer">RPC buffer</a> 
+            which can be read by the master via serial requests.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>The <a href="Protocol.htm#Summary">Amulet serial command opcode</a>s 
+            have changed, but they can be changed by including an <a href="HTMLSupport.htm#initCommands">initialization 
+            file</a> into any project.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <P>Added <A HREF="Widgets.htm#Scribble">Scribble Widget</A>, which allows for freehand drawing. Image data, 
+            in the <a href="Bitmap.htm">Amulet Bitmap Format</a>, can be transferred to an external processor using an 
+            <a href="xmodem.htm">xmodem protocol</a>.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added <a href="Widgets.htm#DynamicImage">Dynamic Image Widget</a>, 
+            which allows for images to be uploaded to the LCD at run-time.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <P><a href="graphicPrimitives.htm">Graphic primitives</a> can be sent unsolicited to the Amulet. The 
+            graphic primitives include line, rectangle, filled rectangle and 
+            pixel.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <P>HTMLCompiler can take a <A HREF="compiler.htm#Uploading">screenshot</A> 
+            of any LCD screen on the Amulet. Image saved in .bmp format. Useful 
+            for documentation purposes.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>New function added, <A HREF="AppendixB.htm#Amulet:togglePolarity()">Amulet:UART.byteOut(</A><I><a href="AppendixB.htm#Amulet:togglePolarity()">x</a></I><A HREF="AppendixB.htm#Amulet:togglePolarity()">)</A>, 
+            which allows for sending a single raw byte out the UART. No Amulet 
+            command opcodes are sent out and no response is expected.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>New function added, <A HREF="AppendixB.htm#Amulet:togglePolarity()">Amulet:SPI(</A><I><a href="AppendixB.htm#Amulet:togglePolarity()">z</a></I><A HREF="AppendixB.htm#Amulet:togglePolarity()">).byteOut(</A><I><a href="AppendixB.htm#Amulet:togglePolarity()">x</a></I><A HREF="AppendixB.htm#Amulet:togglePolarity()">)</A>, 
+            which allows for sending a single byte out on the SPI bus, while 
+            holding low the Slave Select line <I>z</I>.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>New function added, <a href="AppendixB.htm#setCalPOC()">Amulet:internal.setCalPOC(</a>). 
+            Sets the software calibration bit in the flash 
+            memory. Causes Amulet to go into touchscreen calibration mode upon a soft or hard 
+            reset, regardless of the state of <a href="hardware57.htm#DIP">DIP 
+            switch 4.</a></p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Upon loading the <a href="compiler.htm#firmware_upgrade">Amulet 
+            OS Files</a>, touchscreen calibration is required. For applications 
+            that do NOT have a touchscreen, a<a href="compiler.htm#noTouchOS"> 
+            second Amulet OS file</a> is included which does not require the 
+            touchscreen calibration.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <P>Control widgets can have WORDs and STRINGs as <a href="Widgets.htm#ControlWidgetsIntrinsicValues">intrinsic values</a> 
+            in addition to BYTEs.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <P>Control widgets can now send out <A HREF="AppendixB.htm#Control_functions">setString</A> and <A HREF="AppendixB.htm#Control_functions">setWord</A> messages.</P>
+    </td>
+    </tr>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <P>Added new method, <A HREF="AppendixB.htm#Amulet:togglePolarity()">togglePolarity</A>, which toggles&nbsp;the 
+            display polarity from positive to negative and vice versa. Result 
+            gets saved into flash, so polarity is retained even after power 
+            down.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added <a href="HTMLSupport.htm#TRIGGERgt"><b>trigger.gt</b></a> 
+            and <a href="HTMLSupport.htm#TRIGGERlt"><b>trigger.lt</b></a> attributes 
+            for Anchors, Area Maps and Meta Refresh Tags. Allows for triggering 
+            of function calls based on values being greater than or less than. 
+            Adds to the existing <B>trigger</B> attribute, which triggers on 
+            a value be equal to.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added new method, setTrigger(<I>x</I>), which sets the <B>trigger</B>, 
+            <B>trigger.gt</B> or <B>trigger.lt</B> value of an Anchor, Area 
+            Map or Meta Refresh Tag.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added new function, <A HREF="AppendixB.htm#StringField_functions">Amulet:internal.OSVersionString.value()</A> 
+            which returns a string of the current Amulet OS version.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>All Widgets/Objects have a new attribute, <B>invisible</B>, which 
+            allows them to be invisible at the time of page loading. Being invisible 
+            is the same as if the disappear() method was performed on it, and 
+            can be made visible by using the reappear() method.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added new function, Amulet:fileNumber(<I>x</I>), which allows 
+            for hyperlinking to a page within the project using Amulet's internal 
+            file number, as opposed to using the name of the html file.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added new function, Amulet:internal.fileNumber.value(), which 
+            returns Amulet's internal file number.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>HTMLCompiler now generates a <a href="LinkMap.htm">link map</a> 
+            after saving or programming a project. The resulting .map file has 
+            all the files and images used within the project, as well as their 
+            sizes and their internal file number.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added the setOnVarVariableNumber(<I>x</I>) method, which allows 
+            for setting the byte, word or string variable number of the OnVar 
+            function within a Meta Refresh Tag.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Amulet OS now checks the version of the project loaded into its 
+            flash. If the version of the HTMLCompiler used to compile the project&nbsp;is 
+            different than the version of the Amulet OS, an error screen will 
+            show up.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>New Meta tag attributes, <B><a href="Protocol.htm#NullTerminate">nullTerminate</a></B><a href="Protocol.htm#NullTerminate">,</a> 
+            <B><a href="Protocol.htm#UARTDelay">UARTDelay</a></B>, <B><a href="Protocol.htm#BASICStamp">BASICStamp</a></B>, 
+            <B><a href="Protocol.htm#BASICStamp">slaveAckRsp</a></B> and <B><a href="Protocol.htm#BASICStamp">slaveNoRsp</a></B> 
+            added to give more control over the Amulet protocol.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            <p>Communication algorithm changed, so time-outs now cause the Amulet 
+            to re-send the previous message. After ten attempts, the Amulet 
+            will flush its transmit buffer and reset all its UART variables.</p>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Communication <a href="HTMLSupport.htm#META">time-outs</a> on the Amulet side now user defined within 
+            the META tag.</P>
+    </td>
+    </TR>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>The Meta tag attribute <B><a href="HTMLSupport.htm#META">BasicStamp</a></B> 
+            now makes the Amulet null terminate all messages, so the BASIC Stamp 
+            can look for the null termination character. Old style had the Amulet 
+            messages all be the same length. Now with the addition of strings, 
+            that method&nbsp;is inadequate.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P><A HREF="functions.htm#FunctionConventions">Nomenclature</A> of most UART commands&nbsp;has been changed to allow 
+            for consistency with Internal RAM variables. The previous nomenclature 
+            is still supported by the HTMLCompiler, its just not documented 
+            any longer.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Images&nbsp;and most widgets will now clip within the LCD region 
+            instead of wrapping to the other side of the LCD or even worse, 
+            crashing the OS. Becomes useful when using the <a href="Examples.htm#setX()">setX(</a><I><a href="Examples.htm#setX()">x</a></I><a href="Examples.htm#setX()">) 
+            and setY(</a><I><a href="Examples.htm#setX()">x</a></I><a href="Examples.htm#setX()">)</a> 
+            methods.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Radio Buttons and Function/Custom Buttons have had their <B>Button 
+            Value</B> attributes&nbsp;removed. With the addition of the new 
+            <A HREF="functions.htm#FunctionConventions">nomenclature</A>, there 
+            is no need for the attribute, all intrinsic values should be included 
+            in the function call itself.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>The IWC method setUpdateRate() can now be used by Anchors/Area 
+            Maps and 
+            META refresh tags.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>The IWC method forceUpdate() can now be used by Anchors/Area 
+            Maps and META refresh tags.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Slider Widgets have a new parameter <B><A HREF="Widgets.htm#Slider">minAt</A></B>. 
+            Slider value can increase as handle moves from top-to-bottom, bottom-to-top, 
+            left-to-right or right-to-left.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>HTMLCompiler has a new <A HREF="compiler.htm#SerialSetup">RS232 
+            setting</A> for the &quot;auto wake-up&quot; baud rate as well as 
+            the programming baud rate. This allows you to program your module 
+            even if your html pages are setup to communicate at a different 
+            baud rate than your programming baud rate, without setting DIP switch 
+            1 to the program mode.</P>
+    </td>
+    </tr>
+    <TR>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Amulet Serial Protocol Simulator can send over <A HREF="Simulator.htm#SerialSetup">&quot;master&quot; 
+            messages</A> as well as being the slave to the Amulet.</P>
+    </td>
+    </TR>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Amulet Serial Protocol Simulator can now send out a <A HREF="Simulator.htm#GetString">line 
+            feed</A> (\n) in&nbsp;the middle of strings.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <P>Added <A HREF="HTMLSupport.htm#<FONT>"><b>color</b></A> attribute to 
+            the font tag. Only handles black and white.</P>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Added new Slider attribute, <a href="Widgets.htm#Slider"><b>hrefEvent.</b></a> 
+            Allows for determining when the href function is sent out, either 
+            onChange or onPenUp.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>StringField Widget can now support user-defined wraps along with 
+            auto-wrapping. Earlier versions only supported one or the other, 
+            not both.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Anchors/Area Maps and Meta Refresh tags can all be use the reappear() 
+            and disappear() methods, which make them &quot;hittable&quot; or 
+            not.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+            <p>Slider Widget's <B>min</B> attribute value can now be greater 
+            than the <B>max</B> attribute value. Uses the <B><a href="Widgets.htm#SliderAttributes">minAt</a></B> 
+            attribute.</p>
+    </td>
+    </tr>
+    <TR>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <P>StringField widgets now have a maximum precision of 250 characters 
+            instead of 128. Previous documentation erroneously was stated as 
+            255.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <P>Fixed grouped check box bug. Grouped check boxes didn't send 
+            out the OR'ed value of all checked boxes. Instead, they sent out 
+            the OR'ed internal number of each checked box. Internal numbers 
+            are assigned in the order the check boxes are found in the HTML.</P>
+    </td>
+    </TR>
+    <TR>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <P>Fixed bug in StringField when user sends a user-defined line 
+            feed&nbsp;(0x0A). The height of the StringField needed to be tall 
+            enough to handle one&nbsp;line more than was actually used. If not, 
+            the Amulet truncated the text at the line feed&nbsp;instead of actually 
+            wrapping.</P>
+    </td>
+    </TR>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Fixed bug with the Amulet:internal.lostCommByte.value(). Intermittantly 
+            would send a word value with improper Most Significant Byte. MSByte 
+            should always be 0 since it should only return a byte value.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>Meta Refresh Tags can now span multiple lines within the HTML. 
+            </p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+            <p>HTMLCompiler now throws an error if Bargraph widget is 2 pixels 
+            or less in height or width. Prior to this, the HTMLCompiler would 
+            allow it, but the OS would crash.</p>
+    </td>
+    </tr>
+</table>
+<br><hr size="4" width="690" align="left">
+<h3><a name="Changes219"></a>Changes for Amulet OS version 2.1.9</h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added new IWC method forceUpdate() for all View Widgets. 
+            Allows for asynchronous updating of View Widgets.</p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in Numeric Field widget. Could 
+            not display any floating point numbers (printf flag %f). Introduced 
+            in version 2.1.8.</p>
+    </td>
+    </tr>
+</table>
+<br><hr size="4" width="690" align="left">
+<H3><a name="Changes218"></a>Changes for Amulet OS version 2.1.8</H3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in lineplot widget. If&nbsp;lineWeight&gt;1 
+            potential to crash OS.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in HTMLCompiler when dealing 
+            with stringField widgets. HTMLCompiler 
+            would give compile time error if the intrinsic value of the string 
+            used for the&nbsp;initialCondition was different than the relative 
+            position of the string within the options list. </p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in Numeric Field widget. Could 
+            not display negative integers or decimals (printf flags %i or %d). 
+            Introduced in version 2.1.7</p>
+    </td>
+    </tr>
+</table>
+<br><hr size="4" width="690" align="left">
+<h3>&nbsp;&nbsp;<a name="Changes217"></a>Changes for Amulet OS version 2.1.7</h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added Amulet Font Converter and the 
+            ability to display any TrueType font (HTML sizes 1-7) on the Amulet 
+            LCD.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added new attribute &quot;font&quot; 
+            for all Amulet Widgets that contain font information.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added ability to save project as a Palm 
+            DataBase file (.pdb). Used with Palm software created by Amulet, 
+            allows for programming Amulet flash through a Palm handheld.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added ability to change&nbsp;display 
+            polarity through the HTML compiler. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Much faster programming of Amulet flash. 
+            Delay between programming files now down to 10ms.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added Appendix C in the help. Gives 
+            a detailed listing of all internal methods for all widgets and objects.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Anchors, Area Maps, and META Refresh 
+            Tags can now use both the setMethod() and setOnvarMethod() IWC methods 
+            to change the method of either the href or the ONVAR attribute.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>StringField Widget text can now have 
+            inverted color. (White on black)</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Slider Widget can now use setByteValue() 
+            IWC method.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Radio Button/Check Box widgets can now 
+            have a null string as the label. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>BACKGROUND attribute added to the &lt;TABLE&gt; 
+            tag.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Lineplots can now have an &quot;xSamples&quot; value 
+            
+            greater than 255.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed intermittant &quot;could not open 
+            serial port&quot; error. Would occur&nbsp;in the middle of&nbsp;programming&nbsp;a 
+            project into the Amulet flash.</p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>When using Win2000 OS, it is now possible 
+            to launch the help through the HTMLCompiler.</p>
+    </td>
+    </tr>
+</table>
+<br>
+<hr size="4" width="690" align="left">
+<h3><a name="Changes21"></a>Changes for Amulet OS version 2.1</h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="136"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="538"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added custom button widget.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added ability to drive monochrome 
+            displays with resolutions up to 640 x 480.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+            A single lineplot widget can now draw multiple 
+            plots simultaneously within the same lineplot dimensions.    </td>
+  </tr>
+  <tr> 
+    <td width="136"><B>New Feature</B></td>
+    <td width="538">      <p>Custom/function button widgets 
+            can be setup to be&nbsp;a spring-loaded button or&nbsp;a toggle 
+            button.</p>
+</td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+<B>New Feature</B>    </td>
+    <td width="538"> 
+      <p>Added ability to make custom/function buttons 
+            perform an auto-repeat while keeping the button in the pen down 
+            state.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+<B>New Feature</B>    </td>
+    <td width="538"> 
+<p>Custom/function button widgets  can 
+            now 
+            have  the button 
+            label  dynamically entered at runtime by the 
+    server.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p> StringField and custom/function button 
+            widgets now have auto text wrap. User defined wraps can also be 
+            specified.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>StringField, numeric field and&nbsp;custom/function 
+            button widgets can now horizontally and vertically align their text 
+            within their dimensions.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added borders around StringField and numeric field 
+            widgets.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="538"> 
+      <p>Added sequenced function calls. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Button labels no longer go beyond the dimensions 
+            of the button, any extraneous text will either wrap, if possible, 
+            or truncate to fit.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Lineplot widget plots&nbsp;can be drawn in one 
+            of four patterns.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="538"> 
+      <p>Control widgets can now use the setMethod() method 
+            on other control widgets. Version 2.0 only let control widgets use 
+            setMethod() on view widgets.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in sliders 
+            that have a min attribute greater than zero. If a horizontal slider, 
+            it caused slider handle 
+            to jump to the right of where the pen down event occurred. If a 
+            vertical slider, handle would teleport to the bottom when handle 
+            reached the top. Also caused the handle to flicker when all the 
+            way at the bottom.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in horizontal sliders 
+            that are wider than 256 pixels. Caused slider handle to teleport 
+            to the far left when touching&nbsp;to the right of pixel 256.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with view widgets 
+            placed in a table within a table. Depending upon the layout of the 
+            page, view widget may not have updated. </p>
+    </td>
+  </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug in HTML Compiler with extra 
+            spaces being displayed between words. Caused by the combination 
+            within the HTML [text1][space][CR][LF][space][text2]. Browsers disregard 
+            the second space.</p>
+    </td>
+    </tr>
+    <tr>
+    <td width="136"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="538"> 
+      <p>Fixed bug with image compression. For 
+            every&nbsp;63 consecutive rows, one row would be deleted from the 
+            bottom of the image.</p>
+    </td>
+    </tr>
+</table>
+<br>
+<hr size="4" width="690" align="left">
+<h3><a name="Changes10"></a>Changes for Amulet OS version 2.0</h3>
+<table border="1" width="690">
+  <tr> 
+    <td width="135"> 
+      <p align="center"><B>New Feature,<br>
+        Enhancement,<br>
+        or Bug Fix?</B></p>
+    </td>
+    <td width="539"> 
+      <p align="center"><B>Description</B></p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added slider widget.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added radio button and check 
+        box widgets.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Made OS hardware constants 
+        configurable to different size displays. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"><B>New Feature</B></td>
+    <td width="539">Added ability to 
+      specify LCD dimensions and refresh rate through the compiler.</td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>User-defined images can be 
+        specified for all three images of the check box and radio button widgets.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>List widget items can now be 
+        given user-assigned values. Previously, a list had to begin with a zero 
+        (0) value and increase each item value by 1.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added href function <B>Amulet:calibrate</B>, 
+        which takes you directly to the touchscreen calibration pages. Returns 
+        to calling page when successfully calibrated.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Compiler now supports the BACKGROUND 
+        attribute of the &lt;TD&gt; tag, thus allowing background images in individual 
+        table cells.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added multiple function call 
+        capability to Control Widgets (list widgets, slider widgets, radio buttons, 
+        checkboxes and function buttons).</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added StringField widget.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added Inter Widget Communication; 
+        widgets can now communicate with each other.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added the ability to Flash 
+        program without changing the &quot;boot mode&quot; DIP switch position. 
+        Requires &quot;current page&quot; baud rate to be same as the compiler 
+        baud rate. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>New Feature</B></p>
+    </td>
+    <td width="539"> 
+      <p>Compiler now supports multi-level 
+        tables for improved layout capability.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>All widget href fields can 
+        now use any of the available functions.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Improved layout ability by 
+        adding pixel-by-pixel, X-coordinate control to bitmaps; previously bitmap 
+        X-coordinate was rounded-up in 8-pixel increments. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added 16-bit capability to 
+        NumericField, Bargraph, Lineplot, Image Sequence, and Image Bar widgets.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Anchor and META objects can 
+        now specify &quot;request time&quot; for ONVAR function. Previously, only 
+        500 ms was available.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added TRIGGER attribute to 
+        Anchor and META objects; thus, adding selectable trigger values to ONVAR 
+        attribute. Previously, only 0xff trigger was available.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Changed serial protocol command 
+        bytes to be non-ASCII. Implemented to support new StringField widget (ability 
+        to receive an ASCII string) and differentiate between command bytes and 
+        data bytes.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Image maps now support ONVAR, 
+        ONTIME, TRIGGER and VALUE.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added native support for Animated 
+        GIF's; previously required ANIM attribute.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Enhancement</B></p>
+    </td>
+    <td width="539"> 
+      <p>Added &quot;depress&quot; or 
+        &quot;invert&quot; option to Function Button Widget. </p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="539"> 
+      <p>Fixed bug in compiler regarding 
+        &quot;ONVAR&quot; for anchors and META REFRESH tags. UART was set up to 
+        request the external variable immediately upon loading and then once every 
+        11 minutes, instead of the desired every 500 ms.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="539"> 
+      <p>Fixed problem with bold and 
+        italic in the numeric field widget. Numeric field didn't clear itself 
+        correctly, so numbers got mangled.</p>
+    </td>
+  </tr>
+  <tr> 
+    <td width="135"> 
+      <p><B>Bug Fix</B></p>
+    </td>
+    <td width="539"> 
+      <p>Fixed bug in text strings that 
+        have underline, strikethrough or anchor_underline AND spaces. Spaces were 
+        one pixel too large.</p>
+    </td>
+  </tr>
+</table>
+&nbsp;</body>
+
+</html>

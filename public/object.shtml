@@ -1,0 +1,91 @@
+<!--#set var="document_title" value="6.115 Course Information and Staff" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2007-02-13 06:13:13 -0500 (Tue, 13 Feb 2007) $ by \$Author: avestruz $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>Objectives and Outcomes</h2>
+
+<p>In a nutshell:
+<h3>Fight to build - build to <b>win</b>.</h3>
+
+<p>More details:
+
+<p>This class, like its sister <a href="http://web.mit.edu/6.131/www/">6.131</a>,
+is your passport into the world of people who love to build elegant,
+efficient systems that work.  The overarching goal of this class is to
+share with you the skills and techniques that designers use to make
+useful systems that solve problems for people.  These are the skills
+that will make you successful in an engineering career.  They empower
+you to see the value of analysis techniques you have learned.  Your
+experience in this class will teach you to use analytical methods to
+constrain problems in ways that lead to winning solutions &mdash;
+answers that makes your UROP project successful, that make your thesis
+work, that make your product a commercial success, that let you stand
+flat-footed in front of a problem and fight to win.
+
+<p>In our humble and unbiased opinion, 6.115 is one of the most
+exciting classes you can take at MIT to further your professional
+growth as an engineer.  Systems that employ embedded micro-control are
+all around you: CD and MP3 players, kitchen appliances like microwave
+ovens, cellular phones, calculators, television sets, and high
+performance aircraft, to name a few.  In ways you may not realize,
+even very familiar consumer products that existed in some form before
+the microprocessor benefit in their contemporary incarnations from
+microcontrollers.  A modern, high-end luxury automobile will typically
+contain more than a dozen microcontrollers to provide everything from
+engine and emissions control to music programming.
+
+<p>This class, however, is not particularly about learning how a
+specific microcontroller is programmed, or about designing circuits,
+or about wiring chips together.  We&#8217;ll do a little of all of these
+things this term, but our real goal is to introduce you to a palette
+of tools and techniques that let you build what you can imagine.
+These techniques are much more general than the details of a single
+processor or programming language.  Chips come and go, but successful
+approaches for engineering design have a life that spans many
+iterations of a particular technology.
+
+<p>When you leave 6.115, you will:
+
+<ul>
+
+<li> Have confidence in designing an engineered system &#8220;from scratch&#8221;
+&mdash; a talent you will hone and ultimately demonstrate with your final
+project.
+
+<li> Appreciate the essential role of your honesty, integrity, and
+clear communication skills in an engineering project.
+
+<li> Be able to keep a clear laboratory notebook.
+
+<li> Know how to read a circuit schematic.
+
+<li> Know how to construct electronic circuits using solder, printed
+circuit boards, and breadboards.
+
+<li> Know how to program a microprocessor in assembly language and in
+high-level languages like C.
+
+<li> Know how to connect peripheral chips like analog-to-digital
+converters, digital-to-analog converters, serial ports, and parallel
+ports to a microcontroller.
+
+<li> Know how to use software interrupts and microcontroller timers.
+
+<li> Know how a keyboard works and how to connect one to a
+microcontroller.
+
+<li> Know how to use an LCD display module.
+
+<li> Know how to use an LED.
+
+<li> Know how to use and control DC motors.
+
+<li> Know how to use and control a power electronic &#8220;buck&#8221; converter.
+
+<li> Know how to use basic features of laboratory equipment like power
+supplies and oscilloscopes.
+
+</ul>
+
+<!--#include file="include/footer.shtml"-->

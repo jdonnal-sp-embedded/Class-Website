@@ -1,0 +1,51 @@
+#box
+  .block
+    %h2 Create New Event
+    .content
+      -#
+      =form_for [:admin, @event], :remote=>true, :html=>{:class=>"form"} do |f|
+        -#EVENT NAME
+        .group
+          .fieldWithErrors.name_box
+            =f.label :name, "Name", :class=>"label"
+            %span.error
+          =f.text_field :name, :class=>"text_field"
+        -#EVENT DESCRIPTION
+        .group
+          .fieldWithErrors
+            =f.label :description, "Description", :class=>"label"
+            %span.error
+          =f.text_field :description, :class=>"text_field"
+          %span.description optional
+        -#GRADABLE AND SLOTABLE CHECK BOXES
+        .group
+          =f.check_box :slotable, :class=>"checkbox slotable-check"
+          =f.label :slotable, "Has Slots", :class=>"label inline-label"
+          %span#has-slots{:style=>"display: inline; padding-left: 20px;"}
+            =f.select(:slot_duration,Event::POSSIBLE_SLOT_DURATIONS, :class=>"inline-label")
+            =f.label :slot_duration, "Time Length (minutes)", :class=>"label inline-label"
+        .group
+          =f.label :start_at, "Start Time", :class=>"label"
+          =f.datetime_select :start_at, :minute_step=>5
+        .group
+          .fieldWithErrors.end_at_box
+            =f.label :end_at, "End Time", :class=>"label"
+            %span.error
+          =f.datetime_select :end_at, :minute_step=>5
+        .group.navform.wat-cf
+          %button.button{:type=>"submit"}
+            %img{:src=>"assets/icons/check.png", :alt=>"Save"}
+            Save
+:javascript
+  if(#{@event.slotable?})
+    $('#has-slots').show()
+  else
+    $('#has-slots').hide()
+    
+  $('.slotable-check').click(function(){
+      if($('.slotable-check').attr('checked')=='checked')
+        $('#has-slots').fadeIn()
+      else
+        $('#has-slots').fadeOut()
+   
+    });

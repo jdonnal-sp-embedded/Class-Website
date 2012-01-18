@@ -1,0 +1,1050 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Sunday, December 10, 2000 10:50 PM -->
+<HTML>
+
+	<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<META NAME="Author" Content="Ed Sandoval">
+	<TITLE>Easy GUI 5.7&quot; Hardware Specs</TITLE>
+</HEAD>
+
+	<body bgcolor="white">
+<h1 align="CENTER"> Easy GUI™&nbsp;LCD Controller Board (CB-GT570)</h1>
+		
+<div align="left"> 
+  <p>This page provides hardware and electrical documentation for the Easy GUI LCD Controller Board Rev. D, part number CB-GT570. This is the same LCD controller board integrated with the Easy GUI 5.7&quot; LCD Starter Kit (STK-GT570) and the Easy GUI 5.7&quot; LCD Module Kit (MK-GT570). References to software in this document refer to the Amulet HTMLCompiler. For software documentation please see: <a href="http://www.amulettechnologies.com/help/compiler.htm">http://www.amulettechnologies.com/help/compiler.htm</a>. 
+    The Amulet Easy GUI controller board is software configurable to drive any 
+    size monochrome LCD, up to full VGA (640x480).<br>
+    <br>
+    The CB-GT570 controller board is ideal for interfacing to a graphics display 
+    with CCFL backlighting. For more detail on interfacing to the controller board, 
+    click on the following topics:</p>
+			<ul>
+				<li><a href="#Overview">Controller Board Overview,</a>
+				<li><a href="#LCD">LCD Interface,</a>
+				<li><a href="#AmuletInterface">Amulet Interface,</a></li>
+<li><a href="#CCFL">CCFL Interface,</a>
+				<li><a href="#Touch">Touchpanel Interface,</a>
+				<li><a href="#Power">Power Supply and Reset,</a>
+				<li><a href="#DIP">DIP Switch Settings,</a>
+				<li><a href="#Contrast">Contrast Adjust Setting,</a>
+				<li><a href="#RS232">RS-232 Spec</a><a href="#Contrast">,</a>
+				<li><a href="#Drawing">Mechanical Drawing</a>
+							<li><a href="#BezelDrawing">Bezel Mechanical 
+        Drawing</a></li>
+</ul>
+			<hr align="CENTER">
+			<h2><a name="Overview"></a>Controller Board Overview</h2>
+			<p></p>
+		</div>
+		<p align="CENTER"><img src="Images/genController57.gif" width="712" height="470" align="BOTTOM" border="0"><br>
+			<B>Figure 1. CB-GT570 Controller Board, Component Side.<br>
+				<br>
+			</B></p>
+		<div align="center">
+			<table border="1">
+				<tr>
+					<td valign="TOP" nowrap><B>PCB Size:</B></td>
+					<td>6.50&quot; x 4.25&quot;</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>LCD*:</B></td>
+					<td>Negative-type display, 4.87&quot; x 3.70&quot; (5.7&quot; diagonal); 320 x 240, monochrome, dark blue and white ; viewable area 4.76&quot; x 3.61&quot; (121.0 x 91.6mm)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Dot Pitch*:</B></td>
+					<td>0.36 x 0.36mm</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Dot Size*:</B></td>
+					<td>0.33 x 0.33mm</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Touchpanel*:</B></td>
+					<td>4-wire resistive analog; active area is 118.57 x 89.77mm; utilizes full 320 x 240. NOTE: Since the touchpanel is touch activated, do NOT allow your mounting hardware to apply any compression forces <a href="#Drawing">inside the active area</a>!</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Backlight*:</B></td>
+					<td>CCFL, always ON.</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Operating Temp*:</B></td>
+					<td>0° to 45°C; 95% RH Max.</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Storage Temp*:</B></td>
+					<td>-25° to 60°C</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Power:</B></td>
+					<td>12 VDC @ 250mA</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>SRAM:</B></td>
+					<td>128k-Bytes</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>FLASH:</B></td>
+					<td>128k-Bytes (64k-Bytes available)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap><B>Serial Port:</B></td>
+					<td>RS-232, 9-pin DIN, up to 115.2 Kbps</td>
+				</tr>
+			</table>
+			<B>Table 1. PCB Specs</B><br>
+			<br></div>
+The Easy GUI&nbsp;controller board is designed to utilize the following crystal 
+frequencies: 10 Mhz, 12 Mhz, 16 Mhz and 20 Mhz. The controller board ships with 
+a 16 Mhz crystal installed, providing an 8 Mhz PIXEL_CLK. Please contact Amulet 
+Technologies via email (<a href="mailto:support@AmuletTechnologies.com">support@AmuletTechnologies.com</a>) 
+if you would like to use a 10- 12- or 20 Mhz crystal.<br>
+		<br>
+		* Characteristics only apply when the controller board is bundled with either the Easy GUI 5.7&quot; LCD Starter Kit or Easy GUI 5.7&quot; LCD Module Kit.<br>
+		 
+		<hr>
+<h2><a name="LCD"></a>LCD Interface</h2>
+<p>The timing diagram shown below assumes:</p>
+		<ul>
+			<li>DATA WIDTH = 8-bits Max. (Adjustable in Software)
+			<li>LINE_PULSE = Positive Edge Line Pulse (Adjustable in Software)
+			<li>PIXEL_CLK = Negative Edge Pixel Clock (Adjustable in Software)
+			<li>MAXBYTE = 4 bytes of data per line; with the following data in the line buffer: 20, 21, 22, 23
+		</ul>
+		<div align="center">
+			<p><img src="Images/timing.gif" width="611" height="187" border="0"><br>
+				<B>Figure 2. Timing Diagram<br>
+				</B></p>
+			<p><img src="Images/pattern.gif" width="611" height="226" border="0"><br>
+				<B>Figure 3. 320x240 Dot Matrix Display Pattern<br>
+					</B>e<B><br>
+				</B></p>
+		</div>
+		<p>Headers J1, J2, and J9 provide three alternatives for LCD interface. The Easy 
+  GUI Controller Board ships with a 12-pin low insertion force connector installed 
+  in header J2. Headers J1 and J2 are pre-routed with a positive drive voltage 
+  (variable +17 to +23 VDC). If your display requires a different drive voltage 
+  (negative or positive), you must supply this voltage externally. (Contact us: <a href="mailto:support@AmuletTechnologies.com">support@AmuletTechnologies.com</a> 
+  for more info.) Also, the LCD signals to the interface headers are CMOS level 
+  signals. If your LCD requires TTL signals, contact us (<a href="mailto:support@AmuletTechnologies.com">support@AmuletTechnologies.com</a>) 
+  for simple board modification instructions.</p>
+		<div align="center">
+			<table border="1" width="547">
+				<tr>
+					<td valign="TOP" nowrap>Pin #</td>
+					<td width="94">Signal</td>
+					<td>Description</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>1</td>
+					<td width="94">D0</td>
+					<td><B>Pixel_D3</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>2</td>
+					<td width="94">D1</td>
+					<td><B>Pixel_D2</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>3</td>
+					<td width="94">D2</td>
+					<td><B>Pixel_D1</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>4</td>
+					<td width="94">D3</td>
+					<td><B>Pixel_D0</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>5</td>
+					<td width="94">DISP OFF</td>
+					<td><B>LCD_Pwr</B> (&quot;H&quot;: On; &quot;L&quot;: Off): Display control signal</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>6</td>
+					<td width="94">FLM</td>
+					<td><B>Frame_Out</B>: Frame signal (LCD&nbsp;first frame synchronization)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>7</td>
+					<td width="94">NC</td>
+					<td><B>No Connect</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>8</td>
+					<td width="94">LP(CL1)</td>
+					<td><B>Line_Pulse</B>: Pixel data latch signal</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>9</td>
+					<td width="94">XCK(CL2)</td>
+					<td><B>Pixel_Clk</B>: Pixel data shift clock</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>10</td>
+					<td width="94">VDD</td>
+					<td><B>Power Supply</B> (+5V)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>11</td>
+					<td width="94">VSS</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>12</td>
+					<td width="94">VEE</td>
+					<td><B>LCD Driving Voltage </B>(+17 ~ 23V): Positive LCD driving supply</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>13</td>
+					<td width="94">VADJ</td>
+					<td><B>N/A</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>14</td>
+					<td width="94">FGND</td>
+					<td><B>Frame Ground</B></td>
+				</tr>
+			</table>
+			<B>Table 2. LCD Interface Header J1<br>
+				<br>
+			
+			</B><table border="1" width="547">
+				<tr>
+					<td valign="TOP" nowrap>Pin #</td>
+					<td width="94">Signal</td>
+					<td>Description</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>1</td>
+					<td width="94">S</td>
+					<td><B>Frame_Out</B>: Frame signal (LCD&nbsp;first frame synchronization)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>2</td>
+					<td width="94">CP1</td>
+					<td><B>Line_Pulse</B>: Pixel data latch signal</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>3</td>
+					<td width="94">CP2</td>
+					<td><B>Pixel_Clk</B>: Pixel data shift clock</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>4</td>
+					<td width="94">NC</td>
+					<td><B>No Connect</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>5</td>
+					<td width="94">DISP OFF</td>
+					<td><B>LCD_Pwr</B> (&quot;H&quot;: On; &quot;L&quot;: Off): Display control signal</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>6</td>
+					<td width="94">D0</td>
+					<td><B>Pixel_D3</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>7</td>
+					<td width="94">D1</td>
+					<td><B>Pixel_D2</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>8</td>
+					<td width="94">D2</td>
+					<td><B>Pixel_D1</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>9</td>
+					<td width="94">D3</td>
+					<td><B>Pixel_D0</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>10</td>
+					<td width="94">VDD</td>
+					<td><B>Power Supply</B> (+5V)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>11</td>
+					<td width="94">VSS</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>12</td>
+					<td width="94">VEE</td>
+					
+      <td><B>LCD Drive Voltage </B>(+17 ~ 23V): Positive LCD driving supply</td>
+				</tr>
+			</table>
+			<B>Table 3. LCD Interface Header J2<br>
+				<br>
+</B><table border="1" width="547">
+				<tr>
+					<td valign="TOP" nowrap>Pin #</td>
+					<td width="94">Signal</td>
+					<td>Description</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>1</td>
+					<td width="94">VH</td>
+					<td><B>Power Supply</B> (+12V)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>2</td>
+					<td width="94">VH</td>
+					<td><B>Power Supply</B> (+12V)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>3</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>4</td>
+					<td width="94">NC</td>
+					<td><B>No Connect</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>5</td>
+					<td width="94">VL</td>
+					<td><B>Power Supply</B> (+5V)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>6</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>7</td>
+					<td width="94">VS</td>
+					<td><B>Frame_Out</B>: Frame signal (LCD&nbsp;first frame synchronization)</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>8</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>9</td>
+					<td width="94">HS</td>
+					<td><B>Line_Pulse</B>: Pixel data latch signal</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>10</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>11</td>
+					<td width="94">VCLK</td>
+					<td><B>Pixel_Clk</B>: Pixel data shift clock</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>12</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>13</td>
+					<td width="94">VD0</td>
+					<td><B>Pixel_D3</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>14</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>15</td>
+					<td width="94">VD1</td>
+					<td><B>Pixel_D2</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>16</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>17</td>
+					<td width="94">VD2</td>
+					<td><B>Pixel_D1</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>18</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>19</td>
+					<td width="94">VD3</td>
+					<td><B>Pixel_D0</B>: LCD pixel data</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>20</td>
+					<td width="94">GND</td>
+					<td><B>Ground</B></td>
+				</tr>
+			</table>
+			<B>Table 4. LCD Interface Header J9<br>
+			&nbsp;
+			
+			</B></div>
+<hr>
+<h2 align="left"><a name="AmuletInterface"></a>Amulet Interface</h2>
+		<p>Header J6 provides a means of&nbsp;interfacing to the Amulet 
+chip.  </p>
+		<div align="center">
+<table border=1 cellpadding=0 width=547>
+ <tr>
+  <td nowrap valign=top >
+  <p>Pin #</p>
+  </td>
+  <td width=94 >
+  <p>Signal</p>
+  </td>
+  <td >
+  <p>Description</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>1</p>
+  </td>
+  <td width=94 >
+  <p>RESET</p>
+  </td>
+  <td >
+  <p><B>System Reset</B>
+  (active low )</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>2</p>
+  </td>
+  <td width=94 >
+  <p>SCLK</p>
+  </td>
+  <td >
+  <p><B>SPI Clock</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>3</p>
+  </td>
+  <td width=94 >
+  <p>MOSI</p>
+  </td>
+  <td >
+  <p><B>SPI Data Out </B>(MOSI)</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>4</p>
+  </td>
+  <td width=94 >
+  <p>MISO</p>
+  </td>
+  <td >
+  <p><B>SPI Data In </B>(MISO)</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>5</p>
+  </td>
+  <td width=94 >
+  <p>SS2</p>
+  </td>
+  <td valign=top >
+  <p><B>SPI Slave Select</B> (line 2) </p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>6</p>
+  </td>
+  <td width=94 >
+  <p>SS3</p>
+  </td>
+  <td valign=top >
+  <p><B>SPI Slave Select </B>(line 3) </p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>7</p>
+  </td>
+  <td width=94 >
+  <p>SS4</p>
+  </td>
+  <td valign=top >
+  <p><B>SPI Slave Select </B>(line 4) </p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>8</p>
+  </td>
+  <td width=94 >
+  <p>SS5</p>
+  </td>
+  <td valign=top >
+  <p><B>SPI Slave Select </B>(line 5) </p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>9</p>
+  </td>
+  <td width=94 >
+  <p>SS6</p>
+  </td>
+  <td valign=top >
+  <p><B>SPI Slave Select </B>(line 6) </p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>10</p>
+  </td>
+  <td width=94 >
+  <p>SS7</p>
+  </td>
+  <td valign=top >
+  <p><B>SPI Slave Select </B>(line 7) </p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>11</p>
+  </td>
+  <td width=94 >
+  <p>IRQ</p>
+  </td>
+  <td >
+  <p><B>Touch Panel Interrupt</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>12</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>13</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>14</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>15</p>
+  </td>
+  <td width=94 >
+  <p>BOOT</p>
+  </td>
+  <td >
+  <p><B>System Power Up
+  Mode</B> ( 1 = Program, 0 = Normal )</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>16</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>17</p>
+  </td>
+  <td width=94 >
+  <p>BAUD</p>
+  </td>
+  <td >
+  <p><B>Flash Baud Rate</B> ( 1 = 11500, 0 = 19200 )</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>18</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>19</p>
+  </td>
+  <td width=94 >
+  <p>RAM</p>
+  </td>
+  <td >
+  <p><B>RAM Test </B>( 1 =
+  Normal, 0 =TEST )</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>20</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>21</p>
+  </td>
+  <td width=94 >
+  <p>T_CAL</p>
+  </td>
+  <td >
+  <p><B>Touch Panel
+  Calibration</B> ( 0 = Normal, 1 = CALIBRATE )</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>22</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td valign=top >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>23</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td valign=top >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>24</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td valign=top >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>25</p>
+  </td>
+  <td width=94 >
+  <p>TXD</p>
+  </td>
+  <td >
+  <p><B>UART Transmit Data
+  </B>U1 Side</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>26</p>
+  </td>
+  <td width=94 >
+  <p>RXD</p>
+  </td>
+  <td >
+  <p><B>UART Receive Data
+  </B>U1 Side</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>27</p>
+  </td>
+  <td width=94 >
+  <p>TXD</p>
+  </td>
+  <td >
+  <p><B>UART Transmit Data
+  </B>U7 Side</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>28</p>
+  </td>
+  <td width=94 >
+  <p>RXD</p>
+  </td>
+  <td >
+  <p><B>UART Receive Data
+  </B>U7 Side</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>29</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td valign=top >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>30</p>
+  </td>
+  <td width=94 >
+  <p>GND</p>
+  </td>
+  <td valign=top >
+  <p><B>Ground</B></p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>31</p>
+  </td>
+  <td width=94 >
+  <p>TXD IN</p>
+  </td>
+  <td >
+  <p><B>Transmit Data </B>J8
+  Pin2 DB9</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap valign=top >
+  <p>32</p>
+  </td>
+  <td width=94 >
+  <p>RXD IN</p>
+  </td>
+  <td >
+  <p><B>Receive Data </B>J8
+  Pin3 DB9 </p>
+  </td>
+ </tr>
+</table>
+
+<B>Table 5. Amulet Interface Header J6</B>
+		<br>&nbsp;<B>	<br>
+			</B></div>
+		<hr align="CENTER">
+		<h2><a name="CCFL"></a>CCFL Interface</h2>
+		
+<p align="center"><b><font color="red">WARNING</font></b><font color="red">: Electrical 
+  shock hazard! Do not touch the CCFL inverter with power <br>
+  applied to the board. Doing so can shock and burn you.</font></p>
+<p>The Easy GUI controller board comes equipped with an&nbsp;inverter for driving 
+  a CCFL backlight via 2-pin header J10.</p>
+		<div align="center">
+			<table border="1" width="623" height="125">
+				<tr height="19">
+					<td width="240" rowspan="3">
+						<div align="center">
+							<p><img src="Images/ccfl.gif" width="54" height="92" border="0"><br>
+								<b><font color="red">WARNING HIGH VOLTAGE!</font></b></p>
+						</div>
+					</td>
+					<td width="41" height="19">Pin #</td>
+					<td height="19" width="64">Signal</td>
+					<td height="19">Description</td>
+				</tr>
+				<tr height="44">
+					<td width="41" height="44">
+						<p>1</p>
+					</td>
+					<td width="64" height="44">OUT1</td>
+					<td height="44">Power supply for CCFL backlight (HOT)</td>
+				</tr>
+				<tr height="44">
+					<td width="41" height="44">2</td>
+					<td width="64" height="44">OUT2</td>
+					<td height="44">Power supply for CCFL backlight (GND)</td>
+				</tr>
+			</table>
+			<p><B>Table 6. CCFL Interface Connector J10<br>
+					<br>
+				
+			</B><hr align="CENTER">
+		</div>
+		<h2><a name="Touch"></a>Touchpanel Interface</h2>
+		<p>The Easy GUI controller board includes a built-in touchpanel decoder chip (U2). Headers J4 and J5 provide two touchpanel interface options. The board ships with a 4-pin ZIF (zero insertion force) connector installed in J4.<br>
+  <br>
+</p>
+		<div align="center">
+			<table border="1" width="390">
+				<tr>
+					<td valign="TOP" nowrap>Pin #</td>
+					<td>Signal</td>
+					<td>Description</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>1</td>
+					<td>X-</td>
+					<td>X- Position Input</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>2</td>
+					<td>Y+</td>
+					<td>Y+ Position Input</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>3</td>
+					<td>X+</td>
+					<td>X+ Position Input</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>4</td>
+					<td>Y-</td>
+					<td>Y- Position Input</td>
+				</tr>
+			</table>
+			<B>Table 7. Touchpanel Interface Connector<br>
+				<br>
+			</B></div>
+		
+<p>Touchpanel calibration data is stored in FLASH ROM as part of the Amulet Operating System (OS). Therefore, always recalibrate the touchpanel after restoring or updating the OS. To perform a touchpanel calibration, proceed as follows:</p>
+		<ol>
+			<li>Make sure that the DIP switch settings on SW2 are as follows:
+			<blockquote>
+				<p>Switch 1 ON -- Boot Mode<br>
+					Switch 2 OFF -- Flash Mode Baud Rate<br>
+					Switch 3 OFF -- RAM Test<br>Switch 4 OFF -- Touchpanel Mode</p>
+			</blockquote>
+			<li>Press the Reset Switch to reboot the board.&nbsp;The board reboots in the calibration mode.
+			<li>A series of three targets appear on the LCD. &nbsp;The first two targets are X and Y calibration targets. &nbsp;Using a touchpanel stylus, touch the center of each target as it appears. &nbsp;As a target is touched, the next target is displayed.			<li>The third target is a calibration &quot;check&quot; target. Unlike the first two targets, this target appears momentarily pressed while touched.&nbsp;Depending on how you remove the stylus from this target, the calibration will either restart, or the calibration will end.&nbsp;To check calibration accuracy, move the stylus within the center of the target with a continuous touch, and then move the stylus off the edge of the target image.&nbsp;A well-calibrated target will remain pressed with the stylus in the center area, and should return to its pre-pressed state as the stylus moves off the edge of the target.
+			<li>If the calibration is satisfactory, release the stylus anywhere within the target. &nbsp;(The unit will proceed to the uHTML Home Page.)&nbsp; If the calibration is NOT satisfactory, release the stylus anywhere outside the target to restart the calibration.
+
+			<li>If the calibration is satisfactory, then make sure you return the Touchpanel Mode DIP switch (Switch 4) to the Normal Mode (ON) before you press the reset switch or re-apply power to the board.&nbsp; If not, the board will restart in the touchpanel calibration mode.	
+		</ol>
+		<p>Touchpanel calibration can also be entered via software, by using the Amulet:calibrate() function call.</p>
+		<p><B>NOTES:<br>
+			</B></p>
+		<ul>
+			<li>A copy of the touchpanel calibration pages are stored in ..\Amulet\Projects\touch\. The three pages (Target1.html, Target2.html and Target3.html) are setup specifically for 1/4 VGA (320 X 240) displays. A set of calibration pages for 1/8 VGA (240 X 160) are also included. To change the calibration pages for an 1/8 VGA display, open G8Target1.html in the HTMLCompiler and then program into the flash.<br>
+			<li>If a display with a different resolution is used, the size of the tables in Target1.html, Target2.html and Target3.html&nbsp;should be changed to match the resolution of the display. Once the dimensions of the table have been changed to match the correct resolution, open Target1.html in the HTMLCompiler and then program into the flash.<br>
+			<li>The target image (target2.gif) can be replaced with a custom image if you like. The same target must be used in all three calibration pages, though.<br>
+			
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="Power"></a>Power Supply and Reset</h2>
+		
+<p>The Easy GUI controller board comes equipped with a 2.5 mm external power connector 
+  (J3). The power requirement is 12 VDC @ 250 mA. A reset switch (momentary pushbutton, 
+  SW1 on the back of the board) resets the Easy GUI controller chip as well as 
+  LCD power.</p>
+		<div align="center">
+			<table border="1">
+				<tr>
+					<td width="92">
+						<p align="RIGHT"><img src="Images/powerin57.gif" width="231" height="143" align="BOTTOM" border="0"></p>
+					</td>
+					<td>
+						<p><b><font color="red">CAUTION</font></b><font color="red">: Do not reverse the polarity on the power input. <br>
+								Doing so will permanently damage the controller board.</font></p>
+					</td>
+				</tr>
+			</table>
+			<B>Figure 4. Power Supply Input<br>
+				<br>
+			</B></div>
+		<hr align="CENTER">
+		<h2><a name="DIP"></a>DIP Switch Settings</h2>
+		<p>The Easy GUI controller board can be powered up in different modes via the settings of the DIP switch (SW2). Some of the power up modes include: programming mode, run mode, RAM&nbsp;test mode, and touchpanel mode.</p>
+		<div align="center">
+		<table border="1">
+			<tr>
+				<td width="92">
+					<p align="RIGHT"><img src="Images/dip4.gif" width="77" height="79" align="BOTTOM" border="0"></p>
+				</td>
+				<td>Switch 1 -- Boot Mode<br>Switch 2 -- Flash Mode Baud Rate<br>
+					Switch 3 -- RAM Test<br>Switch 4 -- Touchpanel Mode</td>
+			</tr>
+		</table>
+		<B>Figure 5. DIP Switch Settings<br>
+			<br>
+		</B></div>
+		<p><B>Boot Mode (Switch 1) -- </B>This switch is monitored during a reboot to determine the operational mode of the controller board; ON is the normal mode and OFF is the FLASH program mode. Upon clicking on the <B>Program FLASH</B> button in the Compiler window, the Compiler will attempt to send out an auto &quot;wake-up&quot; message to the Amulet controller. If the page currently being displayed is set up to use the same baud rate using the <a href="HTMLSupport.htm#META">META</a> tag (if META is not present, the default is 115200) as the Compiler's uP comm rate, 
+then the Amulet controller will change to a generic &quot;Please wait while programming flash...&quot; screen and commence programming. If the page has a baud rate different than what the Compiler is set to, then you should 
+set the <A HREF="compiler.htm#SerialSetup">uP comm rate</A> in the Settings-&gt;RS232 dialog 
+box to match the baud rate set by the META tag. This will allow the HTMLCompiler 
+to wake up the Amulet at one baud rate and then program it at&nbsp;another baud 
+rate. The only time you should have to set Switch 1 to OFF (program mode) is 
+when the project you compiled locks up the Amulet OS to the point where it won't 
+accept the wake up message or if the Amulet OS has been corrupted and you need 
+to <a href="compiler.htm#firmware_upgrade">reload the OS</a>.</p>
+		<p><B>Flash Mode Baud Rate (Switch 2) --</B> This switch sets the baud rate used during a Flash Reprogram. The ON position sets the hardware to 19,200 baud; OFF sets the hardware to 115,200 baud. This setting must match the baud rate selected in the Easy GUI HTMLCompiler software.</p>
+		<p><B>RAM Test (Switch 3) -- </B>Turn this switch ON and then reboot the controller board to auto-execute a RAM test. A RAM test failure will result in a zero (0) volt signal on the MEM PASS test pad on the board; a pass will result in a 3.3 volt signal. The switch must be returned to the normal mode (OFF) before the next reboot to continue normal operation.</p>
+		<p><B>Touchpanel Mode (Switch 4) --</B> This switch should remain ON during normal operation. Turn this switch OFF and then reboot the controller board to begin a touchpanel calibration. The controller will display a series of three calibration targets. Use a stylus to touch the center of each target. If necessary, the controller will repeat the calibration. When calibration is complete, the controller will return to normal operation. The switch must be returned to the normal mode (ON) before the next reboot to continue normal operation.<br>
+		</p>
+		<p><B>NOTES:<br>
+			</B></p>
+		<ul>
+<li>A copy of the &quot;Please wait while programming flash...&quot; page is stored in ..\Amulet\Projects\OS 
+    Files\Flashing\Flashing.ahtml. It is setup specifically for 320 X 240 displays. If a different sized display is used, the size of the table in Flashing.ahtml should be changed to match the dimensions of the new display. Once the dimensions have been changed, open Flashing.ahtml in the HTMLCompiler and then program into the flash.<br>
+			<li>The text in Flashing.ahtml can be changed, but no images can be added.<br>
+			
+		</ul>
+		<hr align="CENTER">
+		<h2><a name="Contrast"></a>Contrast Adjust Setting</h2>
+		
+<p>By default, the Easy GUI controller board ships with a positive DC/DC converter with a variable output of +17 to +23VDC (variable by rotating the contrast adjust potentiometer VR1). Not all LCD's require a positive LCD driving voltage (see LCD Interface section above for more information). To have the Easy GUI&nbsp;controller board generate a negative LCD driving voltage having a variable output of -15.5 to -23VDC (variable by rotating the contrast adjust potentiometer VR1), proceed as follows:</p>
+		<ol>
+			<li>Cut the trace shorting C29 and add a .22 uF capacitor.
+
+			<li>Remove D1 and turn it around, so the cathode end faces D1 text.
+			<li>Add D2 which is the same as D1, so the anode end faces D2 text.
+			<li>Replace U8 with LT1617ES5.
+
+			<li>Replace R3 with 560K ohm resistor.
+			<li>Replace R4 with 33K ohm resistor.
+			<li>Short VR2 pin 2 (center pin) to VR2 pin 3 (pin closest to SW3).
+			<li>Flip capacitor at location C6 around.
+			<li>Add a .22 uF capacitor to C28.
+		</ol>
+		<div align="center">
+			<table border="1" width="710">
+				<tr>
+					<td valign="TOP" nowrap>Part Reference</td>
+					<td width="72">Package</td>
+					<td width="187">Description</td>
+					<td width="120">Manufacturer</td>
+					<td>Manufacturer Part #</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>C28,C29</td>
+					<td width="72">1206</td>
+					<td width="187">CAP, .22uF, 16V, Z5U, 20%</td>
+					<td width="120">Panasonic</td>
+					<td>ECP-U1C224MA5</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>D2</td>
+					<td width="72">SOD-123</td>
+					<td width="187">Diode, Schottky, .5A, 20V</td>
+					<td width="120">On Semi</td>
+					<td>MBR0520</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>U8</td>
+					<td width="72">SOT-23</td>
+					<td width="187">Negative DC/DC Converter</td>
+					<td width="120">Linear Technology</td>
+					<td>LT1617ES5</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>R3</td>
+					<td width="72">0805</td>
+					<td width="187">RES, 560K, 1/10W, 5%</td>
+					<td width="120">Panasonic</td>
+					<td>ERJ-6GEYJ564V</td>
+				</tr>
+				<tr>
+					<td valign="TOP" nowrap>R4</td>
+					<td width="72">0805</td>
+					<td width="187">RES, 33K, 1/10W, 5%</td>
+					<td width="120">Panasonic</td>
+					<td>ERJ-6GEYJ333V</td>
+				</tr>
+			</table>
+			<B>Table 8. Negative Driving Voltage Parts<br>
+				<br>
+			</B></div>
+		<p><B>NOTES:<br>
+			</B></p>
+		<ul>
+			<li>The negative variable output range can be decreased or increased by using different R3 and R4 resistor values. Consult the datasheet for the LT1617 negative DC/DC converter to calculate values for R3 and R4 for a specific output range.</ul>
+    <hr>
+		
+<h2><a name="RS232"></a><B>RS-232 Spec</B></h2>
+<p>A serial connection is required between the controller board and a personal 
+  computer in order to program uHTML pages into the FLASH memory of the controller 
+  board.</p>
+		<ul>
+			<li>Pin 1 - N/C
+			<li>Pin 2 - TX (Amulet GUI module transmits data on Pin 2 while the PC receives data on Pin 2)
+			<li>Pin 3 - RX (Amulet GUI module receives data on Pin 3 while the PC&nbsp;transmits data on Pin 3)
+			<li>Pin 4 to 6 - Jumpered
+			<li>Pin 5 - Ground
+			<li>Pin 7 to 8 - Jumpered
+
+			<li>Pin 9 - N/C
+
+		</ul>
+		<p>The serial parameters for communications between the Easy GUI client and the server are, as follows:<br>
+			<br>
+		<blockquote>
+			<B>Baud Rate</B>: 9600, 19200, 57600, or 115200bps<br>
+			<B>Parity</B>: None<br>
+			<B>Data Bits</B>: 8<br>
+			<B>Stop Bits</B>: 1<br>
+		</blockquote>
+		See Communications <a href="Protocol.htm">Protocol</a> for more information.<br>
+		<br>
+		<hr align="CENTER">
+		<h2><a name="Drawing"></a>Module Assembly Drawing, Easy GUI 5.7&quot; Starter and 
+Module Kits</h2>
+<p><a href="Images/Sharp.pdf">Click here for the .pdf version</a> of the Mechanical 
+Drawing for the 5.7&quot; Module Kit.</p>
+		<div align="center">
+			<p><img src="Images/Sharp57.gif" width="838" height="542" border="0"></p>
+		</div>
+<hr align="CENTER">
+		<h2><a name="BezelDrawing"></a>Bezel Mechanical Drawing, Easy GUI 5.7&quot; Starter Kit</h2>
+<p align="center"><img src="Images/bezel.gif" width="508" height="475" border="0"></p>
+		<center>
+			<hr align="CENTER" width="60%">
+			<br>
+			<I>Amulet HTMLCompiler,<br>
+				<FONT SIZE="2">Copyright &copy; 2000-2004 by<br>Amulet Technologies, LLC</FONT></I>
+			<p><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A></p>
+		</center>
+	</body>
+
+</HTML>

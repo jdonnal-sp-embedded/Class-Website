@@ -1,0 +1,16 @@
+#box
+  .block
+    %h2 Create New #{@acct_type}
+    .content
+      -#
+      =form_for [:admin, @user], :remote=>true, :html=>{:class=>"form"} do |f|
+        .group
+          .fieldWithErrors
+            =f.label :username, "MIT Username", :class=>"label"
+            %span.error
+          =f.text_field :username
+          =hidden_field_tag :role, @role
+        .group.navform.wat-cf
+          %button.button{:type=>"submit"}
+            %img{:src=>"assets/icons/check.png", :alt=>"Save"}
+            Save

@@ -1,0 +1,15 @@
+<!-- footer.shtml start -->
+ </td>
+</tr>
+</table>
+<hr>
+<font size=-1>
+<em>
+<!--
+  Page by Jim Paris &lt;<a href=mailto:jim@jtan.com>jim@jtan.com</a>&gt;<br>
+  -->
+Last modified: <!--#echo var="lastmod"-->
+</em>
+</font>
+</body>
+<!-- footer.shtml end --></html>

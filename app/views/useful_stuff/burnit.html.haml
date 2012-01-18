@@ -1,0 +1,37 @@
+#block-text.block
+  .content
+    %h2.title BurnIt Information
+    .inner
+      :markdown
+        Datasheets
+        ----------
+        * [Atmel AT89C2051](/datasheets/2051.pdf)- 8-bit 8051-like microcontroller
+        * [GAL22V10](/datasheets/22v10.pdf)- Programmable Logic Device
+        * [Simple2051 Schematic](/datasheets/simple2051.sch)- Simple 2051 application schematic in ExpressSCH format
+        * [ Simple2051 Bitmap](/datasheets/simple2051.bmp)- Simple 2051 application schematic in BMP format
+        * [PIC16F628 ](/datasheets/16f628.pdf)  - 8-bit CMOS FLASH-based microcontroller
+        * [PIC16F628 errata](/datasheets/16f628_errata.pdf)- PIC16F62X Silicon/Data Sheet Errata (check this if you're having problems)
+
+        Programming Hardware
+        --------------------
+        * [BurnIt Schematic](/miscfiles/burnit.bmp) - BMP format
+        * [BurnIt Layout](/miscfiles/burnit.exe)- Self-Extracting Zip format - Email Leeb for password
+        * [BurnIt BOM](/miscfiles/burnitbom.txt) - Parts for BurnIt
+        * [BurnIt Atmega Hex code](/miscfiles/burnit.hex) - Code required for BurnIt's ATMEGA644
+        * [BurnIt Source](/miscfiles/burnitcode.zip) - Source code for BurnIt firmware
+
+        Programming Software
+        --------------------
+        * [Hi-Tech PICC Lite C Compiler](http://www.htsoft.com/products/compilers/PICClite.php) - link to vendor's homepage
+        * [Hi-Tech PICC Lite C Compiler](/miscfiles/picclite-805PL2.exe) - local copy of the version of PICC Lite used on the lab computers
+        * [Hi-Tech PICC Lite](/miscfiles/picclite.pdf) - user's manual
+        * [Stripped WinCupl](/miscfiles/installWinCupl.exe) - version used on lab machines without graphical interface
+
+        Support
+        -------
+        * [BurnIt README](/miscfiles/burnitreadme.txt) - Instructions for using BurnIt
+        * [blinky.c](/miscfiles/blinky.c) - PIC code from Lab 2 to blink an LED on pin B0
+        * [test051.asm](/miscfiles/test051.asm) - 2051 code to blink an LED
+        * [How C Programming Works](http://www.howstuffworks.com/c.htm)- link to a decent tutorial on the C language
+
+- content_for :sidebar, render(:partial => 'sidebar')

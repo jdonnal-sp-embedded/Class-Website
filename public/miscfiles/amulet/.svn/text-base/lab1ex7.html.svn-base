@@ -1,0 +1,209 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+<META NAME="Amulet" Content="baud=9600">
+      <TITLE>untitled</TITLE>
+</HEAD>
+
+<BODY>
+<P>
+<TABLE BORDER="1" WIDTH="320" HEIGHT="240">
+
+
+      <TR>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x32)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="1">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x33)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="2">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x34)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="3">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x41)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="G">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+             </TD>
+
+      </TR>
+
+      <TR>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x35)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="4">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+
+                       <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x36)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="5">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x37)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="6">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x38)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="B">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+      </TR>
+
+
+
+
+
+      <TR>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x38)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="7">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x39)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="8">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x39)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="9">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x43)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="C">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+      </TR>
+
+      <TR>
+
+            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x2A)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="*">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x30)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="0">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x23)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="#">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>            <TD WIDTH="80" HEIGHT="60">
+                       <APPLET CODE="FunctionButton.class"           WIDTH="80" HEIGHT="60" NAME="Button1">
+                       <PARAM NAME="href" VALUE="Amulet:UART.byteOut(0x44)">
+                       <PARAM NAME="fontSize" VALUE="3">
+                       <PARAM NAME="fontStyle" VALUE="BOLD">
+                       <PARAM NAME="label" VALUE="D">
+                       <PARAM NAME="buttonType" VALUE="SPRING-LOADED">
+                       <PARAM NAME="onButtonPress" VALUE="DEPRESS">
+                       </APPLET>
+
+            </TD>
+
+      </TR>
+
+ </TABLE>
+</BODY>
+</HTML>

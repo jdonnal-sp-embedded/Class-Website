@@ -1,0 +1,79 @@
+<!--#set var="document_title" value="6.115 Home" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2011-05-06 15:38:12 -0400 (Fri, 06 May 2011) $ by \$Author: drv $" -->
+<!--#include file="include/header.shtml"-->
+
+<!-- Print a big fat warning if server side includes aren't being parsed. -->
+<!--#if expr="ssi = broken" -->
+<h1>The MIT webserver is currently broken; please bear with us.</h1>
+<!--#endif -->
+
+<h2>Welcome to 6.115!</h2>
+
+<h3>Lab Hours</h2>
+<h4>Week of 2011.05.8:</h4>
+<table>
+  <tr><td>Monday 5/9:</td><td>1100-1300, 1500-1700</td></tr>
+  <tr><td>Tuesday 5/10:</td><td>1000-1900</td></tr>
+  <tr><td>Wednesday 5/11:</td><td>1000-1430, 1600-1900</td></tr>
+  <tr><td>Thursday 5/12:</td><td>Final Checkoffs! - Sign Up Online</td></tr>
+</table>
+
+<h3>Course Announcements</h3>
+
+<h4>01/01 - Introduction</h4>
+<p>
+This class is a chance to remember why you came to MIT: to learn and
+to build.  In the humble and unbiased opinion of the lecturer and
+TA's, 6.115 is one of the most exciting classes you can take at MIT to
+further your professional growth as an engineer.  Systems that employ
+embedded micro-control are all around you: CD and MP3 players, kitchen
+appliances like microwave ovens, cellular phones, calculators,
+television sets, and high performance aircraft, to name a few.  In
+ways you may not realize, even very familiar consumer products that
+existed in some form before the microprocessor benefit in their
+contemporary incarnations from microcontrollers.  A modern, high-end
+luxury automobile will typically contain more than a dozen
+microcontrollers to provide everything from engine and emissions
+control to music programming.  This class is your passport into the
+world of people who love to build elegant, efficient systems that
+work.
+</p>
+<p>Course topics include optical tomography, multi-axis robot arm
+control, video and audio signal processing, power electronics
+including laptop power supplies and fluorescent lamp ballasts, and
+numeric computation (calculators and floating point calculations).
+This class is not particularly about learning how a specific
+microcontroller is programmed, or about designing circuits, or about
+wiring chips together.  We do a little of all of these things, but
+our real goal is to introduce you to a palette of tools and
+techniques that let you build what you can imagine.  These techniques
+are much more general than the details of a single processor or
+programming language.  Chips come and go, but successful approaches
+for engineering design have a life that spans many iterations of a
+particular technology.  
+</p>
+<p>
+Students in the class build a PIC microcontroller development
+system that you can keep if you complete the class.
+</p>
+
+<p><a href="old.shtml">Old announcements</a>
+
+<h3>6.115 TA Mailing List</h3>
+<ul>
+<li>If you have lab or administrative issues, please email <a
+  href="mailto:6.115-tas@mit.edu">6.115-tas@mit.edu</a>.
+</ul>
+
+<hr>
+<p>6.115 Staff and Students thank the following sponsors for their
+generous support of the course:
+<p>The Grainger Foundation<br>
+The Landsman Foundation<br>
+The Guidant Foundation<br>
+Mr. Ron Koo<br>
+The Cambridge-MIT Institute<br>
+The Ford Motor Company<br>
+
+<!--#include file="include/footer.shtml"-->

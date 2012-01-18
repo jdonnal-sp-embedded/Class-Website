@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Control Objects</TITLE>
+</HEAD>
+<BODY BGCOLOR="white">
+<CENTER>
+    <h1><B>Control Objects and View Objects<br></B></h1>
+</CENTER>
+<hr width="70%">
+<p align="left">Amulet µHTML™ pages can be created using standard HTML. However, there are user interface (UI) objects
+common to embedded systems that are not supported by standard HTML. These UI objects are referred to as Amulet
+widgets. There are also UI objects that are supported by HTML, but Amulet has 
+extended their capabilities. These objects can be separated into two distinct 
+categories, <a href="#ControlObjects">Control Objects</a> (anchors, META refreshes, area maps), which can 
+call the functions defined in <A HREF="AppendixB.htm#Control_functions">Appendix 
+B</A>, and <a href="#ViewObjects">View Objects</a> (images, animated images), which have methods that can be invoked via 
+<a href="IWC.htm">Inter-Widget Communications</a>, but can't call functions 
+on their own.</p>
+<h2 align="left"><b><u><a name="ControlObjects">Control Objects</a></u></b></h2>
+<h3><B><a name="Anchors"></a><a href="HTMLSupport.htm#<A>">Anchors</a> &nbsp;&nbsp;&lt;A&gt;</B></h3>
+<p><FONT size="3">Anchors create a touch sensitive hypertext link. Hitting anything that appears between the &lt;A&gt;
+			and &lt;/A&gt; tags will launch the function(s) defined 
+in the <b><a href="HTMLSupport.htm#HREF">HREF</a> </b>attribute. You can put text, images, or view widgets between 
+the &lt;A&gt; and &lt;/A&gt; tags. When the pen is down in the area of the anchor, 
+the image within the area inverts. Anchors can also be set up to call a function(s) 
+based upon a timer event, by using the <a href="HTMLSupport.htm#ONTIME"><b>ONTIME</b></a> 
+attribute.  They can also call a function(s) when a timer-based function returns 
+a specific value, by using the <a href="HTMLSupport.htm#ONVAR"><b>ONVAR</b></a> and either 
+the <a href="HTMLSupport.htm#TRIGGER"><b>TRIGGER</b></a>, <a href="HTMLSupport.htm#TRIGGERgt"><b>TRIGGER.GT</b></a> 
+or <b><a href="HTMLSupport.htm#TRIGGERlt">TRIGGER.LT</a></b> attributes. Anchors can be given 
+an intrinsic value by using the <a href="HTMLSupport.htm#VALUE"><b>VALUE</b></a> 
+attribute. 
+Other objects/widgets can interact with anchors by using their internal name 
+which is specified by the <a href="HTMLSupport.htm#NAME"><b>NAME</b></a> 
+attribute.</FONT></p>
+		<p><FONT size="3">The following is an example of an anchor that creates a hypertext link to Page1.htm on the text &quot;Page 1&quot;. 
+To see this example work, the following example can be found in </FONT><a href="../Projects/Examples/Anchors/Text" target="_blank">\Projects\Examples\Anchors\Text\CompileMe.htm</a>.</p>
+		<ul>
+			<p><B>&lt;A HREF=&quot;Page1.htm&quot;&gt;Page 1&lt;/A&gt; </B></p>
+		</ul>
+		<p><FONT size="3">The following is an example of an anchor around an image (pointer.gif) that links to 
+Page1.htm either every 5 seconds if no user input ,or whenever the image is &quot;hit.&quot; To see this example work, the following example can be found in </FONT><a href="../Projects/Examples/Anchors/Images" target="_blank">\Projects\Examples\Anchors\Images\CompileMe.htm</a>.</p>
+		<ul>
+			<p><FONT size="3"><b>&lt;A HREF=&quot;Page1.htm&quot; ONTIME=&quot;5.0&quot;&gt;&lt;IMG SRC=&quot;pointer.gif&quot;&gt;&lt;/A&gt;</b></FONT></p>
+		</ul>
+		<P><FONT size="3">The following is an example of an anchor around the same image (pointer.gif) that links to 
+Page1.htm when the value of external byte variable #1 equals 0x20, which is polled every 100ms. To see this example work, the following example can be found in </FONT><a href="../Projects/Examples/Anchors/Trigger" target="_blank">\Projects\Examples\Anchors\Trigger\CompileMe.htm</a>. 
+In the example, the slider on the display is sending its intrinsic value to 
+the anchor named <B>test5</B>. When the slider reaches the value 0x20, the anchor 
+should be triggered and the Amulet will launch to Page1.htm.</P>
+		<ul>
+			<p><FONT size="3"><b>&lt;A HREF=&quot;Page1.htm&quot; ONTIME=&quot;0.1&quot; ONVAR=&quot;Amulet:UART.byte(1).value()&quot; TRIGGER=&quot;0x20&quot; NAME=&quot;test5&quot;&gt;&lt;IMG SRC=&quot;</b></FONT><B>pointer.gif</B><FONT size="3"><b>&quot;&gt;&lt;/A&gt;</b></FONT></p>
+		</ul>
+		
+		In the example above, Page1.htm will be linked to if one of four different events 
+occur. One being the external byte variable #1 returning a value of 0x20, thus 
+activating the trigger. A second way is if another Control Widget/Object sends 
+its value to the anchor and that value is 0x20, thus activating the trigger. 
+A third way is if the image &quot;pointer.gif&quot; is 
+physically &quot;hit&quot;. The fourth way is if the anchor, internally named 
+ <B>test5</B>, has a forceHit() method applied to it by  another Control Widget/Object. This is getting into <a href="IWC.htm">Inter-Widget 
+Communications</a>, but just to show an example, here's how another anchor would 
+do a force hit on our previous example <B>test5</B>. Hitting the text &quot;Force hit on pointer&quot; will cause the 
+anchor, <B>test5,</B> to act as if it had been hit.<ul>
+    <p><B>&lt;A HREF=&quot;Amulet:document.test5.forceHit()&quot;&gt;Force hit on pointer&lt;/A&gt;</B></p>
+</ul>
+<p>The following is an example similar to the above, but instead of using TRIGGER, 
+it uses&nbsp;TRIGGER.GT. TRIGGER.GT acts the same as TRIGGER except the HREF 
+will be triggered when the external byte variable #1 is greater than 0x10 .<FONT size="3">To see this example work, the following example can be found in </FONT><a href="../Projects/Examples/Anchors/Trigger.gt" target="_blank">\Projects\Examples\Anchors\Trigger.gt\CompileMe.htm</a>.</p>
+		<ul>
+			<p><FONT size="3"><b>&lt;A HREF=&quot;Page1.htm&quot; ONTIME=&quot;0.1&quot; ONVAR=&quot;Amulet:UART.byte(1).value()&quot; TRIGGER.GT=&quot;0x10&quot; NAME=&quot;test5&quot;&gt;&lt;IMG SRC=&quot;</b></FONT><B>pointer.gif</B><FONT size="3"><b>&quot;&gt;&lt;/A&gt;</b></FONT></p>
+		</ul>
+		
+<p>The following is an example similar to the above, but instead of using TRIGGER.GT, 
+it uses&nbsp;TRIGGER.LT. TRIGGER.LT acts the same as TRIGGER.GT except the HREF 
+will be triggered when the external byte variable #1 is less&nbsp;than 0x10 
+.<FONT size="3">To see this example work, the following example can be found in </FONT><a href="../Projects/Examples/Anchors/Trigger.lt" target="_blank">\Projects\Examples\Anchors\Trigger.lt\CompileMe.htm</a>.</p>
+		<ul>
+			<p><FONT size="3"><b>&lt;A HREF=&quot;Page1.htm&quot; ONTIME=&quot;0.1&quot; ONVAR=&quot;Amulet:UART.byte(1).value()&quot; TRIGGER.LT=&quot;0x10&quot; NAME=&quot;test5&quot;&gt;&lt;IMG SRC=&quot;</b></FONT><B>pointer.gif</B><FONT size="3"><b>&quot;&gt;&lt;/A&gt;</b></FONT></p>
+		</ul>
+		
+<hr>
+<h3><font size="5"><b><a name="Area Maps"></a></b></font><b><a href="HTMLSupport.htm#<AREA>">Area Maps</a> &nbsp;&nbsp;&lt;AREA&gt;</B></h3>
+<p>Area maps create a touch sensitive hypertext link within the bounds of an 
+image. Area maps use the same attributes, and act the same way, as anchors. 
+W<FONT size="3">hen the pen is down in the area of the area map, 
+the image within the area inverts. Upon a &quot;hit&quot; in an area map, the 
+functions specified in the <b><a href="HTMLSupport.htm#AREA_HREF">HREF</a></b> 
+attribute are launched. Area maps can also be set up to call a function(s) 
+based upon a timer event, by using the <a href="HTMLSupport.htm#AREA_ONTIME"><b>ONTIME</b></a> 
+attribute.  They can also call a function(s) when a timer-based function returns 
+a specific value, by using the <a href="HTMLSupport.htm#AREA_ONVAR"><b>ONVAR</b></a> and 
+either the <a href="HTMLSupport.htm#AREA_TRIGGER"><b>TRIGGER</b></a>, <a href="HTMLSupport.htm#AREA_TRIGGERgt"><b>TRIGGER.GT</b></a> 
+or <b><a href="HTMLSupport.htm#AREA_TRIGGERlt">TRIGGER.LT</a></b> attributes. Area maps can be given 
+an intrinsic value by using the <a href="HTMLSupport.htm#AREA_VALUE"><b>VALUE</b></a> 
+attribute. 
+Other objects/widgets can interact with area maps by using the area map's internal name 
+which is specified by  the <a href="HTMLSupport.htm#AREA_NAME"><b>NAME</b></a> 
+attribute.</FONT></p>
+<p>For example, to make a rectangular region of the image popup.gif be an active 
+link that returns you to the calling page when &quot;hit&quot;, use the following.</p>
+<ul>
+    <p><B>&lt;IMG SRC=&quot;popup.gif&quot; BORDER=&quot;0&quot; WIDTH=&quot;265&quot; 
+    HEIGHT=&quot;83&quot; USEMAP=&quot;#popup1&quot;&gt;</B></p>
+</ul>
+<ul>
+    <p><B>&lt;MAP NAME=&quot;popup1&quot;&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;AREA 
+    SHAPE=&quot;rect&quot; COORDS=&quot;122,63,155,76&quot; HREF=&quot;Amulet:back()&quot;&gt;<br>&lt;/MAP&gt;</B></p>
+</ul>
+<p>To see this example work, compile any of the examples in the <a href="../projects/Examples/" target="_blank">Projects/Examples/</a> 
+directory and &quot;hit&quot; the image of the file folder. It will bring up a pop up screen 
+that uses the above image map.  The source is in Amulet/Projects/Examples/Images/<a href="../projects/Examples/Images/PopUp.htm">PopUp.htm</a>.</p>
+<hr>
+<h3>&nbsp;<a name="META"></a><B>META REFRESH &nbsp;&nbsp;&lt;META HTTP-EQUIV=&quot;REFRESH&quot;&gt;</B></h3>
+<p><FONT size="3">The most powerful, and potentially the most confusing, object 
+in the Amulet system is the META Refresh object. It can be thought of as an 
+invisible anchor that exists on a&nbsp;page, but isn't visible on the LCD. </FONT></p>
+<p><FONT size="3">There are four different ways to use the META Refresh 
+  control object: </FONT></p>
+<p><font size="3"><a href="#TimerEvent">1) Call a function(s) based upon a timer event.</a><br><a href="#TriggerEvent">2) Call a function(s) 
+  when a timer-based function returns a specific value</a>.<br><a href="#InitInternalRAM">3) Initialize InternalRAM 
+variables with a value returned from  a timer-based function.</a><br><a href="#Variable">4) Be a container object 
+  that makes no function calls, essentially becoming a  variable which other 
+objects/widgets can reference.</a></font></p>
+<hr width="60%"><h4><a name="TimerEvent"></a>1) Call 
+a function(s) based upon a timer event.</h4>
+<p><FONT size="3"><b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot;<BR>
+CONTENT=&quot;</b></FONT><FONT SIZE="3" COLOR="#000000"><I>1st
+number</I><B><I>, </I></B><I>2nd
+number</I></FONT><FONT size="3"><b>;URL=</b><i>function(s)</i><b>;VALUE=</b><i>number</i><b>;NAME=</b><i>string</i><b>&quot;&gt;
+-- </b>This meta tag acts like an anchor that calls its function
+based upon a timer event instead of a user &quot;hit&quot;. Notice the strange
+syntax with all of the semi-colon delimited fields enclosed within
+one set of quotes. Also, <b>REFRESH</b> must be all uppercase.
+<b>CONTENT</b> fields are described below:<BR>
+</FONT></p>
+<P><FONT SIZE="3" COLOR="#000000"><I>1st number</I><B><I>,
+</I></B><I>2nd number<BR>
+</I>The <I>1st number</I> specifies the frequency that the <B>URL
+</B>function(s)<B> </B>is called (specified in seconds, with a single
+floating-point number). The range is 0.00 - 655.35. 0.00 means update never. 
+The <I>2nd
+number</I> specifies the delay time from when the page is loaded
+until the initial <B>URL</B> function(s) is called (specified in
+seconds, with a single floating-point number). The range is 0.01 -
+655.35. If the <I>2nd number</I> is not specified, then the delay
+time defaults to the <I>1st number</I> (frequency) value. </FONT><font color="black" size="3">If 
+the <I>2nd number</I> is specified and the <I>1st number</I> is 0.00, then the 
+function(s) is called after the delay time specified by the second number and 
+does not update again.</font></P>
+
+<P><FONT size="3"><b>URL=</b><i>function(s)</i><b><BR>
+</b>The allowable syntax for the
+&quot;<b>URL=</b><i>function(s)</i>&quot;string are identical to that of the
+<b>HREF</b> attribute of the &lt;A&gt; tag or the <b>HREF</b>
+attribute for a user-input widget. See </FONT><A HREF="AppendixB.htm#Control_functions"><FONT SIZE="3">Appendix
+B</FONT></A><FONT size="3"> for available functions.</FONT></P>
+
+<P><FONT size="3"><b>VALUE=</b><i>number<BR>
+</i>Specifies the intrinsic value of this meta refresh object.
+ </FONT>This parameter is optional because the intrinsic value 
+    can be specified directly within the <FONT size="3"><b>URL</b></FONT> function call as the argument 
+    to the method. See note regarding <a href="Widgets.htm#ControlWidgetsIntrinsicValues">Control 
+    Object intrinsic values</a>.</P>
+
+<P><FONT size="3"><b>NAME=</b><i>string<BR>
+</i>Specifies the internal name of this meta refresh object. Used for
+<a href="IWC.htm">Inter-Widget Communication</a> only. </FONT></P>
+
+<P><FONT size="3">Examples:</FONT></P>
+
+<P><FONT size="3">To send out an &quot;invoke RPC #5&quot; message every 500ms, use the following META REFRESH object:<BR>
+				
+&nbsp;<b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot;
+CONTENT=&quot;0.5;URL=Amulet:UART.invokeRPC(5)&quot;&gt;</b></FONT></P>
+		<p>An example using the above META tag can be found in <a href="../Projects/Examples/Meta" target="_blank">\Projects\Examples\Meta\CompileMe.htm</a>.</p>
+		<P><FONT size="3">To send out an &quot;invoke RPC #5&quot; message once
+immediately upon loading the HTML page, but never again, use the
+following:<BR>
+&nbsp;<b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot;
+CONTENT=&quot;0,0.01;URL=Amulet:UART.invokeRPC(5)&quot;&gt;<BR>
+</b>Note: The <b>0</b> of &quot;<b>0,0.01</b>&quot; means that the <b>URL</b>
+function will not have an update rate. The <b>0.01</b> of<b>
+</b>&quot;<b>0,0.01</b>&quot; means that the <b>URL</b> function will be called 10ms after
+loading the HTML page. </FONT></P>
+		<P><FONT size="3">To launch to a page called parrot.html after 5 seconds, use the following:<br>
+				 <b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;5;URL=parrot.html&quot;&gt;</b></FONT></P>
+<HR WIDTH="70%">
+		<h4><a name="TriggerEvent"></a>2)<B> </B>Call 
+a function(s) when a timer based function returns a specific value</h4>
+<p><FONT size="3"><b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot;<BR>
+CONTENT=&quot;</b></FONT><FONT SIZE="3" COLOR="#000000"><I>1st
+number</I><B><I>, </I></B><I>2nd
+numbe</I>r</FONT><FONT size="3"><b>;ONVAR=</b><i>function</i><b>;TRIGGER=</b><i>number</i><b>;TRIGGER.GT=</b><i>number</i><b>;TRIGGER.LT=</b><i>number</i><b>;TRIGGER.NEQ=</b><i>number</i><b>;URL=</b><i>function(s)</i><b>;VALUE=</b><i>number</i><b>;NAME=</b><i>string</i><b>&quot;&gt;</b>
+-- This meta tag acts like an anchor that calls its <b>URL</b>
+function(s) when the timer-based <b>ONVAR </b>function returns a
+specific value, instead of a user &quot;hit&quot;. Notice the strange syntax
+with all of the semi-colon delimited fields enclosed within one set
+of quotes.  The <b>ONVAR</b> attribute 
+is like a View Widget's <b>HREF</b> parameter. The <b>URL</b> attribute is like 
+a Control Widget's <b>HREF</b> parameter. <b>CONTENT</b> fields
+are described below:<BR>
+</FONT></p>
+<P><FONT SIZE="3" COLOR="#000000"><I>1st number</I><B><I>,
+</I></B><I>2nd number<BR>
+</I>The <I>1st number</I> specifies the frequency that the </FONT><FONT size="3"><b>ONVAR</b></FONT><FONT SIZE="3" COLOR="#000000"><B>
+</B>function<B> </B>is called (specified in seconds, with a single
+floating-point number). The range is 0.00 - 655.35. 0.00 means update never. 
+The <I>2nd
+number</I> specifies the delay time from when the page is loaded
+until the initial </FONT><FONT size="3"><b>ONVAR</b></FONT><FONT SIZE="3" COLOR="#000000"> function is called (specified in
+seconds, with a single floating-point number). The range is 0.01 -
+655.35. If the <I>2nd number</I> is not specified, then the delay
+time defaults to the <I>1st number</I> (frequency) value. </FONT><font color="black" size="3">If 
+the <I>2nd number</I> is specified and the <I>1st number</I> is 0.00, then the 
+function(s) is called after the delay time specified by the second number and 
+does not update again.</font></P>
+
+<P><FONT size="3"><b><a name="ONVAR"></a>ONVAR=</b><i>function<BR>
+</i>The value returned by this function call is used to trigger the
+function(s) in <b>URL<I>.</I></B> The behavior and syntax of this
+META attribute is identical to that of the <b>ONVAR</b> attribute of
+the &lt;A&gt; tag or the <b>HREF</b> parameter for a View Widget.
+See </FONT><A HREF="AppendixB.htm#View_functions"><FONT SIZE="3">Appendix
+B</FONT></A><FONT size="3"> for available functions.</FONT></P>
+
+<P><FONT size="3"><b>TRIGGER=</b><i>number</i><b><I><BR>
+</I></B>This attribute specifies the byte value that triggers the
+<b>URL</b> function(s). When the value returned from the <b>ONVAR</b>
+function is equal to the <b>TRIGGER</b> value, the <b>URL</b>
+function(s) is called. The trigger value can be a byte, word, InternalRAM byte 
+variable or InternalRAM word variable.</FONT></P>
+
+<P><FONT size="3"><b>TRIGGER.GT=</b><i>number</i><b><I><BR>
+</I></B>This attribute specifies the byte value that triggers the
+<b>URL</b> function(s). When the value returned from the <b>ONVAR</b>
+function is greater than the <b>TRIGGER.GT</b> value, the <b>URL</b>
+function(s) is called. The trigger value can be a byte, word, InternalRAM byte 
+variable or InternalRAM word variable.</FONT></P>
+
+<P><FONT size="3"><b>TRIGGER.LT=</b><i>number</i><b><I><BR>
+</I></B>This attribute specifies the byte value that triggers the
+<b>URL</b> function(s). When the value returned from the <b>ONVAR</b>
+function is less than the <b>TRIGGER.LT</b> value, the <b>URL</b>
+function(s) is called. The trigger value can be a byte, word, InternalRAM byte 
+variable or InternalRAM word variable.</FONT></P>
+
+<P><FONT size="3"><b><a name="TRIGGER.NEQ"></a>TRIGGER.NEQ=</b><i>number</i><b><I><BR>
+</I></B>This attribute specifies the byte value that triggers the
+<b>URL</b> function(s). When the value returned from the <b>ONVAR</b>
+function is not equal to the <b>TRIGGER.NEQ</b> value, the <b>URL</b>
+function(s) is called. The trigger value can be a byte, word, InternalRAM byte 
+variable or InternalRAM word variable.</FONT></P>
+
+<p><FONT size="3"><b>URL=</b><i>function(s)</i><b><BR>
+</b>The allowable syntax for the
+&quot;<b>URL=</b><i>function(s)</i>&quot;string are identical to that of the
+<b>HREF</b> attribute of the &lt;A&gt; tag or the <b>HREF</b>
+parameter for a Control Widget. See </FONT><A HREF="AppendixB.htm#Control_functions"><FONT SIZE="3">Appendix
+B</FONT></A><FONT size="3"> for available functions.</FONT></p>
+<P><FONT size="3"><b>VALUE=</b><i>number<BR>
+</i>Specifies the intrinsic value of this meta refresh object.
+ </FONT>This parameter is optional because the intrinsic value 
+    can be specified directly within the <FONT size="3"><b>URL</b></FONT> function call as the argument 
+    to the method. See note regarding <a href="Widgets.htm#ControlWidgetsIntrinsicValues">Control 
+    Object intrinsic values</a>.<FONT size="3">
+</FONT></P>
+
+<P><FONT size="3"><b>NAME=</b><i>string<BR>
+</i>Specifies the internal name of this meta refresh object. Used for
+Inter-Widget Communication only. </FONT></P>
+
+<HR WIDTH="70%">
+
+<h4><FONT size="3"><a name="InitInternalRAM"></a>3) Initialize Internal RAM variables with 
+a&nbsp;value returned from a  timer-based function.</FONT></h4>
+<p><FONT size="3"><b>META HTTP-EQUIV=&quot;REFRESH&quot;<BR>
+CONTENT=&quot;</b></FONT><FONT SIZE="3" COLOR="#000000"><I>1st
+number</I><B><I>, </I></B><I>2nd numbe</I>r</FONT><FONT size="3"><b>;ONVAR=</b><i>function</i><b>;VALUE=InternalRAM.</b><i>type(x) 
+</i><b>;NAME=</b><i>string</i><b>&quot;&gt;</b>
+-- This meta tag does not require a URL function since the META object only 
+exists to initialize an Internal RAM variable 
+value, either a BYTE, WORD or STRING.  </FONT></p>
+<p>The most obvious&nbsp;use for this type of META is for initializing an Internal 
+RAM variable to an internal Amulet value. For example, to set Internal RAM word 
+variable 0 to the current page number, you could use the following:</p>
+<p><B>&lt;META HTTP-EQUIV=&quot;Refresh&quot; CONTENT=&quot;0,0.01;ONVAR=Amulet:internal.fileNumber.value();value=InternalRAM.word(0)&quot;&gt;</B></p>
+<p>Since the <B>value=InternalRAM.word(0),</B> instead 
+of the META Refresh saving the value in its own memory space, it actually saves 
+it directly to Internal RAM word variable #0.</p>
+<p>Another case where this could be useful is if someone wanted to initialize 
+an Internal RAM variable, but wanted to maintain the slave relationship with 
+the Amulet. Therefore, you could have the META request a variable and store 
+it directly into an Internal RAM variable without ever sending a master message.</p>
+<p><B>&lt;META HTTP-EQUIV=&quot;Refresh&quot; CONTENT=&quot;0,0.01;ONVAR=Amulet:UART.byte(5).value();value=InternalRAM.byte(5)&quot;&gt;</B></p>
+<P>The above example will request the value of external byte variable #5 once 
+10ms after loading the page and save that value into InternalRAM byte variable 
+#5.</P>
+<hr>
+<h4><a name="Variable"></a>4) Be a container object (byte, word or string variable)</h4>
+<p><FONT size="3"><b>META HTTP-EQUIV=&quot;REFRESH&quot;<BR>
+CONTENT=&quot;</b></FONT><FONT SIZE="3" COLOR="#000000"><I>1st
+number</I><B><I>, </I></B><I>2nd numbe</I>r</FONT><FONT size="3"><b>;ONVAR=</b><i>function</i><b>;URL=Amulet:nop();VALUE=</b><i>number 
+</i><b>;NAME=</b><i>string</i><b>&quot;&gt;</b>
+-- This meta tag does not need to call any functions. It exists to hold a variable 
+value, either a BYTE, WORD or STRING. Other control objects/widgets can set the value of this &quot;variable&quot; by 
+using <b>Amulet:document.</b><i>name</i><b>.setValue()</b>, 
+and the value of the &quot;variable&quot; can be read by using  <b>Amulet:document.</b><i>name</i><b>.value(), 
+</b>where <i>name</i> is the internal name given in 
+<b>NAME=</b><i>string. </i></FONT>See note regarding <a href="Widgets.htm#ControlWidgetsIntrinsicValues">Control 
+    Object intrinsic values</a>.</p>
+<P>With the addition of <a href="internalRAM.htm">InternalRAM</a> variables, 
+using the META as a container object is not needed. InternalRAM uses less uHTML 
+space as well as the additional benefit of existing outside of a specific page. 
+META objects are only valid in the page that they are defined in and will be 
+reinitialized every time the page is re-entered. InternalRAM can survive from 
+page to page, will not be reinitialized every time the page is re-entered unless 
+you specify it and InternalRAM can actually be saved back to the flash, so the 
+variable can persist even after powering down.</P>
+<h3><a name="MetaExamples:"></a>Examples:</h3>
+<P><FONT size="3">To send out an&quot;invoke RPC #5&quot; message when the value of a 
+slider (<b>Slider1</b>) equals 0xFF, which is polled every 500ms, use the following META REFRESH object:<BR>
+				 <b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;0.5;ONVAR=Amulet:document.Slider1.value();TRIGGER=0xFF;URL=Amulet:UART.invokeRPC(5);NAME=MetaOne&quot;&gt;</b></FONT></P>
+		<p>This META will continue to send the RPC every 500ms until the slider 
+value no longer equals 0xFF. To have the META send it out only once, you could 
+have the META URL include the following function after the invokeRPC function: 
+Amulet:document.MetaOne.setUpdateRate(0) &nbsp;<br>This will make the META turn 
+itself off after the first invokeRPC is sent.</p>
+<p>An example using the above META tag can be found in <a href="../Projects/Examples/Meta" target="_blank">\Projects\Examples\Meta\TriggerInvoke.htm</a>.</p>
+		<P><FONT size="3">To send out a &quot;set byte variable #2 to 0x78&quot; message when the value of external byte variable #4 equals 0xFF, which is polled every 500ms, use the following META REFRESH object:<BR>
+				 <b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;0.5;ONVAR=Amulet:UART.byte(4).value();TRIGGER=0xFF;URL=Amulet:UART.byte(2).setValue(0x78)&quot;&gt;</b></FONT></P>
+		<P>An example using the above META tag can be found in <a href="../Projects/Examples/Meta" target="_blank">\Projects\Examples\Meta\SetVar.htm</a>.</P>
+		<P><FONT size="3">To send out a 'set string variable #5 to &quot;My 
+String&quot;' message when the value of external byte variable #4 equals 0xF0, which is polled every 500ms, use the following META REFRESH object:<BR>
+				 <b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT='0.5;ONVAR=Amulet:UART.byte(4).value();TRIGGER=0xF0;URL=Amulet:UART.string(5).setValue(&quot;My 
+String&quot;)'&gt;</b></FONT></P>
+<p><FONT size="3">To launch to &quot;Page1.html&quot;when the value of external byte variable #1 is 
+greater than 0xC0, which is polled every 500ms, and to &quot;Page2.htm&quot; if the value is 
+less than 0x40, use the following META REFRESH objects:<br>
+				 <b>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;0.5;ONVAR=Amulet:UART.byte(1).value();TRIGGER.GT=0xC0;URL=../setValue()/Page1.html&quot;&gt;
+				 </b></FONT><B>&lt;META HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;0.5;</B><FONT size="3"><b>ONVAR</b></FONT><B>=Amulet:UART.byte(1).value();TRIGGER.LT=0x40;URL=../setValue()/Page2.html&quot;&gt;</B></p>
+		<P>An example using the above META tags can be found in <a href="../Projects/Examples/Meta" target="_blank">\Projects\Examples\Meta\Trigger2Page.htm</a>.</P>
+		<p><FONT size="3">To use a list box, a function button and multiple
+META REFRESH objects to launch to another page see the
+<a href="../projects/Examples/setValue()/ReadMe.htm">setValue() example.</a></FONT></p>
+		<hr>
+<h2 align="left"><b><u><a name="ViewObjects">View Objects</a></u></b></h2>
+<h3 align="left"><b><a href="HTMLSupport.htm#<IMG>">Images &amp; Animated Images</a> 
+&nbsp;&nbsp;&lt;IMG&gt;</B></h3>
+<p>Both images and animated images use the &lt;IMG&gt; tag. Although they cannot 
+represent data like View Widgets can, they do have internal methods that can 
+be invoked by other Control Widgets/Objects. See the <a href="IWC.htm#Table of methods">Inter-Widget 
+Communications</a> document for the list of available methods for each object/widget.</p>
+<p>For example, to create 3 radio buttons that can be used to change the playback speed of an animated .gif named RunAnim.gif with the internal name of <B>Runner</B>, use the following 
+listings:</p>
+<ul>
+    <p><B>&lt;IMG SRC=&quot;../Images/RunAnim.gif&quot; WIDTH=&quot;200&quot; HEIGHT=&quot;165&quot; NAME=&quot;Runner&quot;&gt;</B></p>
+			<p><B>&lt;APPLET CODE=&quot;RadioButton.class&quot; WIDTH=&quot;101&quot; HEIGHT=&quot;20&quot; name=&quot;Slow&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:document.Runner.slowSpeed()&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;2&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;bold&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;buttonValue&quot; VALUE=&quot;0x01&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;label&quot; VALUE=&quot;Slow&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;off&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;groupName&quot; value=&quot;rgSpeed&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;buttonAlignment&quot; value=&quot;left&quot;&gt;<br>
+					     &lt;/APPLET&gt;</B></p>
+			<p><B>&lt;APPLET CODE=&quot;RadioButton.class&quot; WIDTH=&quot;101&quot; HEIGHT=&quot;20&quot; name=&quot;Regular&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:document.Runner.regularSpeed()&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;2&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;bold&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;buttonValue&quot; VALUE=&quot;0x02&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;label&quot; VALUE=&quot;Normal&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;on&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;groupName&quot; value=&quot;rgSpeed&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;buttonAlignment&quot; value=&quot;left&quot;&gt;<br>
+					     &lt;/APPLET&gt;</B></p>
+			<p><B>&lt;APPLET CODE=&quot;RadioButton.class&quot; WIDTH=&quot;101&quot; HEIGHT=&quot;20&quot; name=&quot;Fast&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:document.Runner.fastSpeed()&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;2&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;bold&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;buttonValue&quot; VALUE=&quot;0x03&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;label&quot; VALUE=&quot;Fast&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;off&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;groupName&quot; value=&quot;rgSpeed&quot;&gt;<br>
+					      &lt;PARAM NAME=&quot;buttonAlignment&quot; value=&quot;left&quot;&gt;<br>
+					     &lt;/APPLET&gt;</B></p>
+			<p>An example using the above animated .gif and 3 radio buttons can be found in <a href="../Projects/Examples/RunningMan" target="_blank">\Projects\Examples\RunningMan\CompileMe.htm</a>.</p>
+		</ul>
+		<hr width="60%">
+		<blockquote>
+    <p align="center"><FONT size="3">&nbsp;</FONT><I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I></p>
+</blockquote>
+		<CENTER>
+<P><I><FONT SIZE="2"><BR>
+</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</CENTER>
+	</BODY>
+</HTML>

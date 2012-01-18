@@ -1,0 +1,20 @@
+#block-text.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active
+        %a#introduction_tab{:href=>'#'} Introduction
+      %li
+        %a#info_tab{:href=>'#'} Course Info
+      %li
+        %a#objectives_tab{:href=>'#'} Objectives
+  
+  #introduction_block.content
+    = render(:partial => 'introduction')
+  #info_block.content
+    = render(:partial => 'info')
+  #objectives_block.content
+    = render(:partial => 'objectives')
+    
+- content_for :sidebar, render(:partial => 'sidebar')
+
+

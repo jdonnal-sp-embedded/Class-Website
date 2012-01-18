@@ -1,0 +1,776 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<title>Amulet Internal RAM</title>
+
+<meta name="GENERATOR" content="Namo WebEditor v5.0">
+</head>
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Amulet Internal RAM</h1>
+<p>Amulet has over 1 KiB of&nbsp;onboard RAM which we have turned&nbsp;into virtual dual port RAM. There are 256 different byte variables, 256 different word (16-bit) variables and 199 different 18-character null terminated string variables. Amulet Widgets can read or write to these Internal RAM variables. The Internal RAM variables can also be saved in flash, thus giving the variables permanence. In addition, an external processor can read and write to these Internal RAM variables as well. The external processor&nbsp;can send an unsolicited serial message to the Amulet to read or write to the Internal RAM variables. This means that the external processor&nbsp;is not  required to be the Amulet's slave. 
+<a href="Protocol.htm#AmuletAsSlaveProtocol">Follow this link</a> to learn more 
+about the  communication protocol. You can setup your HTML 
+pages to a) have&nbsp;the Amulet always be the master, b) have your processor&nbsp;always 
+be the master or c) have a dual master system.</p>
+		<p>Some of the main features of InternalRAM:<br> 1) Internal 
+RAM variables can survive from page to page of your GUI project.<br>2)   Internal 
+RAM can  be saved back to the flash, so the variable can persist even after powering down.<br>3) 
+Internal RAM variables can be used as arguments within&nbsp;Amulet methods. 
+i.e. (Amulet:UART.byte(0).setValue(InternalRAM.byte(2)))<br>4) Internal RAM 
+variables can be used as variable indices. i.e. (Amulet:UART.byte(InternalRAM.byte(0)).setValue(2))</p>
+		<h3>Internal RAM nomenclature:</h3>
+<p>The 
+  href nomenclature for Internal RAM's is <B>Amulet:InternalRAM.<i>variableType(variableNumber).method</i>()<BR>
+ </B></p>
+<table border="0" width="737">
+    <tr>
+        <td width="57">
+            <p>Where:&nbsp;</p>
+        </td>
+        <td width="611">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+            <p><B>Amulet:</B> 
+  is the Amulet script escape telling the compiler that Amulet specific commands 
+            follow.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+            <p><B>InternalRAM </B>is the specifier for Amulet's&nbsp;dual port 
+            Internal RAM.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+            <p>
+  <b><i>variableType</i></b> is 
+  the type of variable, either byte, word or string.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+<p><b><i>variableNumber</i></b> is the variable index within the variable type. 
+            0-255 for bytes, 0-255 for words and 0-198 for strings.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+            <p><b><i>method()</i></b> 
+  is the name of the method to be performed by the InternalRAM variable.</p>
+        </td>
+    </tr>
+</table>
+<p></p>
+<p>As a point of reference, the nomenclature to specify the Internal RAM variables 
+in the HTML is&nbsp;the same as specifying external variables. External variables 
+expect the UART object to be used whereas&nbsp;the Internal RAM variables use 
+the InternalRAM object. For example, to have an Amulet Bargraph Widget tied 
+to an external byte variable # 2, the <B>href </B>attribute would look like 
+this:<br><B>&quot;Amulet:UART.byte(2).value()&quot;</B></p>
+<p>To be tied to an Internal RAM byte variable # 2, then the href attribute 
+would look like this:<br>&quot;<B>Amulet:InternalRAM.byte(2).value()&quot;</B></p>
+<p>The UART object specifies the Amulet will send out a serial message to an 
+external processor requesting the value of the external byte variable number 
+2. The InternalRAM object specifies that the Amulet will read the value of the 
+Internal RAM byte variable number 2. The InternalRAM object will not send out 
+any serial requests since the Amulet is capable of reading the Internal RAM 
+directly.</p>
+		<H3>Using InternalRAM variables as method arguments:</H3>
+<p>A powerful feature of Internal RAM variables is that they can be used as 
+arguments within Amulet href methods. This means that instead of using a Control 
+Widget's intrinsic value as a function parameter, you can use Internal RAM variables, 
+which can be changed at run-time by your external processor. Internal RAM byte, 
+word and string variables can all be used as method arguments. For example, to 
+have a button send out an RPC that is defined by Internal RAM byte variable 
+#1, you would use the following nomenclature:<br><B>&quot;Amulet:UART.invokeRPC(InternalRAM.byte(1))&quot;<br></B>The&nbsp;value 
+which is contained within Internal RAM byte variable #1 would be sent out as 
+the RPC number over the UART.</p>
+<p>Another example which sends out an Internal RAM&nbsp;string variable:<br><B>&quot;Amulet:UART.string(0).setValue(InternalRAM.string(2))&quot;</B><br>This 
+sends the string contained within Internal RAM string variable #2 out the UART 
+as a &quot;set external string variable #0&quot; command to an external processor.</p>
+<p>When using Internal RAM variables as method arguments, use the following 
+naming conventions:<br><B>InternalRAM.byte(x)<br>InternalRAM.string(x)<br>InternalRAM.word(x)<br></B>Do 
+not precede with <B>Amulet: </B>or end with <B>.value()</B>. </p>
+<h3><a name="InternalRAM_Index"></a>Using InternalRAM byte variables as variable 
+indices:</h3>
+<p>Another powerful feature of Internal RAM variables is that they can be used as 
+variable indices for the base variable type.  Since variables only range from 0-0xFF, only Internal RAM 
+byte variables can be used as variable indices. For example, to 
+have a button set an external byte variable that is defined by InternalRAM byte 
+#1 to a value of 0x20, you would use the following:<br><B>&quot;Amulet:UART.byte(InternalRAM.byte(1)).setValue(0x20)&quot;</B> <br>The 
+value contained within Internal RAM byte variable #1 would be used as the external 
+byte variable number to set to 0x20.</p>
+<p>Another example which reads the Internal RAM word variable defined by InternalRAM 
+byte variable #0 would use the following:<br><B>&quot;Amulet:InternalRAM.word(InternalRAM.byte(0)).value()&quot;<br></B>The 
+value contained within Internal RAM byte variable #0 would be used as the Internal 
+RAM word variable number to read from.</p>
+<p>When using Internal RAM variables as variable indices, use the following 
+naming convention:<br><B>InternalRAM.byte(x)<br></B>Do not precede with <B>Amulet: 
+</B>or end with <B>.value()</B>. <B><br></B></p>
+<p>Note: Internal RAM byte variables can only be used&nbsp;as a variable index 
+of the base variable type of an href function. It cannot be used as an index 
+to an Internal RAM variable being used as a method argument. That means the following 
+CANNOT&nbsp;be used: <B>&quot;Amulet:UART.invokeRPC(InternalRAM.byte(InternalRAM.byte(5)))&quot;</B></p>
+<p>It is acceptable to have an href which uses Internal RAM variables as both 
+a variable index as well as an argument. It can be a little confusing to look 
+at, though. The following is a valid href:<br><B>&quot;Amulet:InternalRAM.word(InternalRAM.byte(5)).setValue(InternalRAM.word(6))&quot;<br></B>Which 
+would result in the Internal RAM word variable number defined by the value of 
+InternalRAM byte variable #5 set to the value of  Internal RAM word variable 
+#6.</p>
+<h3><A NAME="InternalRAM.label"></A>Note regarding using InternalRAM string 
+variable for a button label:<BR></h3>
+		<P>When using an InternalRAM string as the label for a button which is using 
+FromInitHref as its label, the <B>initHref</B> parameter of the button should look like: <B>Amulet:InternalRAM.label(<i>x</i>).value()</B>, where <I>x</I> is the index of the Internal RAM string variable. There is not a separate bank of Internal RAM label variables, this function will return the string associated with Internal RAM string variable # <I>x</I>. Due to the requirement of the button to have a label returned to it, it was necessary to create an InternalRAM label variable, but it shares the exact same memory space as the Internal RAM string variables. The Internal RAM label should only be used in this application.</P>
+<hr>
+<h3><B><a name="Initializing_IR"></a>Initializing Internal RAM variables at 
+compile time:</B></h3>
+<p>By default, all Internal RAM variables are initialized to zero. You can  initialize Internal RAM variables at 
+compile time by including an initialization file in your HTML project. The initialization file must have an &quot;ini&quot; extension and must reside in the same directory as your GUI project. You must include the initialization file in a META tag in the start or home page of your HTML project. <a href="../Projects/Examples/InitInternalRAM/ReadMe.htm">Click here</a> to see an example. The syntax to include the file 
+is:</p>
+		<p><B>&lt;META NAME=&quot;initInternalRAM&quot; SRC=&quot;<i>filename</i>.ini&quot;&gt;<br>
+			</B></p>
+		<p>The initialization file,<b><i> filename, </i></b>must have a <B>.ini</B> extension 
+and it&nbsp;must be located in the same directory as your main html page. Inside 
+the initialization file, any line preceded with // is treated as a comment. All 
+initializations must be located in the far left column, so do not tab over. 
+The HTMLCompiler recognizes both&nbsp;decimal and&nbsp;hexadecimal numbers.</p>
+<h3>Initializing single Internal RAM variables:</h3>
+<p>The syntax within the include file to initialize a single&nbsp;Internal RAM  variable is as follows:</p>
+<p><B>InternalRAM.<i>variableType</i>(<i>variableNumber)</i> =<i> value<br></i></b></p>
+<table border="0" width="927">
+    <tr>
+        <td width="62">
+            <p>Where:&nbsp;</p>
+        </td>
+        <td width="855">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+            <p>
+  <b><i>variableType</i></b> is 
+  the type of variable, either byte, word or string.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+<p><b><i>variableNumber</i></b> is the variable index within the variable type. 
+            0-255 for bytes, 0-255 for words and 0-198 for strings.<br></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+<p><b><i>value 
+</i></b>is the initialization value of the Internal RAM variable&nbsp;(range 
+    if byte 0-0xFF, if word 0-0xFFFF, if string 1-250 character string)</p>
+        </td>
+    </tr>
+</table>
+<p>Examples:<br><B>InternalRAM.byte(0xFE) = 0x7F</B><br><B>InternalRAM.word(32) = 4000<br>InternalRAM.string(0) 
+= &quot;First String&quot;</B></p>
+<p>There is an important thing to note regarding the 199 18-character strings. It is acceptable to have strings and initialize strings that are longer than 18 characters (up to 248 characters). You just need to be aware that the string will run on into the next string variable's RAM space. So, if you know your Internal RAM strings are going to be more than 18 characters, you might want to only use every other string variable index. i.e. InternalRAM.string(0), InternalRAM.string(2), InternalRAM.string(4)...etc. Keep in mind that this will effectively give you only 99 string variables instead of the standard 199.</p>
+<p>When initializing Internal RAM strings, user-defined 
+wraps can be specified by entering &quot;\n&quot; within&nbsp;the string. Since 
+we use double quotes to define a string, to have a literal double quote appear 
+in the string, enter two double quotes in a row.</p>
+<p>User-defined wrap example: &nbsp;&nbsp;<B>InternalRAM.string(0) = &quot;top 
+line\nbottom line&quot;</B></p>
+<p>Double quote example: InternalRAM.string(0) = &quot;&quot;&quot;this phrase&quot;&quot; 
+is quoted&quot;</p>
+<h3>Initializing multiple&nbsp;Internal RAM variables:</h3>
+<p>It is also possible to initialize a block of contiguous Internal RAM&nbsp;variables. 
+The syntax to initialize a block of Internal RAM  variables is as follows:</p>
+<p><B>InternalRAM.<i>variableType</i>(<i>variableNumberStart-variableNumberEnd)</i> = <i>value</i></b></p>
+<table border="0" width="927">
+    <tr>
+        <td width="62">
+            <p>Where:&nbsp;</p>
+        </td>
+        <td width="855">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+            <p>
+<b><i>variableType</i></b> is 
+  the type of variable, either byte, word or string.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+<p><b><i>variableNumberStart</i></b> is the variable index within the variable type. 
+            0-255 for bytes, 0-255 for words and 0-198 for strings.<br></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+<p><b><i>variableNumberEnd</i></b> is the variable index within the variable type. 
+            0-255 for bytes, 0-255 for words and 0-198 for strings.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="62">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="855">
+<p><b><i>value 
+</i></b>is the initialization value of the Internal RAM variable&nbsp;(range 
+    if byte 0-0xFF, if word 0-0xFFFF, if string 1-18 character string)</p>
+        </td>
+    </tr>
+</table>
+<p>Example:</p>
+<p><B>InternalRAM.byte(0xFC-0xFF) = 0x7F<br>InternalRAM.word(0x00-0xFF) = 0xFFFF<br>InternalRAM.string(0-10) 
+= &quot;undecided&quot;</B></p>
+<p>Note: When initializing a block of contiguous Internal RAM strings, the initialization 
+string must be 18 characters or less. By default, each Internal RAM string variable 
+holds a maximum of 18 characters and null character.</p>
+<h3><a name="InitializingStrings"></a>Initializing special attributes in Internal RAM string 
+variables:</h3>
+<p>When initializing string variables, it is possible to specify special attributes, 
+such as <a href="#fontStyle">font style</a>, <a href="#LineBreak">line feeds</a> 
+and <a href="#UpperASCII">upper ASCII characters</a>.</p>
+<p><a name="fontStyle"></a>The font styles available 
+are plain, bold, italic, underline and&nbsp;strikethrough. If it is desired 
+to set the font style within the initInternalRAM file,  that can be done by using the font style 
+escape sequence &quot;<B>%s(xxx)</B>&quot;, where xxx is bit representation 
+of the desired font style. See the table below for the list of font styles and 
+their corresponding bit location. Each font style is represented by a single bit within the font style 
+byte. Multiple font styles can be specified at one time, except in the case 
+of plain, which must stand alone.</p>
+<table border="1" width="236">
+    <tr>
+        <td width="110">
+            <p><B><u>Font Style</u></B></p>
+        </td>
+        <td width="110">
+            <p><B><u>Bit Location</u></B></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="110">
+            <p>Italic &nbsp;</p>
+        </td>
+        <td width="110">
+            <p>0x02</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="110">
+            <p>Strikethrough</p>
+        </td>
+        <td width="110">
+            <p>0x04</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="110">
+            <p>Bold</p>
+        </td>
+        <td width="110">
+            <p>0x20</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="110">
+            <p>Underline</p>
+        </td>
+        <td width="110">
+            <p>0x40</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="110">
+            <p>Plain</p>
+        </td>
+        <td width="110">
+            <p>0x80</p>
+        </td>
+    </tr>
+</table>
+<p>For example, to initialize InternalRAM string #0 with a string that is formatted 
+to look like this: &nbsp;&quot;this is <B>bold</B>&quot; you would use the following:<br><B>InternalRAM.string(0) 
+= &quot;this is %s(0x20)bold&quot;</B></p>
+<p><a name="LineBreak"></a>Line feeds are entered in the initInternalRAM file 
+as &quot;\n&quot;. For example, to initialize InternalRAM string #1 with a string 
+that is formatted to look like this:<br>&quot;this is<br>the break&quot;<br>You 
+would use the following:<br><B>InternalRAM.string(0) = &quot;this is\nthe break&quot;</B></p>
+<p><a name="UpperASCII"></a>Upper ASCII characters can be entered similar to 
+font styles. Use the raw byte escape sequence &quot;<B>%r(xxx)</B>&quot;, where 
+xxx is the value of the raw byte to include in the string. For example, to initialize 
+InternalRAM string #2 with a string that is formatted to look like this: &quot;this 
+is a ©&quot; you would use the following:<br><B>InternalRAM.string(0) = &quot;this 
+is a %r(0xA9)&quot;</B></p>
+<hr>
+<h3><B>Internal RAM specific methods:</B></h3>
+<p>There are a number of methods that are specific to the Internal RAM variables. 
+All three variable types have their own specific methods. See the tables below 
+for a description of all available methods. </p>
+<p><B>Table 1.</B> InternalRAM byte method descriptions.</p>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="307"> 
+      <CENTER>
+        <B><a name="InternalRAM_byte"></a>InternalRAM Byte Methods</B> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="352"> 
+      <CENTER>
+        <B>Descriptions</B> 
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).add(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Add the byte value <I>x </I>to the Internal RAM byte variable <I>z</I>. 
+            Result is stored in Internal RAM byte variable <I>z</I>.</P>
+    </TD>
+  </TR>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).and(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Logically AND the Internal RAM byte variable <I>z  </I>with the byte value <I>x</I>. 
+            Result is stored in Internal RAM byte variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).copyToRamByte(<I>y</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+            <p>Copy value of Internal RAM byte variable <I>z</I> into Internal 
+            RAM byte variable <I>y</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).dec()</P>
+    </TD>
+    <TD WIDTH="352"> 
+            <p>Decrement the value of Internal RAM byte variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).div(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Divide the Internal RAM byte variable <I>z</I> by  the byte value <I>x</I>. 
+            Result is stored in Internal RAM byte variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).inc()</P>
+    </TD>
+    <TD WIDTH="352"> 
+            <p>Increment the value of Internal RAM byte variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).maskedValue(<I>y</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+            <p>Return the value of Internal RAM byte variable <I>z </I><FONT size="3">ANDed with the mask <i>y</i></FONT>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).mul(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Multiply&nbsp;the Internal RAM byte variable <I>z</I> by  the byte value <I>x</I>. 
+            Result is stored in Internal RAM byte variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).or(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Logically OR the Internal RAM byte variable <I>z</I> with the byte value <I>x</I>. 
+            Result is stored in Internal RAM byte variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).setValue(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+            <p>Set the value of Internal RAM byte variable <I>z</I> to the byte 
+            value <I>x</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).sub(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Subtract&nbsp;the byte value <I>x </I>from&nbsp;the Internal RAM byte 
+            variable <I>z</I>. Result is stored in Internal RAM byte variable 
+            <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).value()</P>
+    </TD>
+    <TD WIDTH="352"> 
+            <p>Return the value of Internal RAM byte variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="307"> 
+      <P>Amulet:InternalRAM.byte(<I>z</I>).xor(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="352"> 
+      <P> Logically EXCLUSIVE OR&nbsp;the Internal RAM byte variable <I>z</I> 
+            with the byte value <I>x</I>. 
+            Result is stored in Internal RAM byte variable <I>z</I>.</P>
+    </TD>
+    </tr>
+</TABLE>
+<p>&nbsp;</p>
+<p><B>Table 2.</B> InternalRAM word method descriptions.</p>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="310"> 
+      <CENTER>
+        <B><a name="InternalRAM_word"></a>InternalRAM Word Methods</B> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="349"> 
+      <CENTER>
+        <B>Descriptions</B> 
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).add(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+      <P> Add the word value <I>x </I>to the Internal RAM word variable <I>z</I>. 
+            Result is stored in Internal RAM word variable <I>z</I>.</P>
+    </TD>
+  </TR>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).and(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+      <P> Logically AND the Internal RAM word variable <I>z  </I>with the word value <I>x</I>. 
+            Result is stored in Internal RAM word variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).copyToRamWord(<I>y</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+            <p>Copy value of Internal RAM word variable <I>z</I> into Internal 
+            RAM word variable <I>y</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).dec()</P>
+    </TD>
+    <TD WIDTH="360"> 
+            <p>Decrement the value of Internal RAM word variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).div(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+      <P> Divide the Internal RAM word variable <I>z</I> by  the word value <I>x</I>. 
+            Result is stored in Internal RAM word variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).inc()</P>
+    </TD>
+    <TD WIDTH="360"> 
+            <p>Increment the value of Internal RAM word variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).maskedValue(<I>y</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+            <p><FONT size="3">Return the value of Internal RAM word variable </FONT><I><FONT size="3">z 
+            </FONT></I><FONT size="3">ANDed with the mask <i>y</i>.</FONT></p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).mul(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+      <P> Multiply&nbsp;the Internal RAM word variable <I>z</I> by  the word value <I>x</I>. 
+            Result is stored in Internal RAM word variable <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).setValue(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+            <p>Set the value of Internal RAM word variable <I>z</I> to the word 
+            value <I>x</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).sub(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+      <P> Subtract&nbsp;the word value <I>x </I>from&nbsp;the Internal RAM word 
+            variable <I>z</I>. Result is stored in Internal RAM word variable 
+            <I>z</I>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).value()</P>
+    </TD>
+    <TD WIDTH="360"> 
+            <p>Return the value of Internal RAM word variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="299"> 
+      <P>Amulet:InternalRAM.word(<I>z</I>).xor(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="360"> 
+      <P> Logically EXCLUSIVE OR&nbsp;the Internal RAM word variable <I>z</I> 
+            with the word value <I>x</I>. 
+            Result is stored in Internal RAM word variable <I>z</I>.</P>
+    </TD>
+    </tr>
+</TABLE>
+<p>&nbsp;</p>
+<p><B>Table 3.</B> InternalRAM string method descriptions.</p>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="325"> 
+      <CENTER>
+        <B><a name="InternalRAM_string"></a>InternalRAM String Methods</B> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="334"> 
+      <CENTER>
+        <B>Descriptions</B> 
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).appendChar(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Append the single character <I>x</I> to the Internal RAM string 
+            variable <I>z</I>.</p>
+    </TD>
+  </TR>
+    <tr>
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).backspace()</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Delete last character from the Internal RAM string variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).clear()</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Clear out the Internal RAM string variable <I>z</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).copyToRamString(<I>y</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Copy string stored at Internal RAM string&nbsp;variable <I>z</I> 
+            into Internal RAM string&nbsp;variable <I>y</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).copyViaRamBytePtr(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Copy string stored at Internal RAM string&nbsp;variable <I>z</I> 
+            into the Internal RAM string&nbsp;variable whose number is the byte 
+            value stored at Internal RAM byte <I>x</I>.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).setChar(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Set the string&nbsp;stored at Internal RAM string&nbsp;variable 
+            <I>z</I> to the single ASCII character&nbsp;<I>x</I>. setChar() 
+            adds the null termination to the byte <I>x</I>.</p>
+    </TD>
+    </tr>
+  <TR> 
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).setValue(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Set the string&nbsp;stored at Internal RAM string&nbsp;variable 
+            <I>z</I> to the null terminated string <I>x</I>.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).stringToByte(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Converts the ASCII string of a decimal number stored in Internal RAM string variable <I>z</I> 
+            to an actual number to be&nbsp;stored in Internal RAM byte variable 
+            <I>x</I>.</p>
+    </TD>
+  </TR>
+    <tr>
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).stringToWord(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Converts the ASCII string of a decimal number stored in Internal RAM string variable <I>z</I> 
+            to an actual number to be stored in Internal RAM word&nbsp;variable 
+            <I>x</I>.</p>
+    </TD>
+    </tr>
+  <TR> 
+    <TD WIDTH="315"> 
+      <P>Amulet:InternalRAM.string(<I>z</I>).value()</P>
+    </TD>
+    <TD WIDTH="344"> 
+            <p>Return the null terminated string&nbsp;of Internal RAM string&nbsp;variable 
+            <I>z</I>.</p>
+    </TD>
+  </TR>
+</TABLE>
+<p>&nbsp;</p>
+<p><B>Table 4. </B>Miscellaneous<B> </B>InternalRAM method descriptions.</p>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="325"> 
+      <CENTER>
+        <B>InternalRAM  Methods</B> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="334"> 
+      <CENTER>
+        <B>Descriptions</B> 
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=1 WIDTH="675">
+    <tr>
+    <TD WIDTH="325"> 
+      <P>Amulet:InternalRAM.clearRPCBuf()</P>
+    </TD>
+    <TD WIDTH="334"> 
+            <p>Clears the internalRAM RPC buffer.</p>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="325"> 
+      <P>Amulet:InternalRAM.invokeRPC(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="334"> 
+            <p>Adds   
+        the RPC <I>x, </I>to 
+            the internalRAM RPC buffer.</p>
+    </TD>
+    </tr>
+  <TR> 
+    <TD WIDTH="325"> 
+      <P>Amulet:InternalRAM.saveToFlash()</P>
+    </TD>
+    <TD WIDTH="334"> 
+            <p>Saves the current state of all the Internal RAM variables (byte, 
+            word and string) in the serial data flash.</p>
+    </TD>
+  </TR>
+</TABLE>
+<p>&nbsp;</p>
+<HR width="60%">
+<CENTER>
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © </FONT><span style='font-size:10.0pt'>2000-2004</span><FONT SIZE="2"> by<BR>
+					
+Amulet Technologies, LLC</FONT></I>
+			<p>&nbsp;<I><FONT SIZE="2"><BR>
+</FONT></I><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</P>
+		</CENTER>
+
+<p align="center">&nbsp;</p>
+</body>
+</html>

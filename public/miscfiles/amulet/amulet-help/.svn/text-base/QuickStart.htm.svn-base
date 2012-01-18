@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Monday, December 11, 2000 04:06 PM -->
+<HTML>
+
+<HEAD>
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+	<TITLE>Quick Start</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="white">
+
+<H1 ALIGN="CENTER">Easy GUI Quick Start</H1>
+<P>Easy GUI comes pre-programmed from the factory with sample µHTML pages stored in the onboard flash.&nbsp;If you haven't already done so, please take a few minutes to power up the Easy GUI module to review the pre-programmed demo. To power up the Easy GUI Starter Kit and begin GUI navigation, proceed as follows:
+		<OL>
+			<LI>Make sure that the DIP switch settings on SW2 are set to the following default values:<BR>
+			<div align="left">
+				<table border="0">
+					<tr>
+						<td><img src="Images/dipNorm.gif" width="64" height="79" align="BOTTOM" border="0"></td>
+						<td nowrap>Switch 1 ON&nbsp;--- Boot Mode<br>
+							Switch 2 OFF&nbsp;-- Program Baud Rate<br>
+							Switch 3 OFF&nbsp;-- RAM Test<br>
+							Switch 4 ON&nbsp;--- Touch Panel Mode</td>
+					</tr>
+				</table>
+				<br>
+				<img src="Images/gt38board.jpg" width="529" height="424" align="BOTTOM" border="0"></div>
+			<H4>Figure 1.&nbsp;Amulet Easy GUI 3.8&quot; board assembly, component side.</H4>
+			<LI>Connect one end of the power adapter to power input J1 on the Easy GUI module and the other end to the 9-volt battery.<BR>
+	<B><FONT COLOR="red">CAUTION:&nbsp;Do not reverse the polarity on the power input.&nbsp;Doing so will permanently
+	damage the module and invalidate your warranty.</FONT></B><BR>
+	&nbsp;
+
+			<LI>The unit powers up and displays the Easy GUI Home Page.&nbsp;Use a touch panel stylus to navigate the GUI.&nbsp;
+	(A stylus was included with the Starter Kit.) 
+			<li>LCD contrast, and backlight brightness are both adjustable via the potentiometers labeled CONTRAST ADJ and BACKLIGHT ADJ, respectively.
+		</OL>
+		<HR ALIGN="CENTER">
+		<H2><a name="FirstGUI">Creating Your First Easy GUI Graphical User Interface</a></H2>
+<P>By now, you should be familiar with the operation and navigation of the Easy GUI module. The next step is to
+use the Easy GUI HTMLCompiler to compile and program a GUI. In keeping with a long-standing programming tradition,
+this section introduces you to the Easy GUI development tools by guiding you through the creation of a &quot;Hello,
+World!&quot; program -- Amulet Style. Proceed as follows:</P>
+<P>Launch the HTMLCompiler by whichever means you prefer.</P>
+
+<OL>
+	<LI>From the HTMLCompiler's <B>File</B> menu, select <B>Open</B>. You will be presented with a file dialog box.
+	
+  <LI>Use the controls in the file dialog to locate the file home.htm from the 
+    <A HREF="../projects/tour/" target="_blank">\projects\tour\</A> subdirectory 
+    of the Amulet main directory. By default the Amulet main directory is C:\Program 
+    Files\Amulet, however you may have specified a different path during the install. 
+  <LI>Select home.htm and click the <B>Open</B> button.
+</OL>
+
+<P ALIGN="CENTER"><IMG SRC="Images/openHome.gif" WIDTH="428" HEIGHT="266" ALIGN="BOTTOM" BORDER="0"></P>
+<P>The HTMLCompiler will open and compile home.htm and all other files that are linked from home.htm. When the
+conversion is complete the compiler will display:</P>
+<P ALIGN="CENTER"><B>&lt;Successful Compile!  Ready to Program 16 files (11840 bytes) into Flash&gt;</B></P>
+<P ALIGN="CENTER"><IMG SRC="Images/compiledHome.gif" WIDTH="608" HEIGHT="386" ALIGN="BOTTOM" BORDER="0"></P>
+		<P><B>NOTE:</B> DO NOT click on the <B>Program FLASH</B> button yet because you must first prepare the Easy GUI module for programming.</P>
+		<HR ALIGN="CENTER">
+		<H2>Setting up the RS232 port for FLASH programming</H2>
+<P>Before you can program your &quot;Hello, World&quot; program into the Easy GUI FLASH, you must first select
+a comm port and a programming baud rate.<BR>
+<BR>
+To select a serial port for programming:
+
+<OL>
+	<LI>From the HTMLCompiler's <B>Settings </B>menu, select <B>RS232</B>. You will be presented with an RS232 dialog
+	box similar to the one pictured below.<BR>
+	<IMG SRC="Images/baud1.gif" WIDTH="232" HEIGHT="190" ALIGN="BOTTOM" BORDER="0">
+	<LI>Next, select any available serial port from the <B>Comm Port</B> list. All ports listed in your Windows Registry will be listed.	<LI>Then, choose a baud from the <B>Bit Rate</B> list. The bit rate must match the bit rate selected by Switch
+	2 of the Easy GUI module's DIP switch. If you selected 115200, be sure to place Switch 2 in the OFF position. If
+	you selected 19200, be sure to place Switch 2 in the ON position.
+	<LI>Finally click the <B>OK</B> button.
+</OL>
+
+<P>Now, you must connect the Easy GUI module to the PC. Before proceeding, remove the power from your Easy GUI module and make sure the module DIP switch settings on SW2 are as follows:<BLOCKQUOTE>
+			<TABLE BORDER="0">
+		<TR>
+			<TD><IMG SRC="Images/dipFlash.gif" WIDTH="64" HEIGHT="79" ALIGN="BOTTOM" BORDER="0"></TD>
+			<TD  NOWRAP>Switch 1 (Boot Mode) = ON (normal) (<a href="#* Note">*See 
+                note below</a>)<br>
+				Switch 2 (Program Baud Rate) = OFF (115200) or ON (19200) <B><BR>
+				NOTE:</B> This must match the  <A HREF="compiler.htm#SerialSetup">bit rate set for the compiler</A>.<BR>
+				Switch 3 (RAM Test) = OFF (disabled)<BR>
+				Switch 4 (Touch Panel Mode) = ON (Normal operation)</TD>
+		</TR>
+	</TABLE>
+		</BLOCKQUOTE>
+		<P>Connect one end of the 9-pin serial cable (included with the starter kit) to the serial port (J2) on the Easy GUI module and the other end to the assigned serial port on your computer. Now go ahead and apply power to the Easy GUI module.</P>
+<p><a name="* Note">* Note</a>: Upon clicking on the <B>Program FLASH</B> button in the Compiler window, the Compiler will attempt to send out an auto &quot;wake-up&quot; message to the Amulet controller. If the page currently being displayed is set up to use the same baud rate using the <a href="HTMLSupport.htm#META">META</a> tag (if META is not present, the default is 115200) as the Compiler's uP comm rate, 
+then the Amulet controller will change to a generic &quot;Please wait while programming flash...&quot; screen and commence programming. If the page has a baud rate different than what the Compiler is set to, then you should 
+set the <A HREF="compiler.htm#SerialSetup">uP comm rate</A> in the Settings-&gt;RS232 dialog 
+box to match the baud rate set by the META tag. This will allow the HTMLCompiler 
+to wake up the Amulet at one baud rate and then program it at&nbsp;another baud 
+rate. The only time you should have to set Switch 1 to OFF (program mode) is 
+when the project you compiled locks up the Amulet OS to the point where it won't 
+accept the wake up message or if the Amulet OS has been corrupted and you need 
+to <a href="compiler.htm#firmware_upgrade">reload the OS</a>.</p>
+		<HR ALIGN="CENTER">
+		<H2>Programming The Flash</H2>
+<P>Click on the <B>Program FLASH</B> button in the Compiler window. If there is a comm port conflict, the compiler will display &quot;Port is in use.&quot; If the compiler doesn't see the Easy GUI&nbsp;module, the compiler will display &quot;Serial port timed out.&quot; Normally, though, the compiler will display a series of messages as each file within the page is flashed. When the flash programming is complete, the compiler will display:</P>
+<P ALIGN="CENTER"><B>&lt;Successfully Flashed...&gt;</B></P>
+<P ALIGN="CENTER"><img src="Images/flashedHome.gif" width="608" height="386" border="0"></P>
+		<P><B>Congratulations!</B> You have successfully compiled and flashed your first Easy GUI uHTML page(s). The home page is now displayed on the LCD of the Easy GUI&nbsp;module. Navigate the GUI before proceeding to the next section.</P>
+		<HR ALIGN="CENTER">
+		<H2>Editing home.htm</H2>
+<P>Now, it is time to personalize your GUI. Using a text editor, such as Notepad 
+  or a &quot;WYSIWYG&quot; tool like Namo, open &quot;home.htm&quot; located in 
+  the <A HREF="../projects/tour/" target="_blank">\projects\tour\</A> subdirectory 
+  of the Amulet main directory. View the source code for the page and search for 
+  &quot;Hello, World!&quot; between the &lt;BODY&gt; and &lt;/BODY&gt; tags. </P>
+<P ALIGN="CENTER"><IMG SRC="Images/helloWorld.gif" WIDTH="600" HEIGHT="432" ALIGN="BOTTOM" BORDER="0"></P>
+<P>Replace &quot;World&quot; with your name. For example, &quot;Hello, World&quot; should now read &quot;Hello, John!&quot;</P>
+<P>Save the modified file and compile it.</P>
+<P>Click on the Program FLASH button.</P>
+<P><B>Congratulations!</B> You have successfully modified an Easy GUI uHTML page. A personalized version of the home page is now displayed on the LCD of the Easy GUI module. If desired, see <A HREF="compiler.htm#Restore">Restoring
+The Flash To Factory Configuration.<BR>
+
+</A><HR ALIGN="CENTER">
+
+<H2>Creating A GUI from Scratch</H2>
+<P>Before you embark on creating your own GUI from scratch, a few tips are in 
+  order:</P>
+<ul>
+  <li><B>Learn from our examples:</B> We have assembled a number of examples to 
+    show you how to use HTML and Amulet Widgets. To find out more about the examples, 
+    <a href="Examples.htm">Click&nbsp;Here</a>. You may also want to examine the 
+    source code for the sample pages that were factory configured into your Easy 
+    GUI's FLASH. The code resides in the <A HREF="../projects/EasyAs123/" target="_blank">\projects\EasyAs123</A> 
+    subdirectory of the Amulet main directory. The home page is called home.html. 
+    You can use any of these pages as templates for your own GUI. Just copy these 
+    pages to your own subdirectory in \projects\ </li>
+  <li><B>Minimum page requirements:</B> You MUST have at least one table on your 
+    HTML page. The table dimensions attributes must specify the Height and Width 
+    of the LCD (WIDTH=320, HEIGHT=240). All visible content must reside within 
+    this table. You may add any number of rows and columns to this table. You 
+    may also embed additional tables within any cell in this table. The width 
+    and height must be specified for every table and the width must be specified 
+    for every column in each table. Optionally, you can also specify the height 
+    of each row.</li>
+  <li><B>Start with a Template:</B> Finally, you should also be aware that there 
+    is an empty project which contains only one page: template.html. This file 
+    contains the MANDATORY 320x240 TABLE that is REQUIRED by the HTMLCompiler 
+    for every single GUI page. You may add any number of rows and columns to this 
+    table. You may also embed additional tables within any cell in this table. 
+    Template.html is located in the <a href="../projects/empty/" target="_blank">\projects\empty</a> 
+    subdirectory.</li>
+</ul>
+Have fun! 
+<CENTER>
+<P>
+<HR ALIGN="CENTER" WIDTH="60%">
+<B><BR>
+</B><I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright &copy; 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I></CENTER>
+<P ALIGN="CENTER"><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A></P>
+<P>&nbsp;
+
+</BODY>
+
+</HTML>

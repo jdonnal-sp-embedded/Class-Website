@@ -1,0 +1,915 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Appendix C</TITLE>
+</HEAD>
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Appendix C</h1>
+<p> Inter Widget Communication allows one Amulet widget to invoke the methods 
+  of another Amulet widget. (See <a href="AppendixB.htm">Appendix B</a> for a 
+  comprehensive listing of all available function calls.). Below you will find 
+  a description of the valid IWC methods for each widget, in addition to a brief 
+  description of how those methods specifically act.</p>
+<p>Click on the following links to jump to the specific widget's IWC methods:</p>
+<h3>Widgets:</h3>
+<div align="left">
+    <table border="1" width="640">
+        <tr>
+            <td width="50%" valign="middle"><h3 align="left">Control Widgets:</h3></td>
+            <td width="50%" valign="middle">
+                <h3>View Widgets:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%" valign="top"><a href="AppendixC.htm#CheckBox">Check Box</a><br><a href="AppendixC.htm#CustomButton">Custom Button</a><br><a href="#CustomSlider">Custom 
+                Slider</a><br><a href="AppendixC.htm#FunctionButton">Function 
+Button</a><br><a href="AppendixC.htm#List">List</a><br><a href="AppendixC.htm#RadioButton">Radio Button</a><BR><A HREF="#Scribble">Scribble</A><br><a href="AppendixC.htm#Slider">Slider</a></td>
+            <td width="50%" valign="top">
+                <p><a href="AppendixC.htm#BarGraph">Bargraph</a><br><a href="#DynamicImage">Dynamic 
+                Image</a><br><a href="AppendixC.htm#ImageBar">Image 
+                Bar</a><br><a href="AppendixC.htm#ImageSequence">Image 
+                Sequence</a><br><a href="AppendixC.htm#LinePlot">Line 
+                Plot</a><br><a href="#LineGraph">Line Graph</a><br><a href="#LinearGauge">Linear Gauge</a><br><a href="AppendixC.htm#NumericField">Numeric 
+                Field</a><br><a href="AppendixC.htm#StringField">String 
+                Field</a></p>
+            </td>
+        </tr>
+    </table>
+</div>
+<h4>&nbsp;</h4>
+<h3>Objects:</h3>
+<div align="left">
+    <table border="1" width="640">
+        <tr>
+            <td width="50%" valign="middle"><h3 align="left">Control Objects:</h3></td>
+            <td width="50%" valign="middle">
+                <h3>View Objects:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%" valign="top"><A HREF="#Anchor">Anchor/Area 
+                Maps</A><br><A HREF="#METARefreshTag">META Refresh Tag</A></td>
+            <td width="50%" valign="top">
+                <p><A HREF="#AnimatedImage">Animated Image</A><br><A HREF="#Image">Image</A></p>
+            </td>
+        </tr>
+    </table>
+</div>
+<p>Notes:</p>
+<ul>
+  <li><a href="#RegardingMethodParameters">Regarding Method Parameters (<i>x,m,and f</i>)</a>&nbsp;</li>
+</ul>
+<hr>
+<h3><a name="BarGraph"></a> BarGraph</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the BarGraph not visible on the LCD.</li>
+  <li><B>forceUpdate()</B> -  Forces the BarGraph to call its href function 
+    immediately, regardless of the updateRate.</li>
+  <li><B>reappear()</B> - Makes the BarGraph visible on the LCD. Counteracts the 
+    disappear() method.</li>
+  <li><B>setValue(<i>x</i>)</B> - BarGraph uses <B><i>x</i></B>&nbsp;as 
+    its input. This allows a Control Widget to provide the input to a BarGraph.<br>
+  </li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the BarGraph's href parameter.<br>
+</li>
+    <li><B>setUARTMethod(<i>m</i>)</B>
+  - Changes the UART method originally specified by 
+    the BarGraph's href parameter.</li>
+  <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified by the BarGraph, the argument being a floating point number, specifying the time in seconds.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by a BarGraph. Can only be used  if the BarGraph href is  byte(y).value() 
+    or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the BarGraph to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the BarGraph to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - BarGraph starts graphing based upon&nbsp;its input data. Counteracts 
+    the stopUpdating() method.<br>
+  </li>
+  <li><B>stopUpdating()</B> - BarGraph stops graphing.<br>
+  </li>
+  <li><B>toggleUpdating()</B> - Changes current state of BarGraph; either starts 
+    or stops graphing.<br>
+  </li>
+</ul>
+<hr>
+<h3><a name="CheckBox"></a>CheckBox</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the CheckBox not visible or touchable on the 
+    LCD.</li>
+  <li><B>forceHit()</B> - CheckBox performs its &quot;hit&quot; method without 
+    user input. The &quot;hit&quot; method will invoke all href functions of the 
+    CheckBox.. When imparting a forceHit on a single CheckBox, that CheckBox will 
+    toggle. You can also forceHit an entire CheckBox group which will perform 
+    the href function(s), but will not toggle any checkboxes. To forceHit a CheckBox 
+    group, use the <B>groupName</B> as the <I>widgetName</I> (rather than the 
+    individual CheckBox name).<br>
+  </li>
+    <li><B>forceUpdate()</B> - Forces the CheckBox group to call its <B>initHref</B> function 
+    immediately. Only valid if <B>initialCondition</B>&nbsp;is FromInitHref. 
+    Updates the CheckBox group&nbsp;and&nbsp;performs a &quot;hit&quot;. To forceUpdate a CheckBox 
+    group, use the <B>groupName</B> as the <I>widgetName</I> (rather than the 
+    individual CheckBox name).</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the CheckBox to the calling 
+    widget.. The calling object then uses that value, ANDed with the mask <I>y, 
+    </I>as its input. This method is only valid if the intrinsic value&nbsp;is 
+    a byte or word. The mask <I>y</I> can be either a byte or word. This allows 
+    a CheckBox to provide the input to a View Widget. This method is called 
+    from a View Widget href.<br></li>
+    <li><B>reappear()</B> - Makes the CheckBox visible and touchable on the LCD. 
+    Counteracts the disappear() method.</li>
+  <li><B>setValue(<i>x</i>)</B> - The CheckBox intrinsic value is changed&nbsp;to 
+    <I>x</I>.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the CheckBox's href parameter; only valid when the originally specified method is a single 
+    function. To change the 
+    method for a CheckBox group, or an ungrouped CheckBox, use the <B>groupName</B> 
+    as the <I>widgetName</I> (rather than in individual CheckBox name). You cannot 
+    change the method for an individual CheckBox within a group.<br></li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the CheckBox's href parameter; only valid when the originally specified method is a single 
+    function. To change the 
+    method for a CheckBox group, or an ungrouped CheckBox, use the <B>groupName</B> 
+    as the <I>widgetName</I> (rather than in individual CheckBox name). You cannot 
+    change the method for an individual CheckBox within a group.<br></li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used only if the Check 
+    Box href uses  byte(<I>y</I>), word(<I>y</I>) or string(<I>y</I>). In all&nbsp;three 
+    of the cases, the value <I>y</I> is replaced with the value <I>x</I>. Only valid when the originally specified method is a single 
+    function. Can only be used on a Check Box Group, not an individual CheckBox.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the individual CheckBox to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the individual CheckBox to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the CheckBox to the calling 
+    widget.. The calling object then uses that value as its input. This allows 
+    a CheckBox to provide the input to a View Widget. This method is called 
+    from a View Widget href.<br>
+  
+  </li>
+</ul>
+<hr>
+<h3><a name="CustomButton"></a>Custom Button</h3>
+		<ul>
+  <li><B>buttonDown()</B> - Sets the Custom&nbsp;Button Widget to look like 
+    it is its&nbsp;down&nbsp;state. This method does NOT&nbsp;invoke the href 
+    functions. It only affects the looks of the button, not the functionality.</li>
+    <li><B>buttonUp()</B> - Sets the Custom&nbsp;Button Widget to look like 
+    it is its&nbsp;up&nbsp;state. This method does NOT&nbsp;invoke the href 
+    functions. It only affects the looks of the button, not the functionality.</li>
+    <li><B>disappear()</B> - Makes the Custom Button not visible or touchable on 
+    the LCD.</li>
+  <li><B>forceHit()</B> - Custom Button performs its &quot;hit&quot; method without 
+    user input. The &quot;hit&quot; method will invoke all href functions of the 
+    Custom Button.</li>
+    <li><B>forceUpdate()</B> - Forces the Custom Button to call its <B>initHref</B> function 
+    immediately. Only valid if <B>label</B> is fromInitHref. Updates the Custom 
+    Button label without performing a &quot;hit&quot;.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the Custom Button to the 
+    calling widget. The calling object then uses that value, ANDed with the 
+    mask <I>y,</I> as its input. This method is only valid if the intrinsic 
+    value&nbsp;is a byte or word. The mask <I>y</I> can be either a byte or 
+    word. This 
+    allows a Custom Button to provide the input to a View Widget. This method 
+    is called from a View Widget href.</li>
+    <li><B>reappear()</B> - Makes the Custom Button visible and touchable on the 
+    LCD. Counteracts the disappear() method.</li>
+    <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Custom Button's href parameter; only valid when the originally specified method is a single 
+    function.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Custom Button's href parameter; only valid when the originally specified method is a single 
+    function.</li>
+  <li><B>setValue(<i>x</i>)</B> - The Custom Button intrinsic value is changed&nbsp;to 
+    <I>x</I>.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used only if the Custom 
+    Button href uses  byte(<I>y</I>), word(<I>y</I>) or string(<I>y</I>). In 
+    all&nbsp;three of the cases, the value <I>y</I> is replaced with the value 
+    <I>x</I>. Only valid when the originally specified method is a single 
+    function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the individual Custom Button to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the individual Custom Button to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the Custom Button to the 
+    calling widget. The calling object then uses that value as its input. This 
+    allows a Custom Button to provide the input to a View Widget. This method 
+    is called from a View Widget href.</li>
+</ul>
+<hr>
+<h3><a name="CustomSlider"></a>Custom Slider</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Custom Slider not visible or touchable on the LCD.</li>
+  <li><B>forceHit()</B> - Custom Slider performs its &quot;hit&quot; method without user 
+    input. The &quot;hit&quot; method will invoke all href functions of that object.</li>
+    <li><B>forceUpdate()</B> - Forces the Custom Slider to call its <B>initHref</B> function 
+    immediately. Only valid if <B>initialCondition</B>&nbsp;is FromInitHref. 
+    Updates the Custom Slider&nbsp;and&nbsp;performs a &quot;hit&quot;.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the Custom 
+    Slider to the calling 
+    widget. The calling object then uses that value, ANDed with the mask <I>y</I>, as its input. This 
+    method is only valid if the intrinsic value&nbsp;is a byte or word. The 
+    mask <I>y</I> can be either a byte or word. This allows 
+    a Control object to provide the input to a View Widget. This method is called 
+    from a View Widget href.</li>
+    <li><B>reappear()</B> - Makes the Custom Slider visible and touchable on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setValue(<i>x</i>)</B> - The Custom Slider intrinsic value is changed&nbsp;to 
+    <I>x</I>.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Custom Slider's href parameter; only valid when the originally specified method is a single function.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Custom Slider's href parameter; only valid when the originally specified method is a single function.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used only if the Custom 
+    Slider href uses  byte(<I>y</I>), 
+    word(<I>y</I>) or string(<I>y</I>). In all&nbsp;three of the cases, the 
+    value <I>y</I> is replaced with the value <I>x</I>. Only valid when the originally specified method is a single 
+    function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Custom Slider to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Custom Slider to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the Custom Slider to the calling 
+    widget. The calling object then uses that value as its input. This allows 
+    a Control object to provide the input to a View Widget. This method is called 
+    from a View Widget href.</li>
+</ul>
+		<hr>
+		
+<h3><a name="DynamicImage"></a>Dynamic Image</h3>
+<ul>
+  <li><B>clearCanvas()</B> - Clears the display where the canvas image resided. 
+    Essentially does an erase of the Dynamic Image Widget. This only affects what 
+    is displayed on the LCD, it does not affect the actual canvas image stored 
+    in flash.</li>
+    <li><B>disappear()</B> - Makes the Dynamic Image not visible on 
+    the LCD.</li>
+  <li><B>reappear()</B> - Makes the Dynamic Image visible on the 
+    LCD. Counteracts the disappear() method.</li>
+  <li><B>reset()</B> - Makes the Dynamic Image redraw its image. Should be called 
+    after loading a new image using the <A HREF="AppendixB.htm#Control_functions">Amulet:loadFlash(reset)</A> 
+    function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Dynamic Image to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Dynamic Image to the coordinate specified by the word <I>x</I>.</li>
+</ul>
+		<hr>
+		
+<h3><a name="FunctionButton"></a>Function Button</h3>
+		<ul>
+  <li><B>buttonDown()</B> - Sets the Function Button Widget to look like it 
+    is its&nbsp;down&nbsp;state. This method does NOT&nbsp;invoke the href functions. 
+    It only affects the looks of the button, not the functionality.</li>
+    <li><B>buttonUp()</B> - Sets the Function Button Widget to look like it 
+    is its&nbsp;up&nbsp;state. This method does NOT&nbsp;invoke the href functions. 
+    It only affects the looks of the button, not the functionality.</li>
+    <li><B>disappear()</B> - Makes the Function Button not visible or touchable 
+    on the LCD.</li>
+  <li><B>forceHit()</B> - Function Button performs its &quot;hit&quot; method 
+    without user input. The &quot;hit&quot; method will invoke all href functions 
+    of that object.</li>
+    <li><B>forceUpdate()</B> - Forces the Function Button to call its <B>initHref</B> function 
+    immediately. Only valid if <B>label</B> is fromInitHref. Updates the Function&nbsp;Button 
+    label without performing a &quot;hit&quot;.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the Function Button to 
+    the calling widget. The calling object then uses that value, ANDed with 
+    the mask <I>y</I>, as its input. 
+    This method is only valid if the intrinsic value&nbsp;is a byte or word. 
+    The mask <I>y</I> can be either a byte or word. This allows a  Function Button to provide the input to a View Widget. This method 
+    is called from a View Widget href.</li>
+    <li><B>reappear() </B>- Makes the Function Button visible and touchable on the 
+    LCD. Counteracts the disappear() method.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Function Button's href parameter; only valid when the originally specified method is a 
+    single function.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Function Button's href parameter; only valid when the originally specified method is a 
+    single function.</li>
+  <li><B>setValue(<i>x</i>)</B> - The Function Button intrinsic value is 
+    changed&nbsp;to <I>x</I>.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used only if the Function&nbsp;Button href uses  byte(<I>y</I>), 
+    word(<I>y</I>) or string(<I>y</I>). In all&nbsp;three of the cases, the 
+    value <I>y</I> is replaced with the value <I>x</I>. Only valid when the originally specified method is a single 
+    function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Function Button to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Function Button to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the Function Button to 
+    the calling widget. The calling object then uses that value as its input. 
+    This allows a  Function Button to provide the input to a View Widget. This method 
+    is called from a View Widget href.</li>
+</ul>
+<hr>
+<h3><a name="ImageBar"></a>Image Bar</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Image Bar not visible on the LCD</li>
+  <li><B>forceUpdate()</B> -  Forces the Image Bar to call its href function 
+    immediately, regardless of the updateRate.</li>
+    <li><B>reappear()</B> - Makes the Image Bar visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Image Bar's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Image Bar's href parameter.</li>
+  <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the Image Bar, the argument being a floating point number, specifying time 
+    in seconds.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by an Image Bar. Can be used only if the Image Bar href is  byte(y).value() 
+    or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+  <li><B>setValue(<i>x</i>)</B> - Image Bar uses <B><i>x </i></B>as its 
+    input. This allows a Control Widget to provide the input to an Image 
+    Bar.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Image Bar to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Image Bar to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - Image Bar  starts graphing based upon&nbsp;its input data. Counteracts 
+    the stopUpdating() method.</li>
+  <li><B>stopUpdating()</B> - Image Bar stops graphing.</li>
+  <li><B>toggleUpdating()</B> - Changes current state of Image Bar; either starts 
+    or stops graphing.<br>
+  </li>
+</ul>
+<hr>
+<h3><a name="ImageSequence"></a>Image Sequence</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Image Sequence not visible on the LCD</li>
+    <li><B>forceRefresh()</B> -  Forces the Image Sequence to paint the image 
+    at the next update, even if the incoming value is the same as the current 
+    state. Useful if an anchor is used around an Image Sequence, to force the 
+    image to be the correct polarity. If the image changes while the anchor 
+    is selected, it is possible to have the polarity get swapped. Having the 
+    surrounding anchor href perform this on the Image Sequence will allow the 
+    image to stay&nbsp;correctly synched.</li>
+    <li><B>forceUpdate()</B> -  Forces the Image Sequence to call its href function 
+    immediately, regardless of the updateRate.</li>
+    <li><B>reappear()</B> - Makes the Image Sequence visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Image Sequence's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Image Sequence's href parameter.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the Image Sequence, the argument being a floating point number, specifying 
+    time in seconds.</li>
+  <li><B>setValue(<i>x</i>)</B> - Image Sequence uses <I>x</I><B><i> </i></B>as 
+    its input. This allows a Control Widget to provide the input to an 
+    Image Sequence.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by an Image Sequence. Can be used only if the Image Sequence href 
+    is  byte(y).value() or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Image Sequence to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Image Sequence to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - Image Sequence starts using its input data to 
+    determine which image to display. Counteracts 
+    the stopUpdating() method.</li>
+  <li><B>stopUpdating()</B> - Image Sequence stops using its input data to determine 
+    which image to display.</li>
+  <li><B>toggleUpdating()</B> - Changes current state of Image Sequence; either 
+    starts or stops using its input data to determine which image to display.</li>
+</ul>
+<hr>
+<h3><a name="LineGraph"></a>Line Graph</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Line Graph not visible on the LCD.</li>
+  <li><B>forceUpdate()</B> -  Forces the Line Graph to call its href function 
+    immediately, regardless of the updateRate.</li>
+    <li><B>reappear()</B> - Makes the Line Graph visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>reset()</B> - Clears the Line Graph</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Line Graph's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Line Graph's href parameter.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the Line Graph, the argument being a floating point number, specifying time 
+    in seconds.</li>
+  <li><B>setValue(<i>x</i>)</B> - Line Graph uses <I>x</I><B><i> </i></B>as its 
+    input. This allows a Control Widget to provide the input to a Line Graph.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by an Line Graph. Can be used only if the Line Graph href is  byte(y).value() 
+    or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Line Graph to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Line Graph to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - Line Graph starts plotting&nbsp;based upon&nbsp;its input data. Counteracts 
+    the stopUpdating() method.</li>
+  <li><B>stopUpdating()</B> - Line Graph stops plotting.</li>
+  <li><B>toggleUpdating()</B> - Changes current state of Line Graph; either starts 
+    or stops plotting.</li>
+</ul>
+<hr>
+<h3><a name="LinePlot"></a>Line Plot</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Line Plot not visible on the LCD.</li>
+  <li><B>forceUpdate()</B> -  Forces the Line Plot to call its href function 
+    immediately, regardless of the updateRate.</li>
+    <li><B>reappear()</B> - Makes the Line Plot visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>reset()</B> - Clears the Line Plot.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Line Plot's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Line Plot's href parameter.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the Line Plot, the argument being a floating point number, specifying time 
+    in seconds.</li>
+  <li><B>setValue(<i>x</i>)</B> - Line Plot uses <I>x</I><B><i> </i></B>as its 
+    input. This allows a Control Widget to provide the input to a Line 
+    Plot.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by an Line Plot. Can be used only if the Line Plot href is  byte(y).value() 
+    or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Line Plot to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Line Plot to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - Line Plot starts plotting&nbsp;based upon&nbsp;its input data. Counteracts 
+    the stopUpdating() method.</li>
+  <li><B>stopUpdating()</B> - Line Plot stops plotting.</li>
+  <li><B>toggleUpdating()</B> - Changes current state of Line Plot; either starts 
+    or stops plotting.</li>
+</ul>
+<hr>
+<h3><a name="LinearGauge"></a>Linear Gauge</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Linear Gauge not visible on the LCD.</li>
+  <li><B>forceUpdate()</B> -  Forces the  Linear Gauge to call its href function 
+    immediately, regardless of the updateRate.</li>
+    <li><B>reappear()</B> - Makes the  Linear Gauge visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>reset()</B> - Clears the  Linear Gauge.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the  Linear Gauge's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the  Linear Gauge's href parameter.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the  Linear Gauge, the argument being a floating point number, specifying time 
+    in seconds.</li>
+  <li><B>setValue(<i>x</i>)</B> -  Linear Gauge uses <I>x</I><B><i> </i></B>as its 
+    input. This allows a Control Widget to provide the input to a  Linear Gauge.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by a  Linear Gauge. Can be used only if the  Linear Gauge href is  byte(y).value() 
+    or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the  Linear Gauge to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the  Linear Gauge to the coordinate specified by the word <I>x</I>.</li>
+</ul>
+<hr>
+<h3><a name="List"></a>List</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the List not visible or touchable on the LCD.</li>
+  <li><B>forceHit()</B> - List performs its &quot;hit&quot; method without user 
+    input. The &quot;hit&quot; method will invoke all href functions of that object.</li>
+    <li><B>forceUpdate()</B> - Forces the List to call its <B>initHref</B> function 
+    immediately. Only valid if <B>initialCondition</B>&nbsp;is FromInitHref. 
+    Updates the List and&nbsp;performs a &quot;hit&quot;.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the List to the calling 
+    widget. The calling object then uses that value, ANDed with the mask <I>y</I>, as its input. This 
+    method is only valid if the intrinsic value&nbsp;is a byte or word. The 
+    mask <I>y</I> can be either a byte or word. This allows 
+    a Control object to provide the input to a View Widget. This method is called 
+    from a View Widget href.</li>
+    <li><B>nextEntry()</B> - Highlighted box of a list box widget moves to next 
+    entry in the list. Effectively moves the highlighted box down one entry. 
+    Does NOT automatically perform a &quot;hit&quot; method.</li>
+  <li><B>previousEntry()</B> - Highlighted box of a list box widget moves to 
+    previous&nbsp;entry in the list. Effectively moves the highlighted box up&nbsp;one 
+    entry. Does NOT automatically perform a &quot;hit&quot; method.</li>
+  <li><B>reappear()</B> - Makes the List visible and touchable on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by the List's 
+    href parameter; 
+    only valid when the originally specified method is a single function.</li>
+    <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by the List's 
+    href parameter; 
+    only valid when the originally specified method is a single function.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used  if the List href uses  byte(<I>y</I>), 
+    word(<I>y</I>) or string(<I>y</I>). In all&nbsp;three of the cases, the 
+    value <I>y</I> is replaced with the value <I>x</I>. Only valid when the originally specified method is a single 
+    function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the List to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the List to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the List to the calling 
+    widget. The calling object then uses that value as its input. This allows 
+    a Control object to provide the input to a View Widget. This method is called 
+    from a View Widget href.</li>
+</ul>
+<hr>
+<h3><a name="NumericField"></a>Numeric Field</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Numeric Field not visible on the LCD.</li>
+  <li><B>forceUpdate()</B> -  Forces the Numeric Field to call its href function 
+    immediately, regardless of the updateRate.</li>
+    <li><B>inverseRegionColor()</B> - Makes the entire Numeric Field (both the 
+    background and the text) display in reverse 
+    video. Counteracts the normalRegionColor() method.</li>
+    <li><B>normalRegionColor() -  </B>Makes the entire Numeric Field (both the 
+    background and the text) display in normal 
+    video. Counteracts the inverseRegionColor() method.</li>
+    <li><B>reappear()</B> - Makes the Numeric Field visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Numeric Field's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Numeric Field's href parameter.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the Numeric Field, the argument being a floating point number, specifying 
+    time in seconds.</li>
+  <li><B>setValue(<i>x</i>)</B> - Numeric Field uses <B><i>x </i></B>as 
+    its input. This allows a Control Widget to provide the input to a 
+    Numeric Field.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by an Numeric Field. Can be used only if the Numeric Field href 
+    is  byte(y).value() or 
+    word(y).value(). In either&nbsp;case, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Numeric Field to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Numeric Field to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - Numeric Field starts updating&nbsp;based upon&nbsp;its input data. Counteracts 
+    the stopUpdating() method.</li>
+  <li><B>stopUpdating()</B> - Numeric Field stops updating.</li>
+  <li><B>toggleUpdating()</B> - Changes current state of Numeric Field; either 
+    starts or stops updating.</li>
+</ul>
+<hr>
+<h3><a name="RadioButton"></a>Radio Button</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Radio Button not visible or touchable on 
+    the LCD.</li>
+  <li><B>forceHit()</B> - Radio Button performs its &quot;hit&quot; method without 
+    user input. The &quot;hit&quot; method will invoke all href functions of that 
+    object. Unlike the CheckBox, a forceHit can only be imparted to an individual 
+    Radio Button, not a Radio Button group.</li>
+    <li><B>forceUpdate()</B> - Forces the Radio Button group to call its <B>initHref</B> function 
+    immediately. Only valid if <B>initialCondition</B>&nbsp;is FromInitHref. 
+    Updates the Radio Button&nbsp;group and&nbsp;performs a &quot;hit&quot;. 
+    To forceUpdate a Radio Button group, use the <B>groupName</B> as the <I>widgetName</I> (rather than the 
+    individual Radio Button name).</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the Radio Button to the 
+    calling widget. The calling object then uses that value, ANDed with the 
+    mask <I>y,</I> as its input. This method is only valid if the intrinsic 
+    value&nbsp;is a byte or word. The mask <I>y</I> can be either a byte or 
+    word. This 
+    allows a Control object to provide the input to a View Widget. This method 
+    is called from a View Widget href.</li>
+    <li><B>reappear()</B> - Makes the Radio Button visible and touchable on the 
+    LCD. Counteracts the disappear() method.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Radio Button's href parameter; only valid when the originally specified method is a single 
+    function.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Radio Button's href parameter; only valid when the originally specified method is a single 
+    function.</li>
+  <li><B>setValue(<i>x</i>)</B> - The Radio Button intrinsic value is changed&nbsp;to 
+    <I>x</I>.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used only if the Radio 
+    Button href uses  byte(<I>y</I>), word(<I>y</I>) or string(<I>y</I>). In 
+    all&nbsp;three of the cases, the value <I>y</I> is replaced with the value 
+    <I>x</I>. Only valid when the originally specified method is a single 
+    function. Can only be used on an individual Radio Button, not the entire 
+    Radio Button Group.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the individual Radio Button to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the individual Radio Button to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the Radio Button to the 
+    calling widget. The calling object then uses that value as its input. This 
+    allows a Control object to provide the input to a View Widget. This method 
+    is called from a View Widget href.</li>
+</ul>
+<hr><h3><a name="Scribble"></a>Scribble</h3>
+<ul>
+  <li><B>clearCanvas()</B> - Clears the display where the canvas image resided. 
+    Essentially does an erase of the Scribble Widget. This only affects what 
+    is displayed on the LCD, it does not affect the actual canvas image stored 
+    in flash.</li>
+  <li><B>disappear()</B> - Makes the Scribble Widget not visible or touchable on the LCD.</li>
+  <li><B>reappear()</B> - Makes the Scribble Widget visible and touchable on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>reset()</B> - Clears the canvas image currently on the Scribble Widget 
+    and redraws the canvas image stored in flash.</li>
+  <li><B>saveCanvas()</B> - The canvas displayed on the LCD is saved to flash, 
+    overwriting the previous canvas image.</li>
+    <li><B>setLinePattern(<i>x</i>)</B> - Changes the line pattern of the active freehand drawing line 
+    to <I>x</I>.</li>
+    <li><B>setLineWeight(<i>x</i>)</B> - Changes the line weight of the active freehand drawing line, in pixels, 
+    to <I>x</I>.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Scribble Widget to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Scribble Widget to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>uploadImage()</B> - The canvas displayed on the LCD is uploaded to 
+    an external processor using <a href="xmodem.htm">xmodem</a> crc protocol. 
+    The image will be sent in the <a href="Bitmap.htm">Amulet Bitmap Format</a>.</li>
+</ul>
+<hr>
+<h3><a name="Slider"></a>Slider</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Slider not visible or touchable on the LCD.</li>
+  <li><B>forceHit()</B> - Slider performs its &quot;hit&quot; method without user 
+    input. The &quot;hit&quot; method will invoke all href functions of that object.</li>
+    <li><B>forceUpdate()</B> - Forces the Slider to call its <B>initHref</B> function 
+    immediately. Only valid if <B>initialCondition</B>&nbsp;is FromInitHref. 
+    Updates the Slider&nbsp;and&nbsp;performs a &quot;hit&quot;.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value of the Slider to the calling 
+    widget. The calling object then uses that value, ANDed with the mask <I>y</I>, as its input. This 
+    method is only valid if the intrinsic value&nbsp;is a byte or word. The 
+    mask <I>y</I> can be either a byte or word. This allows 
+    a Control object to provide the input to a View Widget. This method is called 
+    from a View Widget href.</li>
+    <li><B>reappear()</B> - Makes the Slider visible and touchable on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setValue(<i>x</i>)</B> - The Slider intrinsic value is changed&nbsp;to 
+    <I>x</I>.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the Slider's href parameter; only valid when the originally specified method is a single function.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the Slider's href parameter; only valid when the originally specified method is a single function.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified in the href function to <I>x</I>. Can only be used only if the Slider href uses  byte(<I>y</I>), 
+    word(<I>y</I>) or string(<I>y</I>). In all&nbsp;three of the cases, the 
+    value <I>y</I> is replaced with the value <I>x</I>. Only valid when the originally specified method is a single 
+    function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Slider to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Slider to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value of the Slider to the calling 
+    widget. The calling object then uses that value as its input. This allows 
+    a Control object to provide the input to a View Widget. This method is called 
+    from a View Widget href.</li>
+</ul>
+<hr>
+<h3><a name="StringField"></a>String Field</h3>
+		<ul>
+  <li><B>disappear()</B> - Makes the String Field not visible on the LCD.</li>
+  <li><B>forceUpdate()</B> -  Forces the String Field to call its href function 
+    immediately, regardless of the updateRate&nbsp;</li>
+    <li><B>inverseRegionColor()</B> - Makes the entire String Field (both the 
+    background and the text) display in reverse 
+    video. Counteracts the normalRegionColor() method.</li>
+    <li><B>inverseStringColor() - </B>Makes the String Field's text string display 
+    in reverse video. Counteracts the normalStringColor() method.</li>
+    <li><B>normalRegionColor() -  </B>Makes the entire String Field (both the 
+    background and the text) display in normal 
+    video. Counteracts the inverseRegionColor() method.</li>
+    <li><B>normalStringColor() - </B>Makes the String Field's text string display 
+    in normal video. Counteracts the normalStringColor() method.</li>
+    <li><B>reappear()</B> - Makes the String Field visible on the LCD. Counteracts 
+    the disappear() method.</li>
+  <li><B>setValue(<i>x</i>)</B> - String Field uses <B><i>x</i></B>&nbsp;as 
+    an input. This allows a Control Widget to provide the input to a 
+    String Field.</li>
+  <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by 
+    the String Field's href parameter.</li>
+  <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by 
+    the String Field's href parameter.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the String Field, the argument being a floating point number, specifying 
+    time in seconds.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally 
+    specified by a String Field. Can be used only if the String Field href is 
+     byte(y).value() or string(y).value(). In both cases, the y gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>).</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the String Field to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the String Field to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>startUpdating()</B> - String Field starts updating&nbsp;based upon&nbsp;its input data. Counteracts 
+    the stopUpdating() method.</li>
+  <li><B>stopUpdating()</B> - String Field stops updating.</li>
+  <li><B>toggleUpdating()</B> - Changes current state of String Field; either 
+    starts or stops updating.</li>
+</ul>
+		<hr>
+		<h3><a name="Anchor"></a>Anchor/Area Map</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the Anchor/Area Map not touchable on 
+    the LCD.</li>
+  <li><B>forceHit()</B> - Anchor/Area Map will perform its &quot;hit&quot; method 
+    without user input. The &quot;hit&quot; method will invoke all href functions 
+    of that object.</li>
+    <li><B>forceUpdate()</B> - Forces the Anchor/Area Map to call its <b><a href="HTMLSupport.htm#ONVAR">ONVAR</a></b> function 
+    immediately.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value associated with the Anchor/Area 
+    Map to the calling widget. The calling object then uses that value, ANDed 
+    with the mask <I>y</I>, as its 
+    input. This method is only valid if the intrinsic value&nbsp;is a byte or 
+    word. The mask <I>y</I> can be either a byte or word. This allows a Control object to provide the input to a View Widget. 
+    This method is called from a View Widget href.</li>
+    <li><B>reappear()</B> - Makes the Anchor/Area Map touchable on the LCD. Counteracts 
+    the disappear() method.</li>
+    <li><B>reset()</B> - Resets the timers in the anchors.</li>
+  <li><B>setValue(<i>x</i>) </B>- The Anchor/Area Map intrinsic value is 
+    changed&nbsp;to <I>x</I>.</li>
+    <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by the 
+    Anchor/Area Map's href parameter; 
+    it is only valid when the originally specified method is 
+    a single function.</li>
+    <li><B>setOnVarMethod(<i>m</i>)</B> - Changes the method originally specified by the 
+    Anchor/Area Map's <a href="HTMLSupport.htm#ONVAR"><b>ONVAR</b></a>&nbsp;parameter; 
+    it is only valid when the originally specified method is 
+    a single function.</li>
+    <li><B>setOnVarUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by the 
+    Anchor/Area Map's <a href="HTMLSupport.htm#ONVAR"><b>ONVAR</b></a>&nbsp;parameter; 
+    it is only valid when the originally specified method is 
+    a single function.</li>
+  <li><B>setOnVarVariableNumber(<i>x</i>)</B> - Changes the variable number originally specified 
+    by the 
+    Anchor/Area Map's onVar&nbsp;parameter. Can be used only if the Anchor onVar 
+    has  a byte(<I>y</I>), word(<I>y</I>)&nbsp;or string(<I>y</I>). In all&nbsp;cases, the <I>y</I> gets changed to the argument 
+    specified in setOnVarVariableNumber(<I>x</I>).</li>
+    <li><B>setTrigger(<i>x</i>) -</B> Changes the trigger value originally specified 
+    by the Anchor/Area Map's <B>trigger</B>, <B>trigger.gt</B> or <B>trigger.lt</B> 
+    parameter to the byte value <I>x</I>.</li>
+    <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by the 
+    Anchor/Area Map's href&nbsp;parameter; 
+    it is only valid when the originally specified method is 
+    a single function.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the Anchor/Area Map, the argument being a floating point number, specifying 
+    time in seconds.</li>
+    <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally specified 
+    by the 
+    Anchor/Area Map's href&nbsp;parameter. Can be used only if the Anchor href 
+    has  a byte(<I>y</I>), word(<I>y</I>)&nbsp;or string(<I>y</I>). In all&nbsp;cases, the <I>y</I> gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>); 
+    it is only valid when the originally specified method is 
+    a single function.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the Anchor/Area Map to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the Anchor/Area Map to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>value()</B> - Sends the intrinsic value associated with the Anchor/Area 
+    Map to the calling widget. The calling object then uses that value as its 
+    input. This allows a Control object to provide the input to a View Widget. 
+    This method is called from a View Widget href.</li>
+</ul>
+<hr>
+<h3><a name="AnimatedImage"></a>Animated Image</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the image not visible on the LCD.</li>
+  <li><B>fastSpeed()</B> - Increases animation speed.<br>
+  </li>
+  <li><B>oneFrame()</B> - Advances animation one frame.<br>
+  </li>
+  <li><B>pause()</B> - Stops animation.<br>
+  </li>
+  <li><B>play()</B> - Starts animation in current direction.<br>
+  </li>
+  <li><B>playBackwards()</B> - Starts animating backwards.<br>
+  </li>
+  <li><B>playForward() </B>- Starts animating forward.<br>
+  </li>
+  <li><B>reappear()</B> - Makes the image visible on the LCD. Counteracts the 
+    disappear() method.</li>
+  <li><B>regularSpeed()</B> - Normal animation speed.<br>
+  </li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the animated image to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the animated image to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>slowSpeed()</B> - Decreases animation speed.<br>
+  </li>
+  <li><B>superFastSpeed()</B> - Fastest animation speed.<br>
+  </li>
+  <li><B>superSlowSpeed()</B> - Slowest animation speed.<br>
+  </li>
+</ul>
+<hr>
+<h3><a name="Image"></a>Image</h3>
+<ul>
+  <li><B>disappear()</B> - Makes the image not visible on the LCD.</li>
+  <li><B>reappear()</B> - Makes the image visible on the LCD. Counteracts the 
+    disappear() method.</li>
+    <li><B>setX(</B><I><b>x</b></I><B>)</B> - Sets the x-coordinate of the topleft 
+    corner of the image to the coordinate specified by the word <I>x</I>.</li>
+    <li><B>setY(</B><I><b>x</b></I><B>)</B> - Sets the y-coordinate of the topleft 
+    corner of the image to the coordinate specified by the word <I>x</I>.</li>
+</ul>
+<hr>
+<h3><a name="METARefreshTag"></a>META Refresh Tag</h3>
+<ul>
+  <li><B>disappear()</B> - Stops the META Refresh Tag URL from being launched.</li>
+  <li><B>forceHit()</B> - META Refresh Tag will perform its &quot;hit&quot; method 
+    without user input. The &quot;hit&quot; method will invoke all href functions 
+    of the META Refresh Tag.</li>
+    <li><B>forceUpdate()</B> - Forces the META Refresh Tag to call its <b><a href="Objects.htm#ONVAR">ONVAR</a></b> function 
+    immediately.</li>
+    <li><B>maskedValue(<i>y</i>)</B> - Sends the intrinsic value associated with the META 
+    Refresh Tag to the calling widget. The calling object then uses that value, 
+    ANDed with the mask <I>y</I>, 
+    as its input. This method is only valid if the intrinsic value&nbsp;is a 
+    byte or word. The mask <I>y</I> can be either a byte or word. This allows a Control object to provide the input to a View 
+    Widget. This method is called from a View Widget href.</li>
+    <li><B>reappear()</B> - Allows the META Refresh Tag URL to be launched. Counteracts 
+    the disappear() method.</li>
+    <li><B>reset()</B> - Resets timers in the META Refresh Tag.</li>
+  <li><B>setValue(<i>x</i>)</B> - The META Refresh Tag&nbsp;intrinsic value 
+    is changed&nbsp;to  <I>x</I>.</li>
+    <li><B>setMethod(<i>m</i>)</B> - Changes the method originally specified by the 
+    META Refresh Tag's URL parameter; 
+    it is only valid when the originally specified method is 
+    a single function. If the URL&nbsp;method uses&nbsp;the UART, then you must 
+    use the setUARTMethod() method.</li>
+    <li><B>setOnVarMethod(<i>m</i>)</B> - Changes the method originally specified by the 
+    META Refresh Tag's <a href="Objects.htm#ONVAR"><b>ONVAR</b></a>&nbsp;parameter; 
+    it is only valid when the originally specified method is 
+    a single function. If the ONVAR method uses the UART, then you must use 
+    the setOnVarUARTMethod() method.</li>
+    <li><B>setOnVarUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by the 
+    META Refresh Tag's <a href="Objects.htm#ONVAR"><b>ONVAR</b></a>&nbsp;parameter; 
+    it is only valid when the originally specified method is 
+    a single function. If the ONVAR method does not use the UART, then you must 
+    use the setOnVARMethod() method.</li>
+  <li><B>setOnVarVariableNumber(<i>x</i>)</B> - Changes the variable number originally specified 
+    by the 
+    META Refresh's onVar&nbsp;parameter. Can be used only if the META Refresh onVar 
+    has  a byte(<I>y</I>), word(<I>y</I>)&nbsp;or string(<I>y</I>). In all&nbsp;cases, the <I>y</I> gets changed to the argument 
+    specified in setOnVarVariableNumber(<I>x</I>).</li>
+    <li><B>setTrigger(<i>x</i>) -</B> Changes the trigger value originally specified 
+    by the META Refresh's <B>trigger</B>, <B>trigger.gt</B> or <B>trigger.lt</B> 
+    parameter to the byte value <I>x</I>.</li>
+    <li><B>setUARTMethod(<i>m</i>)</B> - Changes the UART method originally specified by the 
+    META Refresh Tag's URL&nbsp;parameter; 
+    it is only valid when the originally specified method is 
+    a single function. If the URL&nbsp;method does not use the UART, then you 
+    must use the setMethod() method.</li>
+    <li><B>setUpdateRate(<i>f</i>)</B> - Changes the update rate originally specified 
+    by the META Refresh Tag, the argument being a floating point number, specifying 
+    time in seconds.</li>
+  <li><B>setVariableNumber(<i>x</i>)</B> - Changes the variable number originally specified 
+    by the META Refresh's URL&nbsp;parameter. Can be used only if the META 
+    Refresh URL 
+    has  a byte(<I>y</I>), word(<I>y</I>)&nbsp;or string(<I>y</I>). In all&nbsp;cases, the <I>y</I> gets changed to the argument 
+    specified in setVariableNumber(<I>x</I>); 
+    it is only valid when the originally specified method is 
+    a single function.</li>
+    <li><B>value()</B> - Sends the intrinsic value associated with the META 
+    Refresh Tag to the calling widget. The calling object then uses that value 
+    as its input. This allows a Control object to provide the input to a View 
+    Widget. This method is called from a View Widget href.</li>
+</ul>
+<hr>
+<h3><a name="RegardingMethodParameters"></a>Regarding Method Parameters</h3>
+<ul>
+  <li><B>Regarding <i>x</i></B> - For Control Widgets that have intrinsic values, 
+    such as lists and sliders, leave the argument field empty, since the 
+    intrinsic value of the selection will be sent out. Anchors, META Refresh Tags, 
+     Area Maps and Function/Custom Buttons should use <I>x</I>.<I>  </I>The range for <I>x</I> is 0-255 (0x00-0xff) 
+for a BYTE, 0-65535 (0x00-0xffff) for a WORD and strings in <a href="Widgets.htm#stringVariables">double 
+quotes for STRING</a>s.</li>
+  <li><B>Regarding <i>m</i></B> - When setMethod(),setOnVarMethod(),setOnVarUARTMethod() 
+    or setUARTMethod(), is the IWC method, the argument 
+    should be the name of the method you want to set. i.e. disappear() or byte.value(). 
+    Notice when dealing with a method that relies on a type (byte, word or string) 
+    you need to include the type separated by a dot and then the method (i.e. 
+    word.value()) instead of just the method by itself.</li>
+  <li><B>Regarding <i>f</i> </B>- For Control Widgets that have intrinsic values, 
+    such as lists and sliders, leave the argument field empty, since the 
+    intrinsic value of the selection will be sent out. Anchors, META Refresh Tags, 
+    Area Maps and Function/Custom Buttons&nbsp;should use <I>f</I>. Like the regular <B>updateRate</B>, use the floating point number to 
+    specify the update rate in seconds. The range for <I>f</I> is 0-655.35.<br>&nbsp;</li>
+</ul>
+<HR width="60%">
+<CENTER>
+<BR>
+<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © 2000-2004 by<BR>
+Amulet Technologies, LLC</FONT></I><P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+</CENTER>
+
+<p align="center">&nbsp;</p>
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+<!--#set var="document_title" value="6.115 Home" -->
+<!-- This gets filled automatically by Subversion: -->
+<!--#set var="lastmod" value="\$Date: 2011-11-28 15:46:51 -0500 (Mon, 28 Nov 2011) $ by \$Author: jim $" -->
+<!--#include file="include/header.shtml"-->
+
+<h2>38-600 Lab Hours</h2>
+
+<h3>6.115 TA Hours</h3>
+<p>are posted each week on the <a href="index.shtml">annoucements</a>
+page.  What follows are the hours that the lab and stockroom will be
+open.
+
+<h3>General hours of operation</h3>
+<table border=0 width="80%">
+
+<tr bgcolor="<!--#echo var="hilite" -->" valign=top>
+<td>Day</td><td>Lab</td><td>Stockroom</td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Sunday</td><td>1PM - 11:45PM</td><td><i>closed</i></td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Monday</td><td>9AM - 11:45PM</td><td>9AM - 5:15PM</td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Tuesday</td><td>9AM - 11:45PM</td><td>9AM - 5:15PM</td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Wednesday</td><td>9AM - 11:45PM</td><td>9AM - 5:15PM</td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Thursday</td><td>9AM - 11:45PM</td><td>9AM - 5:15PM</td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Friday</td><td>9AM - 5:15PM</td><td>9AM - 5:15PM</td></tr>
+
+<tr bgcolor="<!--#echo var="normal" -->" valign=top>
+<td>Saturday</td><td><i>closed <b>*</b></i></td><td><i>closed</i></td></tr>
+
+</table>
+<p><b>* Note</b>: If TA/LA lab hours are scheduled for times when the
+lab is closed, use the phone outside the door and call the TA office
+(x3-1938) to be let in.</p>
+
+<h3>Spring Break and Holiday Hours (2012)</h3>
+<table border=0 width="80%">
+  
+  <tr bgcolor="<!--#echo var="hilite" -->" valign=top><td>President's Day Holiday:</td><td>Lab</td><td>Stockroom</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>02/19 Sunday</td><td><i>closed</i></td><td><i>closed</i></td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>02/20 Monday</td><td>1PM - 11:45PM</td><td><i>closed</i></td></tr>
+  
+  <tr bgcolor="<!--#echo var="hilite" -->" valign=top><td>Spring Break:</td><td>Lab</td><td>Stockroom</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/25 Sunday</td><td><i>closed</i></td><td><i>closed</i></td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/26 Monday</td><td>9AM - 5:15PM</td><td>9AM - 5:15PM</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/27 Tuesday</td><td>9AM - 5:15PM</td><td>9AM - 5:15PM</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/28 Wednesday</td><td>9AM - 5:15PM</td><td>9AM - 5:15PM</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/29 Thursday</td><td>9AM - 5:15PM</td><td>9AM - 5:15PM</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/30 Friday</td><td>9AM - 5:15PM</td><td>9AM - 5:15PM</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>03/31 Saturday</td><td><i>closed</i></td><td><i>closed</i></td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>04/01 Sunday</td><td>1PM - 11:45PM</td><td><i>closed</i></td></tr>
+  
+  <tr bgcolor="<!--#echo var="hilite" -->" valign=top><td>Patriot's Day Holiday:</td><td>Lab</td><td>Stockroom</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>04/15 Sunday</td><td><i>closed</i></td><td><i>closed</i></td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>04/16 Monday</td><td><i>closed</i></td><td><i>closed</i></td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>04/17 Tuesday</td><td>9AM - 11:45PM</td><td><i>9AM - 5:15PM</i></td></tr>
+  
+  <tr bgcolor="<!--#echo var="hilite" -->" valign=top><td>Last day of classes:</td><td>Lab</td><td>Stockroom</td></tr>
+  <tr bgcolor="<!--#echo var="normal" -->" valign=top><td>05/17 Thursday</td><td><i>9AM - 8:00PM</i></td><td><i>9AM - 5:15PM</i></td></tr>
+  
+</table>
+
+<!--#include file="include/footer.shtml"-->

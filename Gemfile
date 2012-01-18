@@ -29,3 +29,20 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'rspec-rails' , :group=>[:development, :test]
+gem 'database_cleaner', :group => :test
+gem 'factory_girl_rails', :group => :test
+gem 'cucumber-rails', :group => :test
+gem 'capybara', :group => :test
+gem 'mongoid-rspec', :group => :test
+gem 'mongoid' 
+gem 'bson_ext'
+gem 'devise'
+gem 'launchy', :group => :test
+gem 'simple-navigation'
+gem 'event-calendar', :require => 'event_calendar'
+gem 'haml'
+gem 'web-app-theme'
+gem 'hpricot'
+gem 'ruby_parser'
+gem 'bluecloth'

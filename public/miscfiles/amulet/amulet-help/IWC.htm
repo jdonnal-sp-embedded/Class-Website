@@ -1,0 +1,3456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+   <TITLE>Inter-Widget Communication</TITLE>
+</HEAD>
+<BODY BGCOLOR="white">
+<H1 ALIGN="CENTER">Inter-Widget Communication</h1>
+<p>All widgets use the <B>href</B> parameter 
+  to specify a function call or a group of function calls. One type of function 
+  call is Inter-Widget Communication (IWC). IWC's allow one Amulet widget to invoke 
+the methods of another Amulet widget. (See <a href="AppendixB.htm">Appendix 
+  B</a> for a comprehensive listing of all available function calls. See <a href="AppendixC.htm">Appendix 
+C</a> for a detailed listing of&nbsp;which IWC methods apply to which widget 
+or object, as well as a more in-depth description of what the IWC method actually 
+does.) </p>
+<p>IWC borrows some of its syntax from 
+Java Script, a scripting language used within HTML. All IWC function calls start 
+with &quot;<B>Amulet:document.</B>&quot;. 
+The <B>Amulet:</B> 
+signifies that what follows is an Amulet specific command. The <B>document.</B> 
+represents the Document Object Model. Every HTML page has an object called <B>document</B>, 
+which is one large object that contains every object (widget, text, images 
+etc...) that is on that HTML page. To put it simply,  <B>document. 
+</B>signifies that we're dealing 
+with the current HTML page.</p>
+<p>IWC also borrows concepts from Java, an Object-Oriented 
+Programming(OOP) language. Each widget can be thought of as an object. As in OOP, each 
+object has its own set of data and a set of well-defined interfaces to that 
+data. As in Java, IWC refers to these interfaces as methods. Methods are just 
+functions that are specific to a particular object. Each object has its own 
+set of methods. The same nomenclature as Java 
+is used, where a method is called by using the object's name followed 
+by the dot operator, followed by the method. </p>
+<p>The 
+  href nomenclature for IWC's is <B>Amulet:document.<i>widgetName.method</i>()<BR>
+ </B></p>
+<table border="0" width="737">
+    <tr>
+        <td width="55">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="57">
+            <p>Where:<br>&nbsp;</p>
+        </td>
+        <td width="611">
+            <p><B>Amulet:</B> 
+  is the Amulet script escape telling the compiler that Amulet specific commands 
+            follow.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="55">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+            <p><B>document </B>is the name 
+            of the Document Object Model, the generic name for the current HTML 
+            page.</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="55">
+            <p>&nbsp;</p>
+        </td>
+        <td width="57">
+            <p>&nbsp;</p>
+        </td>
+        <td width="611">
+            <p>
+  <B><i>widgetName</i></B> is 
+  the user-defined name of the called widget.<BR></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="55">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="57">
+            <p align="center">&nbsp;</p>
+        </td>
+        <td width="611">
+            <p><B><i>method()</i></B> 
+  is the name of the method the called widget is to perform.</p>
+        </td>
+    </tr>
+</table>
+<p>Control Widgets/Objects, using IWC, can send data to other 
+widgets/objects or invoke other widgets'/objects' methods. View Widgets, using IWC, can request data from Control 
+  Widgets. </p>
+<p>In addition to widgets, there 
+  are other objects that have methods that can be invoked using IWC. Images 
+and animated images, referred to as View Objects, have methods that Control 
+Widgets/Objects can call. </p>
+<P>To use IWC, the widget/object to be called 
+  must have a name. (See <A HREF="Widgets.htm#WidgetAttributes">Widgets.htm</A> 
+  on how to specify a name for an Amulet widget.) To perform IWC methods on Control/View 
+  Objects, except META REFRESH, append the <B>NAME</B> attribute within the 
+HTML tag:</P>
+<blockquote> 
+  <p><B>NAME=&quot;</B><I>user-defined name</I><B>&quot; 
+     </B></p>
+</blockquote>
+<P>For example, to create a radio button to change the playback speed of an animated .GIF, do the following:</P>
+<blockquote>
+			<p>1. First, give an IWC name to the animated image: <B>&lt;IMG SRC=&quot;../Images/RunAnim.gif&quot; WIDTH=&quot;200&quot; HEIGHT=&quot;165&quot; NAME=&quot;Runner&quot; &gt;<br>
+				</B>2. Next, use the following radio button <B>href</B>: <B>Amulet:document.Runner.slowSpeed()</B>.<br>
+				3. When the radio button is selected, the animated image will start playing back at a slower speed.</p>
+		</blockquote>
+<P>An example using the above animated .gif and radio button can be found in <a href="../Projects/Examples/RunningMan" target="_blank">\Projects\Examples\RunningMan\CompileMe.htm</a>.</P>
+		<p>To perform IWC methods on a <a href="Objects.htm#META">META 
+  REFRESH</a>, append:</p>
+		<blockquote> 
+  <p><B>;NAME=</B><I>user-defined name</I> 
+    to the <B>CONTENT=</B> attribute.</p>
+</blockquote>
+<P>For example: (<B>&lt;META 
+  HTTP-EQUIV=&quot;REFRESH&quot; CONTENT=&quot;12;URL=home.html;NAME=MetaOne&quot;&gt;</B>) Notice 
+the semi-colon. For the META REFRESH only, all attributes must be separated 
+by semi-colons.
+  
+  </P>
+<p>There are essentially 3 different 
+kinds of methods. 1) methods that do not require parameters; 2) methods that 
+require parameters; 3) methods that return a value.</p>
+<h2>Methods that do not require arguments (parameters):</h2>
+<p>See example below, where a function 
+button widget, when pressed, causes a line plot widget(<B>Plot1</B>) to remove itself from the LCD:</p>
+<BLOCKQUOTE>
+			<B>&lt;APPLET CODE=&quot;FunctionButton.class&quot; WIDTH=&quot;56&quot; HEIGHT=&quot;25&quot; NAME=&quot;Button1&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:document.Plot1.disappear()&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;3&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;plain&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;label&quot; VALUE=&quot;action&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;onButtonPress&quot; VALUE=&quot;depress&quot;&gt;<br>
+				&lt;/APPLET&gt;</B></BLOCKQUOTE>
+		<p>The <B>href</B> line  invokes the <B>disappear()</B> 
+method on <B>Plot1</B>. 
+That is, it calls <B>disappear()</B> 
+relative to the <B>Plot1</B> 
+object. Thus, the call 
+to <B>Plot1.disappear()</B> 
+causes the widget named <B>Plot1</B> to remove itself from the LCD. An example using the above function button can be found in <a href="../Projects/Examples/setMethod()" target="_blank">\Projects\Examples\setMethod()\CompileMe.htm</a>.</p>
+		<p>The method <B>disappear()</B> does not require any arguments (parameters that are passed to the method that the method uses as its input). Other methods do require arguments, though. </p>
+		<h2>Methods that require arguments (parameters):</h2>
+<p>Some methods require a parameter to be passed to it. When dealing with methods, a parameter that is passed to it is referred to as the argument of the method. The argument passed to any method is the intrinsic value of the calling widget/object. Only Control Widgets/Objects have an intrinsic value. See example below, where a list widget sends its intrinsic value to an image sequence widget (<B>Tour</B>) to use as its input when a list entry 
+is selected:</p>
+		<BLOCKQUOTE>
+			<B>&lt;APPLET CODE=&quot;List.class&quot; WIDTH=&quot;46&quot; HEIGHT=&quot;60&quot; NAME=&quot;Country&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:document.Tour.setValue()&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;fontSize&quot; VALUE=&quot;2&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;fontStyle&quot; VALUE=&quot;plain&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;options&quot; VALUE=&quot;America,Australia,China,France,San Francisco,Japan&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;initialCondition&quot; VALUE=&quot;America&quot;&gt;<br>
+				&lt;/APPLET&gt;</B></BLOCKQUOTE>
+		<p>The href line  invokes the <B>setValue()</B> 
+method on <B>Tour</B>. If 
+the list entry <B>France </B>is selected, then the call 
+to <B>Tour.setValue()</B> 
+causes the widget named <B>Tour</B> to receive 0x03. When dealing with View Widgets, their values are what they use as their input. So, <B>Tour</B> will use 0x03 as its input value. An example using the above list can be found in <a href="../Projects/Examples/List" target="_blank">\Projects\Examples\List\CompileMe.htm</a>.</p>
+		<h2>Methods that return a value:</h2>
+<p>Only View Widgets can invoke methods 
+that return a value. Only Control Widgets have an intrinsic value to return. 
+Therefore the method <B>value() </B>is 
+only a valid method for Control Widgets. And only View Widgets are allowed to 
+invoke the <B>value() </B>method. 
+See example below, where an image sequence widget requests a list widget's(<B>Country</B>)  intrinsic value to use as the input to the image sequence widget:</p>
+<BLOCKQUOTE>
+			<B>&lt;PARAM NAME=&quot;ImageSeq.class&quot; WIDTH=&quot;145&quot; HEIGHT=&quot;98&quot; NAME=&quot;Tour&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;href&quot; VALUE=&quot;Amulet:document.Country.value()&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;min&quot; VALUE=&quot;0&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;max&quot; VALUE=&quot;5&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;sequence&quot; VALUE=&quot;../Images/america.gif;../Images/australia.gif;../Images/china.gif;../Images/france.gif;../Images/goldenbridge.gif;../Images/japan.gif&quot;&gt;<br>
+				&lt;PARAM NAME=&quot;updateRate&quot; VALUE=&quot;.04&quot;&gt;<br>
+				&lt;/APPLET&gt;</B></BLOCKQUOTE>
+<p>The <B>href</B> line  invokes the value() 
+method on <B>Country</B>. So, every 40ms, <B>Country</B>'s value() method 
+will return the intrinsic value of <B>Country</B> to <B>Tour</B>. 
+<B>Country</B>'s intrinsic value is then used as the input for <B>Tour</B>. An example using the above image sequence can be found in <a href="../Projects/Examples/List" target="_blank">\Projects\Examples\List\CompileMe.htm</a>.</p>
+<p><B>Table 1.</B> IWC method descriptions.</p>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="176"> 
+      <CENTER>
+        <B>IWC Methods</B> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="483"> 
+      <CENTER>
+        <B>Description</B> 
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=1 WIDTH="675">
+  <TR> 
+    <TD WIDTH="170"> 
+            <P>clearCanvas()</P>
+    </TD>
+    <TD WIDTH="489"> 
+            <P>Clears the scribble/ dynamic image canvas completely, including any background 
+            images in the canvas.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>buttonDown()</p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Sets the Custom/Function Button Widget to look like it is in 
+            the down&nbsp;state. This method does NOT&nbsp;invoke the href functions, 
+            it only affects the looks of the button, not the functionality.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>buttonUp()</p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Sets the Custom/Function Button Widget to look like it is in 
+            the up state. This method does NOT&nbsp;invoke the href functions, 
+            it only affects the looks of the button, not the functionality.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>disappear()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> Object not visible on LCD. Counteracts the reappear() method.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>forceHit()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> Object performs its &quot;hit&quot; method 
+        without user input. The &quot;hit&quot; method will invoke all <B>href</B> functions 
+        of that object.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>forceUpdate()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> View Object performs its href method which is normally performed based 
+            upon the <B>updateRate</B> parameter. </P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>inverseRegionColor()</p>
+    </TD>
+    <TD WIDTH="489"> 
+      <p>Object<I> 
+        </I>will display in reverse video. Counteracts the normalRegionColor() 
+            method.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>inverseStringColor()</p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Object's text string will display in reverse video. Counteracts 
+            the normalStringColor() method.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>nextEntry()</P>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Highlighted box of a list box widget moves to next entry in the 
+            list. Effectively moves the highlighted box down one entry.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>normalRegionColor()</p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Object will display in normal video. Counteracts the inverseRegionColor() 
+            method.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>normalStringColor()</p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Object's text string will display in normal&nbsp;video. Counteracts 
+            the inverseStringColor() method.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>previousEntry()</P>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Highlighted box of a list box widget moves to previous&nbsp;entry 
+            in the list. Effectively moves the highlighted box up&nbsp;one entry.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P><a name="reappear()"></a>reappear()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> Object visible on LCD. Counteracts the 
+        disappear() method.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>reset()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Clears the line plot screen. Also resets 
+        timers in anchors and META refresh tags. Redraws the canvas image from flash 
+            for scribble/dynamic image. </P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <P>saveCanvas()</P>
+    </TD>
+    <TD WIDTH="489"> 
+            <P>Saves the current state of the canvas to the flash. Writes over 
+            the original canvas specified at compile time.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <P>setLinePattern(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="489"> 
+            <P>Sets the line pattern for the scribble widget. <a href="Widgets.htm#Figure1">(range 
+            0-15)</a></P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <P>setLineWeight(<I>x</I>)</P>
+    </TD>
+    <TD WIDTH="489"> 
+            <P>Sets the line weight for the scribble widget. (range 1-15)</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setMethod(<I>m</I>)<b><sup>2</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Changes the <B>href</B> method originally specified 
+        by the widget/object; only valid when the originally specified method 
+        is a single function. Cannot be used as part of a multiple href function.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setOnVarMethod(<I>m</I>)<b><sup>2</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Changes the <b><a href="HTMLSupport.htm#ONVAR">ONVAR</a></b>&nbsp;method originally specified 
+        by the widget/object; only valid when the originally specified method 
+        is a single function. Cannot be used as part of a multiple href function.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setOnVarUARTMethod(<I>m</I>)<b><sup>2</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Changes the <b><a href="HTMLSupport.htm#ONVAR">ONVAR</a></b> UART method originally specified 
+        by the widget/object; only valid when the originally specified method 
+        is a single function. Cannot be used as part of a multiple <B>href</B> function.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setOnVarVariableNumber(<I>x</I>)<b><sup>1</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Changes the variable number originally specified 
+    by the 
+    object's onVar&nbsp;parameter. Can be used only if the object's onVar 
+    has  a byte(<I>y</I>), word(<I>y</I>)&nbsp;or string(<I>y</I>). In all&nbsp;cases, the <I>y</I> gets changed to the argument 
+    specified in setOnVarVariableNumber(<I>x</I>).</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setTrigger(<I>x</I>)<b><sup>1</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <p><FONT size="3">Changes the trigger, trigger.gt or trigger.lt value originally 
+            specified by the object
+            to the byte value <I>x</I>.</FONT></p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setUARTMethod(<I>m</I>)<b><sup>2</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Changes the <B>href</B> UART method originally specified 
+        by the widget/object; only valid when the originally specified method 
+        is a single function. Cannot be used as part of a multiple <B>href</B> function.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setUpdateRate(<I>f</I>)<b><sup>3</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Changes the update rate originally specified 
+        by the widget/object. Argument is a floating point number, specifying time 
+        in seconds.Cannot be used as part of a multiple <B>href</B> function.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setValue(<I>x</I>)<b><sup>1</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>  Object receives the  value of the calling 
+        object. This allows a Control Widget to provide the input to a View Widget. 
+            This method is called from a Control Widget <B>href</B>. The type 
+            of data can be either a BYTE, WORD or STRING.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>setVariableNumber(<I>x</I>)<b><sup>1</sup></b></P>
+    </TD>
+    <TD WIDTH="489"> 
+      <p>The  variable number used in the href of  
+            the named  widget 
+        will change to <I>x, </I>where <I>x</I> is the variable index used  in the following  variable 
+            types: byte(<I>x</I>), word(<I>x</I>) 
+         or string(<I>x</I>). The <I>y</I> 
+        gets changed to the argument specified in setVariableNumber(<I>x</I>).</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>setX(<I>x</I>)<b><sup>10</sup></b></p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Changes the X coordinate of the top left corner of the named 
+            widget/object. Should be preceded by a disappear() method and followed 
+            by a reappear() method.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+            <p>setY(<I>x</I>)<b><sup>10</sup></b></p>
+    </TD>
+    <TD WIDTH="489"> 
+            <p>Changes the Y&nbsp;coordinate of the top left corner of the named 
+            widget/object. Should be preceded by a disappear() method and followed 
+            by a reappear() method.</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>startUpdating()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> View Widget starts updating the displayed data. Counteracts the stopUpdating() method.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>stopUpdating()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> View Widget stops updating the displayed data.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>toggleRegionColor()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <p>The named widget will either 
+        start or stop displaying in reverse video.</p>
+    </TD>
+  </TR>
+    <tr>
+    <TD WIDTH="170"> 
+      <P>toggleStringColor()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <p>The named  widget's text string will either 
+        start or stop displaying in reverse video.</p>
+    </TD>
+    </tr>
+  <TR> 
+    <TD WIDTH="170"> 
+      <P>toggleUpdating()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P> Changes current state of View Widget; either 
+        starts or stops updating the displayed data.</P>
+    </TD>
+  </TR>
+    <tr>
+    <TD WIDTH="170"> 
+      <P>uploadImage()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Scribble widget uploads its raw image data via the connection and protocol 
+            described in the <A HREF="Widgets.htm#ScribbleParams">href parameter</A>.</P>
+    </TD>
+    </tr>
+    <tr>
+    <TD WIDTH="170"> 
+      <P>value()</P>
+    </TD>
+    <TD WIDTH="489"> 
+      <P>Returns the intrinsic value of the 
+            Control Object. The calling object then uses that value as its input. This allows a Control object to provide the input to a 
+        View Widget. This method is called from a View Widget <B>href</B>. The 
+            value could be a BYTE, WORD or STRING, depending upon the type of 
+            data of the Control Object.</P>
+    </TD>
+    </tr>
+</TABLE>
+<p>&nbsp;</p>
+<hr>
+<P><B>Table 2.</B> IWC method descriptions unqique to  Animated Image Objects.</P>
+<TABLE BORDER=1 WIDTH=534>
+  <TR> 
+    <TD WIDTH=146> 
+      <CENTER>
+        <B>IWC Methods</B> 
+      </CENTER>
+    </TD>
+    <TD WIDTH=372> 
+      <CENTER>
+        <B>description of method for animated images</B> 
+      </CENTER>
+    </TD>
+  </TR>
+</TABLE>
+<TABLE BORDER=1 WIDTH=534>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>fastSpeed()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Increases animation speed.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>oneFrame()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P> Advances animation one frame.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>pause()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Stops animation.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>play()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Starts animation in current direction.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>playBackwards()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Starts animating backwards.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>playForward()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Starts animating forward.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>regularSpeed()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Normal animation speed.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>slowSpeed()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Decreases animation speed.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>superFastSpeed()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Fastest animation speed.</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH=146> 
+      <P>superSlowSpeed()</P>
+    </TD>
+    <TD WIDTH=372> 
+      <P>Slowest animation speed.</P>
+    </TD>
+  </TR>
+</TABLE>
+<P>&nbsp;</P>
+<hr>
+<P><B><a name="Table of methods"></a>Table 3.</B> Matrix of supported IWC methods for Widgets 
+  and Objects.</P>
+<TABLE BORDER=1 WIDTH="959">
+  <TR> 
+    <TD style="border-width:1; border-style:solid;" WIDTH="143"> 
+      <CENTER>
+        <B>IWC methods</B> 
+      </CENTER>
+    </TD>
+    <TD COLSPAN="14" style="border-width:1; border-style:solid;" width="611"> 
+      <CENTER>
+        <B>Widgets</B> 
+      </CENTER>
+    </TD>
+    <TD COLSPAN=4 width="183"> 
+      <CENTER>
+        <B>Objects</B> 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        Bar<BR>
+        graph 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        Check<BR>
+        box 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        Custom<BR>
+        button 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">Dyn. Image</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        Func.<BR>
+        button 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        Image<BR>
+        Bar 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        Image<BR>
+        Seq. 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        Line<BR>
+        Plot 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        List 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        Num.<BR>
+        Field 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        Radio<BR>
+        Button 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">Scribble</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        Slider 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        String<BR>
+        Field 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        Anchor/<br>Area Map 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        Anim. Image 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        Image 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        META<BR>
+        refresh 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p align="left">clearCanvas()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>disappear()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp;x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        &nbsp;x 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>forceHit()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        x<SUP><b>4</b></SUP> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        x<SUP><b>5</b></SUP> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P align="left">forceUpdate()</P>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;x<b><sup>4a</sup></b></p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">x</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>inverseRegionColor()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>inverseStringColor()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>nextEntry()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>normalRegionColor()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;x</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>normalStringColor()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>previousEntry</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>reappear()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>reset()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>saveCanvas()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>setLinePattern()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>setLineWeight()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setMethod(<I>m</I>)<SUP><b>2, 
+        8</b> </sup></P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        x<SUP><b>9</b></SUP> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setTrigger(<I>x</I>)<SUP><b>1</b></SUP></P>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">x</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setUpdateRate(<I>f</I>)<SUP><b>3, 
+        8</b> </sup></P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <P ALIGN="center">&nbsp;x</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="42"> 
+      <P ALIGN="center">&nbsp;x</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setValue(<I>x</I>)<SUP><b>1</b></SUP></P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        &nbsp;x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        &nbsp;x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp;x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        x<b><sup>6</sup></b> 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="42"> 
+      <P align="center">&nbsp;x<b><sup>7</sup></b></P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setVariableNumber(<I>x</I>)<b><sup>1</sup></b></P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="42"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setX(<I>x</I>)<SUP><b>10</b></SUP></P>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>setY(<I>x</I>)<SUP><b>10</b></SUP></P>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>startUpdating()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="42"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>stopUpdating()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="42"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>toggleUpdating()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+    <TD WIDTH="42"> 
+      <P align="center">&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+            <p>uploadImage()</p>
+    </TD>
+    <TD WIDTH="34"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="40"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="47"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="30"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="25"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="43"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">x</p>
+    </TD>
+    <TD WIDTH="39"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="36"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="49"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="42"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>value()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="40"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="47"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="38"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="30"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="25"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="43"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="50"> 
+            <p align="center">&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="36"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="49"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="949" colspan="19"> 
+            <hr>    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>fastSpeed()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>oneFrame()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>pause()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>play()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>playBackwards()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>playForward()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>regularSpeed()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>slowSpeed()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>superFastSpeed()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+  <TR> 
+    <TD WIDTH="143"> 
+      <P>superSlowSpeed()</P>
+    </TD>
+    <TD WIDTH="34"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="40"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="47"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="38"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="30"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="25"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="43"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="50"> 
+            <p>&nbsp;</p>
+    </TD>
+    <TD WIDTH="39"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="36"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="49"> 
+      <P>&nbsp;</P>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        x 
+      </CENTER>
+    </TD>
+    <TD WIDTH="37"> 
+      <CENTER>
+        &nbsp; 
+      </CENTER>
+    </TD>
+    <TD WIDTH="42"> 
+      <P>&nbsp;</P>
+    </TD>
+  </TR>
+</TABLE>
+<p><B><FONT SIZE="2">1. Regarding </FONT></B><i><b><font size="2">x</font></b></i><B><FONT SIZE="2">:</FONT></B><I><FONT SIZE="2"> 
+   </FONT></I><font size="2">For Control Widgets that have intrinsic values, 
+  such as lists and sliders, leave the argument field empty, since the intrinsic 
+  value of the selection will be sent out. <a href="Objects.htm#Anchors">Anchors</a>,  <a href="Objects.htm#META">META REFRESH tags</a>, 
+  <a href="Objects.htm#Area Maps">area maps</a> and<A HREF="Widgets.htm#Function_Button"> 
+Function</A>/<A HREF="Widgets.htm#Custom_Button">Custom Buttons</A> should use<i> x</i>. 
+The range for </FONT><I><FONT SIZE="2">x</FONT></I><font size="2"> is 0-255 (0x00-0xff) 
+for a BYTE, 0-65535 (0x00-0xffff) for a WORD and 250-character strings in <A HREF="Widgets.htm#stringVariables">double 
+quotes for STRING</A>s.</FONT></p>
+<P><B><FONT SIZE="2">2. Regarding </FONT><I><FONT SIZE="2">m</FONT></I><FONT SIZE="2">: 
+  </FONT></B><font size="2">When setMethod(), setOnVarMethod(), setOnVarUARTMethod 
+or setUARTMethod()  is the IWC method, the argument should be the name of the 
+  method you want to set. See  </FONT><a href="../projects/Examples/setMethod()/ReadMe.htm"><font size="2">setMethod() example.</font></a></P>
+<p><B><FONT SIZE="2">3. Regarding </FONT><I><FONT SIZE="2">f</FONT></I><FONT SIZE="2">:</FONT></B><I><FONT SIZE="2"> 
+   </FONT></I><font size="2">For Control Widgets that have intrinsic values, 
+  such as lists and sliders, leave the argument field empty, since the intrinsic 
+  value of the selection will be sent out. <a href="Objects.htm#Anchors">Anchors</a>, 
+  <a href="Objects.htm#META">META REFRESH tags</a>,  <a href="Objects.htm#Area Maps">area 
+  maps</a> and <A HREF="Widgets.htm#Function_Button">Function</A>/<A HREF="Widgets.htm#Custom_Button">Custom 
+Buttons</A> should use<i> f</i>.  Like the regular <b>updateRate</b>, use 
+  a floating point number to specify the update rate in seconds. Range for <i>f</i> 
+  is 0-655.35</FONT></p>
+<p><B><FONT SIZE="2">4.</FONT></B><font size="2"> 
+  </FONT><B><FONT SIZE="2">forceHit() for checkBox widget: </FONT></B><font size="2">When imparting a forceHit 
+  on a single </FONT><a href="Widgets.htm#Check_Box"><font size="2">checkBox</font></a><font size="2">, that checkBox will toggle. You can also forceHit an entire 
+  checkBox group which will perform the href function(s), but will not toggle 
+  any checkboxes. To forceHit a checkbox group, use the </FONT><B><FONT SIZE="2">groupName </FONT></B><font size="2">as 
+the </FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">  (rather than an individual checkBox name).</FONT></p>
+<p><B><FONT SIZE="2">4a.</FONT></B><font size="2"> 
+  </FONT><B><FONT SIZE="2">forceUpdate() for checkBox widget: </FONT></B><font size="2">You can only 
+impart a forceUpdate on an entire 
+  checkBox group (even if the checkBox is a lone box), which will perform the initHref function. To forceUpdate a checkbox group, use the </FONT><B><FONT SIZE="2">groupName </FONT></B><font size="2">as 
+the </FONT><I><FONT SIZE="2">widgetName</FONT></I><font size="2">  (rather than an individual checkBox name).</FONT></p>
+<P><B><FONT SIZE="2">5.</FONT></B><font size="2"> </FONT><B><FONT SIZE="2">forceHit() 
+  for radioButton widget: </FONT></B><font size="2">You can only impart a forceHit to an individual 
+  radio button, not a radio button group.</FONT></P>
+<p><B><FONT SIZE="2">6. setValue() for anchor/Area 
+Map:</FONT></B><font size="2"> setValue() 
+cannot be invoked if the </FONT><b><a href="HTMLSupport.htm#ONVAR"><font size="2">ONVAR</font></a></b><font size="2"> attribute is present.</FONT></p>
+<p><B><FONT SIZE="2">7. setValue() for META REFRESH:</FONT></B><font size="2"> 
+setValue() cannot be invoked if the </FONT><b><a href="Objects.htm#META"><font size="2">ONVAR</font></a></b><font size="2"> attribute is present.</FONT></p>
+<P><B><FONT SIZE="2">8.</FONT></B><font size="2"> </FONT><B><FONT SIZE="2">setMethod() and setUpdateRate():</FONT></B><font size="2"> 
+  When using the setMethod() or setUpdateRate() methods, multiple functions are 
+  not allowed within a single </FONT><B><FONT SIZE="2">href</FONT></B><font size="2">. However, you can invoke 
+a forceHit() on another object that will launch setMethod() or setUpdateRate(), 
+which then allows you to use multiple functions since there is no such limitation 
+on the forceHit() method. </FONT></P>
+<p><font size="2">&nbsp;</FONT><B><FONT SIZE="2">9.</FONT></B><font size="2"> </FONT><B><FONT SIZE="2">setMethod() 
+  for checkBox widget: </FONT></B><font size="2">To change the method for a checkbox group, or an ungrouped 
+  checkbox, use the </FONT><B><FONT SIZE="2">groupName</FONT></B><font size="2"> as the</FONT><B><FONT SIZE="2"> </FONT></B><I><FONT SIZE="2">widgetName</FONT></I><font size="2"> 
+  (rather than an individual checkBox name). You cannot change the method for 
+  an individual checkBox within a group.</FONT></p>
+<p><font size="2">&nbsp;</FONT><B><FONT SIZE="2">10.</FONT></B><font size="2"><b> regarding 
+x in setX() and setY()</b></FONT><B><FONT SIZE="2">: </FONT></B><font size="2">When 
+setX() or setY() is the IWC method, the argument needs to be a word value with 
+the range being the viewable area of the given LCD.</FONT></p>
+<hr>
+<P><B><a name="Animated_IWC_functions"></a>Table 4.</B> Matrix of supported IWC methods for Animated Image 
+Object</P>
+<TABLE BORDER="1" WIDTH="326">
+    <TR>
+        <TD WIDTH="154">      <CENTER>
+        <B>IWC methods</B> 
+      </CENTER>
+        </TD>
+        <TD WIDTH="156">
+            <P>Animated Image Object</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">
+            <P>disappear()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>fastSpeed()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>oneFrame()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>pause()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>play()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>playBackwards()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>playForward()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">
+            <P>reappear()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>regularSpeed()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>slowSpeed()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>superFastSpeed()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+    <TR>
+        <TD WIDTH="154">      <P>superSlowSpeed()</P>
+        </TD>
+        <TD WIDTH="156">
+            <P ALIGN="center">x</P>
+        </TD>
+    </TR>
+</TABLE>
+<p>&nbsp;</p>
+<hr>
+<p>See some IWC examples in <a href="../Projects/Examples/setMethod()/" target="_blank">Amulet/Projects/Examples/setMethod()/</a> 
+and <a href="../Projects/Examples/setValue()/" target="_blank">Amulet/Projects/Examples/setValue()/</a> 
+Read the comments in ReadMe.htm and compile and load  CompileMe.htm into the Amulet controller.</p>
+<HR width="60%">
+<CENTER>
+<BR>
+			<I>Amulet HTMLCompiler,<BR>
+<FONT SIZE="2">Copyright © </FONT><span style='font-size:10.0pt'>2000-2004</span><FONT SIZE="2"> by<BR>
+					
+Amulet Technologies, LLC</FONT></I>
+			<P><A HREF="welcome.htm">Back to Welcome</A> - <A HREF="mailto:support@amulettechnologies.com">Contact
+Amulet</A> - <A HREF="http://www.AmuletTechnologies.com/index.html" target="_parent">Amulet Home</A>
+		</CENTER>
+
+<p align="center">&nbsp;</p>
+</BODY>
+</HTML>

@@ -1,0 +1,6 @@
+#block-text.block
+  .content
+    %h2.title Useful_stuff
+    .inner
+      = event_calendar.html_safe
+- content_for :sidebar, render(:partial => 'sidebar')
