@@ -20,7 +20,7 @@ Website::Application.routes.draw do
   namespace :admin do
     resources :users
     resources :events do
-      resources :slots, :only=>[:create,:delete]
+      resources :slots, :only=>[:create,:destroy]
     end
   end
   resources :events, :only=>[:show]

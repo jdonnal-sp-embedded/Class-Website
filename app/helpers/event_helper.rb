@@ -8,28 +8,28 @@ module EventHelper
       t_start=event.start_at.in_time_zone.strftime("%b %d")
       t_end=event.end_at.in_time_zone.strftime("%b %d")
       return t_start if(oneDay)
-      return (t_start+" &mdash; "+t_end)
+      return (t_start+" &mdash; "+t_end).html_safe
     #format for timed events
     else
       if(oneDay)
         t_date=event.start_at.in_time_zone.strftime("%b %d")
         t_start=event.start_at.in_time_zone.strftime("%I:%M")
         t_end=event.end_at.in_time_zone.strftime("%I:%M")
-        return (t_date+" "+t_start+" &mdash; "+t_end)
+        return (t_date+" "+t_start+" &mdash; "+t_end).html_safe
       else
         t_start=event.start_at.in_time_zone.strftime("%b %d %I:%M")
         t_end=event.end_at.in_time_zone.strftime("%b %d %I:%M")
-        return (t_start+" &mdash; "+t_end)
+        return (t_start+" &mdash; "+t_end).html_safe
       end
     end
   end
   
   def printSlotTime(slot)
-    return slot.start_at.in_time_zone.strftime("%H:%M")
+    return slot.start_at.in_time_zone.strftime("%H:%M").html_safe
   end
   
-  def printSlotStudent(slot)
-    return "&mdash;".htmlSafe if slot.student ==nil
-    return slot.student.username
+  def printSlotAttendee(slot)
+    return "&mdash;".html_safe if slot.attendee ==nil
+    return slot.attendee.username
   end
 end

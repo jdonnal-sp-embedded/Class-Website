@@ -1,0 +1,16 @@
+<% unless @slot.valid? %>
+	error_field=$('.fieldWithErrors.create_slot_box > .error')
+	error_field.hide()
+	<% if @slot.errors.messages[:end_at] != nil%>
+		error_field.html("<%=@slot.errors.messages[:end_at][0] %>")
+		error_field.fadeIn()
+	<% else%>
+		alert("Unreasonable Input")
+	<% end %>
+	
+<% else %>
+	error_field.hide()
+	/*event was successfully created so display it in the table*/
+	$("#slot_table").html("<%= render(:partial => 'slots/table',:locals=>{:slots=>@slots}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+
+<%end%>

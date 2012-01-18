@@ -14,7 +14,8 @@ class User
   #RELATIONSHIPS
   belongs_to :role
   delegate :permissions, :to => :role
-  has_many :slots
+  has_many :hosting_slots, :class_name=>"Slot", :foreign_key=>"host_id"
+  has_many :attending_slots, :class_name=>"Slot", :foreign_key=>"attendee_id"
   
   #SCOPES
   scope :admins, where(role_id: Role.where(:name=>"admin").first.id)

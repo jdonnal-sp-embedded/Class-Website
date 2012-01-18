@@ -17,7 +17,7 @@ module Admin::EventsHelper
       if event.slots.count==0
         return 'no slots'
       else
-        return event.slots.available.count.to_s+' of '+event.slots.count
+        return event.slots.available.count.to_s+' of '+event.slots.count.to_s
       end
     else
       "&mdash;".html_safe

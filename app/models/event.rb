@@ -51,7 +51,7 @@ class Event
     hour=hash[value+'(4i)']
     minute=hash[value+'(5i)']
     Time.parse("#{year}-#{month}-#{day} #{hour}:#{minute}")
-end
+  end
 
   has_event_calendar
 end
