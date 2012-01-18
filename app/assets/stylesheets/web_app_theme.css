@@ -11,6 +11,9 @@
 #box {
     margin: auto auto
    }
+#box .block{
+	box-shadow: none;
+}
 #box .block h2 {
     background: none repeat scroll 0 0 #5C1F1F;
    }

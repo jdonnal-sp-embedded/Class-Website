@@ -5,5 +5,5 @@
       .timestamp=printTime(@event).html_safe
       %p.first= @event.description
       -if @event.slotable?
-        =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots})
+        =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots, :hosts=>@hosts})
       

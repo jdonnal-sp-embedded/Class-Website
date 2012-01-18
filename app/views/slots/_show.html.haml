@@ -2,8 +2,9 @@
   =render(:partial=>"slots/table", :locals=>{:event=>event, :slots=>slots})
   .actions-bar.wat-cf
     .actions
+      -slot=Slot.new; slot.start_at=event.start_at.in_time_zone
       -if current_user.can_modify_slots?
-        =render(:partial=>'slots/admin_create')
+        =render(:partial=>'slots/admin_create', :locals=>{:slot_duration=>event.slot_duration, :hosts=>hosts, :slot=>slot, :event=>event})
       -elsif current_user.can_create_slots?
         =render(:partial=>'slots/limited_create')
 

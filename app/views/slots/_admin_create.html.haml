@@ -1,8 +1,9 @@
-=form_for [:admin, slot], :remote=>true, :html=>{:class=>"form"} do |f|
-
-	.group
-  .fieldWithErrors.name_box
-    =f.label :name, "Name", :class=>"label"
+=form_for [:admin, event,slot], :method=>:create, :remote=>true, :html=>{:class=>"form"} do |f|
+  .group
+    .fieldWithErrors.create_slot_box
+    =f.label :username, "Add New Slot", :class=>"label"
     %span.error
-  =f.text_field :name, :class=>"text_field"
--
+  .group
+    =f.collection_select :host_id, hosts, :id, :username
+    =f.time_select :start_at, :minute_step=>slot_duration
+  
