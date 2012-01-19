@@ -1,0 +1,4 @@
+
+
+/*slot was deleted so rerender  the slot table*/
+$("#slot_table").html("<%= render(:partial => 'slots/table',:locals=>{:slots=>@slots}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")

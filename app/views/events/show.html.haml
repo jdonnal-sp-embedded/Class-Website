@@ -5,5 +5,10 @@
       .timestamp=printTime(@event).html_safe
       %p.first= @event.description
       -if @event.slotable?
-        =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots, :hosts=>@hosts})
+        -if current_user && current_user.can_modify_slots?
+          =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots, :hosts=>@hosts})
+        -elsif current_user && current_user.can_attend_slots?
+          =render(:partial=>"slots/signup", :locals=>{:event=>@event})
+        -else
+          Sign In to view slots
       

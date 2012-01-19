@@ -13,7 +13,9 @@
 	$("<%=table_id%>").html("<%= render(:partial => 'shared/user_table',:locals=>{:users=>@users, :modifiable=>true}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
 	/*close the facebox*/
 	$(document).trigger('close.facebox')
-	/*display a flash message*/
-	<%=createFlash("Created user account for #{@user.username}","notice").html_safe%>
-	
+	/*rerun the facebox script on the new content*/
+	$('a[rel*=facebox]').facebox({
+		loadingImage: '/assets/facebox/loading.gif',
+		closeImage: '/assets/facebox/closelabel.png'
+	}); 
 <%end%>

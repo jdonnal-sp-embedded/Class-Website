@@ -9,7 +9,7 @@
     %tr
   - events.each do |event|
     %tr{:class=> cycle("odd","even", :name=>"row_class"), :id=>"event"+event.id.to_s} 
-      %td #{link_to event.name, event_path(event), :remote=>true, :rel=>"facebox"}
+      %td #{link_to event.name, event_path(event), :rel=>"facebox"}
       %td #{event.description}
       %td #{printTime(event)}
       %td #{printSlots(event)}

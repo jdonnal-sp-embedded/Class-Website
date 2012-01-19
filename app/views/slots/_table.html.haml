@@ -13,9 +13,9 @@
       %td #{printSlotTime(slot)}
       %td #{slot.host.username}
       %td #{printSlotAttendee(slot)}
-      -if current_user.can_modify_slots?
-        %td.last
-          - event=slot.event
-          #{link_to "delete", [:admin, event, slot], :method=>:delete, :remote=> true, :confirm=>"Delete this slot?"}
-
-    -#[:admin, event,slot], :method=>:create, 
+      %td.last
+        -event=slot.event
+        -if current_user.can_modify_slots?
+          =link_to "delete", [:admin, event, slot], :method=>:delete, :remote=> true, :confirm=>"Delete this slot?"   
+        -if current_user.can_attend_slots? && slot.available?
+          =submit_tag 'Sign Up', :class=>"button"

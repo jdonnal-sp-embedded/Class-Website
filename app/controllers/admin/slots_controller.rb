@@ -9,10 +9,12 @@ class Admin::SlotsController < ApplicationController
     @slot=Slot.new(params[:slot])
     @slot.end_at=@slot.start_at+@slot.event.slot_duration.minutes
     @slot.save
-    @slots=@slot.event.slots
+    @slots=@slot.event.slots.ascending(:start_at)
   end
   
-  def delete
-    
+  def destroy
+    @slot=Slot.find(params[:id])
+    @slots=@slot.event.slots.ascending(:start_at)
+    @slot.destroy
   end
 end

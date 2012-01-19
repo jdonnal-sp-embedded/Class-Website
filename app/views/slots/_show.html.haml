@@ -1,5 +1,5 @@
 #slot_table
-  =render(:partial=>"slots/table", :locals=>{:slots=>event.slots})
+  =render(:partial=>"slots/table", :locals=>{:slots=>event.slots.asc(:start_at)})
 .actions-bar.wat-cf
   .actions
     -slot=Slot.new; slot.start_at=event.start_at.in_time_zone

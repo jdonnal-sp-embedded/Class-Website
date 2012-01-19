@@ -2,3 +2,8 @@
 
 /*event was deleted so rerender  the event table*/
 $("#event_table").html("<%= render(:partial => 'shared/event_table',:locals=>{:events=>@events, :modifiable=>true}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+/*rerun the facebox script on the new content*/
+$('a[rel*=facebox]').facebox({
+	loadingImage: '/assets/facebox/loading.gif',
+	closeImage: '/assets/facebox/closelabel.png'
+}); 

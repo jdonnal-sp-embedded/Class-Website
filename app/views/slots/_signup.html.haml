@@ -1,0 +1,7 @@
+-#the signup view, only shows unique slot start times 
+
+-#Required locals
+-#    event: the event to show signups for
+#slot_table
+  =render(:partial=>"slots/table", :locals=>{:slots=>event.slots.asc(:start_at)})
+  
