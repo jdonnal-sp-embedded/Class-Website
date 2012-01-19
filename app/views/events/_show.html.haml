@@ -1,0 +1,27 @@
+#box
+  .block
+    %h2= @event.name
+    .content
+      .timestamp=printTime(@event).html_safe
+      %p.first= @event.description
+      
+      %h2.title Sign Ups
+      -if @event.slotable?
+        #slot-manager
+          -attending_slot=current_user.attending_slots.where(:event_id=>@event.id).first
+          -signed_up=false
+          .attending
+            -if attending_slot
+              -#the user is attending this event show his/her slot information
+              -signed_up=true
+              %span.slot-info Your slot starts at #{ attending_slot.start_at.in_time_zone.strftime("%H:%M")}
+              =link_to 'Release Slot', admin_event_slot_path(@event,attending_slot,{:release=>true}), :method=>:put, :remote=>true, :class=>"button"
+            -else
+              %span.msg Pick a Slot Below
+          -if current_user && current_user.can_modify_slots?
+            =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots, :hosts=>@hosts})
+          -elsif current_user && current_user.can_attend_slots?
+            =render(:partial=>"slots/signup", :locals=>{:event=>@event})
+          -else
+            Sign In to view slots
+      

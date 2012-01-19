@@ -15,7 +15,7 @@ class Event
   POSSIBLE_SLOT_DURATIONS=[10,15,20,30,60] #duration in minutes
   
   #RELATIONSHIPS
-  has_many :slots
+  has_many :slots, :dependent=>:destroy
   
   #validators
   validates :name,

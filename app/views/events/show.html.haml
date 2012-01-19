@@ -1,14 +1,4 @@
-#box
-  .block
-    %h2= @event.name
-    .content
-      .timestamp=printTime(@event).html_safe
-      %p.first= @event.description
-      -if @event.slotable?
-        -if current_user && current_user.can_modify_slots?
-          =render(:partial=>"slots/show", :locals=>{:event=>@event, :slots=>@slots, :hosts=>@hosts})
-        -elsif current_user && current_user.can_attend_slots?
-          =render(:partial=>"slots/signup", :locals=>{:event=>@event})
-        -else
-          Sign In to view slots
-      
+-#hack to allow javascript and controller rendering of the show view
+-# show.html.haml and _show.html.haml are the same content
+
+=render('show')

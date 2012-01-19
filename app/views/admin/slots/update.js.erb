@@ -1,0 +1,6 @@
+<% if @success %>
+	/*update succeeded so rerender the table*/
+	$('#facebox > .popup > .content').html("<%= render('events/show').gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+<% else %>
+	alert("Update Unsuccessful")
+<% end %>

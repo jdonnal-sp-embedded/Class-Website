@@ -17,4 +17,24 @@ class Admin::SlotsController < ApplicationController
     @slots=@slot.event.slots.ascending(:start_at)
     @slot.destroy
   end
+  
+  def update
+    #used to register users to attend slots
+    @success=false #fail unless explicitly succeed
+    slot=Slot.find(params[:id])
+    if params[:attend]
+      #verify that this is an authorized action
+      return unless current_user.can_attend_slots?
+      #verify that this slot is empty
+      return unless slot.available?
+      slot.attendee=current_user
+      @success=slot.save
+    elsif params[:release]
+      #verify that this is an authorized action
+      return unless slot.attendee==current_user
+      slot.attendee=nil
+      @success=slot.save
+    end
+    @event=slot.event
+  end
 end

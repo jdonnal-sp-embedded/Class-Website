@@ -1,12 +1,19 @@
 -#2 different possible views depending on the authorization of the user
 
+-#required locals
+-# slots: an array of slots to display
+
+-#determine if the user is already assigned to a slot
+-attending_slot=false
+-attending_slot=true if current_user.attending_slots.where(:event_id=>@event.id).first
+-puts '88888888888888 attending slot '+attending_slot.to_s+" "+current_user.can_attend_slots?.to_s
 %table.table
   %thead
     %tr
       %th Time
       %th TA/LA
       %th Student
-      %th.last &nbsp;
+      %th &nbsp;
     %tr
   - slots.each do |slot|
     %tr{:class=> cycle("odd","even", :name=>"row_class"), :id=>"slot"+slot.id.to_s} 
@@ -17,5 +24,7 @@
         -event=slot.event
         -if current_user.can_modify_slots?
           =link_to "delete", [:admin, event, slot], :method=>:delete, :remote=> true, :confirm=>"Delete this slot?"   
-        -if current_user.can_attend_slots? && slot.available?
-          =submit_tag 'Sign Up', :class=>"button"
+        -puts 'slot.available='+slot.available?.to_s
+        -if current_user.can_attend_slots? && slot.available? && !attending_slot
+          -puts '888888888888--------88888888888'
+          =link_to 'Sign Up', admin_event_slot_path(event,slot,{:attend=>true}), :method=>:put, :remote=>true, :class=>"button"

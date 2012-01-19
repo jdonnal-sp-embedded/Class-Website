@@ -28,3 +28,50 @@
 #facebox .timestamp{
 	font-size: large
 }
+
+#slot-manager {
+	border:1px solid rgba(50,50,50,0.5);
+  	border-radius:0px, 0px, 5px, 5px;
+}
+
+#slot-manager .attending{
+	padding: 10px;
+	display: inline-block;
+}
+#slot-manager .attending .msg{
+	font-size: large
+}
+#slot-manager .attending a{
+	float: right
+}
+
+#slot-manager .attending .slot-info{
+	font-size: medium;
+    padding-right: 20px;
+}
+
+.announcements .message {
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    margin: 0 auto 15px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+}
+.announcements .message p {
+    margin: 8px;
+}
+
+.announcements .notice {
+    background: url("web-app-theme/themes/default/images/messages/notice.png") no-repeat scroll 10px center #B8D1E2;
+    border: 1px solid /*#8A9DAA*/;
+    color: #28485E;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.announcements .error, .announcements .error-list 
+    background: url("web-app-theme/themes/default/images/messages/error.png") no-repeat scroll 10px center #CC4831;
+    border: 1px solid #993624;
+}
+.announcements .warning {
+    background: url("web-app-theme/themes/default/images/messages/warning.png") no-repeat scroll 10px center #F9C006;
+    border: 1px solid #BB9004;
+}

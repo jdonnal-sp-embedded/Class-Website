@@ -50,8 +50,9 @@ class Slot
   end
   
   def available?
-    return true if attendee==nil
-    false
+    return false unless attendee==nil #no one has signed up for it
+    return false unless start_at > Time.now  #it hasn't already happened
+    true
   end
   
   
