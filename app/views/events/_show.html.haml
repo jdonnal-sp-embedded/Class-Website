@@ -5,8 +5,8 @@
       .timestamp=printTime(@event).html_safe
       %p.first= @event.description
       
-      %h2.title Sign Ups
       -if @event.slotable?
+        %h2.title Sign Ups
         #slot-manager
           -attending_slot=current_user.attending_slots.where(:event_id=>@event.id).first
           -signed_up=false
