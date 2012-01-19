@@ -5,8 +5,9 @@
 
 -#determine if the user is already assigned to a slot
 -attending_slot=false
--attending_slot=true if current_user.attending_slots.where(:event_id=>@event.id).first
--puts '88888888888888 attending slot '+attending_slot.to_s+" "+current_user.can_attend_slots?.to_s
+-if current_user.attending_slots.length>0
+  -attending_slot=true if current_user.attending_slots.where(:event_id=>@event.id).first
+  
 %table.table
   %thead
     %tr

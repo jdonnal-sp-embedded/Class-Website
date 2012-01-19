@@ -61,17 +61,17 @@
     margin: 8px;
 }
 
-.announcements .notice {
-    background: url("web-app-theme/themes/default/images/messages/notice.png") no-repeat scroll 10px center #B8D1E2;
-    border: 1px solid /*#8A9DAA*/;
-    color: #28485E;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-.announcements .error, .announcements .error-list 
-    background: url("web-app-theme/themes/default/images/messages/error.png") no-repeat scroll 10px center #CC4831;
-    border: 1px solid #993624;
-}
 .announcements .warning {
     background: url("web-app-theme/themes/default/images/messages/warning.png") no-repeat scroll 10px center #F9C006;
     border: 1px solid #BB9004;
+}
+.announcements .error, .announcements .error-list {
+    background: url("web-app-theme/themes/default/images/messages/error.png") no-repeat scroll 10px center #CC4831;
+    border: 1px solid #993624;
+}
+.announcements .notice {
+    background: url("web-app-theme/themes/default/images/messages/notice.png") no-repeat scroll 10px center #B8D1E2;
+    border: 1px solid #8A9DAA;
+    color: #28485E;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }

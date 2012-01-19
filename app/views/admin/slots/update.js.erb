@@ -1,6 +1,8 @@
 <% if @success %>
 	/*update succeeded so rerender the table*/
-	$('#facebox > .popup > .content').html("<%= render('events/show').gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+	//$('#facebox > .popup > .content').fadeTo("slow", 0.33)
+	$('#facebox > .popup > .content').fadeTo("fast", 0.33).html("<%= render('events/show').gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>").fadeTo("fast",1)
+	
 <% else %>
 	alert("Update Unsuccessful")
 <% end %>
