@@ -13,7 +13,7 @@ class Event
   field :gradeable, type: Boolean
   field :slot_duration, type: Integer
   POSSIBLE_SLOT_DURATIONS=[10,15,20,30,60] #duration in minutes
-  
+  POSSIBLE_EVENT_TYPES=['holiday','checkoff','lecture','chalktalk','misc','quiz']
   #RELATIONSHIPS
   has_many :slots, :dependent=>:destroy
   
@@ -27,7 +27,10 @@ class Event
     :presence=>true
   validates :end_at,
     :presence=>true
-  validate :valid_times 
+  validates :type
+    :presence=>true
+    :inclusion=>{:in=> POSSIBLE_EVENT_TYPES}
+  validate :valid_times
     
   def valid_times
     return unless self.end_at && self.start_at 
