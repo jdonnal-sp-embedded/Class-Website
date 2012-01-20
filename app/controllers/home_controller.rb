@@ -1,6 +1,8 @@
 class HomeController < ApplicationController
 
   def index
+    redirect_to :controller=>'info', :action=>'index' unless current_user
+    
     @month=Time.now.month
     @year=Time.now.year
     @shown_month=Date.civil(@year,@month)
