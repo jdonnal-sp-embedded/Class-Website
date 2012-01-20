@@ -28,3 +28,25 @@ Quick nav bar for useful information (datasheets, general info, etc.)
 Check my sweet blog
 http://jdonnal.scripts.mit.edu/home
 	
+---------
+Install Notes
+sudo apt-get install curl git mongodb libcurl4-openssl-dev apache2-prefork-dev libapr1-dev libaprutil1-dev
+#install rvm
+bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+#initialize rvm
+~/.profile #or .bashrc, whichever has the rvm init script
+rvm requirements
+##install all the packages listed
+rvm install 1.9.3-p0
+rvm --default use 1.9.3-p0
+bundle install
+sudo mkdir -p /data/db/
+sudo chown `id -u` /data/db
+git clone ...
+
+
+-------
+Deploy Notes
+git pull 
+bundle exec rake assets:precompile
+touch tmp/restart.txt
