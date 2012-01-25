@@ -1,0 +1,9 @@
+
+
+/*lab hour was deleted so rerender  the lab hour table*/
+$("#lab_hours").html("<%= render(:partial => 'shared/lab_hours_table',).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+/*rerun the facebox script on the new content*/
+$('a[rel*=facebox]').facebox({
+	loadingImage: '/assets/facebox/loading.gif',
+	closeImage: '/assets/facebox/closelabel.png'
+}); 

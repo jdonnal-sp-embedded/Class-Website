@@ -1,0 +1,19 @@
+-#print a table of the lab hours
+-# globals: @hours, an array of lab hours to display
+
+%table.table
+  -@hours.each do |lab_hour|
+    - cls='borderless'
+    - cls='border' if lab_hour.comment==''
+    %tr{ :id=>"lab_hour"+lab_hour.id.to_s} 
+      %td{:class=>cls} #{lab_hour.start_at.in_time_zone.strftime("%a %m/%d")}
+      %td{:class=>cls} #{lab_hour.start_at.in_time_zone.strftime("%H:%M")} &mdash; #{lab_hour.end_at.in_time_zone.strftime("%H:%M")}
+      %td{:class=>cls}
+        #{lab_hour.user.name}
+        -if current_user
+          -if (current_user.can_add_lab_hours? && lab_hour.user==current_user) || (current_user.can_modify_lab_hours?)
+            #{ link_to 'x', [:admin, lab_hour], :method=>"delete", :remote=>true, :confirm=>'Delete this lab hour?'}
+    -if lab_hour.comment!=''
+      %td{:colspan=>"3", :class=>'border comment'} #{lab_hour.comment}
+-if current_user && current_user.can_add_lab_hours?
+  =link_to 'Add Hours', new_admin_lab_hour_path, :rel=>'facebox'

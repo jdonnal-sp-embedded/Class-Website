@@ -31,3 +31,6 @@
         #sidebar
           = yield :sidebar
 
+-if current_user && (current_user.first_name=='' || current_user.last_name=='')
+  :javascript
+    $.facebox({ajax: #{user_path(current_user)}})

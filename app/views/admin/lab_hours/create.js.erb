@@ -1,0 +1,26 @@
+<% unless @hour.valid? %>
+	error_field=$('.fieldWithErrors.start_at> .error')
+	error_field.hide()
+	<% if @hour.errors.messages[:start_at] != nil%>
+		error_field.html("<%=@hour.errors.messages[:start_at][0] %>")
+		error_field.fadeIn()
+	<% end %>
+	error_field=$('.fieldWithErrors.end_at> .error')
+	error_field.hide()
+	<% if @hour.errors.messages[:end_at] != nil%>
+		error_field.html("<%=@hour.errors.messages[:end_at][0] %>")
+		error_field.fadeIn()
+	<% end %>	
+	
+<% else %>
+	/*lab hour was successfully created so display it in the table*/
+	$("#lab_hours").html("<%= render(:partial => 'shared/lab_hours_table',:locals=>{:hours=>@hours}).gsub(/\n/," ").gsub(/\"/,"\'").html_safe %>")
+	/*rerun the facebox script on the new content*/
+	$('a[rel*=facebox]').facebox({
+		loadingImage: '/assets/facebox/loading.gif',
+		closeImage: '/assets/facebox/closelabel.png'
+	}); 
+	/*close the facebox*/
+	$(document).trigger('close.facebox')
+	
+<%end%>

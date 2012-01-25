@@ -14,6 +14,8 @@ class Event
   field :slot_duration, type: Integer
   POSSIBLE_SLOT_DURATIONS=[10,15,20,30,60] #duration in minutes
   POSSIBLE_EVENT_TYPES=['holiday','checkoff','lecture','chalktalk','misc','quiz']
+  EVENT_COLORS={ "holiday"=>"#336699",
+    "checkoff"=>"#E1B378","lecture"=>"#4D8963","chalktalk"=>"#69A583","quiz"=>"#E0CC97", "misc"=>"#EC799A"}  
   #RELATIONSHIPS
   has_many :slots, :dependent=>:destroy
   
@@ -27,8 +29,8 @@ class Event
     :presence=>true
   validates :end_at,
     :presence=>true
-  validates :type
-    :presence=>true
+  validates :type,
+    :presence=>true,
     :inclusion=>{:in=> POSSIBLE_EVENT_TYPES}
   validate :valid_times
     
@@ -183,7 +185,9 @@ class Event
   end
     
   def color
-    self[:color] || '#9aa4ad'
+    #return a color based on the event type
+    #'holiday','checkoff','lecture','chalktalk','misc','quiz'
+    EVENT_COLORS[type]
   end
 
   def days

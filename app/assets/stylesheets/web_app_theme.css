@@ -75,3 +75,25 @@
     color: #28485E;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
+
+#lab_hours {
+	font-size: small
+}
+
+#sidebar {
+	width: 30%
+}
+#main{
+	width: 67%
+}
+
+.table .borderless{
+	border-style: none;
+	padding-bottom: 3px;
+}
+
+.table .comment {
+	font-style: oblique;
+	/*padding-left: 20px;*/
+	padding-top: 0px;
+}

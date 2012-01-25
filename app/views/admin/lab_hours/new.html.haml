@@ -1,0 +1,23 @@
+#box
+  .block
+    %h2 Add Lab Hours
+    .content
+      -#
+      =form_for [:admin, @lab_hour], :remote=>true, :html=>{:class=>"form"} do |f|
+        .group
+          .fieldWithErrors.start_at
+            =f.label :start_at, "Start Time", :class=>"label"
+            %span.error
+          =f.datetime_select :start_at, :minute_step=>5
+        .group
+          =f.label :end_at, "Length (minutes)", :class=>"label"
+          =select_tag "length", options_for_select((30..180).step(15).to_a)
+          =f.hidden_field :user_id, :value=>@lab_hour.user.id
+        .group
+          =f.label :comment, :class=>'label'
+          =f.text_area :comment, :size=>'45x2'
+          %span.description optional
+        .group.navform.wat-cf
+          %button.button{:type=>"submit"}
+            %img{:src=>"assets/icons/check.png", :alt=>"Save"}
+            Save

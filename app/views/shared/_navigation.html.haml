@@ -3,7 +3,10 @@
     -if user_signed_in? && current_user.can_administrate?
       %li= link_to('Admin Panel', admin_path)
 
-    - if user_signed_in?
+    -if user_signed_in?
+      %li #{link_to('Signed in as '+current_user.name, user_path(current_user), :class=>'link')}
+ 
+    -if user_signed_in?
       %li= link_to('Logout', destroy_user_session_path, :method=>'delete')
     - else
       %li= link_to('Login', new_user_session_path, :rel=>"facebox")

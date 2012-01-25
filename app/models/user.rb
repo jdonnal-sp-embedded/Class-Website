@@ -16,6 +16,7 @@ class User
   delegate :permissions, :to => :role
   has_many :hosting_slots, :class_name=>"Slot", :foreign_key=>"host_id"
   has_many :attending_slots, :class_name=>"Slot", :foreign_key=>"attendee_id"
+  has_many :lab_hours
   
   #SCOPES
   scope :admins, where(role_id: Role.where(:name=>"admin").first.id)
@@ -35,6 +36,10 @@ class User
     :presence=>true
   attr_accessible :username, :first_name, :last_name, :email, :password, :password_confirmation, :remember_me
   
+  def name
+    return username unless first_name || last_name
+    return first_name+' '+last_name
+  end
   
   def method_missing(method_id, *args)
     if match= matches_dynamic_role_check?(method_id)

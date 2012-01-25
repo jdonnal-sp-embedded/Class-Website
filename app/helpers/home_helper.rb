@@ -6,7 +6,7 @@ module HomeHelper
       :year=>@year,
       :month=>@month,
       :event_strips=>@event_strips,
-      :use_all_day=>true
+      :use_all_day=>false
     }
   end
   def event_calendar

@@ -1,0 +1,25 @@
+#box
+  .block
+    %h2 Update User Information
+    .content
+      =form_for @user, :remote=>true, :html=>{:class=>"form"} do |f|
+        .group
+          .fieldWithErrors.first_name
+            =f.label :first_name, "First Name", :class=>"label"
+            %span.error
+          =f.text_field :first_name, :class=>"text_field"
+        .group
+          .fieldWithErrors
+            =f.label :last_name, "Last Name", :class=>"label"
+            %span.error
+          =f.text_field :last_name, :class=>"text_field"
+        .group
+          .fieldWithErrors
+            =f.label :email, "E-mail Address", :class=>"label"
+            %span.error
+          =f.text_field :email, :class=>"text_field"
+        
+        .group.navform.wat-cf
+          %button.button{:type=>"submit"}
+            %img{:src=>"icons/check.png", :alt=>"Save"}
+            Save

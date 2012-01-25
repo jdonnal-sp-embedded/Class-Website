@@ -1,0 +1,29 @@
+#block-text.block
+  .content
+    %h2= @user.name
+    .inner
+      %table
+        %tr
+          %td First Name
+          %td
+            =@user.first_name
+            =link_to('edit', edit_user_path(@user), :rel=>'facebox' )
+        %tr
+          %td Last Name
+          %td
+            =@user.last_name
+            =link_to('edit', edit_user_path(@user), :rel=>'facebox' )
+
+        %tr
+          %td Username
+          %td
+            =@user.username
+        %tr
+          %td E-mail
+          %td
+            =@user.email
+            =link_to('edit', edit_user_path(@user), :rel=>'facebox' )
+        %tr
+          %td Role
+          %td= @user.role.name
+          

@@ -1,13 +1,14 @@
+#block
+  .announcements
+    .message.notice 
+      %p Check out the code at the #{link_to 'github repo', 'https://github.com/jdrunner/Class-Website'}
+    .message.warning 
+      %p Make sure you check your e-mail for your account password
+          
 #block-text.block
   .content
-    -#%h2.title Announcements
-    .inner
-      .announcements
-        .message.notice 
-          %p Check out the code at the #{link_to 'github repo', 'https://github.com/jdrunner/Class-Website'}
-        .message.warning 
-          %p Make sure you check your e-mail for your account password
     -#%h2.title Calendar
     .inner
       = event_calendar.html_safe
 - content_for :sidebar, render(:partial => 'sidebar')
+

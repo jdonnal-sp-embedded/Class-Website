@@ -17,6 +17,10 @@
             %span.error
           =f.text_field :description, :class=>"text_field"
           %span.description optional
+        -#EVENT TYPE
+        .group
+          =f.label :type, "Type of Event", :class=>"label"
+          =f.select(:type, Event::POSSIBLE_EVENT_TYPES)
         -#GRADABLE AND SLOTABLE CHECK BOXES
         .group
           =f.check_box :slotable, :class=>"checkbox slotable-check"

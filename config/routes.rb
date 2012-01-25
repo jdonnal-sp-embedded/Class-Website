@@ -22,8 +22,10 @@ Website::Application.routes.draw do
     resources :events do
       resources :slots, :only=>[:create,:destroy, :update]
     end
+    resources :lab_hours
   end
   resources :events, :only=>[:show]
+  resources :users, :except=>[:destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
